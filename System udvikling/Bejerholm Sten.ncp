@@ -1,0 +1,68 @@
+<Project>
+  <Name>Bejerholm Sten</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>EER Diagram</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Varegrupper</Name>
+        <Access>Public</Access>
+        <Location left="328" top="71" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Varer</Name>
+        <Access>Public</Access>
+        <Location left="515" top="71" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int indkøbspris</Member>
+        <Member type="Field">int salgspris</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Kunde</Name>
+        <Access>Public</Access>
+        <Location left="129" top="71" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">String Fornavn</Member>
+        <Member type="Field">String Efternavn</Member>
+        <Member type="Field">String Adresse</Member>
+        <Member type="Field">int Tlf</Member>
+        <Member type="Field">int Postnr</Member>
+        <Member type="Field">String By</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NewClass</Name>
+        <Access>Public</Access>
+        <Location left="704" top="71" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Ordre</Name>
+        <Access>Public</Access>
+        <Location left="515" top="321" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int Ordrenr</Member>
+        <Member type="Field">int Ordredato</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Faktura</Name>
+        <Access>Public</Access>
+        <Location left="704" top="321" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+</Project>
