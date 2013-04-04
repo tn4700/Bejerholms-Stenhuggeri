@@ -7,7 +7,7 @@
       <Entity type="Class">
         <Name>Varegrupper</Name>
         <Access>Public</Access>
-        <Location left="328" top="71" />
+        <Location left="314" top="71" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int grp_nr</Member>
@@ -27,7 +27,7 @@
       <Entity type="Class">
         <Name>Kunde</Name>
         <Access>Public</Access>
-        <Location left="129" top="71" />
+        <Location left="104" top="71" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">String Fornavn</Member>
@@ -41,11 +41,22 @@
       <Entity type="Class">
         <Name>Ordre</Name>
         <Access>Public</Access>
-        <Location left="722" top="337" />
-        <Size width="162" height="216" />
+        <Location left="915" top="367" />
+        <Size width="162" height="298" />
         <Collapsed>False</Collapsed>
-        <Member type="Field">int Ordrenr</Member>
-        <Member type="Field">int Ordredato</Member>
+        <Member type="Field">int ordrenr</Member>
+        <Member type="Field">int ordredato</Member>
+        <Member type="Field">int ordretype</Member>
+        <Member type="Field">String afdødnavn</Member>
+        <Member type="Field">String inskription</Member>
+        <Member type="Field">String Kirkegård</Member>
+        <Member type="Field">int Leveringsdato</Member>
+        <Member type="Field">int afhentningsdato</Member>
+        <Member type="Field">int gravtype</Member>
+        <Member type="Field">int afdeling</Member>
+        <Member type="Field">int række</Member>
+        <Member type="Field">int nummer</Member>
+        <Member type="Field">String bemærkning</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -54,22 +65,28 @@
         <Location left="722" top="71" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
+        <Member type="Field">int faktura_nr</Member>
+        <Member type="Field">int faktureringsdato</Member>
+        <Member type="Field">String vedrørende</Member>
+        <Member type="Field">String Betalingsbetingelser</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Provisionsseddel</Name>
         <Access>Public</Access>
-        <Location left="328" top="337" />
+        <Location left="328" top="336" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int Provisionsnr</Member>
         <Member type="Field">int Dato</Member>
+        <Member type="Field">String Vedrørende</Member>
+        <Member type="Field">String Overførselsbetingelser</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Samarbejdspartnere</Name>
         <Access>Public</Access>
-        <Location left="129" top="337" />
+        <Location left="104" top="337" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">String Firmanavn</Member>
@@ -104,7 +121,7 @@
       <Entity type="Class">
         <Name>Ordre_linje</Name>
         <Access>Public</Access>
-        <Location left="915" top="337" />
+        <Location left="1107" top="367" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Modifier>None</Modifier>
@@ -113,6 +130,29 @@
         <Text>Skal måske laves om</Text>
         <Location left="431" top="487" />
         <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>Ordretype = Nysten / Tilføjelse</Text>
+        <Location left="915" top="305" />
+        <Size width="174" height="50" />
+      </Entity>
+      <Entity type="Class">
+        <Name>Skrifttype</Name>
+        <Access>Public</Access>
+        <Location left="722" top="367" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">string navn</Member>
+        <Member type="Field">int pris</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Kontoudtog</Name>
+        <Access>Public</Access>
+        <Location left="1115" top="76" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
       </Entity>
     </Entities>
     <Relationships />
