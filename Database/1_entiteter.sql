@@ -46,7 +46,7 @@ drop table if exists andenlinje;
 create table andenlinje
 (
 navn                    varchar(50),
-pris                    int,
+pris                    float,
 antal                   int,
 kommentar               varchar(100)
 )engine = innodb;
@@ -54,11 +54,11 @@ kommentar               varchar(100)
 drop table if exists varer;
 create table varer
 (
-indkøbspris             int,
+indkøbspris             float,
 højde                   int,
 bredde                  int,
 længde                  int,
-salgspris               int
+salgspris               float
 ) engine = innodb;
 
 drop table if exists vare_grupper;
@@ -99,7 +99,7 @@ create table kontoudtog_linje
 (
 antal                   int,
 beskrivelse             text,
-pris                    int
+pris                    float
 )engine = innodb;
 
 drop table if exists provisionsseddel;
@@ -109,7 +109,7 @@ provisionsnr            int,            # Unikt nummer som står i toppen af pro
 dato                    datetime,       # Dato for oprettelse af provisionsseddel
 vedrørende              varchar(100),   
 overførelsesbetingelser varchar(100),   
-procent                 int,
+procent                 float,
 
 primary key(provisionsnr)
 ) engine = innodb;
@@ -120,7 +120,7 @@ create table provisionsseddel_linje
 antal                   int,
 beskrivelse             text,
 enhedspris              int,
-beløb                   int
+beløb                   float
 ) engine = innodb;
 
 drop table if exists samarbejdspartnere;
@@ -139,12 +139,12 @@ drop table if exists skriftype;
 create table skrifttype
 (
 navn                    varchar(50),
-pris_pr_bokstav         int
+pris_pr_bokstav         float
 ) engine = innodb;
 
 drop table if exists dekoration;
 create table dekoration
 (
 navn                    varchar(50),
-pris                    int
+pris                    float
 ) engine = innodb;
