@@ -9,9 +9,14 @@ fornavn                 varchar(50),
 efternavn               varchar(50),
 adresse                 varchar(50),
 tlf                     char(8),
-postnr                  char(4),
-bynavn                  varchar(50),
+primary key(tlf)
+) engine = innodb;
 
+drop table if exists postnumre;
+create table postnumre
+(   
+postnummer              char(4),
+byNavn              	varchar(25),
 primary key(tlf)
 ) engine = innodb;
 
@@ -19,31 +24,36 @@ drop table if exists ordre;
 create table ordre
 (
 ordrenr                 int,
-ordretype               varchar(50),     # Ny sten eller tilføjelse, Skal måske laves om?
+ordretype               int,     # Ny sten eller tilføjelse, Skal måske laves om?
+ordredato				datetime,
 leveringdato            datetime,   
 afhentningsdato         datetime,
 bemærkning              text,            # Da vi laver så han selv kan tilføje tekst som en ordre linje er den måske overflødig
 arbejdstimer            int,
 leveringsadresse        varchar(100),    # Adresse + post nr + by
+kirkegård				varchar(25),
+afdeling				int,
 primary key(ordrenr)
 ) engine = innodb;
 
-drop table if exists kirkegaard_ordre;
-create table kirkegaard_ordre
+drop table if exists tilføjelse;
+create table tilføjelse
 (
-kirkegaard              varchar(50),
-afdeling                int,
-gravtype                varchar(50)
+værkstedstimer          int,
+rensning                int,
+transport              	int,
+afhentning				int,
+levering				int
 ) engine = innodb;
 
 drop table if exists vare_linje;
 create table vare_linje
 (
-inskription             text
+linjeNr             	int,
 ) engine = innodb;
 
-drop table if exists andenlinje;
-create table andenlinje
+drop table if exists tomLinje;
+create table tomLinje
 (
 navn                    varchar(50),
 pris                    float,
@@ -54,20 +64,37 @@ kommentar               varchar(100)
 drop table if exists varer;
 create table varer
 (
-indkøbspris             float,
+varenummer 				int auto_increment,
+kommentar				varchar(100),
 højde                   int,
 bredde                  int,
 længde                  int,
-salgspris               float
+indkøbspris             float,
+salgspris               float,
+primary key(varenummer)
 ) engine = innodb;
 
 drop table if exists vare_grupper;
 create table vare_grupper
 (
-grp_nr                  int,            # Et unikt nr som repræsenterer en vare gruppe
+grp_nr                  int auto_increment,  # Et unikt nr som repræsenterer en vare gruppe
 navn                    varchar(25),    # Navet på varegruppen
 primary key(grp_nr)
 ) engine =innodb;
+
+drop table if exists inskription;
+create table inskription
+(
+inskription             text,
+tegnpris         		float
+) engine = innodb;
+
+drop table if exists dekoration;
+create table dekoration
+(
+navn                    varchar(50),
+pris                    float
+) engine = innodb;
 
 drop table if exists faktura;
 create table faktura
@@ -77,9 +104,8 @@ faktureringsdato        int,            # Dato for oprettelse af faktura seddele
 vedrørende              varchar(100),
 betalingsbetingelser    varchar(50),
 sendt_dato              datetime,       # Dato for hvornår fakturaen er sendt
-faktureringsadresse     varchar(50),
-miljøafgift             int,            
-type                    int,            # Bedemand eller almindelig - skal rettes i klassediagram
+faktureringsadresse     varchar(50),          
+fakturatype             boolean,            # Bedemand eller almindelig - skal rettes i klassediagram
 betalingsstatus         boolean,        # Status = betalt eller ikke betalt
 primary key(faktura_nr)
 ) engine = innodb;
@@ -108,9 +134,7 @@ create table provisionsseddel
 provisionsnr            int,            # Unikt nummer som står i toppen af provisions seddelen 
 dato                    datetime,       # Dato for oprettelse af provisionsseddel
 vedrørende              varchar(100),   
-overførelsesbetingelser varchar(100),   
-procent                 float,
-
+overførelsesbetingelser varchar(100),
 primary key(provisionsnr)
 ) engine = innodb;
 
@@ -119,8 +143,8 @@ create table provisionsseddel_linje
 (
 antal                   int,
 beskrivelse             text,
-enhedspris              int,
-beløb                   float
+enhedspris             	float,
+pris                  	float
 ) engine = innodb;
 
 drop table if exists samarbejdspartnere;
@@ -128,23 +152,29 @@ create table samarbejdspartnere
 (
 firmanavn               varchar(50),
 adresse                 varchar(50),
-postnr                  char(4),
-bynavn                  varchar(50),
 tlf                     char(8),        # 8 cifre uden landekode
 cvr_nr                  char(8),        # Et CVR nummer er på 8 cifre
-konto_oplysninger       varchar(50)     # Reg + Kontonr + Bank
+registreringsnr			char(4),
+kontonr		      		char(10),			# Reg + Kontonr
+bank 					varchar(20),
+primary key(cvr_nr)
 ) engine = innodb;
 
-drop table if exists skriftype;
-create table skrifttype
+drop table if exists user;
+create table user
 (
-navn                    varchar(50),
-pris_pr_bokstav         float
+brugernavn               varchar(25),
+pw		                 varchar(25),
+primary key(brugernavn)
 ) engine = innodb;
 
-drop table if exists dekoration;
-create table dekoration
+drop table if exists konstanter;
+create table konstanter
 (
-navn                    varchar(50),
-pris                    float
+nr               		int,
+navn	                varchar(25),
+procentsats				float,
+primary key(nr)
 ) engine = innodb;
+
+
