@@ -17,7 +17,7 @@ create table postnumre
 (   
 postnummer              char(4),
 byNavn              	varchar(25),
-primary key(tlf)
+primary key(postnummer)
 ) engine = innodb;
 
 drop table if exists ordre;
@@ -49,7 +49,7 @@ levering				int
 drop table if exists vare_linje;
 create table vare_linje
 (
-linjeNr             	int,
+linjeNr             	int
 ) engine = innodb;
 
 drop table if exists tomLinje;
@@ -65,12 +65,14 @@ drop table if exists varer;
 create table varer
 (
 varenummer 				int auto_increment,
-kommentar				varchar(100),
+navn					varchar(100),
 højde                   int,
 bredde                  int,
-længde                  int,
 indkøbspris             float,
 salgspris               float,
+typenavn				varchar(20),
+overflade				varchar(20),
+dekoration				boolean,
 primary key(varenummer)
 ) engine = innodb;
 
@@ -85,22 +87,21 @@ primary key(grp_nr)
 drop table if exists inskription;
 create table inskription
 (
-inskription             text,
-tegnpris         		float
+inskription             text
 ) engine = innodb;
 
-drop table if exists dekoration;
-create table dekoration
+drop table if exists tegntype;
+create table tegntype
 (
 navn                    varchar(50),
-pris                    float
+pris_pr_tegn            float
 ) engine = innodb;
 
 drop table if exists faktura;
 create table faktura
 (
 faktura_nr              int,            # Unikt nr som står i toppen af faktura seddelen
-faktureringsdato        int,            # Dato for oprettelse af faktura seddelen
+faktureringsdato        datetime,            # Dato for oprettelse af faktura seddelen
 vedrørende              varchar(100),
 betalingsbetingelser    varchar(50),
 sendt_dato              datetime,       # Dato for hvornår fakturaen er sendt
