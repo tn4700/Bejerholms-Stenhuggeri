@@ -15,45 +15,40 @@ primary key(tlf)
 drop table if exists postnumre;
 create table postnumre
 (   
-postnummer              char(4),
+post_nr              char(4),
 byNavn              	varchar(25),
-primary key(postnummer)
+primary key(post_nr)
 ) engine = innodb;
 
 drop table if exists ordre;
 create table ordre
 (
-ordrenr                 int,
-ordretype               int,     # Ny sten eller tilføjelse, Skal måske laves om?
+ordre_nr                 int,
+ordretype               boolean,
 ordredato				datetime,
+ordrestatus				int,
 leveringdato            datetime,   
 afhentningsdato         datetime,
-bemærkning              text,            # Da vi laver så han selv kan tilføje tekst som en ordre linje er den måske overflødig
-arbejdstimer            int,
+bemærkning              text,            
 leveringsadresse        varchar(100),    # Adresse + post nr + by
 kirkegård				varchar(25),
 afdeling				int,
-primary key(ordrenr)
-) engine = innodb;
-
-drop table if exists tilføjelse;
-create table tilføjelse
-(
-værkstedstimer          int,
-rensning                int,
-transport              	int,
-afhentning				int,
-levering				int
+afdødnavn				varchar(50),
+række					int,
+nummer					int,
+plads_navne				int,
+gravType				boolean,
+primary key(ordre_nr)
 ) engine = innodb;
 
 drop table if exists vare_linje;
 create table vare_linje
 (
-linjeNr             	int
+linje_nr             	int
 ) engine = innodb;
 
-drop table if exists tomLinje;
-create table tomLinje
+drop table if exists tom_linje;
+create table tom_linje
 (
 navn                    varchar(50),
 pris                    float,
@@ -64,7 +59,7 @@ kommentar               varchar(100)
 drop table if exists varer;
 create table varer
 (
-varenummer 				int auto_increment,
+vare_nr 				int auto_increment,
 navn					varchar(100),
 højde                   int,
 bredde                  int,
@@ -73,11 +68,11 @@ salgspris               float,
 typenavn				varchar(20),
 overflade				varchar(20),
 dekoration				boolean,
-primary key(varenummer)
+primary key(vare_nr)
 ) engine = innodb;
 
-drop table if exists vare_grupper;
-create table vare_grupper
+drop table if exists varegrupper;
+create table varegrupper
 (
 grp_nr                  int auto_increment,  # Et unikt nr som repræsenterer en vare gruppe
 navn                    varchar(25),    # Navet på varegruppen
@@ -114,17 +109,18 @@ primary key(faktura_nr)
 drop table if exists kontoudtog;
 create table kontoudtog
 (
-konto_udtog_nr          int,            # Unikt nr som står i topppen af kontoudtogs seddelen
+kontoudtog_nr          	int,            # Unikt nr som står i topppen af kontoudtogs seddelen
 dato                    datetime,       # Dato for oprettelse af kontoudtogs seddelen
 vedrørende              varchar(100),
 sendt_dato              datetime,       # Dato for hvornår Kontoudtog er sendt
-primary key(konto_udtog_nr)
+primary key(kontoudtog_nr)
 )engine = innodb;
 
 drop table if exists kontoudtog_linje;
 create table kontoudtog_linje
 (
 antal                   int,
+linje_nr				int,
 beskrivelse             text,
 pris                    float
 )engine = innodb;
@@ -132,17 +128,18 @@ pris                    float
 drop table if exists provisionsseddel;
 create table provisionsseddel
 (
-provisionsnr            int,            # Unikt nummer som står i toppen af provisions seddelen 
+provisions_nr            int,            # Unikt nummer som står i toppen af provisions seddelen 
 dato                    datetime,       # Dato for oprettelse af provisionsseddel
 vedrørende              varchar(100),   
 overførelsesbetingelser varchar(100),
-primary key(provisionsnr)
+primary key(provisions_nr)
 ) engine = innodb;
 
 drop table if exists provisionsseddel_linje;
 create table provisionsseddel_linje
 (
 antal                   int,
+linje_nr				int,
 beskrivelse             text,
 enhedspris             	float,
 pris                  	float
@@ -155,8 +152,8 @@ firmanavn               varchar(50),
 adresse                 varchar(50),
 tlf                     char(8),        # 8 cifre uden landekode
 cvr_nr                  char(8),        # Et CVR nummer er på 8 cifre
-registreringsnr			char(4),
-kontonr		      		char(10),			# Reg + Kontonr
+registrerings_nr			char(4),
+konto_nr		      		char(10),			# Reg + Kontonr
 bank 					varchar(20),
 primary key(cvr_nr)
 ) engine = innodb;
