@@ -21,20 +21,12 @@ values
 ('00003',true,'2013-04-2 13:00:00','1','2013-06-11 13:00:00','2013-05-17 13:00:00','Bemærkning','Fiktivvej 152','Kirkegård','12','Gunner','11','1','1',true),
 ('00004',true,'2013-04-2 13:00:00','1','2013-06-11 13:00:00','2013-05-18 13:00:00','Bemærkning','Eventyrvej 27','Kirkegård','13','Gunner','11','2','1',true);
 
-
-insert into vare_linje (linje_nr,vare_nr,inkription_id,tom_linje_id,ordre_nr)
+insert into varegrupper (grp_nr,navn)
 values
-('1','1',null,'','00001'),
-('2',null,null,'','00002'),
-('3',null,'1','','00003'),
-('4',null,null,'','00004');
-
-insert into tom_linje (navn,pris,antal,kommentar)
-values
-('Navn1','1000,75','1','fiktiv vare 1'),
-('Navn2','2000,80','1','fiktiv vare 2'),
-('Navn3','3000,33','1','fiktiv vare 3'),
-('Navn4','4000,21','1','fiktiv vare 4');
+(1,'Navn på varegruppe 1'),
+(2,'Navn på varegruppe 2'),
+(3,'Navn på varegruppe 3'),
+(4,'Navn på varegruppe 4');
 
 insert into varer (vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn,overflade,dekoration)
 values
@@ -43,12 +35,19 @@ values
 (3,'vare 3','50','50','500','3000','typenavn 3','overflade 3',true),
 (4,'vare 4','50','50','500','3000','typenavn 4','overflade 4',true);
 
-insert into varegrupper (grp_nr,navn)
+insert into tom_linje (navn,pris,antal,kommentar)
 values
-(1,'Navn på varegruppe 1'),
-(2,'Navn på varegruppe 2'),
-(3,'Navn på varegruppe 3'),
-(4,'Navn på varegruppe 4');
+('Navn1','1000','1','fiktiv vare 1'),
+('Navn2','2000','1','fiktiv vare 2'),
+('Navn3','3000','1','fiktiv vare 3'),
+('Navn4','4000','1','fiktiv vare 4');
+
+insert into tegntype (navn,pris_pr_tegn)
+values
+('NavnA','500.50'),
+('NavnB','2001.25'),
+('NavnC','3002.50'),
+('NavnD','4003.75');
 
 insert into inskription (inskription)
 values
@@ -57,12 +56,13 @@ values
 ('Agmena'),
 ('Flexo');
 
-insert into tegntype (navn,pris_pr_tegn)
+insert into vare_linje (linje_nr, vare_nr, inskription_id, tom_linje_id, ordre_nr)
 values
-('NavnA','500,50'),
-('NavnB','2001,25'),
-('NavnC','3002,50'),
-('NavnD','4003,75');
+('1','1',null,null,'00001'),
+('2',null,null,'1','00002'),
+('3',null,'1',null,'00003'),
+('4',null,null,'2','00004');
+
 
 insert into faktura (faktura_nr,faktureringsdato,vedrørende,betalingsbetingelser,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)
 values
@@ -78,34 +78,34 @@ values
 ('0003','2013-04-30 13:50:32','Niklas Nielsen','2013-04-30 13:20:32'),
 ('0004','2013-04-30 14:50:32','Anette Stidsing','2013-04-30 14:20:32');
 
-insert into kontoudtog_linje (antal,linje_nr,beskrivelse,pris)
+insert into kontoudtog_linje (antal,linje_nr,beskrivelse,pris,kontoudtog_nr)
 values
-('1','1','BeskrivelseA','1000'),
-('1','2','BeskrivelseB','2000'),
-('1','3','BeskrivelseC','3000'),
-('1','4','BeskrivelseD','4000');
+('1','1','BeskrivelseA','1000','1'),
+('1','2','BeskrivelseB','2000','2'),
+('1','3','BeskrivelseC','3000','3'),
+('1','4','BeskrivelseD','4000','4');
 
 insert into provisionsseddel (provisions_nr,dato,vedrørende,overførelsesbetingelser)
 values
 ('1','2013-05-01 14:20:32','1','1000'),
-('1','2013-05-02 15:20:32','1','2000'),
-('1','2013-05-03 16:20:32','1','3000'),
-('1','2013-05-04 17:20:32','1','4000');
+('2','2013-05-02 15:20:32','1','2000'),
+('3','2013-05-03 16:20:32','1','3000'),
+('4','2013-05-04 17:20:32','1','4000');
 
-insert into provisionsseddel_linje(antal,linje_nr, beskrivelse,enhedspris,pris)
+insert into provisionsseddel_linje(antal,linje_nr, beskrivelse,enhedspris,pris,provisions_nr)
 values
-('1','1','BeskrivelseA','100,60','100,60'),
-('1','2','BeskrivelseB','200,10','200,10'),
-('1','3','BeskrivelseC','300,25','300,25'),
-('1','4','BeskrivelseD','400,50','400,50');
+('1','1','BeskrivelseA','100.60','100.60','1'),
+('1','2','BeskrivelseB','200.10','200.10','2'),
+('1','3','BeskrivelseC','300.25','300.25','3'),
+('1','4','BeskrivelseD','400.50','400.50','4');
 
 
 insert into samarbejdspartnere (firmanavn,adresse,tlf,cvr_nr,registrerings_nr,konto_nr,bank)
 values
-('Bedeman Berner','Fiktivvej 666','11112222','16276480','1231','6070123456','BankenA'),
-('Bedeman Berner','Fiktivvej 666','11112222','16276480','1232','6070123457','BankenB'),
-('Bedeman Berner','Fiktivvej 666','11112222','16276480','1233','6070123458','BankenC'),
-('Bedeman Berner','Fiktivvej 666','11112222','16276480','1234','6070123459','BankenD');
+('Bedeman Berner','Fiktivvej 666','11112222','16276481','1231','6070123456','BankenA'),
+('Bedeman Berner','Fiktivvej 666','11112222','16276482','1232','6070123457','BankenB'),
+('Bedeman Berner','Fiktivvej 666','11112222','16276483','1233','6070123458','BankenC'),
+('Bedeman Berner','Fiktivvej 666','11112222','16276484','1234','6070123459','BankenD');
 
 insert into user (brugernavn,pw)
 values
