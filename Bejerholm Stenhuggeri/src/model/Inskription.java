@@ -9,7 +9,7 @@ package model;
  * @author Martin
  */
 public class Inskription {
-    
+
     private String inskription;
     private Tegntype id;
 
@@ -33,5 +33,4 @@ public class Inskription {
     public void setId(Tegntype id) {
         this.id = id;
     }
-       
 }
