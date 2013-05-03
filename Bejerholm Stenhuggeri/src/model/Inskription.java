@@ -6,8 +6,11 @@ package model;
 
 /**
  *
- * @author Oliver
+ * @author Martin
  */
-public class test1 {
+public class Inskription {
     
+    private String inskription;
+    private Tegntype id;
+       
 }
