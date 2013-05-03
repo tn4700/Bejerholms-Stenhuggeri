@@ -9,12 +9,13 @@ package model;
  * @author Martin
  */
 public class Postnumre {
+
     private int post_nr;
     private String byNavn;
-    
-    public Postnumre(){
-        this.post_nr=post_nr;
-        this.byNavn=byNavn;
+
+    public Postnumre() {
+        this.post_nr = post_nr;
+        this.byNavn = byNavn;
     }
 
     public int getPost_nr() {
