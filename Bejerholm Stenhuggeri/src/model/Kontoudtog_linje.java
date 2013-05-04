@@ -9,20 +9,20 @@ package model;
  * @author Martin
  */
 public class Kontoudtog_linje {
-    
+
     private int antal;
     private int linje_nr;
     private String beskrivelse;
     private float pris;
     private int kontoudtog_nr;
-    
-    public Kontoudtog_linje(){
+
+    public Kontoudtog_linje() {
         this.antal = antal;
-        this.linje_nr =linje_nr;
-        this.beskrivelse=beskrivelse;
-        this.pris=pris;
-        this.kontoudtog_nr=kontoudtog_nr;
-        
+        this.linje_nr = linje_nr;
+        this.beskrivelse = beskrivelse;
+        this.pris = pris;
+        this.kontoudtog_nr = kontoudtog_nr;
+
     }
 
     public int getAntal() {

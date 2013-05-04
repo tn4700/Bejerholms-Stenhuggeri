@@ -9,18 +9,19 @@ package model;
  * @author Oliver
  */
 public class Kunde {
+
     private String fornavn;
     private String efternavn;
     private String adresse;
     private int tlf;
     private Postnumre post_nr;
-    
-    public Kunde(){
-        this.fornavn=fornavn;
-        this.efternavn=efternavn;
-        this.adresse=adresse;
-        this.tlf=tlf;
-        this.post_nr=post_nr;
+
+    public Kunde() {
+        this.fornavn = fornavn;
+        this.efternavn = efternavn;
+        this.adresse = adresse;
+        this.tlf = tlf;
+        this.post_nr = post_nr;
     }
 
     public String getFornavn() {

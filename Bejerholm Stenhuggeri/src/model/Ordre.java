@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * @author Martin
  */
 public class Ordre {
-    
+
     private int ordre_nr;
     private boolean ordretype;
     private Timestamp ordredato;
@@ -28,24 +28,24 @@ public class Ordre {
     private int plads_navne;
     private boolean gravType;
     private Kunde kunde;
-    
-    public Ordre(){
-        this.ordre_nr=ordre_nr;
-        this.ordretype=ordretype;
-        this.ordredato=ordredato;
-        this.ordrestatus=ordrestatus;
-        this.leveringsdato=leveringsdato;
-        this.afhentmningsdato=afhentmningsdato;
-        this.bemærkning=bemærkning;
-        this.leveringsadresse=leveringsadresse;
-        this.kirkegård=kirkegård;
-        this.afdeling=afdeling;
-        this.afdødnavn=afdødnavn;
-        this.række=række;
-        this.nummer=nummer;
-        this.plads_navne=plads_navne;
-        this.gravType=gravType;
-        this.kunde=kunde;
+
+    public Ordre() {
+        this.ordre_nr = ordre_nr;
+        this.ordretype = ordretype;
+        this.ordredato = ordredato;
+        this.ordrestatus = ordrestatus;
+        this.leveringsdato = leveringsdato;
+        this.afhentmningsdato = afhentmningsdato;
+        this.bemærkning = bemærkning;
+        this.leveringsadresse = leveringsadresse;
+        this.kirkegård = kirkegård;
+        this.afdeling = afdeling;
+        this.afdødnavn = afdødnavn;
+        this.række = række;
+        this.nummer = nummer;
+        this.plads_navne = plads_navne;
+        this.gravType = gravType;
+        this.kunde = kunde;
     }
 
     public int getOrdre_nr() {

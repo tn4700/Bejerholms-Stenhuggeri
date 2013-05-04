@@ -11,15 +11,16 @@ import java.sql.Timestamp;
  * @author Martin
  */
 public class Kontoudtog {
+
     private int kontoudtog_nr;
     private Timestamp dato;
     private String vedrørende;
     private Timestamp sendt_dato;
     private Faktura faktura_nr;
-    
-    public Kontoudtog(){
+
+    public Kontoudtog() {
         this.kontoudtog_nr = kontoudtog_nr;
-        this.dato=dato;
+        this.dato = dato;
         this.vedrørende = vedrørende;
         this.sendt_dato = sendt_dato;
         this.faktura_nr = faktura_nr;
