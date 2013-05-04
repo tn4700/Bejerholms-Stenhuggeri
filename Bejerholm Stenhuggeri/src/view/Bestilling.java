@@ -27,7 +27,6 @@ public class Bestilling extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
@@ -192,7 +191,7 @@ public class Bestilling extends javax.swing.JFrame {
                 jButton_VidereActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Videre, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 520, 180, 50));
+        getContentPane().add(jButton_Videre, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 500, 180, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
