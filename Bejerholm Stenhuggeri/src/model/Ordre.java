@@ -17,7 +17,7 @@ public class Ordre {
     private Timestamp ordredato;
     private int ordrestatus;
     private Timestamp leveringsdato;
-    private Timestamp afhentmningsdato;
+    private Timestamp afhentningsdato;
     private String bemærkning;
     private String leveringsadresse;
     private String kirkegård;
@@ -29,13 +29,14 @@ public class Ordre {
     private boolean gravType;
     private Kunde kunde;
 
-    public Ordre() {
-        this.ordre_nr = ordre_nr;
+
+
+    public Ordre(boolean ordretype, Timestamp leveringsdato, Timestamp afhentningsdato, String bemærkning, String leveringsadresse, String kirkegård, int afdeling, String afdødnavn, int række, int nummer, int plads_navne, boolean gravType, Kunde kunde) {
+        /* Mangler at sætte Ordre nr samt OrdreDato */
+        ordrestatus = 1; // Ordrestatus 1 = Modtaget
         this.ordretype = ordretype;
-        this.ordredato = ordredato;
-        this.ordrestatus = ordrestatus;
         this.leveringsdato = leveringsdato;
-        this.afhentmningsdato = afhentmningsdato;
+        this.afhentningsdato = afhentningsdato;
         this.bemærkning = bemærkning;
         this.leveringsadresse = leveringsadresse;
         this.kirkegård = kirkegård;
@@ -47,7 +48,20 @@ public class Ordre {
         this.gravType = gravType;
         this.kunde = kunde;
     }
+    
+        public Ordre(boolean ordretype, Timestamp leveringsdato, Timestamp afhentningsdato, String bemærkning, String leveringsadresse, Kunde kunde) {
+        /* Mangler at sætte Ordre nr samt OrdreDato */
+        ordrestatus = 1; // Ordrestatus 1 = Modtaget
+        this.ordretype = ordretype;
+        this.ordretype = ordretype;
+        this.leveringsdato = leveringsdato;
+        this.afhentningsdato = afhentningsdato;
+        this.bemærkning = bemærkning;
+        this.leveringsadresse = leveringsadresse;
+        this.kunde = kunde;
+    }
 
+ 
     public int getOrdre_nr() {
         return ordre_nr;
     }
@@ -88,12 +102,12 @@ public class Ordre {
         this.leveringsdato = leveringsdato;
     }
 
-    public Timestamp getAfhentmningsdato() {
-        return afhentmningsdato;
+    public Timestamp getafhentningsdato() {
+        return afhentningsdato;
     }
 
-    public void setAfhentmningsdato(Timestamp afhentmningsdato) {
-        this.afhentmningsdato = afhentmningsdato;
+    public void setafhentningsdato(Timestamp afhentningsdato) {
+        this.afhentningsdato = afhentningsdato;
     }
 
     public String getBemærkning() {
