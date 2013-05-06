@@ -82,7 +82,8 @@ primary key(grp_nr)
 drop table if exists inskription;
 create table inskription
 (
-inskription             text
+inskription             text,
+skrifttype				varchar(25)
 ) engine = innodb;
 
 drop table if exists tegntype;

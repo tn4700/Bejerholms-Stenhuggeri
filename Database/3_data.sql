@@ -1,4 +1,4 @@
-use bejerholmstenhuggeri;
+﻿use bejerholmstenhuggeri;
 
 insert into kunde (fornavn, efternavn, adresse, tlf)
 values
@@ -60,12 +60,12 @@ values
 ('Opforgyldning af bogstaver i pol. sten','65.00'),
 ('Opforgyldning af bogstaver i ru sten','95.00');
 
-insert into inskription (inskription)
+insert into inskription (inskription, skrifttype)
 values
-('AREIAL'),
-('OLD ENGLISH'),
-('Agmena'),
-('Flexo');
+('inskription','AREIAL'),
+('inskription1','OLD ENGLISH'),
+('inskription2','Agmena'),
+('inskription3','Flexo');
 
 insert into vare_linje (linje_nr, vare_nr, inskription_id, tom_linje_id, ordre_nr)
 values
