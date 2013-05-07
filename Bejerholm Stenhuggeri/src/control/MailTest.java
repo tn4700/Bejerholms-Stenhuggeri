@@ -8,21 +8,21 @@ package control;
  *
  * @author NiklasRenner
  */
-public class EmailTest {
+public class MailTest {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try {
-            Email email = new Email(
+            Mail mail = new Mail(
                     "AnetteStidsing@hotmail.com",
                     "test",
                     "her er beskeden",
                     "ProgrammeringTest@gmail.com",
                     "Hej12345");
-            email.addAttachment("database/1_entiteter.sql");
-            email.sendEmail();
+            mail.addAttachment("database/1_entiteter.sql");
+            mail.sendEmail();
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
         }

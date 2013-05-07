@@ -10,7 +10,7 @@ import javax.mail.internet.MimeMessage.RecipientType;
  *
  * @author NiklasRenner
  */
-public class Email {
+public class Mail {
     
     private final String port = "465";
     private final String host = "smtp.gmail.com";
@@ -26,7 +26,7 @@ public class Email {
     private Multipart multipart;
     private BodyPart messageBodyPart;
 
-    public Email (String to,
+    public Mail (String to,
             String subject,
             String text,
             String user,
