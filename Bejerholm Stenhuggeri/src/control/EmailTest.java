@@ -19,9 +19,9 @@ public class EmailTest {
                     "AnetteStidsing@hotmail.com",
                     "test",
                     "her er beskeden",
-                    "NiklasRennerNielsen@gmail.com",
-                    "483602!QuickzEpix");
-            email.addAttachment("C:/Users/NiklasRenner/Desktop/2. Semester opgave/1_entiteter.sql");
+                    "ProgrammeringTest@gmail.com",
+                    "Hej12345");
+            email.addAttachment("database/1_entiteter.sql");
             email.sendEmail();
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
