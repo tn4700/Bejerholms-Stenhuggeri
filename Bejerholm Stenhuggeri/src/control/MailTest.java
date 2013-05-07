@@ -21,7 +21,7 @@ public class MailTest {
                     "her er beskeden",
                     "ProgrammeringTest@gmail.com",
                     "Hej12345");
-            mail.addAttachment("database/1_entiteter.sql");
+            mail.addAttachment("build.xml");
             mail.sendEmail();
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
