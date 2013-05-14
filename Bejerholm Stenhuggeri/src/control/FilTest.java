@@ -38,7 +38,7 @@ public class FilTest {
         //Opretter diverse objekter der er brug for, for at lave et faktura objekt
         Postnumre postnummer = new Postnumre(4700, "Næstved");
         Kunde kunde = new Kunde("Niklas", "Renner", "Gottliebsvej 7", 53545733, postnummer);
-        Ordre ordre = new Ordre(000001, true, currentTime, currentTime, "bemærkning", "Leveringsvej 45", "Kirkegården", 13, "Hans Afdødesen", 1, 1, 0, true, kunde);
+        Ordre ordre = new Ordre("00001", true, currentTime, currentTime, "bemærkning", "Leveringsvej 45", "Kirkegården", 13, "Hans afdødesen", 1, 1, 0, true, kunde);
 
         //Varelinjer til ordren oprettes
         Vare_linje vl1 = null;

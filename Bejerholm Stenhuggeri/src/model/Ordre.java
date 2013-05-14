@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Ordre {
 
-    private int ordre_nr;
+    private String ordre_nr;
     private boolean ordretype;
     private Timestamp ordredato;
     private int ordrestatus;
@@ -31,7 +31,7 @@ public class Ordre {
     private Kunde kunde;
     private ArrayList<Vare_linje> vare_linjeListe;
 
-    public Ordre(int ordre_nr,
+    public Ordre(String ordre_nr,
             boolean ordretype, 
             Timestamp leveringsdato, 
             Timestamp afhentningsdato, 
@@ -79,11 +79,11 @@ public class Ordre {
         this.vare_linjeListe = vare_linjeListe;
     }
 
-    public int getOrdre_nr() {
+    public String getOrdre_nr() {
         return ordre_nr;
     }
 
-    public void setOrdre_nr(int ordre_nr) {
+    public void setOrdre_nr(String ordre_nr) {
         this.ordre_nr = ordre_nr;
     }
 
