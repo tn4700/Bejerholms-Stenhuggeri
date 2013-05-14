@@ -15,3 +15,4 @@ where ordre_nr = 0;
 
 select * from (faktura natural join ordre);
 
+select * from postnumre join kunde on postnumre.post_nr = kunde.post_nr where kunde.tlf = 11111111;

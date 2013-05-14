@@ -12,8 +12,8 @@ tlf                     char(8),
 primary key(tlf)
 ) engine = innodb;
 
-drop table if exists postnumre;
-create table postnumre
+drop table if exists postnummer;
+create table postnummer
 (   
 post_nr              char(4),
 byNavn              	varchar(25),
@@ -56,8 +56,8 @@ antal                   int,
 kommentar               varchar(100)
 )engine = innodb;
 
-drop table if exists varer;
-create table varer
+drop table if exists vare;
+create table vare
 (
 vare_nr 				int auto_increment,
 navn					varchar(100),
@@ -65,14 +65,14 @@ højde                   int,
 bredde                  int,
 indkøbspris             float,
 salgspris               float,
-typenavn				varchar(20),
+typenavn				varchar(50),
 overflade				varchar(20),
 dekoration				boolean,
 primary key(vare_nr)
 ) engine = innodb;
 
-drop table if exists varegrupper;
-create table varegrupper
+drop table if exists varegruppe;
+create table varegruppe
 (
 grp_nr                  int auto_increment,  # Et unikt nr som repræsenterer en vare gruppe
 navn                    varchar(25),    # Navet på varegruppen
@@ -146,8 +146,8 @@ enhedspris             	float,
 pris                  	float
 ) engine = innodb;
 
-drop table if exists samarbejdspartnere;
-create table samarbejdspartnere
+drop table if exists samarbejdspartner;
+create table samarbejdspartner
 (
 firmanavn               varchar(50),
 adresse                 varchar(50),
@@ -167,12 +167,12 @@ pw		                 varchar(25),
 primary key(brugernavn)
 ) engine = innodb;
 
-drop table if exists konstanter;
-create table konstanter
+drop table if exists konstant;
+create table konstant
 (
 nr               		int,
 navn	                varchar(25),
-procentsats				float,
+procentsats				double,
 primary key(nr)
 ) engine = innodb;
 

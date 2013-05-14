@@ -24,7 +24,7 @@ add primary key(id);
 
 alter table vare_linje
 add column vare_nr int,
-add foreign key(vare_nr) references varer(vare_nr),
+add foreign key(vare_nr) references vare(vare_nr),
 add column inskription_id int,
 add foreign key(inskription_id) references inskription(id),
 add column tom_linje_id int,
@@ -45,9 +45,9 @@ add foreign key(faktura_nr) references faktura(faktura_nr);
 #fase 4 - For hver 1:n forbindelse tilføjes primærnøglen fra 1-siden som fremmednøgle 
 #på n-siden.
 
-alter table varer
+alter table vare
 add column grp_nr int,
-add foreign key(grp_nr) references varegrupper(grp_nr);
+add foreign key(grp_nr) references varegruppe(grp_nr);
 
 alter table vare_linje
 add column ordre_nr int,
@@ -60,11 +60,11 @@ add foreign key(tegn_id) references tegntype(id);
 
 alter table kunde
 add column post_nr char(4),
-add foreign key(post_nr) references postnumre(post_nr);
+add foreign key(post_nr) references postnummer(post_nr);
 
-alter table samarbejdspartnere
+alter table samarbejdspartner
 add column post_nr char(4),
-add foreign key(post_nr) references postnumre(post_nr);
+add foreign key(post_nr) references postnummer(post_nr);
 
 alter table ordre
 add column tlf char(8),
@@ -72,7 +72,7 @@ add foreign key(tlf) references kunde(tlf);
 
 alter table faktura
 add column bedemand_cvr char(10),
-add foreign key(bedemand_cvr) references samarbejdspartnere(cvr_nr);
+add foreign key(bedemand_cvr) references samarbejdspartner(cvr_nr);
 
 alter table provisionsseddel_linje
 add column provisions_nr int,
