@@ -11,12 +11,12 @@ package model;
 public class Tom_linje {
 
     private String navn;
-    private float pris;
+    private double pris;
     private int antal;
     private String kommentar;
     private int id;
 
-    public Tom_linje(String navn, float pris, int antal, String kommentar, int id) {
+    public Tom_linje(String navn, double pris, int antal, String kommentar, int id) {
         this.navn = navn;
         this.pris = pris;
         this.antal = antal;
@@ -32,11 +32,11 @@ public class Tom_linje {
         this.navn = navn;
     }
 
-    public float getPris() {
+    public double getPris() {
         return pris;
     }
 
-    public void setPris(float pris) {
+    public void setPris(double pris) {
         this.pris = pris;
     }
 

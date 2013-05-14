@@ -13,7 +13,7 @@ public class Kontoudtog_linje {
     private int antal;
     private int linje_nr;
     private String beskrivelse;
-    private float pris;
+    private double pris;
     private int kontoudtog_nr;
 
     public Kontoudtog_linje() {
@@ -49,11 +49,11 @@ public class Kontoudtog_linje {
         this.beskrivelse = beskrivelse;
     }
 
-    public float getPris() {
+    public double getPris() {
         return pris;
     }
 
-    public void setPris(float pris) {
+    public void setPris(double pris) {
         this.pris = pris;
     }
 

@@ -14,8 +14,8 @@ public class Vare {
     private String navn;
     private int højde;
     private int bredde;
-    private float indkøbspris;
-    private float salgspris;
+    private double indkøbspris;
+    private double salgspris;
     private String typenavn;
     private String overflade;
     private boolean dekoration;
@@ -25,8 +25,8 @@ public class Vare {
             String navn,
             int højde,
             int bredde,
-            float indkøbspris,
-            float salgspris,
+            double indkøbspris,
+            double salgspris,
             String typenavn,
             String overflade,
             boolean dekoration,
@@ -76,19 +76,19 @@ public class Vare {
         this.bredde = bredde;
     }
 
-    public float getIndkøbspris() {
+    public double getIndkøbspris() {
         return indkøbspris;
     }
 
-    public void setIndkøbspris(float indkøbspris) {
+    public void setIndkøbspris(double indkøbspris) {
         this.indkøbspris = indkøbspris;
     }
 
-    public float getSalgspris() {
+    public double getSalgspris() {
         return salgspris;
     }
 
-    public void setSalgspris(float salgspris) {
+    public void setSalgspris(double salgspris) {
         this.salgspris = salgspris;
     }
 

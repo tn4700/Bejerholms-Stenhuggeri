@@ -13,8 +13,8 @@ public class Provisionsseddel_linje {
     private int antal;
     private int linje_nr;
     private String beskrivelse;
-    private float enhedspris;
-    private float pris;
+    private double enhedspris;
+    private double pris;
     private int provisions_nr;
 
     public Provisionsseddel_linje() {
@@ -51,19 +51,19 @@ public class Provisionsseddel_linje {
         this.beskrivelse = beskrivelse;
     }
 
-    public float getEnhedspris() {
+    public double getEnhedspris() {
         return enhedspris;
     }
 
-    public void setEnhedspris(float enhedspris) {
+    public void setEnhedspris(double enhedspris) {
         this.enhedspris = enhedspris;
     }
 
-    public float getPris() {
+    public double getPris() {
         return pris;
     }
 
-    public void setPris(float pris) {
+    public void setPris(double pris) {
         this.pris = pris;
     }
 

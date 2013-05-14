@@ -11,10 +11,10 @@ package model;
 public class Tegntype {
 
     private String navn;
-    private float pris_pr_tegn;
+    private double pris_pr_tegn;
     private int id;
 
-    public Tegntype(String navn, float pris_pr_tegn, int id) {
+    public Tegntype(String navn, double pris_pr_tegn, int id) {
         this.navn = navn;
         this.pris_pr_tegn = pris_pr_tegn;
         this.id = id;
@@ -29,11 +29,11 @@ public class Tegntype {
         this.navn = navn;
     }
 
-    public float getPris_pr_tegn() {
+    public double getPris_pr_tegn() {
         return pris_pr_tegn;
     }
 
-    public void setPris_pr_tegn(float pris_pr_tegn) {
+    public void setPris_pr_tegn(double pris_pr_tegn) {
         this.pris_pr_tegn = pris_pr_tegn;
     }
 
