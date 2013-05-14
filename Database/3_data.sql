@@ -75,12 +75,12 @@ values
 ('4',null,null,'2','3');
 
 
-insert into faktura (faktura_nr,faktureringsdato,vedrørende,betalingsbetingelser,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)
+insert into faktura (ordre_nr, faktura_nr,faktureringsdato,vedrørende,betalingsbetingelser,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)
 values
-('0','2013-04-30 11:50:32','Martin Hana','Netto 7 dage','2013-05-01 11:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
-('1','2013-04-30 12:50:32','Thomas Nielsen','Netto 7 dage','2013-05-01 12:50:32','Østre Ringvej 49 2.TV, 4700 Næstved',true,false),
-('2','2013-04-30 13:50:32','Niklas Nielsen','Netto 7 dage','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
-('3','2013-04-30 14:50:32','Anette Stidsing','Netto 7 dage','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
+('0', '0','2013-04-30 11:50:32','Martin Hana','Netto 7 dage','2013-05-01 11:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
+('0', '1','2013-04-30 12:50:32','Thomas Nielsen','Netto 7 dage','2013-05-01 12:50:32','Østre Ringvej 49 2.TV, 4700 Næstved',true,false),
+('0', '2','2013-04-30 13:50:32','Niklas Nielsen','Netto 7 dage','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
+('1', '3','2013-04-30 14:50:32','Anette Stidsing','Netto 7 dage','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
 
 insert into kontoudtog (kontoudtog_nr,dato,vedrørende,sendt_dato)
 values
