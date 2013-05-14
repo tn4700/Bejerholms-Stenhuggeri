@@ -74,6 +74,10 @@ public class Ordre {
     public ArrayList<Vare_linje> getVare_linjeListe() {
         return vare_linjeListe;
     }
+    
+    public void setVare_linjeListe(ArrayList<Vare_linje> vare_linjeListe) {
+        this.vare_linjeListe = vare_linjeListe;
+    }
 
     public int getOrdre_nr() {
         return ordre_nr;
