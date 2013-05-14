@@ -5,6 +5,8 @@
 package control;
 
 import com.itextpdf.text.DocumentException;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class FilTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         //Opretter Timestamp med tiden lige nu
         Date date = new Date();
         Timestamp currentTime = new Timestamp(date.getTime());
@@ -37,7 +39,7 @@ public class FilTest {
         Postnumre postnummer = new Postnumre(4700, "Næstved");
         Kunde kunde = new Kunde("Niklas", "Renner", "Gottliebsvej 7", 53545733, postnummer);
         Ordre ordre = new Ordre(000001, true, currentTime, currentTime, "bemærkning", "Leveringsvej 45", "Kirkegården", 13, "Hans Afdødesen", 1, 1, 0, true, kunde);
-        
+
         //Varelinjer til ordren oprettes
         Vare_linje vl1 = null;
         Vare_linje vl2 = null;
@@ -49,7 +51,7 @@ public class FilTest {
         Vare_linje vl8 = null;
         Vare_linje vl9 = null;
         Vare_linje vl10 = null;
-        
+
         //Varelinjer sættes ind i arrayliste og bliver indsat i ordre objektet
         ArrayList<Vare_linje> vlr = new ArrayList();
         vlr.add(vl1);
@@ -65,15 +67,19 @@ public class FilTest {
         ordre.setVare_linjeListe(vlr);
 
         //Faktura_nr metode
-        String faktura_nr = "00"+kunde.getTlf()+"-"+ordre.getOrdre_nr();
-        
+        String faktura_nr = "00" + kunde.getTlf() + "-" + ordre.getOrdre_nr();
+
         //Faktura oprettes
         Faktura faktura = new Faktura(faktura_nr, currentTime, "Torsten vedrørendesen", "betalingsbetingelser", currentTime, "Faktureringsvej 15", true, false, ordre, null);
-          
+
         //Faktura laves til pdf
         try {
             OpretFaktura opretFaktura = new OpretFaktura(faktura);
             opretFaktura.genererFaktura("test.pdf");
+
+            Desktop desktop = Desktop.getDesktop();
+            File file = new File("docs/test.pdf");
+            desktop.open(file);
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (DocumentException ex) {
