@@ -13,7 +13,7 @@ public class Postnumre {
     private int post_nr;
     private String byNavn;
 
-    public Postnumre() {
+    public Postnumre(int post_nr, String byNavn) {
         this.post_nr = post_nr;
         this.byNavn = byNavn;
     }

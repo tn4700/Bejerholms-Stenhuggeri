@@ -29,13 +29,27 @@ public class Ordre {
     private int plads_navne;
     private boolean gravType;
     private Kunde kunde;
-    private ArrayList<Vare_linje> vare_linjeListe = new ArrayList();
+    private ArrayList<Vare_linje> vare_linjeListe;
 
 
 
-    public Ordre(boolean ordretype, Timestamp leveringsdato, Timestamp afhentningsdato, String bemærkning, String leveringsadresse, String kirkegård, int afdeling, String afdødnavn, int række, int nummer, int plads_navne, boolean gravType, Kunde kunde) {
-        /* Mangler at sætte Ordre nr samt OrdreDato */
-        ordrestatus = 1; // Ordrestatus 1 = Modtaget
+    public Ordre(int ordre_nr,
+            boolean ordretype, 
+            Timestamp leveringsdato, 
+            Timestamp afhentningsdato, 
+            String bemærkning, 
+            String leveringsadresse, 
+            String kirkegård, 
+            int afdeling, 
+            String afdødnavn, 
+            int række, 
+            int nummer, 
+            int plads_navne, 
+            boolean gravType, 
+            Kunde kunde) {
+        
+        this.ordre_nr = ordre_nr;
+        this.ordrestatus = ordrestatus;
         this.ordretype = ordretype;
         this.leveringsdato = leveringsdato;
         this.afhentningsdato = afhentningsdato;
@@ -48,18 +62,6 @@ public class Ordre {
         this.nummer = nummer;
         this.plads_navne = plads_navne;
         this.gravType = gravType;
-        this.kunde = kunde;
-    }
-    
-        public Ordre(boolean ordretype, Timestamp leveringsdato, Timestamp afhentningsdato, String bemærkning, String leveringsadresse, Kunde kunde) {
-        /* Mangler at sætte Ordre nr samt OrdreDato */
-        ordrestatus = 1; // Ordrestatus 1 = Modtaget
-        this.ordretype = ordretype;
-        this.ordretype = ordretype;
-        this.leveringsdato = leveringsdato;
-        this.afhentningsdato = afhentningsdato;
-        this.bemærkning = bemærkning;
-        this.leveringsadresse = leveringsadresse;
         this.kunde = kunde;
     }
         

@@ -20,10 +20,20 @@ public class Faktura {
     private String faktureringsadresse;
     private boolean fakturatype;
     private boolean betalingsstatus;
-    private int ordre_nr;
-    private int bedemand_cvr;
+    private Ordre ordre;
+    private Samarbejdspartnere bedemand;
 
-    public Faktura() {
+    public Faktura(int faktura_nr,
+            Timestamp faktureringsdato,
+            String vedrørende,
+            String betalingsbetingelser,
+            Timestamp sendt_dato,
+            String faktureringsadresse,
+            boolean fakturatype,
+            boolean betalingsstatus,
+            Ordre ordre,
+            Samarbejdspartnere bedemand) {
+        
         this.faktura_nr = faktura_nr;
         this.faktureringsdato = faktureringsdato;
         this.vedrørende = vedrørende;
@@ -32,8 +42,24 @@ public class Faktura {
         this.faktureringsadresse = faktureringsadresse;
         this.fakturatype = fakturatype;
         this.betalingsstatus = betalingsstatus;
-        this.ordre_nr = ordre_nr;
-        this.bedemand_cvr = bedemand_cvr;
+        this.ordre = ordre;
+        this.bedemand = bedemand;
+    }
+
+    public Ordre getOrdre() {
+        return ordre;
+    }
+
+    public void setOrdre(Ordre ordre) {
+        this.ordre = ordre;
+    }
+
+    public Samarbejdspartnere getBedemand() {
+        return bedemand;
+    }
+
+    public void setBedemand(Samarbejdspartnere bedemand) {
+        this.bedemand = bedemand;
     }
 
     public int getFaktura_nr() {
@@ -98,21 +124,5 @@ public class Faktura {
 
     public void setBetalingsstatus(boolean betalingsstatus) {
         this.betalingsstatus = betalingsstatus;
-    }
-
-    public int getOrdre_nr() {
-        return ordre_nr;
-    }
-
-    public void setOrdre_nr(int ordre_nr) {
-        this.ordre_nr = ordre_nr;
-    }
-
-    public int getBedemand_cvr() {
-        return bedemand_cvr;
-    }
-
-    public void setBedemand_cvr(int bedemand_cvr) {
-        this.bedemand_cvr = bedemand_cvr;
     }
 }
