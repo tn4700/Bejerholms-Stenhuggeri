@@ -117,6 +117,8 @@ public class OpretFaktura {
         cb.setRGBColorFill(216, 228, 232);
         cb.rectangle(25, 480, 550, 20);
         cb.rectangle(475, 200, 100, 300);
+        cb.rectangle(475, 140, 100, 20);
+        cb.rectangle(475, 180, 100, 20);
         cb.fill();
         
         //Tegn tabel
@@ -129,34 +131,63 @@ public class OpretFaktura {
         cb.lineTo(375, 200);
         cb.moveTo(475, 500);
         cb.lineTo(475, 200);
+        cb.moveTo(475, 180);
+        cb.lineTo(575, 180);
+        cb.moveTo(475, 160);
+        cb.lineTo(575, 160);
+        cb.rectangle(475, 140, 100, 60);
+        cb.moveTo(475, 120);
+        cb.lineTo(575, 120);
+        cb.moveTo(475, 118);
+        cb.lineTo(575, 118);
+        cb.stroke();
         
         //Indsæt navne på tabel elementer
         createContent(cb, btFont, 12, black, 63, 484, "ANTAL", center);
         createContent(cb, btFont, 12, black, 238, 484, "BESKRIVELSE", center);
         createContent(cb, btFont, 12, black, 425, 484, "ENHEDSPRIS", center);
         createContent(cb, btFont, 12, black, 525, 484, "BELØB", center);
-
-        cb.stroke();
+        createContent(cb, tFont, 12, black, 110, 204, "Miljøafgift 2,5%", left);
+        createContent(cb, tFont, 12, black, 465, 184, "SUBTOTAL", right);
+        createContent(cb, tFont, 12, black, 465, 164, "MOMS", right);
+        createContent(cb, tFont, 12, black, 465, 144, "SALGSMOMS", right);
+        createContent(cb, btFont, 12, black, 465, 124, "I ALT", right);
         
         //Indsæt data for varelinjer
         int tmpY = 464;
         double total = 0;
         int quantity = 0;
-        double price;
-        for(int i=1; i<=14; i++){
-            
-            String money = NumberFormat.getCurrencyInstance().format(i);
+        double price = 0;
+        double itemPrice = 0;
+        
+        for(int i=1; i<14; i++){
+
             quantity = i;
-            price = Double.valueOf(NumberFormat.getCurrencyInstance().format(Math.random() * 10));
+            itemPrice = Double.valueOf(Math.random() * 10);
+            price = quantity * itemPrice;
+            total += price;
             
-            createContent(cb, tFont, 12, black, 63, tmpY, ""+i, center);
+            createContent(cb, tFont, 12, black, 63, tmpY, ""+quantity, center);
             createContent(cb, tFont, 12, black, 110, tmpY, "BESKRIVELSE "+i, left);
-            createContent(cb, tFont, 12, black, 465, tmpY, ""+i, right);
-            createContent(cb, tFont, 12, black, 565, tmpY, ""+(i*1000), right);
+            createContent(cb, tFont, 12, black, 465, tmpY, ""+NumberFormat.getCurrencyInstance().format(itemPrice), right);
+            createContent(cb, tFont, 12, black, 565, tmpY, ""+NumberFormat.getCurrencyInstance().format(price), right);
             
             tmpY = tmpY - 20;
         }
-        createContent(cb, tFont, 12, black, 565, 204, ""+NumberFormat.getCurrencyInstance().format(total), left);
+        createContent(cb, tFont, 12, black, 565, 204, ""+NumberFormat.getCurrencyInstance().format(total*+0.025), right);
+        total += (total*0.025);
+        createContent(cb, tFont, 12, black, 565, 184, ""+NumberFormat.getCurrencyInstance().format(total), right);
+        createContent(cb, tFont, 12, black, 565, 164, "25,00%", right);
+        createContent(cb, tFont, 12, black, 565, 144, ""+NumberFormat.getCurrencyInstance().format(total*0.25), right);
+        total += (total*0.25);
+        createContent(cb, tFont, 12, black, 565, 124, ""+NumberFormat.getCurrencyInstance().format(total), right);
+        
+        //Indsættelse af betalingsbetingelser og kontaktinfo
+        createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
+        createContent(cb, tFont, 12, black, 150, 104, faktura.getBetalingsbetingelser(), left);
+        createContent(cb, tFont, 12, black, 25, 84, "Sydbank: 6821  -  1021974", left);
+        createContent(cb, tFont, 12, black, 25, 64, "Ordrenummer og navn bedes anført ved bankoverførsel", left);
+        createContent(cb, tFont, 10, black, 25, 24, "Hvis der er spørgsmål til denne faktura, bedes De venligst kontakte os(se kontaktinfo i toppen af fakturaen)", left);
 
         //test
         //cb.moveTo(250, 250);
