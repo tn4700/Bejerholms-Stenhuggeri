@@ -12,7 +12,7 @@ import java.sql.Timestamp;
  */
 public class Faktura {
 
-    private int faktura_nr;
+    private String faktura_nr;
     private Timestamp faktureringsdato;
     private String vedrørende;
     private String betalingsbetingelser;
@@ -23,7 +23,7 @@ public class Faktura {
     private Ordre ordre;
     private Samarbejdspartnere bedemand;
 
-    public Faktura(int faktura_nr,
+    public Faktura(String faktura_nr,
             Timestamp faktureringsdato,
             String vedrørende,
             String betalingsbetingelser,
@@ -62,11 +62,11 @@ public class Faktura {
         this.bedemand = bedemand;
     }
 
-    public int getFaktura_nr() {
+    public String getFaktura_nr() {
         return faktura_nr;
     }
 
-    public void setFaktura_nr(int faktura_nr) {
+    public void setFaktura_nr(String faktura_nr) {
         this.faktura_nr = faktura_nr;
     }
 

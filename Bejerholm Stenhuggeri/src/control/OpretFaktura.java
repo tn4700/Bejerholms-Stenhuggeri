@@ -30,6 +30,7 @@ public class OpretFaktura {
     public OpretFaktura(Faktura faktura) {
         sideTal = 0;
         this.faktura = faktura;
+        faktura.getOrdre()
     }
 
     public void genererFaktura(String filNavn) {

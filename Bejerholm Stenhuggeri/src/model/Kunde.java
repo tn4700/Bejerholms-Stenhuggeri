@@ -74,15 +74,15 @@ public class Kunde {
      True = Gravsten
      False = Alt andet
      */
-    public void opretOrdre(boolean ordretype, Timestamp leveringsdato, Timestamp afhentningsdato, String bemærkning, String leveringsadresse, String kirkegård, int afdeling, String afdødnavn, int række, int nummer, int plads_navne, boolean gravType, Kunde kunde){
-        
-        if(ordretype = true){
-            Ordre gravStenOrdre = new Ordre(ordretype, leveringsdato, afhentningsdato, bemærkning, leveringsadresse, kirkegård, afdeling, afdødnavn, række, nummer, plads_navne, gravType, kunde);
-            ordreList.add(gravStenOrdre);
-        }else{
-            Ordre normalOrdre = new Ordre(ordretype, leveringsdato, afhentningsdato, bemærkning, leveringsadresse, kunde);
-            ordreList.add(normalOrdre);
-        }
-            
-    }
+//    public void opretOrdre(boolean ordretype, Timestamp leveringsdato, Timestamp afhentningsdato, String bemærkning, String leveringsadresse, String kirkegård, int afdeling, String afdødnavn, int række, int nummer, int plads_navne, boolean gravType, Kunde kunde){
+//        
+//        if(ordretype = true){
+//            Ordre gravStenOrdre = new Ordre(ordretype, leveringsdato, afhentningsdato, bemærkning, leveringsadresse, kirkegård, afdeling, afdødnavn, række, nummer, plads_navne, gravType, kunde);
+//            ordreList.add(gravStenOrdre);
+//        }else{
+//            Ordre normalOrdre = new Ordre(ordretype, leveringsdato, afhentningsdato, bemærkning, leveringsadresse, kunde);
+//            ordreList.add(normalOrdre);
+//        }
+//            
+//    }
 }

@@ -31,8 +31,6 @@ public class Ordre {
     private Kunde kunde;
     private ArrayList<Vare_linje> vare_linjeListe;
 
-
-
     public Ordre(int ordre_nr,
             boolean ordretype, 
             Timestamp leveringsdato, 
@@ -72,8 +70,11 @@ public class Ordre {
             vare_linjeListe.add(vl);
         }
     }
+    
+    public ArrayList<Vare_linje> getVare_linjeListe() {
+        return vare_linjeListe;
+    }
 
- 
     public int getOrdre_nr() {
         return ordre_nr;
     }
