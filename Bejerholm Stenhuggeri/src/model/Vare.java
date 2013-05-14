@@ -8,7 +8,7 @@ package model;
  *
  * @author Martin
  */
-public class Varer {
+public class Vare {
 
     private int vare_nr;
     private String navn;
@@ -21,7 +21,7 @@ public class Varer {
     private boolean dekoration;
     private Vare_linje grp_nr;
 
-    public Varer(int vare_nr,
+    public Vare(int vare_nr,
             String navn,
             int højde,
             int bredde,

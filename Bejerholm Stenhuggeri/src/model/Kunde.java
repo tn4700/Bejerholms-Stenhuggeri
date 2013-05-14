@@ -18,10 +18,10 @@ public class Kunde {
     private String efternavn;
     private String adresse;
     private int tlf;
-    private Postnumre post_nr;
+    private Postnummer post_nr;
     ArrayList<Ordre> ordreList = new ArrayList();
 
-    public Kunde(String fornavn, String efternavn, String adresse, int tlf, Postnumre post_nr) {
+    public Kunde(String fornavn, String efternavn, String adresse, int tlf, Postnummer post_nr) {
         this.fornavn = fornavn;
         this.efternavn = efternavn;
         this.adresse = adresse;
@@ -63,11 +63,11 @@ public class Kunde {
         this.tlf = tlf;
     }
 
-    public Postnumre getPost_nr() {
+    public Postnummer getPost_nr() {
         return post_nr;
     }
 
-    public void setPost_nr(Postnumre post_nr) {
+    public void setPost_nr(Postnummer post_nr) {
         this.post_nr = post_nr;
     }
     /* Boolean type

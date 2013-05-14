@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Kunde;
-import model.Postnumre;
+import model.Postnummer;
 
 /**
  *
@@ -22,14 +22,14 @@ public class DatabaseObjectHandler {
     }
     
      public ArrayList getPostnumre() throws SQLException {
-        ArrayList<Postnumre> postnummerArray = new ArrayList<Postnumre>();
+        ArrayList<Postnummer> postnummerArray = new ArrayList<Postnummer>();
         String sql = "select post_nr, by from postnumre";
 
         ResultSet rs;
         rs = db.getData(sql);
 
         while (rs.next()) {
-            Postnumre postnr = new Postnumre(
+            Postnummer postnr = new Postnummer(
                     rs.getInt("post_nr"),
                     rs.getString("byNavn"));
             postnummerArray.add(postnr);

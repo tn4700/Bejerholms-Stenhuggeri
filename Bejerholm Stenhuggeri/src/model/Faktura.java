@@ -21,7 +21,7 @@ public class Faktura {
     private boolean fakturatype;
     private boolean betalingsstatus;
     private Ordre ordre;
-    private Samarbejdspartnere bedemand;
+    private Samarbejdspartner bedemand;
 
     public Faktura(String faktura_nr,
             Timestamp faktureringsdato,
@@ -32,7 +32,7 @@ public class Faktura {
             boolean fakturatype,
             boolean betalingsstatus,
             Ordre ordre,
-            Samarbejdspartnere bedemand) {
+            Samarbejdspartner bedemand) {
         
         this.faktura_nr = faktura_nr;
         this.faktureringsdato = faktureringsdato;
@@ -54,11 +54,11 @@ public class Faktura {
         this.ordre = ordre;
     }
 
-    public Samarbejdspartnere getBedemand() {
+    public Samarbejdspartner getBedemand() {
         return bedemand;
     }
 
-    public void setBedemand(Samarbejdspartnere bedemand) {
+    public void setBedemand(Samarbejdspartner bedemand) {
         this.bedemand = bedemand;
     }
 

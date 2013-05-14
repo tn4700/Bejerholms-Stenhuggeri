@@ -8,12 +8,12 @@ package model;
  *
  * @author Martin
  */
-public class Postnumre {
+public class Postnummer {
 
     private int post_nr;
     private String byNavn;
 
-    public Postnumre(int post_nr, String byNavn) {
+    public Postnummer(int post_nr, String byNavn) {
         this.post_nr = post_nr;
         this.byNavn = byNavn;
     }

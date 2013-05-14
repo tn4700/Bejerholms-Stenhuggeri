@@ -8,7 +8,7 @@ package model;
  *
  * @author Martin
  */
-public class Samarbejdspartnere {
+public class Samarbejdspartner {
 
     private String firmanavn;
     private String adresse;
@@ -17,9 +17,9 @@ public class Samarbejdspartnere {
     private int registrerings_nr;
     private int konto_nr;
     private String bank;
-    private Postnumre post_nr;
+    private Postnummer post_nr;
 
-    public Samarbejdspartnere() {
+    public Samarbejdspartner() {
         this.firmanavn = firmanavn;
         this.adresse = adresse;
         this.tlf = tlf;
@@ -87,11 +87,11 @@ public class Samarbejdspartnere {
         this.bank = bank;
     }
 
-    public Postnumre getPost_nr() {
+    public Postnummer getPost_nr() {
         return post_nr;
     }
 
-    public void setPost_nr(Postnumre post_nr) {
+    public void setPost_nr(Postnummer post_nr) {
         this.post_nr = post_nr;
     }
 }

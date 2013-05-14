@@ -8,12 +8,12 @@ package model;
  *
  * @author Martin
  */
-public class Varegrupper {
+public class Varegruppe {
 
     private int grp_nr;
     private String navn;
 
-    public Varegrupper(int grp_nr, String navn) {
+    public Varegruppe(int grp_nr, String navn) {
         this.grp_nr = grp_nr;
         this.navn = navn;
     }
