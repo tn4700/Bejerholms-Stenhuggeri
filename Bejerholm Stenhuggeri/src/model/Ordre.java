@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,6 +29,7 @@ public class Ordre {
     private int plads_navne;
     private boolean gravType;
     private Kunde kunde;
+    private ArrayList<Vare_linje> vare_linjeListe = new ArrayList();
 
 
 
@@ -59,6 +61,14 @@ public class Ordre {
         this.bemærkning = bemærkning;
         this.leveringsadresse = leveringsadresse;
         this.kunde = kunde;
+    }
+        
+    public void tilføjVarelinje(Vare_linje vl){
+        if(vl == null){
+            
+        }else{
+            vare_linjeListe.add(vl);
+        }
     }
 
  
