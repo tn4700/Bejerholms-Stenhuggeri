@@ -16,13 +16,12 @@ public class Tom_linje {
     private String kommentar;
     private int id;
 
-    public Tom_linje() {
+    public Tom_linje(String navn, float pris, int antal, String kommentar, int id) {
         this.navn = navn;
         this.pris = pris;
         this.antal = antal;
         this.kommentar = kommentar;
         this.id = id;
-
     }
 
     public String getNavn() {

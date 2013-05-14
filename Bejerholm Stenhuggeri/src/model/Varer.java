@@ -21,7 +21,17 @@ public class Varer {
     private boolean dekoration;
     private Vare_linje grp_nr;
 
-    public Varer() {
+    public Varer(int vare_nr,
+            String navn,
+            int højde,
+            int bredde,
+            float indkøbspris,
+            float salgspris,
+            String typenavn,
+            String overflade,
+            boolean dekoration,
+            Vare_linje grp_nr) {
+
         this.vare_nr = vare_nr;
         this.navn = navn;
         this.højde = højde;

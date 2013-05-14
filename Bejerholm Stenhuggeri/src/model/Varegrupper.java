@@ -13,10 +13,9 @@ public class Varegrupper {
     private int grp_nr;
     private String navn;
 
-    public Varegrupper() {
+    public Varegrupper(int grp_nr, String navn) {
         this.grp_nr = grp_nr;
         this.navn = navn;
-
     }
 
     public int getGrp_nr() {

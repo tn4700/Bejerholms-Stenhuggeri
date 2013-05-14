@@ -14,7 +14,7 @@ public class Tegntype {
     private float pris_pr_tegn;
     private int id;
 
-    public Tegntype() {
+    public Tegntype(String navn, float pris_pr_tegn, int id) {
         this.navn = navn;
         this.pris_pr_tegn = pris_pr_tegn;
         this.id = id;

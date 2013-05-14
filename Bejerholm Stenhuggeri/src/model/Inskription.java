@@ -11,11 +11,11 @@ package model;
 public class Inskription {
 
     private String inskription;
-    private Tegntype id;
+    private Tegntype tegntype;
 
-    public Inskription() {
+    public Inskription(String inskription, Tegntype tegntype) {
         this.inskription = inskription;
-        this.id = id;
+        this.tegntype = tegntype;
     }
 
     public String getInskription() {
@@ -27,10 +27,10 @@ public class Inskription {
     }
 
     public Tegntype getId() {
-        return id;
+        return tegntype;
     }
 
     public void setId(Tegntype id) {
-        this.id = id;
+        this.tegntype = id;
     }
 }

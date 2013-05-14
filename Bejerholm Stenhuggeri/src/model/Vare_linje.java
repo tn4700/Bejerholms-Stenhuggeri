@@ -14,14 +14,14 @@ public class Vare_linje {
     private int ordre_nr;
     private Vare_linje vare_nr;
     private Inskription inskription_id;
-    private Tom_linje tom_linje_id;
+    private Tom_linje tom_linje;
 
-    public Vare_linje() {
+    public Vare_linje(int linje_nr, int ordre_nr, Vare_linje vare_nr, Inskription inskription_id, Tom_linje tom_linje) {
         this.linje_nr = linje_nr;
         this.ordre_nr = ordre_nr;
         this.vare_nr = vare_nr;
         this.inskription_id = inskription_id;
-        this.tom_linje_id = tom_linje_id;
+        this.tom_linje = tom_linje;
     }
 
     public int getLinje_nr() {
@@ -57,10 +57,10 @@ public class Vare_linje {
     }
 
     public Tom_linje getTom_linje_id() {
-        return tom_linje_id;
+        return tom_linje;
     }
 
     public void setTom_linje_id(Tom_linje tom_linje_id) {
-        this.tom_linje_id = tom_linje_id;
+        this.tom_linje = tom_linje_id;
     }
 }
