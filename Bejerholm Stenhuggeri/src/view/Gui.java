@@ -6,14 +6,13 @@ package view;
 
 import java.awt.CardLayout;
 
-
-
 /**
  *
  * @author Oliver
  */
 public class Gui extends javax.swing.JFrame {
-         private CardLayout layout;
+
+    private CardLayout layout;
 
     /**
      * Creates new form Gui
@@ -114,6 +113,28 @@ public class Gui extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jComboBox5 = new javax.swing.JComboBox();
         jButton8 = new javax.swing.JButton();
+        jPanel_OrdreBekræftigelse = new javax.swing.JPanel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jLabel32 = new javax.swing.JLabel();
+        jPanel_Konstanter = new javax.swing.JPanel();
+        jButton18 = new javax.swing.JButton();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jPanel_Administration = new javax.swing.JPanel();
+        jButton19 = new javax.swing.JButton();
+        jButton20 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton();
         jPanel_Lager = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
@@ -129,6 +150,12 @@ public class Gui extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
+        jPanel_LagerTilføj = new javax.swing.JPanel();
+        jPanel_Søg = new javax.swing.JPanel();
+        jComboBox7 = new javax.swing.JComboBox();
+        jTextField1 = new javax.swing.JTextField();
+        jButton12 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,22 +167,52 @@ public class Gui extends javax.swing.JFrame {
         jPanel_Hovedmenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton_Søg.setText("Søg");
+        jButton_Søg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_SøgActionPerformed(evt);
+            }
+        });
         jPanel_Hovedmenu.add(jButton_Søg, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 173, 84));
 
         jButton_Salg.setText("Salg");
+        jButton_Salg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_SalgActionPerformed(evt);
+            }
+        });
         jPanel_Hovedmenu.add(jButton_Salg, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 173, 84));
 
         jButton_Administration.setText("Administration");
+        jButton_Administration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AdministrationActionPerformed(evt);
+            }
+        });
         jPanel_Hovedmenu.add(jButton_Administration, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, 173, 84));
 
         jButton_Lager.setText("Lager");
+        jButton_Lager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_LagerActionPerformed(evt);
+            }
+        });
         jPanel_Hovedmenu.add(jButton_Lager, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 173, 84));
 
-        jPanel_CardMain.add(jPanel_Hovedmenu, "card8");
+        jPanel_CardMain.add(jPanel_Hovedmenu, "card_HovedMenu");
 
         jButton_LynSalg.setText("Lyn Salg");
+        jButton_LynSalg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_LynSalgActionPerformed(evt);
+            }
+        });
 
         jButton_AlmSalg.setText("Salg");
+        jButton_AlmSalg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AlmSalgActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_SalgLayout = new javax.swing.GroupLayout(jPanel_Salg);
         jPanel_Salg.setLayout(jPanel_SalgLayout);
@@ -178,7 +235,7 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap(196, Short.MAX_VALUE))
         );
 
-        jPanel_CardMain.add(jPanel_Salg, "card4");
+        jPanel_CardMain.add(jPanel_Salg, "card_Salg");
 
         jPanel_LynSalg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -206,7 +263,7 @@ public class Gui extends javax.swing.JFrame {
         jButton3.setText("Videre");
         jPanel_LynSalg.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, -1, -1));
 
-        jPanel_CardMain.add(jPanel_LynSalg, "card5");
+        jPanel_CardMain.add(jPanel_LynSalg, "card_LynSalg");
 
         jPanel_OrdreSalg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -269,7 +326,7 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField12)
                             .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,7 +353,7 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        jPanel_OrdreSalg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 22, 580, 140));
+        jPanel_OrdreSalg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 22, 670, 140));
 
         jLabel9.setText("Kunde info");
         jPanel_OrdreSalg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
@@ -344,7 +401,7 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addGap(18, 18, 18)
                             .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,10 +418,10 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
-        jPanel_OrdreSalg.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 210, 160));
+        jPanel_OrdreSalg.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 250, 180));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -425,7 +482,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,21 +507,31 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        jPanel_OrdreSalg.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 330, 160));
+        jPanel_OrdreSalg.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 390, 180));
 
         jButton4.setText("Videre");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel_OrdreSalg.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, -1, -1));
 
-        jPanel_CardMain.add(jPanel_OrdreSalg, "card6");
+        jPanel_CardMain.add(jPanel_OrdreSalg, "card_OrdreSalg");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jScrollPane1.setViewportView(jTextPane1);
 
         jButton5.setText("Godkend");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -609,7 +676,170 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel_CardMain.add(jPanel_Ordre_Linje, "Ordre_Trin_2");
+        jPanel_CardMain.add(jPanel_Ordre_Linje, "card_Ordre_Linje");
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jButton13.setText("Godkend");
+
+        jButton14.setText("Ændre");
+
+        jButton15.setText("Annuller");
+
+        jButton16.setText("Print");
+
+        jButton17.setText("Email");
+
+        jLabel32.setText("Her vises et eksempel af ordre seddel / eller bare hvilken oplysninger der er tastet ind");
+
+        javax.swing.GroupLayout jPanel_OrdreBekræftigelseLayout = new javax.swing.GroupLayout(jPanel_OrdreBekræftigelse);
+        jPanel_OrdreBekræftigelse.setLayout(jPanel_OrdreBekræftigelseLayout);
+        jPanel_OrdreBekræftigelseLayout.setHorizontalGroup(
+            jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jLabel32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(75, 75, 75))
+        );
+        jPanel_OrdreBekræftigelseLayout.setVerticalGroup(
+            jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                                .addComponent(jButton13)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton14)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton15)
+                                .addGap(96, 96, 96)
+                                .addComponent(jButton16)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton17))
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(jLabel32)))
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+        jPanel_CardMain.add(jPanel_OrdreBekræftigelse, "card_OrdreBekræftigelse");
+
+        jButton18.setText("Ændre");
+
+        jLabel33.setText("Konstant 1");
+
+        jLabel34.setText("Konstant 2");
+
+        jLabel35.setText("Konstant 3");
+
+        jLabel36.setText("Konstant 4");
+
+        jTextField2.setText("jTextField2");
+
+        jTextField3.setText("jTextField3");
+
+        jTextField4.setText("jTextField4");
+
+        jTextField5.setText("jTextField5");
+
+        javax.swing.GroupLayout jPanel_KonstanterLayout = new javax.swing.GroupLayout(jPanel_Konstanter);
+        jPanel_Konstanter.setLayout(jPanel_KonstanterLayout);
+        jPanel_KonstanterLayout.setHorizontalGroup(
+            jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_KonstanterLayout.createSequentialGroup()
+                .addGroup(jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_KonstanterLayout.createSequentialGroup()
+                        .addGap(308, 308, 308)
+                        .addComponent(jButton18))
+                    .addGroup(jPanel_KonstanterLayout.createSequentialGroup()
+                        .addGap(263, 263, 263)
+                        .addGroup(jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel35)
+                            .addComponent(jLabel36))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField4)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(304, Short.MAX_VALUE))
+        );
+        jPanel_KonstanterLayout.setVerticalGroup(
+            jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_KonstanterLayout.createSequentialGroup()
+                .addContainerGap(72, Short.MAX_VALUE)
+                .addGroup(jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel35)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addComponent(jButton18)
+                .addGap(134, 134, 134))
+        );
+
+        jPanel_CardMain.add(jPanel_Konstanter, "card_Konstanter");
+
+        jButton19.setText("Ændre Konstanter");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+
+        jButton20.setText("Opret/ Rediger/ Slet Bruger");
+
+        jButton21.setText("Import / Export CSV filer");
+
+        javax.swing.GroupLayout jPanel_AdministrationLayout = new javax.swing.GroupLayout(jPanel_Administration);
+        jPanel_Administration.setLayout(jPanel_AdministrationLayout);
+        jPanel_AdministrationLayout.setHorizontalGroup(
+            jPanel_AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_AdministrationLayout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(jButton19)
+                .addGap(18, 18, 18)
+                .addComponent(jButton20)
+                .addGap(18, 18, 18)
+                .addComponent(jButton21)
+                .addContainerGap(195, Short.MAX_VALUE))
+        );
+        jPanel_AdministrationLayout.setVerticalGroup(
+            jPanel_AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_AdministrationLayout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addGroup(jPanel_AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton19)
+                    .addComponent(jButton20)
+                    .addComponent(jButton21))
+                .addContainerGap(262, Short.MAX_VALUE))
+        );
+
+        jPanel_CardMain.add(jPanel_Administration, "card_Administration");
 
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
@@ -680,6 +910,11 @@ public class Gui extends javax.swing.JFrame {
         jLabel28.setText("Filtrer Varer");
 
         jButton11.setText("Tilføj Vare");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_LagerLayout = new javax.swing.GroupLayout(jPanel_Lager);
         jPanel_Lager.setLayout(jPanel_LagerLayout);
@@ -719,9 +954,60 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jPanel_CardMain.add(jPanel_Lager, "card7");
+        jPanel_CardMain.add(jPanel_Lager, "card_Lager");
 
-        jPanel1.add(jPanel_CardMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 125, -1, -1));
+        javax.swing.GroupLayout jPanel_LagerTilføjLayout = new javax.swing.GroupLayout(jPanel_LagerTilføj);
+        jPanel_LagerTilføj.setLayout(jPanel_LagerTilføjLayout);
+        jPanel_LagerTilføjLayout.setHorizontalGroup(
+            jPanel_LagerTilføjLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 783, Short.MAX_VALUE)
+        );
+        jPanel_LagerTilføjLayout.setVerticalGroup(
+            jPanel_LagerTilføjLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 422, Short.MAX_VALUE)
+        );
+
+        jPanel_CardMain.add(jPanel_LagerTilføj, "card_LagerTilføj");
+
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ordre", "Faktura", "Kontoudtog", "Provisionsseddel", " " }));
+
+        jButton12.setText("Søg");
+
+        javax.swing.GroupLayout jPanel_SøgLayout = new javax.swing.GroupLayout(jPanel_Søg);
+        jPanel_Søg.setLayout(jPanel_SøgLayout);
+        jPanel_SøgLayout.setHorizontalGroup(
+            jPanel_SøgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_SøgLayout.createSequentialGroup()
+                .addGap(270, 270, 270)
+                .addGroup(jPanel_SøgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox7, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1)
+                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(338, Short.MAX_VALUE))
+        );
+        jPanel_SøgLayout.setVerticalGroup(
+            jPanel_SøgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_SøgLayout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton12)
+                .addContainerGap(195, Short.MAX_VALUE))
+        );
+
+        jPanel_CardMain.add(jPanel_Søg, "card_Søg");
+
+        jPanel1.add(jPanel_CardMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+
+        jButton1.setText("Hovedmenu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -736,6 +1022,61 @@ public class Gui extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_SalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalgActionPerformed
+        layout.show(jPanel_CardMain, "card_Salg");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_SalgActionPerformed
+
+    private void jButton_LynSalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LynSalgActionPerformed
+        layout.show(jPanel_CardMain, "card_LynSalg");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_LynSalgActionPerformed
+
+    private void jButton_AlmSalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AlmSalgActionPerformed
+layout.show(jPanel_CardMain, "card_OrdreSalg");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_AlmSalgActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        layout.show(jPanel_CardMain, "card_HovedMenu");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+ layout.show(jPanel_CardMain, "card_Ordre_Linje");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton_LagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerActionPerformed
+ layout.show(jPanel_CardMain, "card_Lager");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_LagerActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+ layout.show(jPanel_CardMain, "card_OrdreBekræftigelse");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+ layout.show(jPanel_CardMain, "card_Konstanter");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+ layout.show(jPanel_CardMain, "card_LagerTilføj");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton_AdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministrationActionPerformed
+ layout.show(jPanel_CardMain, "card_Administration");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_AdministrationActionPerformed
+
+    private void jButton_SøgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SøgActionPerformed
+ layout.show(jPanel_CardMain, "card_Søg");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_SøgActionPerformed
 
     /**
      * @param args the command line arguments
@@ -779,9 +1120,20 @@ public class Gui extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -804,6 +1156,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JComboBox jComboBox6;
+    private javax.swing.JComboBox jComboBox7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -829,6 +1182,11 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -840,21 +1198,28 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel_Administration;
     private javax.swing.JPanel jPanel_CardMain;
     private javax.swing.JPanel jPanel_Hovedmenu;
+    private javax.swing.JPanel jPanel_Konstanter;
     private javax.swing.JPanel jPanel_Lager;
+    private javax.swing.JPanel jPanel_LagerTilføj;
     private javax.swing.JPanel jPanel_LynSalg;
+    private javax.swing.JPanel jPanel_OrdreBekræftigelse;
     private javax.swing.JPanel jPanel_OrdreSalg;
     private javax.swing.JPanel jPanel_Ordre_Linje;
     private javax.swing.JPanel jPanel_Salg;
+    private javax.swing.JPanel jPanel_Søg;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
@@ -865,6 +1230,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
@@ -872,6 +1238,9 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField24;
     private javax.swing.JTextField jTextField25;
     private javax.swing.JTextField jTextField26;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
