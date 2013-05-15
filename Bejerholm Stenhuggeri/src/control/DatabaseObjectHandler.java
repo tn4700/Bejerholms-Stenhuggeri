@@ -7,10 +7,13 @@ package control;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Inskription;
 import model.Kunde;
 import model.Ordre;
 import model.Postnummer;
 import model.Samarbejdspartner;
+import model.Tegntype;
+import model.Tom_linje;
 
 /**
  *
@@ -36,7 +39,7 @@ public class DatabaseObjectHandler {
                     rs.getInt("post_nr"),
                     rs.getString("byNavn"));
             postnummerArray.add(postnr);
-        }
+        }rs.close();
         return postnummerArray;
     }
 
@@ -51,7 +54,7 @@ public class DatabaseObjectHandler {
             Postnummer postnr = new Postnummer(rs.getInt("post_nr"), rs.getString("bynavn"));
             Kunde kunde = new Kunde(rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("Adresse"), rs.getInt("tlf"), postnr);
             kundeArray.add(kunde);
-        }
+        }rs.close();
                 
         return kundeArray;
 
@@ -76,8 +79,8 @@ public class DatabaseObjectHandler {
                         rs.getString("adresse"),
                         rs.getInt("tlf"),
                         postnr);
-                rs.close();
-            }
+                
+            }rs.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,6 +117,71 @@ public class DatabaseObjectHandler {
         return partner;
     }
     
+    public ArrayList getTomLinjeListe() throws SQLException{
+        ArrayList<Tom_linje> tomlinjeListe = new ArrayList<>();
+        String sql = "select navn, pris, antal, kommentar, id from tom_linje";
+        ResultSet rs;
+        
+        rs = db.getData(sql);
+        
+        while(rs.next()){
+            Tom_linje tl = new Tom_linje(
+                    rs.getString("navn"),
+                    rs.getDouble("pris"), 
+                    rs.getInt("antal"), 
+                    rs.getString("kommentar"),
+                    rs.getInt("id"));
+            tomlinjeListe.add(tl);
+        
+        }
+        rs.close();
+        return tomlinjeListe;
+    }
+    
+        public ArrayList getTegntypeListe() throws SQLException{
+        ArrayList<Tegntype> tegntypeListe = new ArrayList<>();
+        String sql = "select navn, pris_pr_tegn, id from tegntype";
+        ResultSet rs;
+        
+        rs = db.getData(sql);
+        
+        while(rs.next()){
+            Tegntype tt = new Tegntype(
+                    rs.getString("navn"),
+                    rs.getDouble("pris_pr_tegn"), 
+                    rs.getInt("id"));
+            tegntypeListe.add(tt);
+        
+        }
+        rs.close();
+        return tegntypeListe;
+    }
+        
+        public ArrayList getInskriptionListe() throws SQLException{
+        ArrayList<Inskription> inskriptionListe = new ArrayList<>();
+        String sql = "select inskription.inskription, inskription.tegn_id, inskription.skrifttype, tegntype.navn, "
+                + "tegntype.pris_pr_tegn from inskription join tegntype on tegntype.id = inskription.tegn_id";
+        ResultSet rs;
+        
+        rs = db.getData(sql);
+        
+        while(rs.next()){
+            Tegntype tegntype = new Tegntype(
+                    rs.getString("navn"),
+                    rs.getDouble("pris_pr_tegn"), 
+                    rs.getInt("tegn_id"));
+            Inskription inskription = new Inskription(
+                    rs.getString("inskription"),
+                    tegntype, 
+                    rs.getInt("tegn_id"),
+                    rs.getString("skrifttype"));
+            inskriptionListe.add(inskription);
+        
+        }
+        rs.close();
+        return inskriptionListe;
+    }
+       
  
     public Ordre getOrdre(int ordre_nr) throws SQLException{
         Ordre ordre = null;

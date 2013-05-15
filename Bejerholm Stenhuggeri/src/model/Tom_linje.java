@@ -63,4 +63,11 @@ public class Tom_linje {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Tom_linje{" + "navn=" + navn + ", pris=" + pris + ", antal=" + antal + ", kommentar=" + kommentar + ", id=" + id + '}';
+    }
+    
+    
 }

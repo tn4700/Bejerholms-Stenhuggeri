@@ -44,4 +44,10 @@ public class Tegntype {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Tegntype{" + "navn=" + navn + ", pris_pr_tegn=" + pris_pr_tegn + ", id=" + id + '}';
+    }
+    
 }

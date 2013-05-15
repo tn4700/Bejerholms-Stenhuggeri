@@ -8,8 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Inskription;
 import model.Kunde;
 import model.Samarbejdspartner;
+import model.Tegntype;
+import model.Tom_linje;
 
 /**
  *
@@ -34,6 +37,15 @@ public class ObjectHandlerTEST {
             
             ArrayList<Kunde> kundeliste = dbhandler.getKundeListe();
             System.out.println(kundeliste);
+            
+            ArrayList<Tom_linje> te = dbhandler.getTomLinjeListe();
+            System.out.println(te);
+            
+            ArrayList<Tegntype> tegntypeliste = dbhandler.getTegntypeListe();
+            System.out.println(tegntypeliste);
+            
+            ArrayList<Inskription> inskriptionliste = dbhandler.getInskriptionListe();
+            System.out.println(inskriptionliste);
             
         } catch (SQLException ex) {
             Logger.getLogger(ObjectHandlerTEST.class.getName()).log(Level.SEVERE, null, ex);
