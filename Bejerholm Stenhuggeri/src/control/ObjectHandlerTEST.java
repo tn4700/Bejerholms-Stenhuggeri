@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Kunde;
-import model.Postnummer;
 
 /**
  *
@@ -21,12 +20,12 @@ public class ObjectHandlerTEST {
      */
     public static void main(String[] args) {
         try {
-            DBConnection db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "1234");
+            DBConnection db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
             System.out.println("" + db.isConnected());
             DatabaseObjectHandler dbhandler = new DatabaseObjectHandler(db);
             
-            
             Kunde kunde = dbhandler.getKunde(28931093);
+            System.out.println(kunde.getFornavn()+" "+kunde.getEfternavn()+" "+kunde.getTlf()+" "+kunde.getAdresse()+" "+kunde.getPost_nr().getPost_nr()+" "+kunde.getPost_nr().getByNavn());
                     
                     
         } catch (SQLException ex) {
