@@ -1,4 +1,4 @@
-use bejerholmstenhuggeri;
+﻿use bejerholmstenhuggeri;
 
 insert into postnummer (post_nr,byNavn)
 values

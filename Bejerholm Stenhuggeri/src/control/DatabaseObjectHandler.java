@@ -98,9 +98,9 @@ public class DatabaseObjectHandler {
     public Samarbejdspartner getSamarbejdspartner(int cvr_nr) throws SQLException{
         Samarbejdspartner partner = null;
         ResultSet rs;
-        String sql = "select  samarbejdspartner.firmavn, samarbejdspartner.adresse, samarbejdspartner.tlf, samarbejdspartner.cvr_nr, "
+        String sql = "select  samarbejdspartner.firmanavn, samarbejdspartner.adresse, samarbejdspartner.tlf, samarbejdspartner.cvr_nr, "
                 + "samarbejdspartner.registrerings_nr, samarbejdspartner.konto_nr, samarbejdspartner.bank, samarbejdspartner.post_nr, postnummer.bynavn "
-                + "from kunde join postnummer on postnummer.post_nr = samarbejdspartner.post_nr where samarbejdspartner.cvr_nr=" + cvr_nr;
+                + "from samarbejdspartner join postnummer on postnummer.post_nr = samarbejdspartner.post_nr where samarbejdspartner.cvr_nr=" + cvr_nr;
         rs = db.getData(sql);
         try {
 
@@ -128,6 +128,7 @@ public class DatabaseObjectHandler {
    
     public Ordre getOrdre(int ordre_nr) throws SQLException{
         Ordre ordre = null;
+        ResultSet rs;
         
         
         
