@@ -19,7 +19,7 @@ public class Samarbejdspartner {
     private String bank;
     private Postnummer post_nr;
 
-    public Samarbejdspartner() {
+    public Samarbejdspartner(String firmanavn,String adresse,int tlf,int cvr_nr,int registrerings_nr,int konto_nr,String bank,Postnummer post_nr) {
         this.firmanavn = firmanavn;
         this.adresse = adresse;
         this.tlf = tlf;

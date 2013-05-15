@@ -18,7 +18,7 @@ public class Provisionsseddel {
     private String overførelsesbetingelser;
     private Faktura faktura_nr;
 
-    public Provisionsseddel() {
+    public Provisionsseddel(int provisions_nr,Timestamp dato,String vedrørende,String overførelsesbetingelser,Faktura faktura_nr) {
         this.provisions_nr = provisions_nr;
         this.dato = dato;
         this.vedrørende = vedrørende;

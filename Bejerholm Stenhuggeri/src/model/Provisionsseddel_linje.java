@@ -17,7 +17,7 @@ public class Provisionsseddel_linje {
     private double pris;
     private int provisions_nr;
 
-    public Provisionsseddel_linje() {
+    public Provisionsseddel_linje(int antal,int linje_nr,String beskrivelse,double enhedspris,double pris,int provisions_nr) {
         this.antal = antal;
         this.linje_nr = linje_nr;
         this.beskrivelse = beskrivelse;
