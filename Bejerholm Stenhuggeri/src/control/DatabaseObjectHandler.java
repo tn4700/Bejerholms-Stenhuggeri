@@ -42,30 +42,19 @@ public class DatabaseObjectHandler {
 
     public ArrayList getKundeListe() throws SQLException {
         ArrayList<Kunde> kundeArray = new ArrayList<>();
-        Kunde kunde = null;
-        Postnummer postnr;
+        String sql = "select kunde.fornavn, kunde.efternavn, kunde.adresse, kunde.tlf, kunde.post_nr, postnummer.bynavn from kunde join postnummer "
+                + "on postnummer.post_nr = kunde.post_nr";
         ResultSet rs;
-        String sql = "select kunde.fornavn, kunde.efternavn, kunde.adresse, kunde.tlf, kunde.post_nr, postnummer.bynavn "
-                + "from kunde join postnummer on postnummer.post_nr = kunde.post_nr where kunde.tlf=" + kunde.getTlf();
-
-        try {
-            rs = db.getData(sql);
-            if (rs.next()) {
-                postnr = new Postnummer(
-                        rs.getInt("post_nr"),
-                        rs.getString("byNavn"));
-                kunde = new Kunde(
-                        rs.getString("fornavn"),
-                        rs.getString("efternavn"),
-                        rs.getString("adresse"),
-                        rs.getInt("tlf"),
-                        postnr);
-                kundeArray.add(kunde);
-            }
-        } catch (Exception e) {
-            System.out.println("fejl: " + e);
+        rs = db.getData(sql);
+        
+        while(rs.next()){
+            Postnummer postnr = new Postnummer(rs.getInt("post_nr"), rs.getString("bynavn"));
+            Kunde kunde = new Kunde(rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("Adresse"), rs.getInt("tlf"), postnr);
+            kundeArray.add(kunde);
         }
+                
         return kundeArray;
+
     }
 
     public Kunde getKunde(int tlf) throws SQLException {
@@ -125,7 +114,7 @@ public class DatabaseObjectHandler {
         return partner;
     }
     
-   
+ 
     public Ordre getOrdre(int ordre_nr) throws SQLException{
         Ordre ordre = null;
         ResultSet rs;

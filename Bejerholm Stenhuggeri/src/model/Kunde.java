@@ -70,6 +70,7 @@ public class Kunde {
     public void setPost_nr(Postnummer post_nr) {
         this.post_nr = post_nr;
     }
+    
     /* Boolean type
      True = Gravsten
      False = Alt andet
@@ -85,4 +86,9 @@ public class Kunde {
 //        }
 //            
 //    }
+
+    @Override
+    public String toString() {
+        return "Kunde{" + "fornavn=" + fornavn + ", efternavn=" + efternavn + ", adresse=" + adresse + ", tlf=" + tlf + ", post_nr=" + post_nr + ", ordreList=" + ordreList + '}';
+    }
 }

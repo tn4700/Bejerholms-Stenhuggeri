@@ -5,6 +5,7 @@
 package control;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Kunde;
@@ -31,6 +32,8 @@ public class ObjectHandlerTEST {
              Samarbejdspartner partner = dbhandler.getSamarbejdspartner(12943790);
             System.out.println(partner.getFirmanavn()+" "+partner.getAdresse()+" "+partner.getBank()+" "+partner.getRegistrerings_nr()+" "+partner.getPost_nr().getPost_nr()+" "+partner.getPost_nr().getByNavn());  
             
+            ArrayList<Kunde> kundeliste = dbhandler.getKundeListe();
+            System.out.println(kundeliste);
             
         } catch (SQLException ex) {
             Logger.getLogger(ObjectHandlerTEST.class.getName()).log(Level.SEVERE, null, ex);
