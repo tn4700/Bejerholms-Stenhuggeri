@@ -7,6 +7,7 @@ package control;
 import com.itextpdf.text.DocumentException;
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -77,6 +78,8 @@ public class FilTest {
             Desktop desktop = Desktop.getDesktop();
             File file = new File("docs/test.pdf");
             desktop.open(file);
+        } catch (FileNotFoundException ex){
+            System.out.println("Luk andre pdf'er før du prøver at se en ny!");
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (DocumentException ex) {

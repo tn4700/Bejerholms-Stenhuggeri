@@ -1,4 +1,4 @@
-Drop database if exists bejerholmstenhuggeri;
+doubleDrop database if exists bejerholmstenhuggeri;
 create database bejerholmstenhuggeri;
 use bejerholmstenhuggeri;
 
@@ -23,7 +23,7 @@ primary key(post_nr)
 drop table if exists ordre;
 create table ordre
 (
-ordre_nr                 int,
+ordre_nr                varchar(5),
 ordretype               boolean,
 ordredato				datetime,
 ordrestatus				int,
@@ -51,7 +51,7 @@ drop table if exists tom_linje;
 create table tom_linje
 (
 navn                    varchar(50),
-pris                    float,
+pris                    double,
 antal                   int,
 kommentar               varchar(100)
 )engine = innodb;
@@ -63,8 +63,8 @@ vare_nr 				int auto_increment,
 navn					varchar(100),
 højde                   int,
 bredde                  int,
-indkøbspris             float,
-salgspris               float,
+indkøbspris             double,
+salgspris               double,
 typenavn				varchar(50),
 overflade				varchar(20),
 dekoration				boolean,
@@ -90,13 +90,13 @@ drop table if exists tegntype;
 create table tegntype
 (
 navn                    varchar(50),
-pris_pr_tegn            float
+pris_pr_tegn            double
 ) engine = innodb;
 
 drop table if exists faktura;
 create table faktura
 (
-faktura_nr              int,            # Unikt nr som står i toppen af faktura seddelen
+faktura_nr              varchar(16),            # Unikt nr som står i toppen af faktura seddelen
 faktureringsdato        datetime,            # Dato for oprettelse af faktura seddelen
 vedrørende              varchar(100),
 betalingsbetingelser    varchar(50),
@@ -123,7 +123,7 @@ create table kontoudtog_linje
 antal                   int,
 linje_nr				int,
 beskrivelse             text,
-pris                    float
+pris                    double
 )engine = innodb;
 
 drop table if exists provisionsseddel;
@@ -142,8 +142,8 @@ create table provisionsseddel_linje
 antal                   int,
 linje_nr				int,
 beskrivelse             text,
-enhedspris             	float,
-pris                  	float
+enhedspris             	double,
+pris                  	double
 ) engine = innodb;
 
 drop table if exists samarbejdspartner;
