@@ -1,4 +1,4 @@
-doubleDrop database if exists bejerholmstenhuggeri;
+Drop database if exists bejerholmstenhuggeri;
 create database bejerholmstenhuggeri;
 use bejerholmstenhuggeri;
 

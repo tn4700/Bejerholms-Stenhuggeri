@@ -31,15 +31,15 @@ add column tom_linje_id int,
 add foreign key(tom_linje_id) references tom_linje(id);
 
 alter table faktura
-add column ordre_nr int,
+add column ordre_nr varchar(5),
 add foreign key(ordre_nr) references ordre(ordre_nr);
 
 alter table provisionsseddel
-add column faktura_nr int,
+add column faktura_nr varchar(16),
 add foreign key(faktura_nr) references faktura(faktura_nr);
 
 alter table kontoudtog
-add column faktura_nr int,
+add column faktura_nr varchar(16),
 add foreign key(faktura_nr) references faktura(faktura_nr);
 
 #fase 4 - For hver 1:n forbindelse tilføjes primærnøglen fra 1-siden som fremmednøgle 
@@ -50,7 +50,7 @@ add column grp_nr int,
 add foreign key(grp_nr) references varegruppe(grp_nr);
 
 alter table vare_linje
-add column ordre_nr int,
+add column ordre_nr varchar(5),
 add foreign key(ordre_nr) references ordre(ordre_nr),
 add primary key(ordre_nr, linje_nr);
 
