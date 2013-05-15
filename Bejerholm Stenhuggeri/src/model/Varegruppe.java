@@ -33,4 +33,11 @@ public class Varegruppe {
     public void setNavn(String navn) {
         this.navn = navn;
     }
+
+    @Override
+    public String toString() {
+        return "Varegruppe{" + "grp_nr=" + grp_nr + ", navn=" + navn + '}';
+    }
+    
+    
 }

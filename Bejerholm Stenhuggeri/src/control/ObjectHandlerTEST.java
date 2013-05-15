@@ -13,6 +13,9 @@ import model.Kunde;
 import model.Samarbejdspartner;
 import model.Tegntype;
 import model.Tom_linje;
+import model.Vare;
+import model.Vare_linje;
+import model.Varegruppe;
 
 /**
  *
@@ -38,14 +41,26 @@ public class ObjectHandlerTEST {
             ArrayList<Kunde> kundeliste = dbhandler.getKundeListe();
             System.out.println(kundeliste);
             
-            ArrayList<Tom_linje> te = dbhandler.getTomLinjeListe();
-            System.out.println(te);
+            ArrayList<Tom_linje> tomlinjeliste = dbhandler.getTomLinjeListe();
+            System.out.println(tomlinjeliste);
             
             ArrayList<Tegntype> tegntypeliste = dbhandler.getTegntypeListe();
             System.out.println(tegntypeliste);
             
             ArrayList<Inskription> inskriptionliste = dbhandler.getInskriptionListe();
             System.out.println(inskriptionliste);
+            
+            ArrayList<Varegruppe> varegrpListe = dbhandler.getVareGruppeListe();
+            System.out.println(varegrpListe);
+            
+            ArrayList<Vare> vareListe = dbhandler.getVareListe();
+            System.out.println(vareListe);
+            
+            ArrayList<Vare_linje> vareLinjeListe = dbhandler.getVareLinjeListe(tomlinjeliste, vareListe, inskriptionliste);
+            for (int i = 0; i < vareLinjeListe.size(); i++) {
+                System.out.println(vareLinjeListe.get(i));
+            }
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(ObjectHandlerTEST.class.getName()).log(Level.SEVERE, null, ex);

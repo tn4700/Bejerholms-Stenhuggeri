@@ -19,7 +19,7 @@ public class Vare {
     private String typenavn;
     private String overflade;
     private boolean dekoration;
-    private Vare_linje grp_nr;
+    private Varegruppe gruppe;
 
     public Vare(int vare_nr,
             String navn,
@@ -30,7 +30,7 @@ public class Vare {
             String typenavn,
             String overflade,
             boolean dekoration,
-            Vare_linje grp_nr) {
+            Varegruppe gruppe) {
 
         this.vare_nr = vare_nr;
         this.navn = navn;
@@ -41,7 +41,7 @@ public class Vare {
         this.typenavn = typenavn;
         this.overflade = overflade;
         this.dekoration = dekoration;
-        this.grp_nr = grp_nr;
+        this.gruppe = gruppe;
     }
 
     public int getVare_nr() {
@@ -116,11 +116,18 @@ public class Vare {
         this.dekoration = dekoration;
     }
 
-    public Vare_linje getGrp_nr() {
-        return grp_nr;
+    public Varegruppe getGruppe() {
+        return gruppe;
     }
 
-    public void setGrp_nr(Vare_linje grp_nr) {
-        this.grp_nr = grp_nr;
+    public void setGruppe(Varegruppe gruppe) {
+        this.gruppe = gruppe;
     }
+
+    @Override
+    public String toString() {
+        return "Vare{" + "vare_nr=" + vare_nr + ", navn=" + navn + ", h\u00f8jde=" + højde + ", bredde=" + bredde + ", indk\u00f8bspris=" + indkøbspris + ", salgspris=" + salgspris + ", typenavn=" + typenavn + ", overflade=" + overflade + ", dekoration=" + dekoration + ", gruppe=" + gruppe + '}';
+    }
+    
+    
 }

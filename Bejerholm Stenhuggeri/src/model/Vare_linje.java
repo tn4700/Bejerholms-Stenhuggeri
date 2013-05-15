@@ -11,20 +11,36 @@ package model;
 public class Vare_linje {
 
     private int linje_nr;
-    private int ordre_nr;
-    private Vare_linje vare_nr;
-    private Inskription inskription_id;
+    private String ordre_nr;
+    private Vare vare;
+    private Inskription inskription;
     private Tom_linje tom_linje;
 
-    public Vare_linje(int linje_nr, int ordre_nr, Vare_linje vare_nr, Inskription inskription_id, Tom_linje tom_linje) {
+    public Vare_linje(int linje_nr, String ordre_nr, Vare vare) {
         this.linje_nr = linje_nr;
         this.ordre_nr = ordre_nr;
-        this.vare_nr = vare_nr;
-        this.inskription_id = inskription_id;
+        this.vare = vare;
+        this.inskription = null;
+        this.tom_linje = null;
+    }
+
+    public Vare_linje(int linje_nr, String ordre_nr, Inskription inskription) {
+        this.linje_nr = linje_nr;
+        this.ordre_nr = ordre_nr;
+        this.vare = null;
+        this.inskription = inskription;
+        this.tom_linje = null;
+    }
+
+    public Vare_linje(int linje_nr, String ordre_nr, Tom_linje tom_linje) {
+        this.linje_nr = linje_nr;
+        this.ordre_nr = ordre_nr;
+        this.vare = null;
+        this.inskription = null;
         this.tom_linje = tom_linje;
     }
-    
-    public void vælgVare(Vare vælgv){
+
+    public void vælgVare(Vare vælgv) {
         //?????
     }
 
@@ -36,35 +52,41 @@ public class Vare_linje {
         this.linje_nr = linje_nr;
     }
 
-    public int getOrdre_nr() {
+    public String getOrdre_nr() {
         return ordre_nr;
     }
 
-    public void setOrdre_nr(int ordre_nr) {
+    public void setOrdre_nr(String ordre_nr) {
         this.ordre_nr = ordre_nr;
     }
 
-    public Vare_linje getVare_nr() {
-        return vare_nr;
+    public Vare getVare() {
+        return vare;
     }
 
-    public void setVare_nr(Vare_linje vare_nr) {
-        this.vare_nr = vare_nr;
+    public void setVare(Vare vare_nr) {
+        this.vare = vare;
     }
 
-    public Inskription getInskription_id() {
-        return inskription_id;
+    public Inskription getInskription() {
+        return inskription;
     }
 
-    public void setInskription_id(Inskription inskription_id) {
-        this.inskription_id = inskription_id;
+    public void setInskription(Inskription inskription) {
+        this.inskription = inskription;
     }
 
-    public Tom_linje getTom_linje_id() {
+    public Tom_linje getTom_linje() {
         return tom_linje;
     }
 
-    public void setTom_linje_id(Tom_linje tom_linje_id) {
-        this.tom_linje = tom_linje_id;
+    public void setTom_linje(Tom_linje tom_linje) {
+        this.tom_linje = tom_linje;
     }
+
+    @Override
+    public String toString() {
+        return "Vare_linje{" + "linje_nr=" + linje_nr + ", ordre_nr=" + ordre_nr + ", vare=" + vare + ", inskription=" + inskription + ", tom_linje=" + tom_linje + '}';
+    }
+    
 }

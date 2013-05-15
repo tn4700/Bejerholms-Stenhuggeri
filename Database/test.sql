@@ -27,3 +27,10 @@ samarbejdspartner.registrerings_nr, samarbejdspartner.konto_nr, samarbejdspartne
 
 select ordre.ordre_nr, ordre.ordretype, ordre.ordredato, ordre.ordrestatus, ordre.leveringdato, ordre.bemærkning, ordre.leveringsadresse, ordre.kirkegård,
 ordre.afdeling, ordre.afdødnavn, ordre.række, ordre.nummer, ordre.plads_navne, ordre.gravtype from ordre join kunde on kunde.tlf = ordre.tlf where ordre.ordre_nr = 1;
+
+select inskription.inskription, inskription.tegn_id, inskription.skrifttype, tegntype.navn, tegntype.pris_pr_tegn from inskription join tegntype on tegntype.id = inskription.tegn_id;
+
+select vare.vare_nr, vare.navn, vare.højde, vare.bredde, vare.indkøbspris, vare.salgspris, vare.typenavn, vare.overflade, vare.dekoration, vare.grp_nr from vare join varegruppe on varegruppe.grp_nr = vare.grp_nr;
+
+select vare_linje.linje_nr, vare_linje.vare_nr, vare_linje.tom_linje_id, vare_linje.inskription_id, vare_linje.ordre_nr from vare_linje;
+ 

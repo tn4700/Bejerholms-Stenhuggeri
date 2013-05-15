@@ -12,13 +12,13 @@ public class Inskription {
 
     private String inskription;
     private Tegntype tegntype;
-    private int tegn_id;
+    private int id;
     private String skrifttype;
 
-    public Inskription(String inskription, Tegntype tegntype, int tegn_id, String skrifttype) {
+    public Inskription(String inskription, Tegntype tegntype, int id, String skrifttype) {
         this.inskription = inskription;
         this.tegntype = tegntype;
-        this.tegn_id = tegn_id;
+        this.id = id;
         this.skrifttype = skrifttype;
     }
 
@@ -26,21 +26,37 @@ public class Inskription {
         return inskription;
     }
 
+    public Tegntype getTegntype() {
+        return tegntype;
+    }
+
+    public void setTegntype(Tegntype tegntype) {
+        this.tegntype = tegntype;
+    }
+
+    public String getSkrifttype() {
+        return skrifttype;
+    }
+
+    public void setSkrifttype(String skrifttype) {
+        this.skrifttype = skrifttype;
+    }
+
     public void setInskription(String inskription) {
         this.inskription = inskription;
     }
 
-    public Tegntype getId() {
-        return tegntype;
+    public int getId() {
+        return id;
     }
 
-    public void setId(Tegntype id) {
-        this.tegntype = id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "Inskription{" + "inskription=" + inskription + ", tegntype=" + tegntype + ", tegn_id=" + tegn_id + ", skrifttype=" + skrifttype + '}';
+        return "Inskription{" + "inskription=" + inskription + ", tegntype=" + tegntype + ", id=" + id + ", skrifttype=" + skrifttype + '}';
     }
     
 }
