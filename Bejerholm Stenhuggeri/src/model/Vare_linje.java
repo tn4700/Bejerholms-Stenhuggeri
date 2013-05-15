@@ -23,6 +23,10 @@ public class Vare_linje {
         this.inskription_id = inskription_id;
         this.tom_linje = tom_linje;
     }
+    
+    public void vælgVare(Vare vælgv){
+        
+    }
 
     public int getLinje_nr() {
         return linje_nr;
