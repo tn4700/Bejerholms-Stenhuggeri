@@ -25,7 +25,7 @@ public class Vare_linje {
     }
     
     public void vælgVare(Vare vælgv){
-        
+        //?????
     }
 
     public int getLinje_nr() {
