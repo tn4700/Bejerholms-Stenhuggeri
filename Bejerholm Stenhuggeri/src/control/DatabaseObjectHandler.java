@@ -30,66 +30,77 @@ public class DatabaseObjectHandler {
         this.db = db;
     }
 
-    public ArrayList getPostnummerListe() throws SQLException {
-        ArrayList<Postnummer> postnummerArray = new ArrayList<>();
-        String sql = "select post_nr, by from postnummer";
+//    public ArrayList getPostnummerListe() throws SQLException {
+//        ArrayList<Postnummer> postnummerArray = new ArrayList<>();
+//        String sql = "select post_nr, by from postnummer";
+//
+//        ResultSet rs;
+//        rs = db.getData(sql);
+//
+//        while (rs.next()) {
+//            Postnummer postnr = new Postnummer(
+//                    rs.getInt("post_nr"),
+//                    rs.getString("byNavn"));
+//            postnummerArray.add(postnr);
+//        }
+//        rs.close();
+//        return postnummerArray;
+//    }
 
+//    public ArrayList getKundeListe() throws SQLException {
+//        ArrayList<Kunde> kundeArray = new ArrayList<>();
+//        String sql = "select kunde.fornavn, kunde.efternavn, kunde.adresse, kunde.tlf, kunde.post_nr, postnummer.bynavn from kunde join postnummer "
+//                + "on postnummer.post_nr = kunde.post_nr";
+//        ResultSet rs;
+//        rs = db.getData(sql);
+//
+//        while (rs.next()) {
+//            Postnummer postnr = new Postnummer(rs.getInt("post_nr"), rs.getString("bynavn"));
+//            Kunde kunde = new Kunde(rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("Adresse"), rs.getInt("tlf"), postnr);
+//            kundeArray.add(kunde);
+//        }
+//        rs.close();
+//
+//        return kundeArray;
+//
+//    }
+
+    public Postnummer getPostnummer(int post_nr) throws SQLException {
+        Postnummer postnr = null;
+        String sql = "select post_nr, bynavn from postnummer where post_nr" + post_nr;
         ResultSet rs;
+
         rs = db.getData(sql);
 
-        while (rs.next()) {
-            Postnummer postnr = new Postnummer(
+        if (rs.next()) {
+            postnr = new Postnummer(
                     rs.getInt("post_nr"),
-                    rs.getString("byNavn"));
-            postnummerArray.add(postnr);
+                    rs.getString("bynavn"));
+            rs.close();
         }
-        rs.close();
-        return postnummerArray;
-    }
-
-    public ArrayList getKundeListe() throws SQLException {
-        ArrayList<Kunde> kundeArray = new ArrayList<>();
-        String sql = "select kunde.fornavn, kunde.efternavn, kunde.adresse, kunde.tlf, kunde.post_nr, postnummer.bynavn from kunde join postnummer "
-                + "on postnummer.post_nr = kunde.post_nr";
-        ResultSet rs;
-        rs = db.getData(sql);
-
-        while (rs.next()) {
-            Postnummer postnr = new Postnummer(rs.getInt("post_nr"), rs.getString("bynavn"));
-            Kunde kunde = new Kunde(rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("Adresse"), rs.getInt("tlf"), postnr);
-            kundeArray.add(kunde);
-        }
-        rs.close();
-
-        return kundeArray;
-
+        return postnr;
     }
 
     public Kunde getKunde(int tlf) throws SQLException {
         Kunde kunde = null;
-
-        String sql = "select kunde.fornavn, kunde.efternavn, kunde.adresse, kunde.tlf, kunde.post_nr, postnummer.bynavn "
-                + "from kunde join postnummer on postnummer.post_nr = kunde.post_nr where kunde.tlf = " + tlf;
+        int post_nr = 0;
+        String sql = "select fornavn, efternavn, adresse, tlf, post_nr from kunde where tlf= " + tlf;
         ResultSet rs;
 
-        try {
+
             rs = db.getData(sql);
             if (rs.next()) {
-                Postnummer postnr = new Postnummer(
-                        rs.getInt("post_nr"),
-                        rs.getString("byNavn"));
                 kunde = new Kunde(
                         rs.getString("fornavn"),
                         rs.getString("efternavn"),
                         rs.getString("adresse"),
                         rs.getInt("tlf"),
-                        postnr);
-
+                        null);
+                post_nr = rs.getInt("post_nr");
             }
             rs.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            kunde.setPost_nr(getPostnummer(post_nr));
+        
         return kunde;
     }
 
@@ -123,89 +134,191 @@ public class DatabaseObjectHandler {
         return partner;
     }
 
-    public ArrayList getTomLinjeListe() throws SQLException {
-        ArrayList<Tom_linje> tomlinjeListe = new ArrayList<>();
-        String sql = "select navn, pris, antal, kommentar, id from tom_linje";
+    public Tom_linje getTomLinje(int id) throws SQLException {
+        Tom_linje tomlinje = null;
+        String sql = "select navn, pris, antal, kommentar, id from tom_linje where id =" + id;
         ResultSet rs;
 
         rs = db.getData(sql);
 
-        while (rs.next()) {
-            Tom_linje tl = new Tom_linje(
+        if (rs.next()) {
+            tomlinje = new Tom_linje(
                     rs.getString("navn"),
                     rs.getDouble("pris"),
                     rs.getInt("antal"),
                     rs.getString("kommentar"),
                     rs.getInt("id"));
-            tomlinjeListe.add(tl);
-
         }
         rs.close();
-        return tomlinjeListe;
+        return tomlinje;
     }
 
-    public ArrayList getTegntypeListe() throws SQLException {
-        ArrayList<Tegntype> tegntypeListe = new ArrayList<>();
-        String sql = "select navn, pris_pr_tegn, id from tegntype";
+//    public ArrayList getTomLinjeListe() throws SQLException {
+//        ArrayList<Tom_linje> tomlinjeListe = new ArrayList<>();
+//        String sql = "select navn, pris, antal, kommentar, id from tom_linje";
+//        ResultSet rs;
+//
+//        rs = db.getData(sql);
+//
+//        while (rs.next()) {
+//            Tom_linje tl = new Tom_linje(
+//                    rs.getString("navn"),
+//                    rs.getDouble("pris"),
+//                    rs.getInt("antal"),
+//                    rs.getString("kommentar"),
+//                    rs.getInt("id"));
+//            tomlinjeListe.add(tl);
+//
+//        }
+//        rs.close();
+//        return tomlinjeListe;
+//    }
+
+    public Tegntype getTegntype(int id) throws SQLException {
+        Tegntype tegntype = null;
+        String sql = "select navn, pris_pr_tegn, id from tegntype where id=" + id;
         ResultSet rs;
 
         rs = db.getData(sql);
 
-        while (rs.next()) {
-            Tegntype tt = new Tegntype(
+        if (rs.next()) {
+            tegntype = new Tegntype(
                     rs.getString("navn"),
                     rs.getDouble("pris_pr_tegn"),
                     rs.getInt("id"));
-            tegntypeListe.add(tt);
-
         }
         rs.close();
-        return tegntypeListe;
+        return tegntype;
     }
 
-    public ArrayList getInskriptionListe() throws SQLException {
-        ArrayList<Inskription> inskriptionListe = new ArrayList<>();
-        String sql = "select inskription.inskription, inskription.id, inskription.skrifttype, tegntype.navn, inskription.tegn_id, "
-                + "tegntype.pris_pr_tegn from inskription join tegntype on tegntype.id = inskription.tegn_id";
+//    public ArrayList getTegntypeListe() throws SQLException {
+//        ArrayList<Tegntype> tegntypeListe = new ArrayList<>();
+//        String sql = "select navn, pris_pr_tegn, id from tegntype";
+//        ResultSet rs;
+//
+//        rs = db.getData(sql);
+//
+//        while (rs.next()) {
+//            Tegntype tt = new Tegntype(
+//                    rs.getString("navn"),
+//                    rs.getDouble("pris_pr_tegn"),
+//                    rs.getInt("id"));
+//            tegntypeListe.add(tt);
+//
+//        }
+//        rs.close();
+//        return tegntypeListe;
+//    }
+    
+     public Inskription getInskription(int id) throws SQLException {
+        Inskription inskription = null;
+        int tegn_id = 0;
+        String sql = "select inskription, id, skrifttype,tegn_id from inskription where id="+id;
         ResultSet rs;
 
         rs = db.getData(sql);
 
-        while (rs.next()) {
-            Tegntype tegntype = new Tegntype(
-                    rs.getString("navn"),
-                    rs.getDouble("pris_pr_tegn"),
-                    rs.getInt("tegn_id"));
-            Inskription inskription = new Inskription(
+        if (rs.next()) {
+          inskription = new Inskription(
                     rs.getString("inskription"),
-                    tegntype,
+                    null,
                     rs.getInt("id"),
                     rs.getString("skrifttype"));
-            inskriptionListe.add(inskription);
-
-        }
+          tegn_id = rs.getInt("tegn_id");
+}
         rs.close();
-        return inskriptionListe;
+        inskription.setTegntype(getTegntype(tegn_id));
+        
+        return inskription;
     }
 
-    public ArrayList getVareGruppeListe() throws SQLException {
-        ArrayList<Varegruppe> varegruppeListe = new ArrayList<>();
-        String sql = "select grp_nr, navn from varegruppe";
+//    public ArrayList getInskriptionListe() throws SQLException {
+//        ArrayList<Inskription> inskriptionListe = new ArrayList<>();
+//        String sql = "select inskription.inskription, inskription.id, inskription.skrifttype, tegntype.navn, inskription.tegn_id, "
+//                + "tegntype.pris_pr_tegn from inskription join tegntype on tegntype.id = inskription.tegn_id";
+//        ResultSet rs;
+//
+//        rs = db.getData(sql);
+//
+//        while (rs.next()) {
+//            Tegntype tegntype = new Tegntype(
+//                    rs.getString("navn"),
+//                    rs.getDouble("pris_pr_tegn"),
+//                    rs.getInt("tegn_id"));
+//            Inskription inskription = new Inskription(
+//                    rs.getString("inskription"),
+//                    tegntype,
+//                    rs.getInt("id"),
+//                    rs.getString("skrifttype"));
+//            inskriptionListe.add(inskription);
+//
+//        }
+//        rs.close();
+//        return inskriptionListe;
+//    }
+public Varegruppe getVareGruppe(int grp_nr) throws SQLException {
+        Varegruppe varegruppe = null;
+        String sql = "select grp_nr, navn from varegruppe where grp_nr="+grp_nr;
         ResultSet rs;
 
         rs = db.getData(sql);
 
-        while (rs.next()) {
-            Varegruppe varegruppe = new Varegruppe(
+        if (rs.next()) {
+            varegruppe = new Varegruppe(
                     rs.getInt("grp_nr"),
                     rs.getString("navn"));
-            varegruppeListe.add(varegruppe);
-
+ 
         }
         rs.close();
 
-        return varegruppeListe;
+        return varegruppe;
     }
+
+//    public ArrayList getVareGruppeListe() throws SQLException {
+//        ArrayList<Varegruppe> varegruppeListe = new ArrayList<>();
+//        String sql = "select grp_nr, navn from varegruppe";
+//        ResultSet rs;
+//
+//        rs = db.getData(sql);
+//
+//        while (rs.next()) {
+//            Varegruppe varegruppe = new Varegruppe(
+//                    rs.getInt("grp_nr"),
+//                    rs.getString("navn"));
+//            varegruppeListe.add(varegruppe);
+//
+//        }
+//        rs.close();
+//
+//        return varegruppeListe;
+//    }
+public Vare getVare(int vare_nr) throws SQLException {
+        Vare vare = null;
+        int grp_nr = 0;
+        String sql = "select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, "
+                + "overflade, dekoration, grp_nr from vare where vare_nr="+vare_nr;
+        ResultSet rs;
+        rs = db.getData(sql);
+
+        if (rs.next()) {
+            vare = new Vare(
+                    rs.getInt("vare_nr"),
+                    rs.getString("navn"),
+                    rs.getInt("højde"),
+                    rs.getInt("bredde"),
+                    rs.getDouble("indkøbspris"),
+                    rs.getDouble("salgspris"),
+                    rs.getString("typenavn"),
+                    rs.getString("overflade"),
+                    rs.getBoolean("dekoration"),
+                    null);
+            grp_nr = rs.getInt("grp_nr");
+  }
+        rs.close();
+        vare.setGruppe(getVareGruppe(grp_nr));
+        return vare;
+    }
+
 
     public ArrayList getVareListe() throws SQLException {
         ArrayList<Vare> vareListe = new ArrayList<>();
@@ -246,27 +359,27 @@ public class DatabaseObjectHandler {
 
         while (rs.next()) {
             Vare_linje varelinje = null;
-            if(rs.getInt("vare_linje.vare_nr")>0){
+            if (rs.getInt("vare_linje.vare_nr") > 0) {
                 for (int i = 0; i < vareliste.size(); i++) {
-                    if(vareliste.get(i).getVare_nr()==rs.getInt("vare_linje.vare_nr")){
+                    if (vareliste.get(i).getVare_nr() == rs.getInt("vare_linje.vare_nr")) {
                         Vare vare = vareliste.get(i);
-                        i = vareliste.size()+1;
+                        i = vareliste.size() + 1;
                         varelinje = new Vare_linje(rs.getInt("vare_linje.linje_nr"), rs.getString("vare_linje.ordre_nr"), vare);
                     }
                 }
-            } else if(rs.getInt("vare_linje.tom_linje_id")>0){
+            } else if (rs.getInt("vare_linje.tom_linje_id") > 0) {
                 for (int i = 0; i < tomlinjeliste.size(); i++) {
-                    if(tomlinjeliste.get(i).getId()==rs.getInt("vare_linje.tom_linje_id")){
+                    if (tomlinjeliste.get(i).getId() == rs.getInt("vare_linje.tom_linje_id")) {
                         Tom_linje tomlinje = tomlinjeliste.get(i);
-                        i = tomlinjeliste.size()+1;
+                        i = tomlinjeliste.size() + 1;
                         varelinje = new Vare_linje(rs.getInt("vare_linje.linje_nr"), rs.getString("vare_linje.ordre_nr"), tomlinje);
                     }
                 }
-            } else if(rs.getInt("vare_linje.inskription_id")>0){
+            } else if (rs.getInt("vare_linje.inskription_id") > 0) {
                 for (int i = 0; i < inskriptionliste.size(); i++) {
-                    if(inskriptionliste.get(i).getId()==rs.getInt("vare_linje.inskription_id")){
+                    if (inskriptionliste.get(i).getId() == rs.getInt("vare_linje.inskription_id")) {
                         Inskription inskription = inskriptionliste.get(i);
-                        i = inskriptionliste.size()+1;
+                        i = inskriptionliste.size() + 1;
                         varelinje = new Vare_linje(rs.getInt("vare_linje.linje_nr"), rs.getString("vare_linje.ordre_nr"), inskription);
                     }
                 }

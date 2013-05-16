@@ -38,28 +38,13 @@ public class ObjectHandlerTEST {
              Samarbejdspartner partner = dbhandler.getSamarbejdspartner(12943790);
             System.out.println(partner.getFirmanavn()+" "+partner.getAdresse()+" "+partner.getBank()+" "+partner.getRegistrerings_nr()+" "+partner.getPost_nr().getPost_nr()+" "+partner.getPost_nr().getByNavn());  
             
-            ArrayList<Kunde> kundeliste = dbhandler.getKundeListe();
-            System.out.println(kundeliste);
-            
-            ArrayList<Tom_linje> tomlinjeliste = dbhandler.getTomLinjeListe();
-            System.out.println(tomlinjeliste);
-            
-            ArrayList<Tegntype> tegntypeliste = dbhandler.getTegntypeListe();
-            System.out.println(tegntypeliste);
-            
-            ArrayList<Inskription> inskriptionliste = dbhandler.getInskriptionListe();
-            System.out.println(inskriptionliste);
-            
-            ArrayList<Varegruppe> varegrpListe = dbhandler.getVareGruppeListe();
-            System.out.println(varegrpListe);
-            
             ArrayList<Vare> vareListe = dbhandler.getVareListe();
             System.out.println(vareListe);
             
-            ArrayList<Vare_linje> vareLinjeListe = dbhandler.getVareLinjeListe(tomlinjeliste, vareListe, inskriptionliste);
-            for (int i = 0; i < vareLinjeListe.size(); i++) {
-                System.out.println(vareLinjeListe.get(i));
-            }
+
+            Inskription inskription = dbhandler.getInskription(2);
+            System.out.println(inskription);
+            
             
             
         } catch (SQLException ex) {
