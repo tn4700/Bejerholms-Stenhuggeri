@@ -72,11 +72,14 @@ public class FilTest {
 
         //Faktura laves til pdf
         try {
-            OpretFaktura opretFaktura = new OpretFaktura(faktura);
-            opretFaktura.genererFaktura("test.pdf");
+            //OpretFaktura opretFaktura = new OpretFaktura(faktura);
+            //opretFaktura.genererFaktura("FakturaTest.pdf");
+            
+            OpretOrdre opretOrdre = new OpretOrdre(ordre);
+            opretOrdre.genererOrdre("OrdreTest.pdf");
 
             Desktop desktop = Desktop.getDesktop();
-            File file = new File("docs/test.pdf");
+            File file = new File("docs/OrdreTest.pdf");
             desktop.open(file);
         } catch (FileNotFoundException ex){
             System.out.println("Luk andre pdf'er før du prøver at se en ny!");
