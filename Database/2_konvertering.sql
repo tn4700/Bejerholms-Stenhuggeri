@@ -76,8 +76,8 @@ add column tlf char(8),
 add foreign key(tlf) references kunde(tlf);
 
 alter table faktura
-add column bedemand_cvr char(10),
-add foreign key(bedemand_cvr) references samarbejdspartner(cvr_nr);
+add column bedemand_tlf char(8),
+add foreign key(bedemand_tlf) references samarbejdspartner(tlf);
 
 alter table provisionsseddel_linje
 add column provisions_nr int,

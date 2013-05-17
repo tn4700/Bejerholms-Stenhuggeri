@@ -18,6 +18,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import model.Faktura;
+import model.Vare_linje;
 
 /**
  *
@@ -155,36 +156,55 @@ public class OpretFaktura {
         
         //Indsæt data for varelinjer
         int tmpY = 464;
+        int antal = 0;
+        double enhedsPris = 0;
+        double pris = 0;
         double total = 0;
-        int quantity = 0;
-        double price = 0;
-        double itemPrice = 0;
+        String beskrivelse = "";
         
-        for(int i=1; i<14; i++){
-
-            quantity = i;
-            itemPrice = Double.valueOf(Math.random() * 10);
-            price = quantity * itemPrice;
-            total += price;
+        for(int i=0; i<faktura.getOrdre().getVare_linjeListe().size(); i++){
+            Vare_linje vare_linje = faktura.getOrdre().getVare_linjeListe().get(i);
             
-            createContent(cb, tFont, 12, black, 63, tmpY, ""+quantity, center);
-            createContent(cb, tFont, 12, black, 110, tmpY, "BESKRIVELSE "+i, left);
-            createContent(cb, tFont, 12, black, 465, tmpY, ""+NumberFormat.getCurrencyInstance().format(itemPrice), right);
-            createContent(cb, tFont, 12, black, 565, tmpY, ""+NumberFormat.getCurrencyInstance().format(price), right);
+            if(vare_linje.getVare()!=null){
+                beskrivelse = vare_linje.getVare().getNavn();
+                antal = 1;
+                enhedsPris = vare_linje.getVare().getSalgspris();
+            } else if(vare_linje.getInskription()!=null){
+                for (int j = 0; j < vare_linje.getInskription().getInskription_linje_liste().size(); j++) {
+                    String characters = vare_linje.getInskription().getInskription_linje_liste().get(i).getInskription().replaceAll(" ", "");
+                    if(vare_linje.getInskription().getInskription_linje_liste().get(i).getLinje_type()==1){
+                    antal += characters.length();
+                    }
+                }
+                enhedsPris = vare_linje.getInskription().getTegntype().getPris_pr_tegn();
+                beskrivelse = vare_linje.getInskription().getTegntype().getNavn();
+            } else if(vare_linje.getTom_linje()!=null){
+                beskrivelse = vare_linje.getTom_linje().getNavn();
+                antal = vare_linje.getTom_linje().getAntal();
+                enhedsPris = vare_linje.getTom_linje().getPris();
+            }  
+            pris = antal*enhedsPris;
+            total += pris;
+            
+            createContent(cb, tFont, 12, black, 63, tmpY, ""+antal, center);
+            createContent(cb, tFont, 12, black, 110, tmpY, beskrivelse, left);
+            createContent(cb, tFont, 12, black, 465, tmpY, ""+NumberFormat.getCurrencyInstance().format(enhedsPris), right);
+            createContent(cb, tFont, 12, black, 565, tmpY, ""+NumberFormat.getCurrencyInstance().format(pris), right);
             
             tmpY = tmpY - 20;
         }
-        createContent(cb, tFont, 12, black, 565, 204, ""+NumberFormat.getCurrencyInstance().format(total*+0.025), right);
-        total += (total*0.025);
+        createContent(cb, tFont, 12, black, 565, 204, ""+NumberFormat.getCurrencyInstance().format(Math.floor(total*+0.025)), right);
+        total += Math.floor((total*0.025));
         createContent(cb, tFont, 12, black, 565, 184, ""+NumberFormat.getCurrencyInstance().format(total), right);
         createContent(cb, tFont, 12, black, 565, 164, "25,00%", right);
         createContent(cb, tFont, 12, black, 565, 144, ""+NumberFormat.getCurrencyInstance().format(total*0.25), right);
         total += (total*0.25);
+        total = Math.floor(total+0.5);
         createContent(cb, tFont, 12, black, 565, 124, ""+NumberFormat.getCurrencyInstance().format(total), right);
         
         //Indsættelse af betalingsbetingelser og kontaktinfo
         createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
-        if(faktura.getOrdre().GetOrdretype()){
+        if(faktura.getFakturatype()){
             createContent(cb, tFont, 12, black, 150, 104, "Netto 7 dage", left);
         } else {
             createContent(cb, tFont, 12, black, 150, 104, "Netto 14 dage", left);

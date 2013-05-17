@@ -77,12 +77,12 @@ public class DatabaseObjectHandler {
         db.setData("insert into kunde(fornavn, efternavn, adresse, tlf, post_nr) values('" + fornavn + "','" + efternavn + "','" + adresse + "','" + tlf + "','" + postnr + "');");
     }
 
-    public Samarbejdspartner getSamarbejdspartner(int cvr_nr) throws SQLException {
+    public Samarbejdspartner getSamarbejdspartner(int tlf) throws SQLException {
         Samarbejdspartner partner = null;
         ResultSet rs;
         int post_nr = 0;
         String sql = "select firmanavn, adresse, tlf, cvr_nr, registrerings_nr, konto_nr, bank, post_nr"
-                + " from samarbejdspartner where samarbejdspartner.cvr_nr = " + cvr_nr;
+                + " from samarbejdspartner where samarbejdspartner.tlf = " + tlf;
         rs = db.getData(sql);
 
         if (rs.next()) {
@@ -337,26 +337,47 @@ public class DatabaseObjectHandler {
             }
         }
         rs.close();
-        
-        if(linjeType==1){
+
+        if (linjeType == 1) {
             vare_linje.setVare(getVare(id));
-        } else if(linjeType==2){
+        } else if (linjeType == 2) {
             vare_linje.setInskription(getInskription(id));
-        } else if(linjeType==3){
+        } else if (linjeType == 3) {
             vare_linje.setTom_linje(getTomLinje(id));
         }
-        
+
         return vare_linje;
     }
-    
+
     public Faktura getFaktura(String faktura_nr) throws SQLException {
         Faktura faktura = null;
-        
-        String sql = "select bedemand_cvr, ordre_nr, faktura_nr, faktureringsdato, vedrørende, sendt_dato, faktureringsadresse, fakturatype, betalingsstatus";
-        
+        int tlf = 0;
+        String ordre_nr = "";
+        String sql = "select bedemand_tlf, ordre_nr, faktura_nr, faktureringsdato, vedrørende, "
+                + "sendt_dato, faktureringsadresse, fakturatype, betalingsstatus from faktura "
+                + "where faktura_nr = '" + faktura_nr + "';";
+
         ResultSet rs = db.getData(sql);
         
+        if(rs.next()){
+            faktura = new Faktura(rs.getString("faktura_nr"),
+            rs.getTimestamp("faktureringsdato"),
+            rs.getString("vedrørende"),
+            rs.getTimestamp("sendt_dato"),
+            rs.getString("faktureringsadresse"),
+            rs.getBoolean("fakturatype"),
+            rs.getBoolean("betalingsstatus"),
+            null,
+            null);
+            ordre_nr = rs.getString("ordre_nr");
+            tlf = rs.getInt("bedemand_tlf");
+        }
+        rs.close();
         
+        faktura.setOrdre(getOrdre(ordre_nr));
+        if(tlf!=0){
+        faktura.setBedemand(getSamarbejdspartner(tlf));
+        }
         return faktura;
     }
 }

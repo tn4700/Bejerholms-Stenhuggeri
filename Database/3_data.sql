@@ -26,7 +26,7 @@ values
 insert into vare (grp_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn,overflade,dekoration)
 values
 ('2','fugl 181op',null,null,'116','286','O. Storm Broncedekoration',null,true),
-('1',null,'45','36','650','3200','Lys Halmstad','poleret',false),
+('1','DEN BEDSTE VARE','45','36','650','3200','Lys Halmstad','poleret',false),
 ('1','granitplade','200','300','3000','10000','granitplade','overflade 3',false),
 ('2','fugl 85328v',null,null,'450','900','Strassacker Broncedekoration',null,true);
 
@@ -63,7 +63,7 @@ values
 
 insert into inskription_linje(linje_nr, inskription_id, linje_type, inskription)
 values
-('1','1','1','Hej'),('2','1','1','mor'),('3','1','1','og'),('4','1','1','hej'),('5','1','1','far'),
+('1','1','1','Hej med dig'),('2','1','1','min mor'),('3','1','1','og du er'),('4','1','1','den bedste hej'),('5','1','1','med dig far'),
 ('1','2','2','Hej'),('2','2','2','mor'),('3','2','1','og'),('4','2','1','hej'),('5','2','1','far'),
 ('1','3','1','Hej'),('2','3','1','mor'),('3','3','3',''),('4','3','3',''),('5','3','3',''),
 ('1','4','1','Kagemand 2000-2001'),('2','4','1','hvil i fred'),('3','4','0',''),('4','4','0',''),('5','4','0','');
@@ -87,16 +87,16 @@ values
 insert into samarbejdspartner (post_nr, firmanavn,adresse,tlf,cvr_nr,registrerings_nr,konto_nr,bank)
 values
 ('4700','Bedemand ApS','Bedemandsvej 1 4220 Korsør','58350001','12943790','2190','0754567300','Nordea'),
-('4700','Bedemand Berner','Fiktivvej 666','11112222','16276482','1232','6070123457','BankenB'),
+('4700','Bedemand Berner','Fiktivvej 666','11112226','16276482','1232','6070123457','BankenB'),
 ('4700','Bedemand Berner','Fiktivvej 666','11112222','16276483','1233','6070123458','BankenC'),
-('4700','Bedemand Berner','Fiktivvej 666','11112222','16276484','1234','6070123459','BankenD');
+('4700','Bedemand Berner','Fiktivvej 666','11112224','16276484','1234','6070123459','BankenD');
 
-insert into faktura (bedemand_cvr, ordre_nr, faktura_nr,faktureringsdato,vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)
+insert into faktura (bedemand_tlf, ordre_nr, faktura_nr,faktureringsdato,vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)
 values
 (null, '00001', '0020332836-00001','2013-04-30 11:50:32','Martin Hana','2013-05-01 11:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
 (null,'00002', '0050111211-00002','2013-04-30 12:50:32','Thomas Nielsen','2013-05-01 12:50:32','Østre Ringvej 49 2.TV, 4700 Næstved',true,false),
 (null,'00003', '0031255685-00003','2013-04-30 13:50:32','Niklas Nielsen','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
-('12943790','00004', '0028931093-00004','2013-04-30 14:50:32','Anette Stidsing','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
+('58350001','00004', '0028931093-00004','2013-04-30 14:50:32','Anette Stidsing','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
 
 insert into kontoudtog (kontoudtog_nr,dato,vedrørende,sendt_dato)
 values

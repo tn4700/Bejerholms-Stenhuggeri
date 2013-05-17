@@ -162,7 +162,7 @@ cvr_nr                  char(8),        # Et CVR nummer er på 8 cifre
 registrerings_nr			char(4),
 konto_nr		      		char(10),			# Reg + Kontonr
 bank 					varchar(20),
-primary key(cvr_nr)
+primary key(tlf)
 ) engine = innodb;
 
 drop table if exists user;

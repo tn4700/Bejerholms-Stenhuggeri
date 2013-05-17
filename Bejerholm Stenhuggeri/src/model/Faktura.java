@@ -99,7 +99,7 @@ public class Faktura {
         this.faktureringsadresse = faktureringsadresse;
     }
 
-    public boolean isFakturatype() {
+    public boolean getFakturatype() {
         return fakturatype;
     }
 
@@ -127,4 +127,10 @@ public class Faktura {
         
         return kontoudtog;
     }
+
+    @Override
+    public String toString() {
+        return "Faktura{" + "faktura_nr=" + faktura_nr + ", faktureringsdato=" + faktureringsdato + ", vedr\u00f8rende=" + vedrørende + ", sendt_dato=" + sendt_dato + ", faktureringsadresse=" + faktureringsadresse + ", fakturatype=" + fakturatype + ", betalingsstatus=" + betalingsstatus + ", ordre=" + ordre + ", bedemand=" + bedemand + '}';
+    }
+    
 }
