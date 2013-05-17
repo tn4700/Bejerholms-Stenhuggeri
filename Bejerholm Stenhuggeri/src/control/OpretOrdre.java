@@ -96,15 +96,15 @@ public class OpretOrdre {
         cb.lineTo(300, 600);
         cb.stroke();
         createContent(cb, btFont, 12, black, 29, 644, "Kundeinformation:", left);
-        
+
         //Indsæt data til kundeinfo
-        String navn = ordre.getKunde().getFornavn()+" "+ordre.getKunde().getEfternavn();
+        String navn = ordre.getKunde().getFornavn() + " " + ordre.getKunde().getEfternavn();
         createContent(cb, tFont, 12, black, 29, 624, navn, left);
         String adresse = ordre.getKunde().getAdresse();
         createContent(cb, tFont, 12, black, 29, 604, adresse, left);
-        String postnrby = ordre.getKunde().getPost_nr().getPost_nr()+" "+ordre.getKunde().getPost_nr().getByNavn();
+        String postnrby = ordre.getKunde().getPost_nr().getPost_nr() + " " + ordre.getKunde().getPost_nr().getByNavn();
         createContent(cb, tFont, 12, black, 29, 584, postnrby, left);
-        
+
         //Indsættelse af ordrebekræftigelse-tabel
         createContent(cb, btFont, 16, red, 325, 644, "Ordrebekræftelse:", left);
         createContent(cb, btFont, 12, black, 325, 624, "Dato:", left);
@@ -117,15 +117,15 @@ public class OpretOrdre {
         cb.moveTo(325, 580);
         cb.lineTo(575, 580);
         cb.stroke();
-        
+
         //Indsættelse af data i ordrebekræftelse  
         String timeStamp = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
         createContent(cb, btFont, 12, black, 571, 624, timeStamp, right);
-        String tlf = ordre.getKunde().getTlf()+"";
+        String tlf = ordre.getKunde().getTlf() + "";
         createContent(cb, btFont, 12, black, 571, 604, tlf, right);
         String ordre_nr = ordre.getOrdre_nr();
         createContent(cb, btFont, 12, red, 571, 584, ordre_nr, right);
-        
+
         //Opret info-tabeller
         createContent(cb, btFont, 12, black, 29, 544, "Ny sten(nr.)", left);
         createContent(cb, btFont, 12, black, 29, 524, "Tilføjelse", left);
@@ -146,92 +146,134 @@ public class OpretOrdre {
         cb.moveTo(280, 560);
         cb.lineTo(280, 520);
         cb.stroke();
-        createContent(cb, btFont, 12, black, 29, 544, "Ny sten(nr.)", left);
-        createContent(cb, btFont, 12, black, 29, 524, "Tilføjelse", left);
-        createContent(cb, btFont, 12, black, 29, 504, "Kiste/Urne", left);
+        createContent(cb, btFont, 12, black, 389, 544, "Kirkegård", left);
+        createContent(cb, btFont, 12, black, 389, 524, "Afdeling", left);
+        createContent(cb, btFont, 12, black, 389, 504, "Række + Nr.", left);
         cb.rectangle(385, 500, 200, 60);
-        cb.moveTo(25, 540);
-        cb.lineTo(175, 540);
-        cb.moveTo(25, 520);
-        cb.lineTo(175, 520);
-        cb.moveTo(125, 560);
-        cb.lineTo(125, 500);
+        cb.moveTo(385, 560);
+        cb.lineTo(585, 560);
+        cb.moveTo(385, 540);
+        cb.lineTo(585, 540);
+        cb.moveTo(385, 520);
+        cb.lineTo(585, 520);
+        cb.moveTo(485, 560);
+        cb.lineTo(485, 500);
         cb.stroke();
-        
-        
-        
+
+        //Indsæt data til info-tabeller
+        if (ordre.GetOrdretype()) {
+            createContent(cb, tFont, 12, black, 150, 544, "" + 1, center);
+            cb.rectangle(125, 520, 50, 20);
+            cb.fill();
+        } else {
+            cb.rectangle(125, 540, 50, 20);
+            cb.fill();
+            createContent(cb, tFont, 12, black, 150, 524, "X", center);
+        }
+        if (ordre.getGravType()) {
+            createContent(cb, tFont, 12, black, 150, 504, "Kiste", center);
+        } else {
+            createContent(cb, tFont, 12, black, 150, 504, "Urne", center);
+        }
+        if (ordre.getAfhentningsdato() != null) {
+            String afhDato = new SimpleDateFormat("dd-MM-yyyy").format(ordre.getAfhentningsdato());
+            createContent(cb, tFont, 12, black, 330, 544, afhDato, center);
+        } else {
+            cb.rectangle(280, 540, 100, 20);
+            cb.fill();
+        }
+        if (ordre.getLeveringsdato() != null) {
+            String levDato = new SimpleDateFormat("dd-MM-yyyy").format(ordre.getLeveringsdato());
+            createContent(cb, tFont, 12, black, 330, 524, levDato, center);
+        } else {
+            cb.rectangle(280, 520, 100, 20);
+            cb.fill();
+        }
+        if(ordre.getKirkegård()!=null) {
+        createContent(cb, tFont, 12, black, 535, 544, ordre.getKirkegård(), center);
+        }
+        if(ordre.getAfdeling()!=0) {
+            createContent(cb, tFont, 12, black, 535, 524, ""+ordre.getAfdeling(), center);
+        }
+        if(ordre.getNummer()!=0 && ordre.getRække()!=0){
+        String rk_nr = "Ræ. "+ordre.getRække()+" Nr. "+ordre.getNummer();
+        createContent(cb, tFont, 12, black, 535, 504, rk_nr, center);
+        }
+
+
+
         //midlertidig flytning
         int tmp = 100;
 
         //Farv tabel baggrund
         cb.setRGBColorFill(216, 228, 232);
-        cb.rectangle(25, 480-tmp, 550, 20);
-        cb.rectangle(475, 200-tmp, 100, 300);
-        cb.rectangle(475, 140-tmp, 100, 20);
-        cb.rectangle(475, 180-tmp, 100, 20);
+        cb.rectangle(25, 480 - tmp, 550, 20);
+        cb.rectangle(475, 200 - tmp, 100, 300);
+        cb.rectangle(475, 140 - tmp, 100, 20);
+        cb.rectangle(475, 180 - tmp, 100, 20);
         cb.fill();
-        
+
         //Tegn tabel
-        cb.rectangle(25, 200-tmp, 550, 300);
-        cb.moveTo(25, 480-tmp);
-        cb.lineTo(575, 480-tmp);
-        cb.moveTo(100, 500-tmp);
-        cb.lineTo(100, 200-tmp);
-        cb.moveTo(375, 500-tmp);
-        cb.lineTo(375, 200-tmp);
-        cb.moveTo(475, 500-tmp);
-        cb.lineTo(475, 200-tmp);
-        cb.moveTo(475, 180-tmp);
-        cb.lineTo(575, 180-tmp);
-        cb.moveTo(475, 160-tmp);
-        cb.lineTo(575, 160-tmp);
-        cb.rectangle(475, 140-tmp, 100, 60);
-        cb.moveTo(475, 120-tmp);
-        cb.lineTo(575, 120-tmp);
-        cb.moveTo(475, 118-tmp);
-        cb.lineTo(575, 118-tmp);
+        cb.rectangle(25, 200 - tmp, 550, 300);
+        cb.moveTo(25, 480 - tmp);
+        cb.lineTo(575, 480 - tmp);
+        cb.moveTo(100, 500 - tmp);
+        cb.lineTo(100, 200 - tmp);
+        cb.moveTo(375, 500 - tmp);
+        cb.lineTo(375, 200 - tmp);
+        cb.moveTo(475, 500 - tmp);
+        cb.lineTo(475, 200 - tmp);
+        cb.moveTo(475, 180 - tmp);
+        cb.lineTo(575, 180 - tmp);
+        cb.moveTo(475, 160 - tmp);
+        cb.lineTo(575, 160 - tmp);
+        cb.rectangle(475, 140 - tmp, 100, 60);
+        cb.moveTo(475, 120 - tmp);
+        cb.lineTo(575, 120 - tmp);
+        cb.moveTo(475, 118 - tmp);
+        cb.lineTo(575, 118 - tmp);
         cb.stroke();
-        
+
         //Indsæt navne på tabel elementer
-        createContent(cb, btFont, 12, black, 63, 484-tmp, "ANTAL", center);
-        createContent(cb, btFont, 12, black, 238, 484-tmp, "BESKRIVELSE", center);
-        createContent(cb, btFont, 12, black, 425, 484-tmp, "ENHEDSPRIS", center);
-        createContent(cb, btFont, 12, black, 525, 484-tmp, "BELØB", center);
-        createContent(cb, tFont, 12, black, 110, 204-tmp, "Miljøafgift 2,5%", left);
-        createContent(cb, tFont, 12, black, 465, 184-tmp, "SUBTOTAL", right);
-        createContent(cb, tFont, 12, black, 465, 164-tmp, "MOMS", right);
-        createContent(cb, tFont, 12, black, 465, 144-tmp, "SALGSMOMS", right);
-        createContent(cb, btFont, 12, black, 465, 124-tmp, "I ALT", right);
-        
+        createContent(cb, btFont, 12, black, 63, 484 - tmp, "ANTAL", center);
+        createContent(cb, btFont, 12, black, 238, 484 - tmp, "BESKRIVELSE", center);
+        createContent(cb, btFont, 12, black, 425, 484 - tmp, "ENHEDSPRIS", center);
+        createContent(cb, btFont, 12, black, 525, 484 - tmp, "BELØB", center);
+        createContent(cb, tFont, 12, black, 110, 204 - tmp, "Miljøafgift 2,5%", left);
+        createContent(cb, tFont, 12, black, 465, 184 - tmp, "SUBTOTAL", right);
+        createContent(cb, tFont, 12, black, 465, 164 - tmp, "MOMS", right);
+        createContent(cb, tFont, 12, black, 465, 144 - tmp, "SALGSMOMS", right);
+        createContent(cb, btFont, 12, black, 465, 124 - tmp, "I ALT", right);
+
         //Indsæt data for varelinjer
-        int tmpY = 464-tmp;
+        int tmpY = 464 - tmp;
         double total = 0;
         int quantity = 0;
         double price = 0;
         double itemPrice = 0;
-        
-        for(int i=1; i<14; i++){
+
+        for (int i = 1; i < 14; i++) {
 
             quantity = i;
             itemPrice = Double.valueOf(Math.random() * 10);
             price = quantity * itemPrice;
             total += price;
-            
-            createContent(cb, tFont, 12, black, 63, tmpY, ""+quantity, center);
-            createContent(cb, tFont, 12, black, 110, tmpY, "BESKRIVELSE "+i, left);
-            createContent(cb, tFont, 12, black, 465, tmpY, ""+NumberFormat.getCurrencyInstance().format(itemPrice), right);
-            createContent(cb, tFont, 12, black, 565, tmpY, ""+NumberFormat.getCurrencyInstance().format(price), right);
-            
+
+            createContent(cb, tFont, 12, black, 63, tmpY, "" + quantity, center);
+            createContent(cb, tFont, 12, black, 110, tmpY, "BESKRIVELSE " + i, left);
+            createContent(cb, tFont, 12, black, 465, tmpY, "" + NumberFormat.getCurrencyInstance().format(itemPrice), right);
+            createContent(cb, tFont, 12, black, 565, tmpY, "" + NumberFormat.getCurrencyInstance().format(price), right);
+
             tmpY = tmpY - 20;
         }
-        createContent(cb, tFont, 12, black, 565, 204-tmp, ""+NumberFormat.getCurrencyInstance().format(total*+0.025), right);
-        total += (total*0.025);
-        createContent(cb, tFont, 12, black, 565, 184-tmp, ""+NumberFormat.getCurrencyInstance().format(total), right);
-        createContent(cb, tFont, 12, black, 565, 164-tmp, "25,00%", right);
-        createContent(cb, tFont, 12, black, 565, 144-tmp, ""+NumberFormat.getCurrencyInstance().format(total*0.25), right);
-        total += (total*0.25);
-        createContent(cb, tFont, 12, black, 565, 124-tmp, ""+NumberFormat.getCurrencyInstance().format(total), right);
-        
+        createContent(cb, tFont, 12, black, 565, 204 - tmp, "" + NumberFormat.getCurrencyInstance().format(total * +0.025), right);
+        total += (total * 0.025);
+        createContent(cb, tFont, 12, black, 565, 184 - tmp, "" + NumberFormat.getCurrencyInstance().format(total), right);
+        createContent(cb, tFont, 12, black, 565, 164 - tmp, "25,00%", right);
+        createContent(cb, tFont, 12, black, 565, 144 - tmp, "" + NumberFormat.getCurrencyInstance().format(total * 0.25), right);
+        total += (total * 0.25);
+        createContent(cb, tFont, 12, black, 565, 124 - tmp, "" + NumberFormat.getCurrencyInstance().format(total), right);
+
         //Lukker dokument og skriver alt det data der er blevet indsat til PDF-filen
         doc.close();
 
