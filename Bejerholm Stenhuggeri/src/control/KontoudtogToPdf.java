@@ -65,7 +65,7 @@ public class KontoudtogToPdf {
 
         //Faktura oprettes
         
-        Faktura faktura = new Faktura(faktura_nr, currentTime, "Torsten vedrørendesen", currentTime, "Faktureringsvej 15", true, false, ordre, null);
+        Faktura faktura = new Faktura(faktura_nr, currentTime, "Torsten vedrørendesen", "Netto 7 dage", currentTime, "Faktureringsvej 15", true, false, ordre, null);
         Samarbejdspartner bedemand = new Samarbejdspartner("Firmanavn", "Adresse", 12345678, 123456, 6070, 4825318, "Boss Banken", postnummer);
         faktura.setBedemand(bedemand);
         Kontoudtog kontoudtog = new Kontoudtog(123, currentTime, "Vedrørende", currentTime, faktura);

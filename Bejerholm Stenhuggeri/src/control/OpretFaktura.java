@@ -184,11 +184,7 @@ public class OpretFaktura {
         
         //Indsættelse af betalingsbetingelser og kontaktinfo
         createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
-        if(faktura.getOrdre().GetOrdretype()){
-            createContent(cb, tFont, 12, black, 150, 104, "Netto 7 dage", left);
-        } else {
-            createContent(cb, tFont, 12, black, 150, 104, "Netto 14 dage", left);
-        }
+        createContent(cb, tFont, 12, black, 150, 104, faktura.getBetalingsbetingelser(), left);
         createContent(cb, tFont, 12, black, 25, 84, "Sydbank: 6821  -  1021974", left);
         createContent(cb, tFont, 12, black, 25, 64, "Ordrenummer og navn bedes anført ved bankoverførsel", left);
         createContent(cb, tFont, 10, black, 25, 24, "Hvis der er spørgsmål til denne faktura, bedes De venligst kontakte os(se kontaktinfo i toppen af fakturaen)", left);

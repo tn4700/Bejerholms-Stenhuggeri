@@ -15,6 +15,7 @@ public class Faktura {
     private String faktura_nr;
     private Timestamp faktureringsdato;
     private String vedrørende;
+    private String betalingsbetingelser;
     private Timestamp sendt_dato;
     private String faktureringsadresse;
     private boolean fakturatype;
@@ -25,6 +26,7 @@ public class Faktura {
     public Faktura(String faktura_nr,
             Timestamp faktureringsdato,
             String vedrørende,
+            String betalingsbetingelser,
             Timestamp sendt_dato,
             String faktureringsadresse,
             boolean fakturatype,
@@ -35,6 +37,7 @@ public class Faktura {
         this.faktura_nr = faktura_nr;
         this.faktureringsdato = faktureringsdato;
         this.vedrørende = vedrørende;
+        this.betalingsbetingelser = betalingsbetingelser;
         this.sendt_dato = sendt_dato;
         this.faktureringsadresse = faktureringsadresse;
         this.fakturatype = fakturatype;
@@ -81,6 +84,14 @@ public class Faktura {
 
     public void setVedrørende(String vedrørende) {
         this.vedrørende = vedrørende;
+    }
+
+    public String getBetalingsbetingelser() {
+        return betalingsbetingelser;
+    }
+
+    public void setBetalingsbetingelser(String betalingsbetingelser) {
+        this.betalingsbetingelser = betalingsbetingelser;
     }
 
     public Timestamp getSendt_dato() {
