@@ -167,7 +167,7 @@ public class DatabaseObjectHandler {
         return inskription_linje;
     }
 
-    public int getMaxInsktriptionLinje(int inskription_id) throws SQLException {
+    public int getMaxInskriptionLinje(int inskription_id) throws SQLException {
         int max = 0;
         String sql = "select max(linje_nr) from inskription_linje where inskription_id =" + inskription_id;
         ResultSet rs;
@@ -199,7 +199,7 @@ public class DatabaseObjectHandler {
 
         inskription.setTegntype(getTegntype(tegn_id));
 
-        for (int i = 1; i <= getMaxInsktriptionLinje(inskription.getId()); i++) {
+        for (int i = 1; i <= getMaxInskriptionLinje(inskription.getId()); i++) {
             inskription_linje = getInskriptionLinje(i, inskription.getId());
             inskription.addInskription_linje(inskription_linje);
             inskription_linje = null;
@@ -207,6 +207,8 @@ public class DatabaseObjectHandler {
 
         return inskription;
     }
+    
+    
 
     public Varegruppe getVareGruppe(int grp_nr) throws SQLException {
         Varegruppe varegruppe = null;
