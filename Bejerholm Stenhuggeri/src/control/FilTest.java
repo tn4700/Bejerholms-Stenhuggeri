@@ -68,7 +68,7 @@ public class FilTest {
         String faktura_nr = "00" + kunde.getTlf() + "-" + ordre.getOrdre_nr();
 
         //Faktura oprettes
-        Faktura faktura = new Faktura(faktura_nr, currentTime, "Torsten vedrørendesen", "Netto 7 dage", currentTime, "Faktureringsvej 15", true, false, ordre, null);
+        Faktura faktura = new Faktura(faktura_nr, currentTime, "Torsten vedrørendesen", currentTime, "Faktureringsvej 15", true, false, ordre, null);
 
         //Faktura laves til pdf
         try {

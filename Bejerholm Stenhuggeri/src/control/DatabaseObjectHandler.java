@@ -6,7 +6,7 @@ package control;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import model.Faktura;
 import model.Inskription;
 import model.Inskription_linje;
 import model.Kunde;
@@ -309,7 +309,6 @@ public class DatabaseObjectHandler {
         return ordre;
     }
 
-// skal kaldes med linje_nr + ordre_nr 
     public Vare_linje getVareLinje(int linje_nr, String ordre_nr) throws SQLException {
         Vare_linje vare_linje = null;
         int linjeType = 0;
@@ -348,5 +347,16 @@ public class DatabaseObjectHandler {
         }
         
         return vare_linje;
+    }
+    
+    public Faktura getFaktura(String faktura_nr) throws SQLException {
+        Faktura faktura = null;
+        
+        String sql = "select bedemand_cvr, ordre_nr, faktura_nr, faktureringsdato, vedrørende, sendt_dato, faktureringsadresse, fakturatype, betalingsstatus";
+        
+        ResultSet rs = db.getData(sql);
+        
+        
+        return faktura;
     }
 }
