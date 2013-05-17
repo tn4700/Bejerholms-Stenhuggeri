@@ -32,10 +32,10 @@ values
 
 insert into ordre (tlf, ordre_nr,ordretype,ordredato,ordrestatus,leveringdato,afhentningsdato,bemærkning,leveringsadresse,kirkegård,afdeling,afdødnavn,række,nummer,plads_navne,gravType)
 values
-('20332836','0',true,'2013-04-30 12:50:32','1','2013-05-10 12:50:32','2013-05-15 12:50:32','Bemærkning','Østrering vej 40 1. tv','Vor Frue Kirke','10','Gunner','10','1','1',true),
-('50111211','1',true,'2013-04-1 13:00:00','1','2013-05-11 13:00:00','2013-05-16 13:00:00','Bemærkning','Østre Ringvej 49 2. TV','Vor Frue Kirke','11','Gunner','10','2','1',true),
-('31255685','2',true,'2013-04-2 13:00:00','1','2013-06-11 13:00:00','2013-05-17 13:00:00','Bemærkning','Fiktivvej 152','Kirkegård','12','Gunner','11','1','1',true),
-('28931093','3',true,'2013-04-2 13:00:00','1','2013-06-11 13:00:00','2013-05-18 13:00:00','Bemærkning','Eventyrvej 27','Kirkegård','13','Gunner','11','2','1',true);
+('20332836','00001',true,'2013-04-30 12:50:32','1','2013-05-10 12:50:32','2013-05-15 12:50:32','Bemærkning','Østrering vej 40 1. tv','Vor Frue Kirke','10','Gunner','10','1','1',true),
+('50111211','00002',true,'2013-04-1 13:00:00','1','2013-05-11 13:00:00','2013-05-16 13:00:00','Bemærkning','Østre Ringvej 49 2. TV','Vor Frue Kirke','11','Gunner','10','2','1',true),
+('31255685','00003',true,'2013-04-2 13:00:00','1','2013-06-11 13:00:00','2013-05-17 13:00:00','Bemærkning','Fiktivvej 152','Kirkegård','12','Gunner','11','1','1',true),
+('28931093','00004',true,'2013-04-2 13:00:00','1','2013-06-11 13:00:00','2013-05-18 13:00:00','Bemærkning','Eventyrvej 27','Kirkegård','13','Gunner','11','2','1',true);
 
 insert into tegntype (navn,pris_pr_tegn)
 values
@@ -45,7 +45,6 @@ values
 ('Faksimile indhuggede m/ farve','98.00'),
 ('Faksimile indhuggede m/ guld','118.00'),
 ('Indhuggede bogstaver i egen sten- m/ alm. farve','75.00'),
-
 ('Indhuggede bogstaver i egen sten- m/ alm. guld','118.00'),
 ('Håndtegnet bogstaver/ Håndhugget','130.00'),
 ('Håndtegnet bogstaver/ Sandblæste','90.00'),
@@ -55,12 +54,19 @@ values
 ('Opforgyldning af bogstaver i pol. sten','65.00'),
 ('Opforgyldning af bogstaver i ru sten','95.00');
 
-insert into inskription (tegn_id, inskription, skrifttype)
+insert into inskription (tegn_id, skrifttype)
 values
-('2','Lars Vestergaard farvel','AREIAL'),
-('4','Bente Bentsen 1920 - 2002','OLD ENGLISH'),
-('7','Konrad Andersen hvil i fred','Agmena'),
-('10','Billy olesen - farvel','Flexo');
+('2','ARIAL'),
+('4','OLD ENGLISH'),
+('7','Agmena'),
+('10','Flexo');
+
+insert into inskription_linje(linje_nr, inskription_id, linje_type, inskription)
+values
+('1','1','1','Hej'),('2','1','1','mor'),('3','1','1','og'),('4','1','1','hej'),('5','1','1','far'),
+('1','2','2','Hej'),('2','2','2','mor'),('3','2','1','og'),('4','2','1','hej'),('5','2','1','far'),
+('1','3','1','Hej'),('2','3','1','mor'),('3','3','3',''),('4','3','3',''),('5','3','3',''),
+('1','4','1','Kagemand 2000-2001'),('2','4','1','hvil i fred'),('3','4','0',''),('4','4','0',''),('5','4','0','');
 
 insert into tom_linje (navn,pris,antal,kommentar)
 values
@@ -72,10 +78,10 @@ values
 
 insert into vare_linje (linje_nr, vare_nr, inskription_id, tom_linje_id, ordre_nr)
 values
-('1','2',null,null,'0'),
-('2',null,null,'1','1'),
-('3','3',null,null,'2'),
-('4','4',null,null,'3');
+('1','2',null,null,'00001'),
+('2',null,null,'1','00001'),
+('3',null,'1',null,'00001'),
+('4',null,'2',null,'00001');
 
 
 insert into samarbejdspartner (post_nr, firmanavn,adresse,tlf,cvr_nr,registrerings_nr,konto_nr,bank)
@@ -87,11 +93,10 @@ values
 
 insert into faktura (bedemand_cvr, ordre_nr, faktura_nr,faktureringsdato,vedrørende,betalingsbetingelser,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)
 values
-(null, '0', '0','2013-04-30 11:50:32','Martin Hana','Netto 7 dage','2013-05-01 11:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
-(null,'1', '1','2013-04-30 12:50:32','Thomas Nielsen','Netto 7 dage','2013-05-01 12:50:32','Østre Ringvej 49 2.TV, 4700 Næstved',true,false),
-(null,'2', '2','2013-04-30 13:50:32','Niklas Nielsen','Netto 7 dage','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
-('12943790','3', '3','2013-04-30 14:50:32','Anette Stidsing','Netto 7 dage','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
-
+(null, '00001', '0020332836-00001','2013-04-30 11:50:32','Martin Hana','Netto 7 dage','2013-05-01 11:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
+(null,'00002', '0050111211-00002','2013-04-30 12:50:32','Thomas Nielsen','Netto 7 dage','2013-05-01 12:50:32','Østre Ringvej 49 2.TV, 4700 Næstved',true,false),
+(null,'00003', '0031255685-00003','2013-04-30 13:50:32','Niklas Nielsen','Netto 7 dage','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
+('12943790','00004', '0028931093-00004','2013-04-30 14:50:32','Anette Stidsing','Netto 7 dage','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
 
 insert into kontoudtog (kontoudtog_nr,dato,vedrørende,sendt_dato)
 values

@@ -16,32 +16,12 @@ public class Vare_linje {
     private Inskription inskription;
     private Tom_linje tom_linje;
 
-    public Vare_linje(int linje_nr, String ordre_nr, Vare vare) {
+    public Vare_linje(int linje_nr, String ordre_nr, Vare vare, Inskription inskription, Tom_linje tom_linje) {
         this.linje_nr = linje_nr;
         this.ordre_nr = ordre_nr;
         this.vare = vare;
-        this.inskription = null;
-        this.tom_linje = null;
-    }
-
-    public Vare_linje(int linje_nr, String ordre_nr, Inskription inskription) {
-        this.linje_nr = linje_nr;
-        this.ordre_nr = ordre_nr;
-        this.vare = null;
         this.inskription = inskription;
-        this.tom_linje = null;
-    }
-
-    public Vare_linje(int linje_nr, String ordre_nr, Tom_linje tom_linje) {
-        this.linje_nr = linje_nr;
-        this.ordre_nr = ordre_nr;
-        this.vare = null;
-        this.inskription = null;
         this.tom_linje = tom_linje;
-    }
-
-    public void vælgVare(Vare vælgv) {
-        //?????
     }
 
     public int getLinje_nr() {
@@ -64,7 +44,7 @@ public class Vare_linje {
         return vare;
     }
 
-    public void setVare(Vare vare_nr) {
+    public void setVare(Vare vare) {
         this.vare = vare;
     }
 

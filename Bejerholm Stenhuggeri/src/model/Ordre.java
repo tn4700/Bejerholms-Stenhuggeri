@@ -46,6 +46,7 @@ public class Ordre {
             boolean gravType,         
             Kunde kunde) {
         
+        vare_linjeListe = new ArrayList();
         this.ordre_nr = ordre_nr;
         this.ordrestatus = ordrestatus;
         this.ordretype = ordretype;
@@ -63,12 +64,8 @@ public class Ordre {
         this.kunde = kunde;
     }
         
-    public void tilføjVarelinje(Vare_linje vl){
-        if(vl == null){
-            
-        }else{
-            vare_linjeListe.add(vl);
-        }
+    public void addVare_linje(Vare_linje vare_linje){
+            vare_linjeListe.add(vare_linje);
     }
     
     public ArrayList<Vare_linje> getVare_linjeListe() {
@@ -214,4 +211,10 @@ public class Ordre {
     public void setAfhentningsdato(Timestamp afhentningsdato) {
         this.afhentningsdato = afhentningsdato;
     }
+
+    @Override
+    public String toString() {
+        return "Ordre{" + "ordre_nr=" + ordre_nr + ", ordretype=" + ordretype + ", ordredato=" + ordredato + ", ordrestatus=" + ordrestatus + ", leveringsdato=" + leveringsdato + ", afhentningsdato=" + afhentningsdato + ", bemærkning=" + bemærkning + ", leveringsadresse=" + leveringsadresse + ", kirkegård=" + kirkegård + ", afdeling=" + afdeling + ", afdødnavn=" + afdødnavn + ", række=" + række + ", nummer=" + nummer + ", plads_navne=" + plads_navne + ", gravType=" + gravType + ", kunde=" + kunde + ", vare_linjeListe=" + vare_linjeListe + '}';
+    }
+    
 }

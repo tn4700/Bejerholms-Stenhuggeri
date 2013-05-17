@@ -29,7 +29,7 @@ public class ObjectHandlerTEST {
      */
     public static void main(String[] args) {
         try {
-            DBConnection db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "1234");
+            DBConnection db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
             System.out.println("" + db.isConnected());
             DatabaseObjectHandler dbhandler = new DatabaseObjectHandler(db);
             
@@ -48,10 +48,13 @@ public class ObjectHandlerTEST {
             Vare vare = dbhandler.getVare(1);
             System.out.println(vare);
        
-            Vare_linje varelinje = dbhandler.getVareLinje(1);
+            Vare_linje varelinje = dbhandler.getVareLinje(1, "00001");
             System.out.println(varelinje);
             
-            Ordre ordre = dbhandler.getOrdre("1");
+            Inskription inskription = dbhandler.getInskription(2);
+            System.out.println(inskription);
+            
+            Ordre ordre = dbhandler.getOrdre("00001");
             System.out.println(ordre);
             
             

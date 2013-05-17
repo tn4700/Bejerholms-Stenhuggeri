@@ -4,26 +4,33 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Martin
  */
 public class Inskription {
 
-    private String inskription;
+    private ArrayList<Inskription_linje> inskription_linje_liste;
     private Tegntype tegntype;
     private int id;
     private String skrifttype;
 
-    public Inskription(String inskription, Tegntype tegntype, int id, String skrifttype) {
-        this.inskription = inskription;
+    public Inskription(ArrayList<Inskription_linje> inskription_linje_liste, Tegntype tegntype, int id, String skrifttype) {
+        inskription_linje_liste = new ArrayList();
+        this.inskription_linje_liste = inskription_linje_liste;
         this.tegntype = tegntype;
         this.id = id;
         this.skrifttype = skrifttype;
     }
+    
+    public void addInskription_linje(Inskription_linje inskription_linje){
+        inskription_linje_liste.add(inskription_linje);
+    }
 
-    public String getInskription() {
-        return inskription;
+    public ArrayList<Inskription_linje> getInskription_linje_liste() {
+        return inskription_linje_liste;
     }
 
     public Tegntype getTegntype() {
@@ -42,8 +49,8 @@ public class Inskription {
         this.skrifttype = skrifttype;
     }
 
-    public void setInskription(String inskription) {
-        this.inskription = inskription;
+    public void setInskription(ArrayList<Inskription_linje> inskription_linje_liste) {
+        this.inskription_linje_liste = inskription_linje_liste;
     }
 
     public int getId() {
@@ -56,7 +63,7 @@ public class Inskription {
 
     @Override
     public String toString() {
-        return "Inskription{" + "inskription=" + inskription + ", tegntype=" + tegntype + ", id=" + id + ", skrifttype=" + skrifttype + '}';
+        return "Inskription{" + "inskription_linje_liste=" + inskription_linje_liste + ", tegntype=" + tegntype + ", id=" + id + ", skrifttype=" + skrifttype + '}';
     }
     
 }

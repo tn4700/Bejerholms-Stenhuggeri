@@ -23,7 +23,7 @@ primary key(post_nr)
 drop table if exists ordre;
 create table ordre
 (
-ordre_nr                varchar(5),
+ordre_nr                char(5),
 ordretype               boolean,
 ordredato				datetime,
 ordrestatus				int,
@@ -82,8 +82,15 @@ primary key(grp_nr)
 drop table if exists inskription;
 create table inskription
 (
-inskription             text,
 skrifttype				varchar(25)
+) engine = innodb;
+
+drop table if exists inskription_linje;
+create table inskription_linje
+(
+linje_nr				int,
+inskription             varchar(50),
+linje_type				int #0 - tom, 1 - ny, 2 - gammel, 3 - plads
 ) engine = innodb;
 
 drop table if exists tegntype;
@@ -96,7 +103,7 @@ pris_pr_tegn            double
 drop table if exists faktura;
 create table faktura
 (
-faktura_nr              varchar(16),            # Unikt nr som står i toppen af faktura seddelen
+faktura_nr              char(16),            # Unikt nr som står i toppen af faktura seddelen
 faktureringsdato        datetime,            # Dato for oprettelse af faktura seddelen
 vedrørende              varchar(100),
 betalingsbetingelser    varchar(50),

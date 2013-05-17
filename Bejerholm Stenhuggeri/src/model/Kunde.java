@@ -19,7 +19,6 @@ public class Kunde {
     private String adresse;
     private int tlf;
     private Postnummer post_nr;
-    ArrayList<Ordre> ordreList = new ArrayList();
 
     public Kunde(String fornavn, String efternavn, String adresse, int tlf, Postnummer post_nr) {
         this.fornavn = fornavn;
@@ -28,8 +27,6 @@ public class Kunde {
         this.tlf = tlf;
         this.post_nr = post_nr;
     }
-
-    
 
     public String getFornavn() {
         return fornavn;
@@ -70,25 +67,9 @@ public class Kunde {
     public void setPost_nr(Postnummer post_nr) {
         this.post_nr = post_nr;
     }
-    
-    /* Boolean type
-     True = Gravsten
-     False = Alt andet
-     */
-//    public void opretOrdre(boolean ordretype, Timestamp leveringsdato, Timestamp afhentningsdato, String bemærkning, String leveringsadresse, String kirkegård, int afdeling, String afdødnavn, int række, int nummer, int plads_navne, boolean gravType, Kunde kunde){
-//        
-//        if(ordretype = true){
-//            Ordre gravStenOrdre = new Ordre(ordretype, leveringsdato, afhentningsdato, bemærkning, leveringsadresse, kirkegård, afdeling, afdødnavn, række, nummer, plads_navne, gravType, kunde);
-//            ordreList.add(gravStenOrdre);
-//        }else{
-//            Ordre normalOrdre = new Ordre(ordretype, leveringsdato, afhentningsdato, bemærkning, leveringsadresse, kunde);
-//            ordreList.add(normalOrdre);
-//        }
-//            
-//    }
 
     @Override
     public String toString() {
-        return "Kunde{" + "fornavn=" + fornavn + ", efternavn=" + efternavn + ", adresse=" + adresse + ", tlf=" + tlf + ", post_nr=" + post_nr + ", ordreList=" + ordreList + '}';
+        return "Kunde{" + "fornavn=" + fornavn + ", efternavn=" + efternavn + ", adresse=" + adresse + ", tlf=" + tlf + ", post_nr=" + post_nr + "}";
     }
 }
