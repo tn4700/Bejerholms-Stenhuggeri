@@ -33,7 +33,7 @@ public class Faktura {
             boolean betalingsstatus,
             Ordre ordre,
             Samarbejdspartner bedemand) {
-        
+
         this.faktura_nr = faktura_nr;
         this.faktureringsdato = faktureringsdato;
         this.vedrørende = vedrørende;
@@ -124,5 +124,18 @@ public class Faktura {
 
     public void setBetalingsstatus(boolean betalingsstatus) {
         this.betalingsstatus = betalingsstatus;
+    }
+/**
+ * Denne metode opretter et kontoudtog ud fra en faktura og returner derefter 
+ * kontoudtog objektet
+ * @param oprettetdato Et Timestamp med hvornår kontoudtoget er oprettet
+ * @return  Returner et kontoudtog objekt
+ */
+    public Kontoudtog opretKontoudtog(Timestamp oprettetdato) {
+        // Mangler at lave så den oprettet med et nyt kontoudtog nummer. 
+        Kontoudtog kontoudtog = new Kontoudtog(123, oprettetdato, "13", null, this);
+       
+        
+        return kontoudtog;
     }
 }
