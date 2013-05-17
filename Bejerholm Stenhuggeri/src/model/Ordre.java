@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Ordre {
 
     private String ordre_nr;
-    private boolean ordretype;
+    private boolean ordretype;      //1 - ny sten, 0 - tilføjelse
     private Timestamp ordredato;
     private int ordrestatus;
     private Timestamp leveringsdato;
@@ -27,7 +27,7 @@ public class Ordre {
     private int række;
     private int nummer;
     private int plads_navne;
-    private boolean gravType;
+    private boolean gravType;       //1 - Kiste, 0 - Urne 
     private Kunde kunde;
     private ArrayList<Vare_linje> vare_linjeListe;
 
@@ -43,7 +43,7 @@ public class Ordre {
             int række, 
             int nummer, 
             int plads_navne, 
-            boolean gravType, 
+            boolean gravType,         
             Kunde kunde) {
         
         this.ordre_nr = ordre_nr;
@@ -87,7 +87,7 @@ public class Ordre {
         this.ordre_nr = ordre_nr;
     }
 
-    public boolean isOrdretype() {
+    public boolean GetOrdretype() {
         return ordretype;
     }
 
@@ -191,7 +191,7 @@ public class Ordre {
         this.plads_navne = plads_navne;
     }
 
-    public boolean isGravType() {
+    public boolean getGravType() {
         return gravType;
     }
 
@@ -205,5 +205,13 @@ public class Ordre {
 
     public void setKunde(Kunde kunde) {
         this.kunde = kunde;
+    }
+    
+    public Timestamp getAfhentningsdato() {
+        return afhentningsdato;
+    }
+
+    public void setAfhentningsdato(Timestamp afhentningsdato) {
+        this.afhentningsdato = afhentningsdato;
     }
 }
