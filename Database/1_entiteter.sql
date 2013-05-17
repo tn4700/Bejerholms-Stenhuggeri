@@ -15,7 +15,7 @@ primary key(tlf)
 drop table if exists postnummer;
 create table postnummer
 (   
-post_nr              char(4),
+post_nr              	char(4),
 byNavn              	varchar(25),
 primary key(post_nr)
 ) engine = innodb;
@@ -106,7 +106,6 @@ create table faktura
 faktura_nr              char(16),            # Unikt nr som står i toppen af faktura seddelen
 faktureringsdato        datetime,            # Dato for oprettelse af faktura seddelen
 vedrørende              varchar(100),
-betalingsbetingelser    varchar(50),
 sendt_dato              datetime,       # Dato for hvornår fakturaen er sendt
 faktureringsadresse     varchar(50),          
 fakturatype             boolean,            # Bedemand eller almindelig - skal rettes i klassediagram

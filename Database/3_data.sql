@@ -91,12 +91,12 @@ values
 ('4700','Bedemand Berner','Fiktivvej 666','11112222','16276483','1233','6070123458','BankenC'),
 ('4700','Bedemand Berner','Fiktivvej 666','11112222','16276484','1234','6070123459','BankenD');
 
-insert into faktura (bedemand_cvr, ordre_nr, faktura_nr,faktureringsdato,vedrørende,betalingsbetingelser,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)
+insert into faktura (bedemand_cvr, ordre_nr, faktura_nr,faktureringsdato,vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)
 values
-(null, '00001', '0020332836-00001','2013-04-30 11:50:32','Martin Hana','Netto 7 dage','2013-05-01 11:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
-(null,'00002', '0050111211-00002','2013-04-30 12:50:32','Thomas Nielsen','Netto 7 dage','2013-05-01 12:50:32','Østre Ringvej 49 2.TV, 4700 Næstved',true,false),
-(null,'00003', '0031255685-00003','2013-04-30 13:50:32','Niklas Nielsen','Netto 7 dage','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
-('12943790','00004', '0028931093-00004','2013-04-30 14:50:32','Anette Stidsing','Netto 7 dage','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
+(null, '00001', '0020332836-00001','2013-04-30 11:50:32','Martin Hana','2013-05-01 11:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
+(null,'00002', '0050111211-00002','2013-04-30 12:50:32','Thomas Nielsen','2013-05-01 12:50:32','Østre Ringvej 49 2.TV, 4700 Næstved',true,false),
+(null,'00003', '0031255685-00003','2013-04-30 13:50:32','Niklas Nielsen','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
+('12943790','00004', '0028931093-00004','2013-04-30 14:50:32','Anette Stidsing','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
 
 insert into kontoudtog (kontoudtog_nr,dato,vedrørende,sendt_dato)
 values
