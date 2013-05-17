@@ -16,14 +16,14 @@ public class Provisionsseddel {
     private Timestamp dato;
     private String vedrørende;
     private String overførelsesbetingelser;
-    private Faktura faktura_nr;
+    private Faktura faktura;
 
-    public Provisionsseddel(int provisions_nr,Timestamp dato,String vedrørende,String overførelsesbetingelser,Faktura faktura_nr) {
+    public Provisionsseddel(int provisions_nr,Timestamp dato,String vedrørende,String overførelsesbetingelser,Faktura faktura) {
         this.provisions_nr = provisions_nr;
         this.dato = dato;
         this.vedrørende = vedrørende;
         this.overførelsesbetingelser = overførelsesbetingelser;
-        this.faktura_nr = faktura_nr;
+        this.faktura = faktura;
     }
 
     public int getProvisions_nr() {
@@ -58,11 +58,13 @@ public class Provisionsseddel {
         this.overførelsesbetingelser = overførelsesbetingelser;
     }
 
-    public Faktura getFaktura_nr() {
-        return faktura_nr;
+    public Faktura getFaktura() {
+        return faktura;
     }
 
-    public void setFaktura_nr(Faktura faktura_nr) {
-        this.faktura_nr = faktura_nr;
+    public void setFaktura(Faktura faktura) {
+        this.faktura = faktura;
     }
+
+   
 }
