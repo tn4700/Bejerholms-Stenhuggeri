@@ -16,8 +16,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import model.Inskription;
+import model.Inskription_linje;
 import model.Ordre;
+import model.Vare_linje;
 
 /**
  *
@@ -149,15 +153,23 @@ public class OpretOrdre {
         createContent(cb, btFont, 12, black, 389, 544, "Kirkegård", left);
         createContent(cb, btFont, 12, black, 389, 524, "Afdeling", left);
         createContent(cb, btFont, 12, black, 389, 504, "Række + Nr.", left);
-        cb.rectangle(385, 500, 200, 60);
+        cb.rectangle(385, 500, 190, 60);
         cb.moveTo(385, 560);
-        cb.lineTo(585, 560);
+        cb.lineTo(575, 560);
         cb.moveTo(385, 540);
-        cb.lineTo(585, 540);
+        cb.lineTo(575, 540);
         cb.moveTo(385, 520);
-        cb.lineTo(585, 520);
-        cb.moveTo(485, 560);
-        cb.lineTo(485, 500);
+        cb.lineTo(575, 520);
+        cb.moveTo(475, 560);
+        cb.lineTo(475, 500);
+        cb.moveTo(475, 120);
+        cb.lineTo(575, 120);
+        cb.moveTo(475, 100);
+        cb.lineTo(575, 100);
+        cb.moveTo(475, 80);
+        cb.lineTo(575, 80);
+        cb.moveTo(475, 78);
+        cb.lineTo(575, 78);
         cb.stroke();
 
         //Indsæt data til info-tabeller
@@ -189,91 +201,133 @@ public class OpretOrdre {
             cb.rectangle(280, 520, 100, 20);
             cb.fill();
         }
-        if(ordre.getKirkegård()!=null) {
-        createContent(cb, tFont, 12, black, 535, 544, ordre.getKirkegård(), center);
+        if (ordre.getKirkegård() != null) {
+            createContent(cb, tFont, 12, black, 525, 544, ordre.getKirkegård(), center);
         }
-        if(ordre.getAfdeling()!=0) {
-            createContent(cb, tFont, 12, black, 535, 524, ""+ordre.getAfdeling(), center);
+        if (ordre.getAfdeling() != 0) {
+            createContent(cb, tFont, 12, black, 525, 524, "" + ordre.getAfdeling(), center);
         }
-        if(ordre.getNummer()!=0 && ordre.getRække()!=0){
-        String rk_nr = "Ræ. "+ordre.getRække()+" Nr. "+ordre.getNummer();
-        createContent(cb, tFont, 12, black, 535, 504, rk_nr, center);
+        if (ordre.getNummer() != 0 && ordre.getRække() != 0) {
+            String rk_nr = "Ræ. " + ordre.getRække() + " Nr. " + ordre.getNummer();
+            createContent(cb, tFont, 12, black, 525, 504, rk_nr, center);
         }
 
+        //Indsættelse af inskriptions-overskrift
+        createContent(cb, btFont, 12, black, 300, 484, "Inskription:", center);
 
-
-        //midlertidig flytning
-        int tmp = 100;
-
-        //Farv tabel baggrund
-        cb.setRGBColorFill(216, 228, 232);
-        cb.rectangle(25, 480 - tmp, 550, 20);
-        cb.rectangle(475, 200 - tmp, 100, 300);
-        cb.rectangle(475, 140 - tmp, 100, 20);
-        cb.rectangle(475, 180 - tmp, 100, 20);
-        cb.fill();
-
+        //Indsættelse af inskriptions-tekst
+        ArrayList<Inskription_linje> inskription_linje_liste = null;
+        Inskription inskription = null;
+        for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
+            if (ordre.getVare_linjeListe().get(i).getInskription() != null) {
+                inskription_linje_liste = ordre.getVare_linjeListe().get(i).getInskription().getInskription_linje_liste();
+                inskription = ordre.getVare_linjeListe().get(i).getInskription();
+            }
+        }
+        int inskriptionY = 454;
+        if (inskription_linje_liste == null) {
+            createContent(cb, infoFont, 14, black, 300, 464, "ingen inskription", center);
+        } else {
+            for (int i = 0; i < inskription_linje_liste.size(); i++) {
+                if (inskription_linje_liste.get(i).getLinje_type() == 1) {
+                    createContent(cb, infoFont, 14, black, 300, inskriptionY, inskription_linje_liste.get(i).getInskription(), center);
+                } else if (inskription_linje_liste.get(i).getLinje_type() == 2) {
+                    createContent(cb, infoFont, 14, red, 300, inskriptionY, inskription_linje_liste.get(i).getInskription(), center);
+                } else if (inskription_linje_liste.get(i).getLinje_type() == 3) {
+                    createContent(cb, infoFont, 14, black, 300, inskriptionY, "(PLADS)", center);
+                } else {
+                }
+                inskriptionY -= 20;
+            }
+        }
+        
+        //Indsættelse af skrifttype linje
+        createContent(cb, btFont, 12, black, 425, 344, "Skrifttype:", center);
+        if(inskription!=null){
+        createContent(cb, tFont, 12, black, 525, 344, inskription.getSkrifttype(), center);
+        }
+        
         //Tegn tabel
-        cb.rectangle(25, 200 - tmp, 550, 300);
-        cb.moveTo(25, 480 - tmp);
-        cb.lineTo(575, 480 - tmp);
-        cb.moveTo(100, 500 - tmp);
-        cb.lineTo(100, 200 - tmp);
-        cb.moveTo(375, 500 - tmp);
-        cb.lineTo(375, 200 - tmp);
-        cb.moveTo(475, 500 - tmp);
-        cb.lineTo(475, 200 - tmp);
-        cb.moveTo(475, 180 - tmp);
-        cb.lineTo(575, 180 - tmp);
-        cb.moveTo(475, 160 - tmp);
-        cb.lineTo(575, 160 - tmp);
-        cb.rectangle(475, 140 - tmp, 100, 60);
-        cb.moveTo(475, 120 - tmp);
-        cb.lineTo(575, 120 - tmp);
-        cb.moveTo(475, 118 - tmp);
-        cb.lineTo(575, 118 - tmp);
+        cb.rectangle(25, 140, 550, 200);
+        int tabelY = 320;
+        for (int i = 1; i < 11; i++) {
+        cb.moveTo(25, tabelY);
+        cb.lineTo(575, tabelY);
+        tabelY -= 20;
+        }
+        cb.moveTo(100, 340);
+        cb.lineTo(100, 140);
+        cb.moveTo(475, 340);
+        cb.lineTo(475, 140);
         cb.stroke();
 
         //Indsæt navne på tabel elementer
-        createContent(cb, btFont, 12, black, 63, 484 - tmp, "ANTAL", center);
-        createContent(cb, btFont, 12, black, 238, 484 - tmp, "BESKRIVELSE", center);
-        createContent(cb, btFont, 12, black, 425, 484 - tmp, "ENHEDSPRIS", center);
-        createContent(cb, btFont, 12, black, 525, 484 - tmp, "BELØB", center);
-        createContent(cb, tFont, 12, black, 110, 204 - tmp, "Miljøafgift 2,5%", left);
-        createContent(cb, tFont, 12, black, 465, 184 - tmp, "SUBTOTAL", right);
-        createContent(cb, tFont, 12, black, 465, 164 - tmp, "MOMS", right);
-        createContent(cb, tFont, 12, black, 465, 144 - tmp, "SALGSMOMS", right);
-        createContent(cb, btFont, 12, black, 465, 124 - tmp, "I ALT", right);
+        createContent(cb, btFont, 12, black, 63, 324, "Antal:", center);
+        createContent(cb, btFont, 12, black, 287, 324, "Vare:", center);
+        createContent(cb, btFont, 12, black, 525, 324, "Pris:", center);
+        createContent(cb, tFont, 12, black, 110, 144, "Miljøafgift 2,5%", left);
+        createContent(cb, btFont, 12, black, 465, 124, "Pris", right);
+        createContent(cb, btFont, 12, black, 465, 104, "Moms(25%)", right);
+        createContent(cb, btFont, 12, black, 465, 84, "Total", right);
 
         //Indsæt data for varelinjer
-        int tmpY = 464 - tmp;
+        int tmpY = 304;
+        int antal = 0;
+        double enhedsPris = 0;
+        double pris = 0;
         double total = 0;
-        int quantity = 0;
-        double price = 0;
-        double itemPrice = 0;
-
-        for (int i = 1; i < 14; i++) {
-
-            quantity = i;
-            itemPrice = Double.valueOf(Math.random() * 10);
-            price = quantity * itemPrice;
-            total += price;
-
-            createContent(cb, tFont, 12, black, 63, tmpY, "" + quantity, center);
-            createContent(cb, tFont, 12, black, 110, tmpY, "BESKRIVELSE " + i, left);
-            createContent(cb, tFont, 12, black, 465, tmpY, "" + NumberFormat.getCurrencyInstance().format(itemPrice), right);
-            createContent(cb, tFont, 12, black, 565, tmpY, "" + NumberFormat.getCurrencyInstance().format(price), right);
-
+        String beskrivelse = "";
+        
+        for(int i=0; i<ordre.getVare_linjeListe().size(); i++){
+            Vare_linje vare_linje = ordre.getVare_linjeListe().get(i);
+            
+            if(vare_linje.getVare()!=null){
+                beskrivelse = vare_linje.getVare().getNavn();
+                antal = 1;
+                enhedsPris = vare_linje.getVare().getSalgspris();
+            } else if(vare_linje.getInskription()!=null){
+                antal = 0;
+                for (int j = 0; j < vare_linje.getInskription().getInskription_linje_liste().size(); j++) {
+                    String characters = vare_linje.getInskription().getInskription_linje_liste().get(j).getInskription().replaceAll(" ", "");
+                    if(vare_linje.getInskription().getInskription_linje_liste().get(j).getLinje_type()==1){
+                    antal += characters.length();
+                    }
+                }
+                enhedsPris = vare_linje.getInskription().getTegntype().getPris_pr_tegn();
+                beskrivelse = vare_linje.getInskription().getTegntype().getNavn();
+            } else if(vare_linje.getTom_linje()!=null){
+                beskrivelse = vare_linje.getTom_linje().getNavn();
+                antal = vare_linje.getTom_linje().getAntal();
+                enhedsPris = vare_linje.getTom_linje().getPris();
+            }  
+            pris = antal*enhedsPris;
+            total += pris;
+            
+            createContent(cb, tFont, 12, black, 63, tmpY, ""+antal, center);
+            createContent(cb, tFont, 12, black, 110, tmpY, beskrivelse, left);
+            createContent(cb, tFont, 12, black, 465, tmpY, ""+NumberFormat.getCurrencyInstance().format(enhedsPris), right);
+            createContent(cb, tFont, 12, black, 565, tmpY, ""+NumberFormat.getCurrencyInstance().format(pris), right);
+            
             tmpY = tmpY - 20;
         }
-        createContent(cb, tFont, 12, black, 565, 204 - tmp, "" + NumberFormat.getCurrencyInstance().format(total * +0.025), right);
-        total += (total * 0.025);
-        createContent(cb, tFont, 12, black, 565, 184 - tmp, "" + NumberFormat.getCurrencyInstance().format(total), right);
-        createContent(cb, tFont, 12, black, 565, 164 - tmp, "25,00%", right);
-        createContent(cb, tFont, 12, black, 565, 144 - tmp, "" + NumberFormat.getCurrencyInstance().format(total * 0.25), right);
-        total += (total * 0.25);
-        createContent(cb, tFont, 12, black, 565, 124 - tmp, "" + NumberFormat.getCurrencyInstance().format(total), right);
-
+        createContent(cb, tFont, 12, black, 565, 144, ""+NumberFormat.getCurrencyInstance().format(Math.floor(total*+0.025)), right);
+        total += Math.floor((total*0.025));
+        createContent(cb, tFont, 12, black, 565, 124, ""+NumberFormat.getCurrencyInstance().format(total), right);
+        createContent(cb, tFont, 12, black, 565, 104, ""+NumberFormat.getCurrencyInstance().format(total*0.25), right);
+        total += (total*0.25);
+        total = Math.floor(total+0.5);
+        createContent(cb, tFont, 12, black, 565, 84, ""+NumberFormat.getCurrencyInstance().format(total), right);
+        
+        //Indsættelse af bemærkning tabel
+        createContent(cb, btFont, 12, black, 29, 64, "Bemærkninger:", left);
+        cb.rectangle(25, 20, 550, 40);
+        cb.stroke();
+        
+        //Indsættelse af bemærkninger
+        createContent(cb, tFont, 12, black, 29, 44, ordre.getBemærkning(), left);        
+        
+        
+        
         //Lukker dokument og skriver alt det data der er blevet indsat til PDF-filen
         doc.close();
 

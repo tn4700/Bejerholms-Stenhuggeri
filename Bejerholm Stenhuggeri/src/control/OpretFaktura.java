@@ -170,9 +170,11 @@ public class OpretFaktura {
                 antal = 1;
                 enhedsPris = vare_linje.getVare().getSalgspris();
             } else if(vare_linje.getInskription()!=null){
+                antal = 0;
                 for (int j = 0; j < vare_linje.getInskription().getInskription_linje_liste().size(); j++) {
-                    String characters = vare_linje.getInskription().getInskription_linje_liste().get(i).getInskription().replaceAll(" ", "");
-                    if(vare_linje.getInskription().getInskription_linje_liste().get(i).getLinje_type()==1){
+                    String characters = vare_linje.getInskription().getInskription_linje_liste().get(j).getInskription().replaceAll(" ", "");
+                    System.out.println(characters);
+                    if(vare_linje.getInskription().getInskription_linje_liste().get(j).getLinje_type()==1){
                     antal += characters.length();
                     }
                 }
@@ -212,12 +214,6 @@ public class OpretFaktura {
         createContent(cb, tFont, 12, black, 25, 84, "Sydbank: 6821  -  1021974", left);
         createContent(cb, tFont, 12, black, 25, 64, "Ordrenummer og navn bedes anført ved bankoverførsel", left);
         createContent(cb, tFont, 10, black, 25, 24, "Hvis der er spørgsmål til denne faktura, bedes De venligst kontakte os(se kontaktinfo i toppen af fakturaen)", left);
-
-        //test
-        //cb.moveTo(250, 250);
-        //cb.lineTo(250,300);
-        //cb.lineTo(275, 250);
-        //cb.lineTo(275, 300);
         
         //Lukker dokument og skriver alt det data der er blevet indsat til PDF-filen
         doc.close();

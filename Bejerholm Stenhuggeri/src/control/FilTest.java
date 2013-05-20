@@ -10,15 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
 import model.Faktura;
-import model.Kunde;
-import model.Ordre;
-import model.Postnummer;
-import model.Vare_linje;
-
 /**
  *
  * @author NiklasRenner
@@ -45,11 +37,11 @@ public class FilTest {
             OpretFaktura opretFaktura = new OpretFaktura(faktura);
             opretFaktura.genererFaktura("FakturaTest.pdf");
 
-            //OpretOrdre opretOrdre = new OpretOrdre(faktura.getOrdre);
-            //opretOrdre.genererOrdre("OrdreTest.pdf");
+            OpretOrdre opretOrdre = new OpretOrdre(faktura.getOrdre());
+            opretOrdre.genererOrdre("OrdreTest.pdf");
 
             Desktop desktop = Desktop.getDesktop();
-            File file = new File("docs/FakturaTest.pdf");
+            File file = new File("docs/OrdreTest.pdf");
             desktop.open(file);
         } catch (FileNotFoundException ex) {
             System.out.println("Luk andre pdf'er før du prøver at se en ny!");

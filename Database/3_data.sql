@@ -64,7 +64,7 @@ values
 insert into inskription_linje(linje_nr, inskription_id, linje_type, inskription)
 values
 ('1','1','1','Hej med dig'),('2','1','1','min mor'),('3','1','1','og du er'),('4','1','1','den bedste hej'),('5','1','1','med dig far'),
-('1','2','2','Hej'),('2','2','2','mor'),('3','2','1','og'),('4','2','1','hej'),('5','2','1','far'),
+('1','2','2','Anette Mi Stidsing'),('2','2','2','* 25. 6. 1992  + 1. 1. 2013'),('3','2','1','Niklas Renner Nielsen'),('4','2','1','* 25. 6. 1992  + 1. 1. 2013'),('5','2','2','Hvil i fred'),
 ('1','3','1','Hej'),('2','3','1','mor'),('3','3','3',''),('4','3','3',''),('5','3','3',''),
 ('1','4','1','Kagemand 2000-2001'),('2','4','1','hvil i fred'),('3','4','0',''),('4','4','0',''),('5','4','0','');
 
@@ -80,8 +80,8 @@ insert into vare_linje (linje_nr, vare_nr, inskription_id, tom_linje_id, ordre_n
 values
 ('1','2',null,null,'00001'),
 ('2',null,null,'1','00001'),
-('3',null,'1',null,'00001'),
-('4',null,'2',null,'00001');
+('3',null,'2',null,'00001'),
+('1',null,'1',null,'00004');
 
 
 insert into samarbejdspartner (post_nr, firmanavn,adresse,tlf,cvr_nr,registrerings_nr,konto_nr,bank)
