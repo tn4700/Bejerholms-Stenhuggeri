@@ -1296,6 +1296,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Import / Export CSV filer"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton21ActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1638,9 +1641,6 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_DBnavn">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField6"/>
-                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_DBnavnActionPerformed"/>
                   </Events>
@@ -1651,9 +1651,6 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Port">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField27"/>
-                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="456" y="90" width="140" height="30"/>
@@ -1661,9 +1658,6 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Host">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField28"/>
-                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="176" y="164" width="140" height="30"/>
@@ -1671,9 +1665,6 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Brugernavn">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField29"/>
-                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="456" y="164" width="140" height="30"/>
@@ -1681,9 +1672,6 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Password">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField30"/>
-                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="176" y="250" width="140" height="30"/>
@@ -1699,7 +1687,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="320" y="380" width="170" height="40"/>
+                      <AbsoluteConstraints x="310" y="380" width="170" height="40"/>
                     </Constraint>
                   </Constraints>
                 </Component>

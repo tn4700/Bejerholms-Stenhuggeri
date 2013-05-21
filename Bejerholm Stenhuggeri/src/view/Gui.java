@@ -832,6 +832,11 @@ public class Gui extends javax.swing.JFrame {
         jButton20.setText("Opret/ Rediger/ Slet Bruger");
 
         jButton21.setText("Import / Export CSV filer");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_AdministrationLayout = new javax.swing.GroupLayout(jPanel_Administration);
         jPanel_Administration.setLayout(jPanel_AdministrationLayout);
@@ -1039,7 +1044,6 @@ public class Gui extends javax.swing.JFrame {
         jPanel_DBconn.add(jLabel_Password);
         jLabel_Password.setBounds(176, 220, 90, 20);
 
-        jTextField_DBnavn.setText("jTextField6");
         jTextField_DBnavn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_DBnavnActionPerformed(evt);
@@ -1047,20 +1051,12 @@ public class Gui extends javax.swing.JFrame {
         });
         jPanel_DBconn.add(jTextField_DBnavn);
         jTextField_DBnavn.setBounds(176, 90, 140, 30);
-
-        jTextField_Port.setText("jTextField27");
         jPanel_DBconn.add(jTextField_Port);
         jTextField_Port.setBounds(456, 90, 140, 30);
-
-        jTextField_Host.setText("jTextField28");
         jPanel_DBconn.add(jTextField_Host);
         jTextField_Host.setBounds(176, 164, 140, 30);
-
-        jTextField_Brugernavn.setText("jTextField29");
         jPanel_DBconn.add(jTextField_Brugernavn);
         jTextField_Brugernavn.setBounds(456, 164, 140, 30);
-
-        jTextField_Password.setText("jTextField30");
         jPanel_DBconn.add(jTextField_Password);
         jTextField_Password.setBounds(176, 250, 140, 30);
 
@@ -1071,7 +1067,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel_DBconn.add(jButton_DBconnect);
-        jButton_DBconnect.setBounds(320, 380, 170, 40);
+        jButton_DBconnect.setBounds(310, 380, 170, 40);
         jPanel_DBconn.add(jLabel_ConnFejlbesked);
         jLabel_ConnFejlbesked.setBounds(370, 320, 0, 0);
 
@@ -1176,6 +1172,10 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
         }
         
     }//GEN-LAST:event_jButton_DBconnectActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton21ActionPerformed
 
     /**
      * @param args the command line arguments
