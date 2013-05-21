@@ -20,18 +20,10 @@ import java.util.List;
  * @author Martin
  */
 public class ExportToCSV {
-    
-    DBConnection db;
-    
-    public ExportToCSV(DBConnection db) {
-        this.db = db;
-        export();
-    }
 
-    public final void export() {
+    public final static void export(DBConnection db) throws IOException, SQLException{
 
-        Writer out;
-        try {            
+            Writer out;            
             //Henter alle tables i db
             ResultSet res = db.getData("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'bejerholmstenhuggeri'");
             //Forbereder List af table navne
@@ -53,7 +45,6 @@ public class ExportToCSV {
                 //colunm count er nødvendig da tabeller er dynamisk og skal kende antalet af tabeller
                 int columnCount = getColumnCount(res);
 
-                try {
                     File filepath = new File(filename + "" + tableName + ".csv");
                     out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filepath.toString()), "ISO-8859-1"));
                     //Den her loop sætter navn på column på toppen af filen, kan udkommenteres hvis det ikke er nødvendigt. 
@@ -82,15 +73,7 @@ public class ExportToCSV {
                     }
                     out.flush();
                     out.close();
-                } catch (IOException ioe) {
-                    //autogenereret catch block
-                    ioe.printStackTrace();
-                }
             }
-        } catch (SQLException sqle) {
-            System.err.println("SQLException information");
-            sqle.printStackTrace();
-        }
     }
     
     //For at få antallet af rækker i et result set

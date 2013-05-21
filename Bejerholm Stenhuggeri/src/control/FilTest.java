@@ -34,9 +34,8 @@ public class FilTest {
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
-                //Faktura laves til pdf
         try {
-            ExportToCSV export = new ExportToCSV(db);
+            ExportToCSV.export(db);
             
             OpretFaktura opretFaktura = new OpretFaktura(faktura);
             opretFaktura.genererFaktura("FakturaTest.pdf");
@@ -52,6 +51,8 @@ public class FilTest {
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (DocumentException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
