@@ -32,20 +32,20 @@ public class Ordre {
     private ArrayList<Vare_linje> vare_linjeListe;
 
     public Ordre(String ordre_nr,
-            boolean ordretype, 
-            Timestamp leveringsdato, 
-            Timestamp afhentningsdato, 
-            String bemærkning, 
-            String leveringsadresse, 
-            String kirkegård, 
-            int afdeling, 
-            String afdødnavn, 
-            int række, 
-            int nummer, 
-            int plads_navne, 
-            boolean gravType,         
+            boolean ordretype,
+            Timestamp leveringsdato,
+            Timestamp afhentningsdato,
+            String bemærkning,
+            String leveringsadresse,
+            String kirkegård,
+            int afdeling,
+            String afdødnavn,
+            int række,
+            int nummer,
+            int plads_navne,
+            boolean gravType,
             Kunde kunde) {
-        
+
         vare_linjeListe = new ArrayList();
         this.ordre_nr = ordre_nr;
         this.ordrestatus = ordrestatus;
@@ -63,15 +63,15 @@ public class Ordre {
         this.gravType = gravType;
         this.kunde = kunde;
     }
-        
-    public void addVare_linje(Vare_linje vare_linje){
-            vare_linjeListe.add(vare_linje);
+
+    public void addVare_linje(Vare_linje vare_linje) {
+        vare_linjeListe.add(vare_linje);
     }
-    
+
     public ArrayList<Vare_linje> getVare_linjeListe() {
         return vare_linjeListe;
     }
-    
+
     public void setVare_linjeListe(ArrayList<Vare_linje> vare_linjeListe) {
         this.vare_linjeListe = vare_linjeListe;
     }
@@ -203,7 +203,7 @@ public class Ordre {
     public void setKunde(Kunde kunde) {
         this.kunde = kunde;
     }
-    
+
     public Timestamp getAfhentningsdato() {
         return afhentningsdato;
     }
@@ -212,9 +212,39 @@ public class Ordre {
         this.afhentningsdato = afhentningsdato;
     }
 
+    public double getTotal() {
+        
+        int antal = 0;
+        double enhedsPris = 0;
+        double pris = 0;
+        double total = 0;
+
+        for (int i = 0; i < vare_linjeListe.size(); i++) {
+
+            if (vare_linjeListe.get(i).getVare() != null) {
+                antal = 1;
+                enhedsPris = vare_linjeListe.get(i).getVare().getSalgspris();
+            } else if (vare_linjeListe.get(i).getInskription() != null) {
+                antal = 0;
+                for (int j = 0; j < vare_linjeListe.get(i).getInskription().getInskription_linje_liste().size(); j++) {
+                    String characters = vare_linjeListe.get(i).getInskription().getInskription_linje_liste().get(j).getInskription().replaceAll(" ", "");
+                    if (vare_linjeListe.get(i).getInskription().getInskription_linje_liste().get(j).getLinje_type() == 1) {
+                        antal += characters.length();
+                    }
+                }
+                enhedsPris = vare_linjeListe.get(i).getInskription().getTegntype().getPris_pr_tegn();
+            } else if (vare_linjeListe.get(i).getTom_linje() != null) {
+                antal = vare_linjeListe.get(i).getTom_linje().getAntal();
+                enhedsPris = vare_linjeListe.get(i).getTom_linje().getPris();
+            }
+            pris = antal * enhedsPris;
+            total += pris;
+        }
+        return total;
+    }
+
     @Override
     public String toString() {
         return "Ordre{" + "ordre_nr=" + ordre_nr + ", ordretype=" + ordretype + ", ordredato=" + ordredato + ", ordrestatus=" + ordrestatus + ", leveringsdato=" + leveringsdato + ", afhentningsdato=" + afhentningsdato + ", bemærkning=" + bemærkning + ", leveringsadresse=" + leveringsadresse + ", kirkegård=" + kirkegård + ", afdeling=" + afdeling + ", afdødnavn=" + afdødnavn + ", række=" + række + ", nummer=" + nummer + ", plads_navne=" + plads_navne + ", gravType=" + gravType + ", kunde=" + kunde + ", vare_linjeListe=" + vare_linjeListe + '}';
     }
-    
 }

@@ -43,6 +43,8 @@ public class FilTest {
             OpretOrdre opretOrdre = new OpretOrdre(faktura.getOrdre());
             opretOrdre.genererOrdre("OrdreTest.pdf");
 
+            double tmp = faktura.getOrdre().getTotal();
+            System.out.println("Total: "+tmp);
             Desktop desktop = Desktop.getDesktop();
             File file = new File("docs/OrdreTest.pdf");
             desktop.open(file);

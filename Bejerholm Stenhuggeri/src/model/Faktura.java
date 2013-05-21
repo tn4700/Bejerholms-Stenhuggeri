@@ -120,13 +120,13 @@ public class Faktura {
  * @param oprettetdato Et Timestamp med hvornår kontoudtoget er oprettet
  * @return  Returner et kontoudtog objekt
  */
-    public Kontoudtog opretKontoudtog(Timestamp oprettetdato) {
+    //public Kontoudtog opretKontoudtog(Timestamp oprettetdato) {
         // Mangler at lave så den oprettet med et nyt kontoudtog nummer. 
-        Kontoudtog kontoudtog = new Kontoudtog(123, oprettetdato, "13", null, this);
+        //Kontoudtog kontoudtog = new Kontoudtog(123, oprettetdato, "13", null, this);
        
         
-        return kontoudtog;
-    }
+       //return kontoudtog;
+    //}
 
     @Override
     public String toString() {

@@ -12,7 +12,7 @@ alter table tom_linje
 add column id int auto_increment,
 add primary key(id);
 
-alter table inskription
+alter table inskription_linje
 add column id int auto_increment,
 add primary key(id);
 
@@ -26,7 +26,7 @@ alter table vare_linje
 add column vare_nr int,
 add foreign key(vare_nr) references vare(vare_nr),
 add column inskription_id int,
-add foreign key(inskription_id) references inskription(id),
+add foreign key(inskription_id) references inskription_linje(id),
 add column tom_linje_id int,
 add foreign key(tom_linje_id) references tom_linje(id);
 
@@ -39,8 +39,8 @@ add column faktura_nr char(16),
 add foreign key(faktura_nr) references faktura(faktura_nr);
 
 alter table kontoudtog
-add column faktura_nr char(16),
-add foreign key(faktura_nr) references faktura(faktura_nr);
+add column provisions_nr char(5),
+add foreign key(provisions_nr) references provisionsseddel(provisions_nr);
 
 #fase 4 - For hver 1:n forbindelse tilføjes primærnøglen fra 1-siden som fremmednøgle 
 #på n-siden.
@@ -54,13 +54,13 @@ add column ordre_nr char(5),
 add foreign key(ordre_nr) references ordre(ordre_nr),
 add primary key(ordre_nr, linje_nr);
 
-alter table inskription
+alter table inskription_linje
 add column tegn_id int,
 add foreign key(tegn_id) references tegntype(id);
 
-alter table inskription_linje
+alter table inskription
 add column inskription_id int,
-add foreign key(inskription_id) references inskription(id),
+add foreign key(inskription_id) references inskription_linje(id),
 add primary key(inskription_id, linje_nr);
 
 alter table kunde
@@ -78,16 +78,6 @@ add foreign key(tlf) references kunde(tlf);
 alter table faktura
 add column bedemand_tlf char(8),
 add foreign key(bedemand_tlf) references samarbejdspartner(tlf);
-
-alter table provisionsseddel_linje
-add column provisions_nr int,
-add foreign key(provisions_nr) references provisionsseddel(provisions_nr),
-add primary key(provisions_nr, linje_nr);
-
-alter table kontoudtog_linje
-add column kontoudtog_nr int,
-add foreign key(kontoudtog_nr) references kontoudtog(kontoudtog_nr),
-add primary key(kontoudtog_nr, linje_nr);
 
 #fase 5 - For hver n:m forbindelse oprettes en ny tabel med primærnøglerne fra de to
 #tabeller som sammensat primærnøgle og med de to primærnøgler som fremmednøgler.

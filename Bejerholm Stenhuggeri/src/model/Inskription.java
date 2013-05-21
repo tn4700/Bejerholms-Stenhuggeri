@@ -4,66 +4,59 @@
  */
 package model;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author Martin
+ * @author NiklasRenner
  */
 public class Inskription {
 
-    private ArrayList<Inskription_linje> inskription_linje_liste;
-    private Tegntype tegntype;
-    private int id;
-    private String skrifttype;
+    private int linje_nr;
+    private int inskription_id;
+    private int linje_type;
+    private String inskription;
 
-    public Inskription(ArrayList<Inskription_linje> inskription_linje_liste, Tegntype tegntype, int id, String skrifttype) {
-        inskription_linje_liste = new ArrayList();
-        this.inskription_linje_liste = inskription_linje_liste;
-        this.tegntype = tegntype;
-        this.id = id;
-        this.skrifttype = skrifttype;
-    }
-    
-    public void addInskription_linje(Inskription_linje inskription_linje){
-        inskription_linje_liste.add(inskription_linje);
+    public Inskription(int linje_nr, int inskription_id, int linje_type, String inskription) {
+        this.linje_nr = linje_nr;
+        this.inskription_id = inskription_id;
+        this.linje_type = linje_type;
+        this.inskription = inskription;
     }
 
-    public ArrayList<Inskription_linje> getInskription_linje_liste() {
-        return inskription_linje_liste;
+    public int getLinje_nr() {
+        return linje_nr;
     }
 
-    public Tegntype getTegntype() {
-        return tegntype;
+    public void setLinje_nr(int linje_nr) {
+        this.linje_nr = linje_nr;
     }
 
-    public void setTegntype(Tegntype tegntype) {
-        this.tegntype = tegntype;
+    public int getInskription_id() {
+        return inskription_id;
     }
 
-    public String getSkrifttype() {
-        return skrifttype;
+    public void setInskription_id(int inskription_id) {
+        this.inskription_id = inskription_id;
     }
 
-    public void setSkrifttype(String skrifttype) {
-        this.skrifttype = skrifttype;
+    public int getLinje_type() {
+        return linje_type;
     }
 
-    public void setInskription(ArrayList<Inskription_linje> inskription_linje_liste) {
-        this.inskription_linje_liste = inskription_linje_liste;
+    public void setLinje_type(int linje_type) {
+        this.linje_type = linje_type;
     }
 
-    public int getId() {
-        return id;
+    public String getInskription() {
+        return inskription;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setInskription(String inskription) {
+        this.inskription = inskription;
     }
 
     @Override
     public String toString() {
-        return "Inskription{" + "inskription_linje_liste=" + inskription_linje_liste + ", tegntype=" + tegntype + ", id=" + id + ", skrifttype=" + skrifttype + '}';
+        return "Inskription_linje{" + "linje_nr=" + linje_nr + ", inskription_id=" + inskription_id + ", linje_type=" + linje_type + ", inskription=" + inskription + '}';
     }
     
 }

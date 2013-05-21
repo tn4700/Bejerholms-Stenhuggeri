@@ -79,14 +79,14 @@ navn                    varchar(25),    # Navet på varegruppen
 primary key(grp_nr)
 ) engine =innodb;
 
-drop table if exists inskription;
-create table inskription
+drop table if exists inskription_linje;
+create table inskription_linje
 (
 skrifttype				varchar(25)
 ) engine = innodb;
 
-drop table if exists inskription_linje;
-create table inskription_linje
+drop table if exists inskription;
+create table inskription
 (
 linje_nr				int,
 inskription             varchar(50),
@@ -116,40 +116,21 @@ primary key(faktura_nr)
 drop table if exists kontoudtog;
 create table kontoudtog
 (
-kontoudtog_nr          	int,            # Unikt nr som står i topppen af kontoudtogs seddelen
+kontoudtog_nr          	char(5),            # Unikt nr som står i topppen af kontoudtogs seddelen
 dato                    datetime,       # Dato for oprettelse af kontoudtogs seddelen
 vedrørende              varchar(100),
 sendt_dato              datetime,       # Dato for hvornår Kontoudtog er sendt
 primary key(kontoudtog_nr)
 )engine = innodb;
 
-drop table if exists kontoudtog_linje;
-create table kontoudtog_linje
-(
-antal                   int,
-linje_nr				int,
-beskrivelse             text,
-pris                    double
-)engine = innodb;
-
 drop table if exists provisionsseddel;
 create table provisionsseddel
 (
-provisions_nr            int,            # Unikt nummer som står i toppen af provisions seddelen 
+provisions_nr            char(5),            # Unikt nummer som står i toppen af provisions seddelen 
 dato                    datetime,       # Dato for oprettelse af provisionsseddel
 vedrørende              varchar(100),   
 overførelsesbetingelser varchar(100),
 primary key(provisions_nr)
-) engine = innodb;
-
-drop table if exists provisionsseddel_linje;
-create table provisionsseddel_linje
-(
-antal                   int,
-linje_nr				int,
-beskrivelse             text,
-enhedspris             	double,
-pris                  	double
 ) engine = innodb;
 
 drop table if exists samarbejdspartner;

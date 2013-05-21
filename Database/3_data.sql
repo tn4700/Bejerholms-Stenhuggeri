@@ -54,14 +54,14 @@ values
 ('Opforgyldning af bogstaver i pol. sten','65.00'),
 ('Opforgyldning af bogstaver i ru sten','95.00');
 
-insert into inskription (tegn_id, skrifttype)
+insert into inskription_linje (tegn_id, skrifttype)
 values
 ('2','ARIAL'),
 ('4','OLD ENGLISH'),
 ('7','Agmena'),
 ('10','Flexo');
 
-insert into inskription_linje(linje_nr, inskription_id, linje_type, inskription)
+insert into inskription(linje_nr, inskription_id, linje_type, inskription)
 values
 ('1','1','1','Hej med dig'),('2','1','1','min mor'),('3','1','1','og du er'),('4','1','1','den bedste hej'),('5','1','1','med dig far'),
 ('1','2','2','Anette Mi Stidsing'),('2','2','2','* 25. 6. 1992  + 1. 1. 2013'),('3','2','1','Niklas Renner Nielsen'),('4','2','1','* 25. 6. 1992  + 1. 1. 2013'),('5','2','2','Hvil i fred'),
@@ -98,38 +98,19 @@ values
 (null,'00003', '0031255685-00003','2013-04-30 13:50:32','Niklas Nielsen','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
 ('58350001','00004', '0028931093-00004','2013-04-30 14:50:32','Anette Stidsing','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
 
-insert into kontoudtog (kontoudtog_nr,dato,vedrørende,sendt_dato)
+insert into provisionsseddel (faktura_nr, provisions_nr,dato,vedrørende,overførelsesbetingelser)
 values
-('0','2013-04-30 11:50:32','Martin Hana','2013-04-30 11:20:32'),
-('1','2013-04-30 12:50:32','Thomas Nielsen','2013-04-30 12:20:32'),
-('2','2013-04-30 13:50:32','Niklas Nielsen','2013-04-30 13:20:32'),
-('3','2013-04-30 14:50:32','Anette Stidsing','2013-04-30 14:20:32');
+('0020332836-00001','00001','2013-05-01 14:20:32','1','1000'),
+('0050111211-00002','00002','2013-05-02 15:20:32','1','2000'),
+('0031255685-00003','00003','2013-05-03 16:20:32','1','3000'),
+('0028931093-00004','00004','2013-05-04 17:20:32','1','4000');
 
-insert into kontoudtog_linje (antal,linje_nr,beskrivelse,pris,kontoudtog_nr)
+insert into kontoudtog (provisions_nr, kontoudtog_nr,dato,vedrørende,sendt_dato)
 values
-('1','0','BeskrivelseA','1000','0'),
-('1','1','BeskrivelseB','2000','1'),
-('1','2','BeskrivelseC','3000','2'),
-('1','3','BeskrivelseD','4000','3');
-
-
-insert into provisionsseddel (provisions_nr,dato,vedrørende,overførelsesbetingelser)
-values
-('0','2013-05-01 14:20:32','1','1000'),
-('1','2013-05-02 15:20:32','1','2000'),
-('2','2013-05-03 16:20:32','1','3000'),
-('3','2013-05-04 17:20:32','1','4000');
-
-
-
-insert into provisionsseddel_linje(antal,linje_nr, beskrivelse,enhedspris,pris,provisions_nr)
-values
-('1','0','BeskrivelseA','100.60','100.60','0'),
-('1','1','BeskrivelseB','200.10','200.10','1'),
-('1','2','BeskrivelseC','300.25','300.25','2'),
-('1','3','BeskrivelseD','400.50','400.50','3');
-
-
+('00001','00001','2013-04-30 11:50:32','Martin Hana','2013-04-30 11:20:32'),
+('00002','00002','2013-04-30 12:50:32','Thomas Nielsen','2013-04-30 12:20:32'),
+('00003','00003','2013-04-30 13:50:32','Niklas Nielsen','2013-04-30 13:20:32'),
+('00004','00004','2013-04-30 14:50:32','Anette Stidsing','2013-04-30 14:20:32');
 
 insert into user (brugernavn,pw)
 values

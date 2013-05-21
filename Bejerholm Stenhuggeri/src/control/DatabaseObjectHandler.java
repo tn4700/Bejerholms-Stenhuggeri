@@ -7,8 +7,8 @@ package control;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Faktura;
-import model.Inskription;
 import model.Inskription_linje;
+import model.Inskription;
 import model.Kunde;
 import model.Ordre;
 import model.Postnummer;
@@ -147,16 +147,16 @@ public class DatabaseObjectHandler {
         db.setData("insert into tegntype (navn, pris_pr_tegn) values('" + navn + "','" + pris_pr_tegn + "');");
     }
 
-    public Inskription_linje getInskriptionLinje(int linje_nr, int inskription_id) throws SQLException {
-        Inskription_linje inskription_linje = null;
-        String sql = "select linje_nr, inskription_id, linje_type, inskription from inskription_linje "
+    public Inskription getInskription(int linje_nr, int inskription_id) throws SQLException {
+        Inskription inskription = null;
+        String sql = "select linje_nr, inskription_id, linje_type, inskription from inskription "
                 + "where linje_nr = " + linje_nr + " and inskription_id = " + inskription_id;
         ResultSet rs;
 
         rs = db.getData(sql);
 
         if (rs.next()) {
-            inskription_linje = new Inskription_linje(
+            inskription = new Inskription(
                     rs.getInt("linje_nr"),
                     rs.getInt("inskription_id"),
                     rs.getInt("linje_type"),
@@ -164,12 +164,12 @@ public class DatabaseObjectHandler {
         }
         rs.close();
 
-        return inskription_linje;
+        return inskription;
     }
 
     public int getMaxInskriptionLinje(int inskription_id) throws SQLException {
         int max = 0;
-        String sql = "select max(linje_nr) from inskription_linje where inskription_id =" + inskription_id;
+        String sql = "select max(linje_nr) from inskription where inskription_id =" + inskription_id;
         ResultSet rs;
         rs = db.getData(sql);
         if (rs.next()) {
@@ -178,17 +178,17 @@ public class DatabaseObjectHandler {
         return max;
     }
 
-    public Inskription getInskription(int id) throws SQLException {
-        Inskription inskription = null;
+    public Inskription_linje getInskriptionLinje(int id) throws SQLException {
+        Inskription_linje inskription_linje = null;
         int tegn_id = 0;
-        Inskription_linje inskription_linje;
-        String sql = "select id, skrifttype, tegn_id from inskription where id=" + id;
+        Inskription inskription;
+        String sql = "select id, skrifttype, tegn_id from inskription_linje where id=" + id;
         ResultSet rs;
 
         rs = db.getData(sql);
 
         if (rs.next()) {
-            inskription = new Inskription(
+            inskription_linje = new Inskription_linje(
                     null,
                     null,
                     rs.getInt("id"),
@@ -197,15 +197,15 @@ public class DatabaseObjectHandler {
         }
         rs.close();
 
-        inskription.setTegntype(getTegntype(tegn_id));
+        inskription_linje.setTegntype(getTegntype(tegn_id));
 
-        for (int i = 1; i <= getMaxInskriptionLinje(inskription.getId()); i++) {
-            inskription_linje = getInskriptionLinje(i, inskription.getId());
-            inskription.addInskription_linje(inskription_linje);
-            inskription_linje = null;
+        for (int i = 1; i <= getMaxInskriptionLinje(inskription_linje.getId()); i++) {
+            inskription = getInskription(i, inskription_linje.getId());
+            inskription_linje.addInskription_linje(inskription);
+            inskription = null;
         }
 
-        return inskription;
+        return inskription_linje;
     }
     
     
@@ -343,7 +343,7 @@ public class DatabaseObjectHandler {
         if (linjeType == 1) {
             vare_linje.setVare(getVare(id));
         } else if (linjeType == 2) {
-            vare_linje.setInskription(getInskription(id));
+            vare_linje.setInskription_linje(getInskriptionLinje(id));
         } else if (linjeType == 3) {
             vare_linje.setTom_linje(getTomLinje(id));
         }

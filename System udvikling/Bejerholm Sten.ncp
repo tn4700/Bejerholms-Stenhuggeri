@@ -87,13 +87,12 @@
       <Entity type="Class">
         <Name>Provisionsseddel</Name>
         <Access>Public</Access>
-        <Location left="1216" top="796" />
+        <Location left="1296" top="752" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int provisions_nr</Member>
         <Member type="Field">datetime dato</Member>
         <Member type="Field">String vedrørende</Member>
-        <Member type="Field">String overførselsbetingelser</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -121,7 +120,7 @@
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
-        <Name>Inskription</Name>
+        <Name>Inskription_linje</Name>
         <Access>Public</Access>
         <Location left="511" top="392" />
         <Size width="162" height="216" />
@@ -132,7 +131,7 @@
       <Entity type="Class">
         <Name>Kontoudtog</Name>
         <Access>Public</Access>
-        <Location left="1416" top="796" />
+        <Location left="1556" top="752" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int kontoudtog_nr</Member>
@@ -200,7 +199,7 @@
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
-        <Name>Inskription_linje</Name>
+        <Name>Inskription</Name>
         <Access>Public</Access>
         <Location left="752" top="544" />
         <Size width="162" height="216" />
@@ -255,16 +254,6 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="4" second="5">
-        <Label>
-        </Label>
-        <StartOrientation>Vertical</StartOrientation>
-        <EndOrientation>Vertical</EndOrientation>
-        <Direction>Bidirectional</Direction>
-        <AssociationType>Association</AssociationType>
-        <StartMultiplicity>1</StartMultiplicity>
-        <EndMultiplicity>1</EndMultiplicity>
-      </Relationship>
-      <Relationship type="Association" first="4" second="9">
         <Label>
         </Label>
         <StartOrientation>Vertical</StartOrientation>
@@ -381,6 +370,20 @@
         <AssociationType>Association</AssociationType>
         <StartMultiplicity>1</StartMultiplicity>
         <EndMultiplicity>*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="9" second="5">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1512</X>
+          <Y>867</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
     </Relationships>
   </ProjectItem>

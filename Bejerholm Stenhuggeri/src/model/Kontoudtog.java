@@ -16,14 +16,14 @@ public class Kontoudtog {
     private Timestamp dato;
     private String vedrørende;
     private Timestamp sendt_dato;
-    private Faktura faktura;
-
-    public Kontoudtog(int kontoudtog_nr, Timestamp dato, String vedrørende, Timestamp sendt_dato, Faktura faktura ) {
+    private Provisionsseddel provisionsseddel;
+    
+    public Kontoudtog(int kontoudtog_nr, Timestamp dato, String vedrørende, Timestamp sendt_dato, Provisionsseddel provisionsseddel) {
         this.kontoudtog_nr = kontoudtog_nr;
         this.dato = dato;
         this.vedrørende = vedrørende;
         this.sendt_dato = sendt_dato;
-        this.faktura = faktura;
+        this.provisionsseddel = provisionsseddel;
     }
 
     public int getKontoudtog_nr() {
@@ -58,11 +58,11 @@ public class Kontoudtog {
         this.sendt_dato = sendt_dato;
     }
 
-    public Faktura getFaktura() {
-        return faktura;
+    public Provisionsseddel getProvisionsseddel() {
+        return provisionsseddel;
     }
 
-    public void setFaktura(Faktura faktura) {
-        this.faktura = faktura;
+    public void setProvisionsseddel(Provisionsseddel provisionsseddel) {
+        this.provisionsseddel = provisionsseddel;
     }
 }
