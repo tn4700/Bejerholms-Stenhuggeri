@@ -1157,7 +1157,7 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     }//GEN-LAST:event_jTextField_DBnavnActionPerformed
 
     private void jButton_DBconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DBconnectActionPerformed
-        // Opdater db info
+        // sætter db info
         db.setDbNavn(jTextField_DBnavn.getText());
         db.setHost(jTextField_Host.getText());
         db.setPort(jTextField_Port.getText());
