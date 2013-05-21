@@ -7,6 +7,7 @@ package control;
 import com.sun.org.apache.xerces.internal.impl.dv.xs.DateTimeDV;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import model.Faktura;
 import model.Inskription_linje;
 import model.Inskription;
@@ -324,8 +325,6 @@ public class DatabaseObjectHandler {
         return ordre;
     }
 
-    public void createOrdre(int tlf, String ordre_nr, boolean ordretype, ordredato, ordrestatus, leveringdato, afhentningsdato, bemærkning, leveringsadresse, kirkegård, afdeling, afdødnavn, række, nummer, plads_navne, gravType) {
-    }
 
     public Vare_linje getVareLinje(int linje_nr, String ordre_nr) throws SQLException {
         Vare_linje vare_linje = null;
