@@ -173,7 +173,6 @@ public class OpretFaktura {
                 antal = 0;
                 for (int j = 0; j < vare_linje.getInskription().getInskription_linje_liste().size(); j++) {
                     String characters = vare_linje.getInskription().getInskription_linje_liste().get(j).getInskription().replaceAll(" ", "");
-                    System.out.println(characters);
                     if(vare_linje.getInskription().getInskription_linje_liste().get(j).getLinje_type()==1){
                     antal += characters.length();
                     }

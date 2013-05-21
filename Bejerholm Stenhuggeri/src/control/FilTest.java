@@ -22,9 +22,11 @@ public class FilTest {
      */
     public static void main(String[] args) {
 
+        DBConnection db = null;
         Faktura faktura = null;
+        
         try {
-        DBConnection db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
+        db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
         DatabaseObjectHandler dbhandler = new DatabaseObjectHandler(db);
         faktura = dbhandler.getFaktura("0020332836-00001");
         } catch (SQLException ex) {
@@ -34,6 +36,9 @@ public class FilTest {
         }
                 //Faktura laves til pdf
         try {
+            ExportToCSV export = new ExportToCSV(db);
+            export.export();
+            
             OpretFaktura opretFaktura = new OpretFaktura(faktura);
             opretFaktura.genererFaktura("FakturaTest.pdf");
 
