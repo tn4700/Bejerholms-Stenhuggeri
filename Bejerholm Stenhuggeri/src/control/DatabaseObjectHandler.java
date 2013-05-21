@@ -4,6 +4,7 @@
  */
 package control;
 
+import com.sun.org.apache.xerces.internal.impl.dv.xs.DateTimeDV;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Faktura;
@@ -48,7 +49,9 @@ public class DatabaseObjectHandler {
     }
 
     public void createPostnummer(int post_nr, String bynavn) throws SQLException {
-        db.setData("insert into postnummer(post_nr, byNavn) values ('" + post_nr + "','" + bynavn + "');");
+        if (getPostnummer(post_nr) == null) {
+            db.setData("insert into postnummer(post_nr, byNavn) values ('" + post_nr + "','" + bynavn + "');");
+        }
     }
 
     public Kunde getKunde(int tlf) throws SQLException {
@@ -73,8 +76,13 @@ public class DatabaseObjectHandler {
         return kunde;
     }
 
-    public void createKunde(String fornavn, String efternavn, String adresse, int tlf, int postnr) throws SQLException {
-        db.setData("insert into kunde(fornavn, efternavn, adresse, tlf, post_nr) values('" + fornavn + "','" + efternavn + "','" + adresse + "','" + tlf + "','" + postnr + "');");
+    public void createKunde(String fornavn, String efternavn, String adresse, int tlf, Postnummer postnr) throws SQLException {
+
+        if (getKunde(tlf) == null) {
+            db.setData("insert into kunde(fornavn, efternavn, adresse, tlf, post_nr) values('" + fornavn + "','" + efternavn + "','" + adresse + "','" + tlf + "','" + postnr + "');");
+        }
+
+
     }
 
     public Samarbejdspartner getSamarbejdspartner(int tlf) throws SQLException {
@@ -99,12 +107,15 @@ public class DatabaseObjectHandler {
         }
         rs.close();
         partner.setPost_nr(getPostnummer(post_nr));
-
         return partner;
     }
 
     public void createSamarbejdspartner(String firmanavn, String adresse, int tlf, int cvr_nr, int registrerings_nr, int konto_nr, String bank, int postnr) throws SQLException {
-        db.setData("insert into samarbejdspartner(firmanavn,adresse,tlf,cvr_nr,registrerings_nr,konto_nr,bank,postnr) values('" + firmanavn + "','" + adresse + "','" + tlf + "','" + cvr_nr + "','" + registrerings_nr + "','" + konto_nr + "','" + bank + "','" + postnr + "');");
+        if (getSamarbejdspartner(tlf) == null) {
+            db.setData("insert into samarbejdspartner(firmanavn,adresse,tlf,cvr_nr,registrerings_nr,konto_nr,bank,postnr) "
+                    + "values('" + firmanavn + "','" + adresse + "','" + tlf + "','"
+                    + "" + cvr_nr + "','" + registrerings_nr + "','" + konto_nr + "','" + bank + "','" + postnr + "');");
+        }
     }
 
     public Tom_linje getTomLinje(int id) throws SQLException {
@@ -207,8 +218,6 @@ public class DatabaseObjectHandler {
 
         return inskription_linje;
     }
-    
-    
 
     public Varegruppe getVareGruppe(int grp_nr) throws SQLException {
         Varegruppe varegruppe = null;
@@ -228,7 +237,7 @@ public class DatabaseObjectHandler {
         return varegruppe;
     }
 
-    public void createVaregruppe(String navn) throws SQLException {
+    public void createVaregruppe(int grp_nr, String navn) throws SQLException {
         db.setData("insert into varegruppe(navn) values ('" + navn + "');");
     }
 
@@ -261,6 +270,12 @@ public class DatabaseObjectHandler {
         return vare;
     }
 
+    public void createVare(String navn, int højde, int bredde, double indkøbspris, double salgspris, String typenavn, String overflade, boolean dekoration, int gruppe_nr) throws SQLException {
+        db.setData("insert into vare(navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade,"
+                + "dekoration, gruppe_nr) values ('" + navn + "','" + højde + "','" + bredde + "','" + indkøbspris + "','" + salgspris + "','" + typenavn + "','"
+                + "" + overflade + "','" + dekoration + "','" + gruppe_nr + "');");
+    }
+
     public int getMaxVareLinje(String ordre_nr) throws SQLException {
         int max = 0;
         String sql = "select max(linje_nr) from vare_linje where ordre_nr = '" + ordre_nr + "'";
@@ -276,17 +291,17 @@ public class DatabaseObjectHandler {
         Ordre ordre = null;
         Vare_linje vare_linje = null;
         int tlf = 0;
-        String sql = "select tlf, ordre_nr,ordretype,ordredato,ordrestatus,leveringdato,afhentningsdato,bemærkning,"
+        String sql = "select tlf, ordre_nr,ordretype,ordredato,ordrestatus,leveringdato,afhentningsdato,bemærkning,bemærkning_ekstra,"
                 + "leveringsadresse,kirkegård,afdeling,afdødnavn,række,nummer,plads_navne,gravType from ordre where ordre_nr =" + ordre_nr;
         ResultSet rs;
         rs = db.getData(sql);
-
         if (rs.next()) {
             ordre = new Ordre(rs.getString("ordre_nr"),
                     rs.getBoolean("ordretype"),
                     rs.getTimestamp("leveringdato"),
                     rs.getTimestamp("afhentningsdato"),
                     rs.getString("bemærkning"),
+                    rs.getString("bemærkning_ekstra"),
                     rs.getString("leveringsadresse"),
                     rs.getString("kirkegård"),
                     rs.getInt("afdeling"),
@@ -299,7 +314,6 @@ public class DatabaseObjectHandler {
             tlf = rs.getInt("tlf");
         }
         rs.close();
-
         ordre.setKunde(getKunde(tlf));
         int max = getMaxVareLinje(ordre.getOrdre_nr());
         for (int i = 1; i <= max; i++) {
@@ -307,8 +321,10 @@ public class DatabaseObjectHandler {
             ordre.addVare_linje(vare_linje);
             vare_linje = null;
         }
-
         return ordre;
+    }
+
+    public void createOrdre(int tlf, String ordre_nr, boolean ordretype, ordredato, ordrestatus, leveringdato, afhentningsdato, bemærkning, leveringsadresse, kirkegård, afdeling, afdødnavn, række, nummer, plads_navne, gravType) {
     }
 
     public Vare_linje getVareLinje(int linje_nr, String ordre_nr) throws SQLException {
@@ -360,25 +376,25 @@ public class DatabaseObjectHandler {
                 + "where faktura_nr = '" + faktura_nr + "';";
 
         ResultSet rs = db.getData(sql);
-        
-        if(rs.next()){
+
+        if (rs.next()) {
             faktura = new Faktura(rs.getString("faktura_nr"),
-            rs.getTimestamp("faktureringsdato"),
-            rs.getString("vedrørende"),
-            rs.getTimestamp("sendt_dato"),
-            rs.getString("faktureringsadresse"),
-            rs.getBoolean("fakturatype"),
-            rs.getBoolean("betalingsstatus"),
-            null,
-            null);
+                    rs.getTimestamp("faktureringsdato"),
+                    rs.getString("vedrørende"),
+                    rs.getTimestamp("sendt_dato"),
+                    rs.getString("faktureringsadresse"),
+                    rs.getBoolean("fakturatype"),
+                    rs.getBoolean("betalingsstatus"),
+                    null,
+                    null);
             ordre_nr = rs.getString("ordre_nr");
             tlf = rs.getInt("bedemand_tlf");
         }
         rs.close();
-        
+
         faktura.setOrdre(getOrdre(ordre_nr));
-        if(tlf!=0){
-        faktura.setBedemand(getSamarbejdspartner(tlf));
+        if (tlf != 0) {
+            faktura.setBedemand(getSamarbejdspartner(tlf));
         }
         return faktura;
     }
