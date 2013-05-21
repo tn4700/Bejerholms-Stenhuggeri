@@ -37,7 +37,6 @@ public class FilTest {
                 //Faktura laves til pdf
         try {
             ExportToCSV export = new ExportToCSV(db);
-            export.export();
             
             OpretFaktura opretFaktura = new OpretFaktura(faktura);
             opretFaktura.genererFaktura("FakturaTest.pdf");
