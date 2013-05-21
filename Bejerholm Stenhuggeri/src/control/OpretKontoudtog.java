@@ -90,8 +90,8 @@ public class OpretKontoudtog {
 
         //Indsættelse af data om kundenavn og faktureringsadresse
         createContent(cb, btFont, 12, black, 25, 660, "Faktureres til:", left);
-        String firmanavn = kontoudtog.getFaktura().getBedemand().getFirmanavn();
-        createContent(cb, tFont, 12, black, 130, 660, firmanavn, left);
+    //  String firmanavn = kontoudtog.getFaktura().getBedemand().getFirmanavn();
+    //  createContent(cb, tFont, 12, black, 130, 660, firmanavn, left);
         String adresse = faktura.getBedemand().getAdresse();
         createContent(cb, tFont, 12, black, 130, 644, adresse, left);
         String postnrby = faktura.getBedemand().getPost_nr().getPost_nr() + " " + faktura.getBedemand().getPost_nr().getPost_nr();

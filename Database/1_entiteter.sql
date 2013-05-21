@@ -29,7 +29,8 @@ ordredato				datetime,
 ordrestatus				int,
 leveringdato            datetime,   
 afhentningsdato         datetime,
-bemærkning              text,            
+bemærkning              text, 
+bemærkning_ekstra		text,         
 leveringsadresse        varchar(100),    # Adresse + post nr + by
 kirkegård				varchar(25),
 afdeling				int,
@@ -152,15 +153,6 @@ create table user
 brugernavn               varchar(25),
 pw		                 varchar(25),
 primary key(brugernavn)
-) engine = innodb;
-
-drop table if exists konstant;
-create table konstant
-(
-nr               		int,
-navn	                varchar(25),
-procentsats				double,
-primary key(nr)
 ) engine = innodb;
 
 

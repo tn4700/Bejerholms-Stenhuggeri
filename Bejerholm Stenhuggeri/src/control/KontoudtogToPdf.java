@@ -68,7 +68,7 @@ public class KontoudtogToPdf {
         Faktura faktura = new Faktura(faktura_nr, currentTime, "Torsten vedrørendesen", currentTime, "Faktureringsvej 15", true, false, ordre, null);
         Samarbejdspartner bedemand = new Samarbejdspartner("Firmanavn", "Adresse", 12345678, 123456, 6070, 4825318, "Boss Banken", postnummer);
         faktura.setBedemand(bedemand);
-        Kontoudtog kontoudtog = new Kontoudtog(123, currentTime, "Vedrørende", currentTime, faktura);
+        /*Kontoudtog kontoudtog = new Kontoudtog(123, currentTime, "Vedrørende", currentTime, faktura);
         
          try {
             OpretKontoudtog opretKontoudtog = new OpretKontoudtog(faktura,kontoudtog);
@@ -83,7 +83,7 @@ public class KontoudtogToPdf {
             ex.printStackTrace();
         } catch (DocumentException ex) {
             ex.printStackTrace();
-        }
+        }*/
 
         
         // TODO code application logic here

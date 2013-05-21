@@ -20,6 +20,7 @@ public class Ordre {
     private Timestamp leveringsdato;
     private Timestamp afhentningsdato;
     private String bemærkning;
+    private String bemærkning_ekstra;
     private String leveringsadresse;
     private String kirkegård;
     private int afdeling;
@@ -36,6 +37,7 @@ public class Ordre {
             Timestamp leveringsdato,
             Timestamp afhentningsdato,
             String bemærkning,
+            String bemærkning_ekstra,
             String leveringsadresse,
             String kirkegård,
             int afdeling,
@@ -53,6 +55,7 @@ public class Ordre {
         this.leveringsdato = leveringsdato;
         this.afhentningsdato = afhentningsdato;
         this.bemærkning = bemærkning;
+        this.bemærkning_ekstra = bemærkning_ekstra;
         this.leveringsadresse = leveringsadresse;
         this.kirkegård = kirkegård;
         this.afdeling = afdeling;
@@ -74,6 +77,14 @@ public class Ordre {
 
     public void setVare_linjeListe(ArrayList<Vare_linje> vare_linjeListe) {
         this.vare_linjeListe = vare_linjeListe;
+    }
+
+    public String getBemærkning_ekstra() {
+        return bemærkning_ekstra;
+    }
+
+    public void setBemærkning_ekstra(String bemærkning_ekstra) {
+        this.bemærkning_ekstra = bemærkning_ekstra;
     }
 
     public String getOrdre_nr() {

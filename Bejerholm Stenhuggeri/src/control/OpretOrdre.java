@@ -324,7 +324,8 @@ public class OpretOrdre {
         cb.stroke();
         
         //Indsættelse af bemærkninger
-        createContent(cb, tFont, 12, black, 29, 44, ordre.getBemærkning(), left);        
+        createContent(cb, tFont, 12, black, 29, 44, ordre.getBemærkning(), left);
+        createContent(cb, tFont, 12, black, 29, 24, ordre.getBemærkning_ekstra(), left);
 
         //Lukker dokument og skriver alt det data der er blevet indsat til PDF-filen
         doc.close();

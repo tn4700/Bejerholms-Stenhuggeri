@@ -30,12 +30,12 @@ values
 ('1','granitplade','200','300','3000','10000','granitplade','overflade 3',false),
 ('2','fugl 85328v',null,null,'450','900','Strassacker Broncedekoration',null,true);
 
-insert into ordre (tlf, ordre_nr,ordretype,ordredato,ordrestatus,leveringdato,afhentningsdato,bemærkning,leveringsadresse,kirkegård,afdeling,afdødnavn,række,nummer,plads_navne,gravType)
+insert into ordre (tlf, ordre_nr,ordretype,ordredato,ordrestatus,leveringdato,afhentningsdato,bemærkning, bemærkning_ekstra,leveringsadresse,kirkegård,afdeling,afdødnavn,række,nummer,plads_navne,gravType)
 values
-('20332836','00001',true,'2013-04-30 12:50:32','1','2013-05-10 12:50:32','2013-05-15 12:50:32','Bemærkning','Østrering vej 40 1. tv','Vor Frue Kirke','10','Gunner','10','1','1',true),
-('50111211','00002',true,'2013-04-1 13:00:00','1','2013-05-11 13:00:00','2013-05-16 13:00:00','Bemærkning','Østre Ringvej 49 2. TV','Vor Frue Kirke','11','Gunner','10','2','1',true),
-('31255685','00003',true,'2013-04-2 13:00:00','1','2013-06-11 13:00:00','2013-05-17 13:00:00','Bemærkning','Fiktivvej 152','Kirkegård','12','Gunner','11','1','1',true),
-('28931093','00004',true,'2013-04-2 13:00:00','1','2013-06-11 13:00:00','2013-05-18 13:00:00','Bemærkning','Eventyrvej 27','Kirkegård','13','Gunner','11','2','1',true);
+('20332836','00001',true,'2013-04-30 12:50:32','1','2013-05-10 12:50:32','2013-05-15 12:50:32','Bemærkning','Bemærkning_ekstra','Østrering vej 40 1. tv','Vor Frue Kirke','10','Gunner','10','1','1',true),
+('50111211','00002',true,'2013-04-1 13:00:00','1','2013-05-11 13:00:00','2013-05-16 13:00:00','Bemærkning','Bemærkning_ekstra','Østre Ringvej 49 2. TV','Vor Frue Kirke','11','Gunner','10','2','1',true),
+('31255685','00003',true,'2013-04-2 13:00:00','1','2013-06-11 13:00:00','2013-05-17 13:00:00','Bemærkning','Bemærkning_ekstra','Fiktivvej 152','Kirkegård','12','Gunner','11','1','1',true),
+('28931093','00004',true,'2013-04-2 13:00:00','1','2013-06-11 13:00:00','2013-05-18 13:00:00','Bemærkning','Bemærkning_ekstra','Eventyrvej 27','Kirkegård','13','Gunner','11','2','1',true);
 
 insert into tegntype (navn,pris_pr_tegn)
 values
@@ -116,7 +116,3 @@ insert into user (brugernavn,pw)
 values
 ('martinhana','martin10'),
 ('Mahias BejerHolm','Mathias20');
-
-insert into konstant (nr,navn,procentsats)
-values
-('1','Miljøafgift','2.5');
