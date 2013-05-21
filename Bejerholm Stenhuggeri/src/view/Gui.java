@@ -4,7 +4,11 @@
  */
 package view;
 
+
+import control.DBConnection;
 import java.awt.CardLayout;
+import java.awt.Color;
+
 
 /**
  *
@@ -13,6 +17,7 @@ import java.awt.CardLayout;
 public class Gui extends javax.swing.JFrame {
 
     private CardLayout layout;
+    private DBConnection db;
 
     /**
      * Creates new form Gui
@@ -155,6 +160,19 @@ public class Gui extends javax.swing.JFrame {
         jComboBox7 = new javax.swing.JComboBox();
         jTextField1 = new javax.swing.JTextField();
         jButton12 = new javax.swing.JButton();
+        jPanel_DBconn = new javax.swing.JPanel();
+        jLabe_DBnavn = new javax.swing.JLabel();
+        jLabel_Port = new javax.swing.JLabel();
+        jLabel_Host = new javax.swing.JLabel();
+        jLabel_Brugernavn = new javax.swing.JLabel();
+        jLabel_Password = new javax.swing.JLabel();
+        jTextField_DBnavn = new javax.swing.JTextField();
+        jTextField_Port = new javax.swing.JTextField();
+        jTextField_Host = new javax.swing.JTextField();
+        jTextField_Brugernavn = new javax.swing.JTextField();
+        jTextField_Password = new javax.swing.JTextField();
+        jButton_DBconnect = new javax.swing.JButton();
+        jLabel_ConnFejlbesked = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -223,7 +241,7 @@ public class Gui extends javax.swing.JFrame {
                 .addComponent(jButton_LynSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(137, 137, 137)
                 .addComponent(jButton_AlmSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         jPanel_SalgLayout.setVerticalGroup(
             jPanel_SalgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +250,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel_SalgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_LynSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_AlmSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Salg, "card_Salg");
@@ -326,7 +344,7 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField12)
                             .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,7 +368,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel_OrdreSalg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 22, 670, 140));
@@ -401,7 +419,7 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addGap(18, 18, 18)
                             .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,7 +436,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jPanel_OrdreSalg.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 250, 180));
@@ -482,7 +500,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,7 +525,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jPanel_OrdreSalg.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 390, 180));
@@ -606,7 +624,7 @@ public class Gui extends javax.swing.JFrame {
                                         .addComponent(jTextField23)))
                                 .addComponent(jLabel25)
                                 .addComponent(jScrollPane3)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 84, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -673,7 +691,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel_Ordre_LinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7)
                     .addComponent(jButton5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Ordre_Linje, "card_Ordre_Linje");
@@ -699,7 +717,7 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(jLabel32)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -731,7 +749,7 @@ public class Gui extends javax.swing.JFrame {
                     .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addComponent(jLabel32)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_OrdreBekræftigelse, "card_OrdreBekræftigelse");
@@ -776,12 +794,12 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(jTextField3)
                             .addComponent(jTextField4)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(304, Short.MAX_VALUE))
+                .addContainerGap(377, Short.MAX_VALUE))
         );
         jPanel_KonstanterLayout.setVerticalGroup(
             jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_KonstanterLayout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+                .addContainerGap(103, Short.MAX_VALUE)
                 .addGroup(jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -826,7 +844,7 @@ public class Gui extends javax.swing.JFrame {
                 .addComponent(jButton20)
                 .addGap(18, 18, 18)
                 .addComponent(jButton21)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         jPanel_AdministrationLayout.setVerticalGroup(
             jPanel_AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -836,7 +854,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jButton19)
                     .addComponent(jButton20)
                     .addComponent(jButton21))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(325, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Administration, "card_Administration");
@@ -933,7 +951,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel28))
                     .addComponent(jButton11))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel_LagerLayout.setVerticalGroup(
             jPanel_LagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -951,7 +969,7 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(jPanel_LagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton9)
                             .addComponent(jButton11))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Lager, "card_Lager");
@@ -960,11 +978,11 @@ public class Gui extends javax.swing.JFrame {
         jPanel_LagerTilføj.setLayout(jPanel_LagerTilføjLayout);
         jPanel_LagerTilføjLayout.setHorizontalGroup(
             jPanel_LagerTilføjLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+            .addGap(0, 863, Short.MAX_VALUE)
         );
         jPanel_LagerTilføjLayout.setVerticalGroup(
             jPanel_LagerTilføjLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGap(0, 490, Short.MAX_VALUE)
         );
 
         jPanel_CardMain.add(jPanel_LagerTilføj, "card_LagerTilføj");
@@ -983,7 +1001,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jComboBox7, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField1)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(338, Short.MAX_VALUE))
+                .addContainerGap(418, Short.MAX_VALUE))
         );
         jPanel_SøgLayout.setVerticalGroup(
             jPanel_SøgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -994,10 +1012,70 @@ public class Gui extends javax.swing.JFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton12)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Søg, "card_Søg");
+
+        jPanel_DBconn.setLayout(null);
+
+        jLabe_DBnavn.setText("Databasenavn");
+        jPanel_DBconn.add(jLabe_DBnavn);
+        jLabe_DBnavn.setBounds(176, 65, 90, 20);
+
+        jLabel_Port.setText("Port");
+        jPanel_DBconn.add(jLabel_Port);
+        jLabel_Port.setBounds(458, 65, 90, 20);
+
+        jLabel_Host.setText("Host");
+        jPanel_DBconn.add(jLabel_Host);
+        jLabel_Host.setBounds(176, 142, 90, 20);
+
+        jLabel_Brugernavn.setText("Brugernavn");
+        jPanel_DBconn.add(jLabel_Brugernavn);
+        jLabel_Brugernavn.setBounds(458, 142, 90, 20);
+
+        jLabel_Password.setText("Password");
+        jPanel_DBconn.add(jLabel_Password);
+        jLabel_Password.setBounds(176, 220, 90, 20);
+
+        jTextField_DBnavn.setText("jTextField6");
+        jTextField_DBnavn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_DBnavnActionPerformed(evt);
+            }
+        });
+        jPanel_DBconn.add(jTextField_DBnavn);
+        jTextField_DBnavn.setBounds(176, 90, 140, 30);
+
+        jTextField_Port.setText("jTextField27");
+        jPanel_DBconn.add(jTextField_Port);
+        jTextField_Port.setBounds(456, 90, 140, 30);
+
+        jTextField_Host.setText("jTextField28");
+        jPanel_DBconn.add(jTextField_Host);
+        jTextField_Host.setBounds(176, 164, 140, 30);
+
+        jTextField_Brugernavn.setText("jTextField29");
+        jPanel_DBconn.add(jTextField_Brugernavn);
+        jTextField_Brugernavn.setBounds(456, 164, 140, 30);
+
+        jTextField_Password.setText("jTextField30");
+        jPanel_DBconn.add(jTextField_Password);
+        jTextField_Password.setBounds(176, 250, 140, 30);
+
+        jButton_DBconnect.setText("Connect");
+        jButton_DBconnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_DBconnectActionPerformed(evt);
+            }
+        });
+        jPanel_DBconn.add(jButton_DBconnect);
+        jButton_DBconnect.setBounds(320, 380, 170, 40);
+        jPanel_DBconn.add(jLabel_ConnFejlbesked);
+        jLabel_ConnFejlbesked.setBounds(370, 320, 0, 0);
+
+        jPanel_CardMain.add(jPanel_DBconn, "card13");
 
         jPanel1.add(jPanel_CardMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
@@ -1013,7 +1091,7 @@ public class Gui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1077,6 +1155,27 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
  layout.show(jPanel_CardMain, "card_Søg");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SøgActionPerformed
+
+    private void jTextField_DBnavnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_DBnavnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_DBnavnActionPerformed
+
+    private void jButton_DBconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DBconnectActionPerformed
+        // Opdater db info
+        db.setDbNavn(jTextField_DBnavn.getText());
+        db.setHost(jTextField_Host.getText());
+        db.setPort(jTextField_Port.getText());
+        db.setUser(jTextField_Brugernavn.getText());
+        db.setPw(jTextField_Password.getText());
+        db.connect();
+        if(db.isConnected()){
+            layout.show(jPanel_Hovedmenu, "Hovedmenu");
+        }else{
+            jLabel_ConnFejlbesked.setForeground(Color.red);
+            jLabel_ConnFejlbesked.setText("Forbindelsen fejlede - kontroller felterne");
+        }
+        
+    }//GEN-LAST:event_jButton_DBconnectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1143,6 +1242,7 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton_Administration;
     private javax.swing.JButton jButton_AlmSalg;
+    private javax.swing.JButton jButton_DBconnect;
     private javax.swing.JButton jButton_Lager;
     private javax.swing.JButton jButton_LynSalg;
     private javax.swing.JButton jButton_Salg;
@@ -1157,6 +1257,7 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JComboBox jComboBox6;
     private javax.swing.JComboBox jComboBox7;
+    private javax.swing.JLabel jLabe_DBnavn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1193,6 +1294,11 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_Brugernavn;
+    private javax.swing.JLabel jLabel_ConnFejlbesked;
+    private javax.swing.JLabel jLabel_Host;
+    private javax.swing.JLabel jLabel_Password;
+    private javax.swing.JLabel jLabel_Port;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1200,6 +1306,7 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel_Administration;
     private javax.swing.JPanel jPanel_CardMain;
+    private javax.swing.JPanel jPanel_DBconn;
     private javax.swing.JPanel jPanel_Hovedmenu;
     private javax.swing.JPanel jPanel_Konstanter;
     private javax.swing.JPanel jPanel_Lager;
@@ -1244,6 +1351,11 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextField_Brugernavn;
+    private javax.swing.JTextField jTextField_DBnavn;
+    private javax.swing.JTextField jTextField_Host;
+    private javax.swing.JTextField jTextField_Password;
+    private javax.swing.JTextField jTextField_Port;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }
