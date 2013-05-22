@@ -4,11 +4,13 @@
  */
 package view;
 
-
 import control.DBConnection;
+import control.DatabaseObjectHandler;
 import java.awt.CardLayout;
 import java.awt.Color;
-
+import java.util.ArrayList;
+import model.Vare;
+import model.Varegruppe;
 
 /**
  *
@@ -18,13 +20,28 @@ public class Gui extends javax.swing.JFrame {
 
     private CardLayout layout;
     private DBConnection db;
+    private DatabaseObjectHandler dbhandler;
+    private ArrayList<Varegruppe> varegrup_list;
+    private ArrayList<Vare> vare_list;
+    private ArrayList<Vare> valgteVare_lynsalg;
 
     /**
      * Creates new form Gui
      */
     public Gui() {
         initComponents();
+        try {
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "1234");
+        } catch (Exception ex) {
+            System.out.println("fejl: " + ex);
+        }
+        dbhandler = new DatabaseObjectHandler(db);
         layout = (CardLayout) (jPanel_CardMain.getLayout());
+        valgteVare_lynsalg = new ArrayList<>();
+        
+        hentlister();
+        udskrivVaregrp();
+
     }
 
     /**
@@ -55,6 +72,10 @@ public class Gui extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaLynsalg = new javax.swing.JTextArea();
         jButtonLynsalgVidere = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextAreaVareInfo = new javax.swing.JTextArea();
+        jComboBoxfjernValgtvare_lynsalg = new javax.swing.JComboBox();
+        jButton_fjernValgtVare_lynsalg = new javax.swing.JButton();
         jPanel_OrdreSalg = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -118,6 +139,14 @@ public class Gui extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jComboBox5 = new javax.swing.JComboBox();
         jButton8 = new javax.swing.JButton();
+        jPanel_LynSalgBekræftigelse = new javax.swing.JPanel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jButton22 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
+        jButton25 = new javax.swing.JButton();
+        jButton26 = new javax.swing.JButton();
+        jLabel37 = new javax.swing.JLabel();
         jPanel_OrdreBekræftigelse = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         jButton13 = new javax.swing.JButton();
@@ -257,7 +286,11 @@ public class Gui extends javax.swing.JFrame {
 
         jPanel_LynSalg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox_Lynsalgvaregruppe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_Lynsalgvaregruppe.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox_LynsalgvaregruppeItemStateChanged(evt);
+            }
+        });
         jComboBox_Lynsalgvaregruppe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_LynsalgvaregruppeActionPerformed(evt);
@@ -265,10 +298,19 @@ public class Gui extends javax.swing.JFrame {
         });
         jPanel_LynSalg.add(jComboBox_Lynsalgvaregruppe, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 120, -1));
 
-        jComboBoxLynsalgVare.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxLynsalgVare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxLynsalgVareActionPerformed(evt);
+            }
+        });
         jPanel_LynSalg.add(jComboBoxLynsalgVare, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 120, -1));
 
         jButtonLynsalgTilføj.setText("Tilføj");
+        jButtonLynsalgTilføj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLynsalgTilføjActionPerformed(evt);
+            }
+        });
         jPanel_LynSalg.add(jButtonLynsalgTilføj, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 90, -1));
 
         jLabel1.setText("Varegruppe: ");
@@ -284,7 +326,33 @@ public class Gui extends javax.swing.JFrame {
         jPanel_LynSalg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 390, 210));
 
         jButtonLynsalgVidere.setText("Videre");
+        jButtonLynsalgVidere.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLynsalgVidereActionPerformed(evt);
+            }
+        });
         jPanel_LynSalg.add(jButtonLynsalgVidere, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, -1, -1));
+
+        jTextAreaVareInfo.setColumns(20);
+        jTextAreaVareInfo.setRows(5);
+        jScrollPane5.setViewportView(jTextAreaVareInfo);
+
+        jPanel_LynSalg.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 170, 210));
+
+        jComboBoxfjernValgtvare_lynsalg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxfjernValgtvare_lynsalgActionPerformed(evt);
+            }
+        });
+        jPanel_LynSalg.add(jComboBoxfjernValgtvare_lynsalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 110, 20));
+
+        jButton_fjernValgtVare_lynsalg.setText("Fjern");
+        jButton_fjernValgtVare_lynsalg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_fjernValgtVare_lynsalgActionPerformed(evt);
+            }
+        });
+        jPanel_LynSalg.add(jButton_fjernValgtVare_lynsalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
 
         jPanel_CardMain.add(jPanel_LynSalg, "card_LynSalg");
 
@@ -701,6 +769,64 @@ public class Gui extends javax.swing.JFrame {
 
         jPanel_CardMain.add(jPanel_Ordre_Linje, "card_Ordre_Linje");
 
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jButton22.setText("Godkend");
+
+        jButton23.setText("Ændre");
+
+        jButton24.setText("Annuller");
+
+        jButton25.setText("Print");
+
+        jButton26.setText("Email");
+
+        jLabel37.setText("Her vises et eksempel af faktura hvor Bejerholm er kunde");
+
+        javax.swing.GroupLayout jPanel_LynSalgBekræftigelseLayout = new javax.swing.GroupLayout(jPanel_LynSalgBekræftigelse);
+        jPanel_LynSalgBekræftigelse.setLayout(jPanel_LynSalgBekræftigelseLayout);
+        jPanel_LynSalgBekræftigelseLayout.setHorizontalGroup(
+            jPanel_LynSalgBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jLabel37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel_LynSalgBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(75, 75, 75))
+        );
+        jPanel_LynSalgBekræftigelseLayout.setVerticalGroup(
+            jPanel_LynSalgBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
+                .addGroup(jPanel_LynSalgBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel_LynSalgBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
+                                .addComponent(jButton22)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton23)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton24)
+                                .addGap(96, 96, 96)
+                                .addComponent(jButton25)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton26))
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(jLabel37)))
+                .addContainerGap(120, Short.MAX_VALUE))
+        );
+
+        jPanel_CardMain.add(jPanel_LynSalgBekræftigelse, "card_LynSalgBekræftigelse");
+
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jButton13.setText("Godkend");
@@ -1113,7 +1239,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_LynSalgActionPerformed
 
     private void jButton_AlmSalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AlmSalgActionPerformed
-layout.show(jPanel_CardMain, "card_OrdreSalg");
+        layout.show(jPanel_CardMain, "card_OrdreSalg");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_AlmSalgActionPerformed
 
@@ -1123,37 +1249,37 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
- layout.show(jPanel_CardMain, "card_Ordre_Linje");
+        layout.show(jPanel_CardMain, "card_Ordre_Linje");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton_LagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerActionPerformed
- layout.show(jPanel_CardMain, "card_Lager");
+        layout.show(jPanel_CardMain, "card_Lager");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_LagerActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
- layout.show(jPanel_CardMain, "card_OrdreBekræftigelse");
+        layout.show(jPanel_CardMain, "card_OrdreBekræftigelse");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
- layout.show(jPanel_CardMain, "card_Konstanter");
+        layout.show(jPanel_CardMain, "card_Konstanter");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
- layout.show(jPanel_CardMain, "card_LagerTilføj");
+        layout.show(jPanel_CardMain, "card_LagerTilføj");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton_AdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministrationActionPerformed
- layout.show(jPanel_CardMain, "card_Administration");
+        layout.show(jPanel_CardMain, "card_Administration");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_AdministrationActionPerformed
 
     private void jButton_SøgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SøgActionPerformed
- layout.show(jPanel_CardMain, "card_Søg");
+        layout.show(jPanel_CardMain, "card_Søg");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SøgActionPerformed
 
@@ -1169,13 +1295,13 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
         db.setUser(jTextField_Brugernavn.getText());
         db.setPw(jTextField_Password.getText());
         db.connect();
-        if(db.isConnected()){
+        if (db.isConnected()) {
             layout.show(jPanel_Hovedmenu, "Hovedmenu");
-        }else{
+        } else {
             jLabel_ConnFejlbesked.setForeground(Color.red);
             jLabel_ConnFejlbesked.setText("Forbindelsen fejlede - kontroller felterne");
         }
-        
+
     }//GEN-LAST:event_jButton_DBconnectActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
@@ -1183,8 +1309,63 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jComboBox_LynsalgvaregruppeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_LynsalgvaregruppeActionPerformed
-        // TODO add your handling code here:
+ jComboBoxLynsalgVare.removeAllItems();    
+        Varegruppe varegruppe = (Varegruppe) jComboBox_Lynsalgvaregruppe.getSelectedItem();
+        try {
+            vare_list = dbhandler.getVareListe(varegruppe.getGrp_nr());
+            for (int i = 0; i < vare_list.size(); i++) {
+                jComboBoxLynsalgVare.addItem(vare_list.get(i));
+            }
+        } catch (Exception e) {
+            System.out.println("fejl: " + e);
+        }
     }//GEN-LAST:event_jComboBox_LynsalgvaregruppeActionPerformed
+
+    private void jComboBox_LynsalgvaregruppeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_LynsalgvaregruppeItemStateChanged
+       
+    }//GEN-LAST:event_jComboBox_LynsalgvaregruppeItemStateChanged
+
+    private void jButtonLynsalgTilføjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgTilføjActionPerformed
+       if(jComboBoxLynsalgVare != null){
+           Vare valgtvare = (Vare)  jComboBoxLynsalgVare.getSelectedItem();
+           valgteVare_lynsalg.add(valgtvare);
+           opdaterValgteVare();
+           jComboBoxfjernValgtvare_lynsalg.addItem(valgtvare);
+           jComboBoxLynsalgVare.removeItem(valgtvare);
+           
+       }
+        
+    }//GEN-LAST:event_jButtonLynsalgTilføjActionPerformed
+
+    private void jComboBoxLynsalgVareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLynsalgVareActionPerformed
+        jTextAreaVareInfo.setText("");
+        if(jComboBoxLynsalgVare.getSelectedItem() != null){
+        Vare valgtvare = (Vare)  jComboBoxLynsalgVare.getSelectedItem();
+        jTextAreaVareInfo.append(""+valgtvare+"\n");
+        jTextAreaVareInfo.append("Overflade: "+valgtvare.getOverflade()+"\n");
+        jTextAreaVareInfo.append("Type: "+valgtvare.getTypenavn()+"\n");
+        jTextAreaVareInfo.append("Højde: "+valgtvare.getHøjde()+"\n");
+        jTextAreaVareInfo.append("Bredde: "+valgtvare.getBredde()+"\n");
+        jTextAreaVareInfo.append("Pris"+valgtvare.getSalgspris()+"\n");
+        jTextAreaVareInfo.append("Varegruppe: "+valgtvare.getGruppe()+"\n");
+        }
+    }//GEN-LAST:event_jComboBoxLynsalgVareActionPerformed
+
+    private void jComboBoxfjernValgtvare_lynsalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxfjernValgtvare_lynsalgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxfjernValgtvare_lynsalgActionPerformed
+
+    private void jButton_fjernValgtVare_lynsalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_fjernValgtVare_lynsalgActionPerformed
+        Vare valgtVare = (Vare) jComboBoxfjernValgtvare_lynsalg.getSelectedItem(); 
+        jComboBoxfjernValgtvare_lynsalg.removeItem(valgtVare);
+        jComboBoxLynsalgVare.addItem(valgtVare);
+        valgteVare_lynsalg.remove(valgtVare);
+        opdaterValgteVare();
+    }//GEN-LAST:event_jButton_fjernValgtVare_lynsalgActionPerformed
+
+    private void jButtonLynsalgVidereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgVidereActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLynsalgVidereActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1221,7 +1402,6 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
                 new Gui().setVisible(true);
             }
@@ -1241,6 +1421,11 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
+    private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -1256,6 +1441,7 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JButton jButton_LynSalg;
     private javax.swing.JButton jButton_Salg;
     private javax.swing.JButton jButton_Søg;
+    private javax.swing.JButton jButton_fjernValgtVare_lynsalg;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -1266,6 +1452,7 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JComboBox jComboBox7;
     private javax.swing.JComboBox jComboBoxLynsalgVare;
     private javax.swing.JComboBox jComboBox_Lynsalgvaregruppe;
+    private javax.swing.JComboBox jComboBoxfjernValgtvare_lynsalg;
     private javax.swing.JLabel jLabe_DBnavn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1297,6 +1484,7 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1321,6 +1509,7 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JPanel jPanel_Lager;
     private javax.swing.JPanel jPanel_LagerTilføj;
     private javax.swing.JPanel jPanel_LynSalg;
+    private javax.swing.JPanel jPanel_LynSalgBekræftigelse;
     private javax.swing.JPanel jPanel_OrdreBekræftigelse;
     private javax.swing.JPanel jPanel_OrdreSalg;
     private javax.swing.JPanel jPanel_Ordre_Linje;
@@ -1330,11 +1519,14 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextAreaLynsalg;
+    private javax.swing.JTextArea jTextAreaVareInfo;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
@@ -1367,4 +1559,28 @@ layout.show(jPanel_CardMain, "card_OrdreSalg");
     private javax.swing.JTextField jTextField_Port;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void hentlister() {
+
+        try {
+            varegrup_list = dbhandler.getVaregruppeListe();
+
+        } catch (Exception e) {
+            System.out.println("ERRRWOR" + e);
+        }
+    }
+
+    private void udskrivVaregrp() {
+        for (int i = 0; i < varegrup_list.size(); i++) {
+            jComboBox_Lynsalgvaregruppe.addItem(varegrup_list.get(i));
+
+        }
+    }
+    
+    private void opdaterValgteVare(){
+        jTextAreaLynsalg.setText("");        
+        for (int i = 0; i < valgteVare_lynsalg.size() ; i++) {
+            jTextAreaLynsalg.append(""+valgteVare_lynsalg.get(i)+"\n");
+        }
+    }
 }

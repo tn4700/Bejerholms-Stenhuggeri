@@ -220,14 +220,14 @@ public class DatabaseObjectHandler {
 
         return inskription_linje;
     }
-    
-    public ArrayList getVaregruppeListe()throws SQLException{
+
+    public ArrayList getVaregruppeListe() throws SQLException {
         String sql = "select grp_nr, navn from varegruppe";
         ResultSet rs;
-        ArrayList<Varegruppe> varegruppeListe = new ArrayList<>();
+        ArrayList<Varegruppe> varegruppeListe = new ArrayList();
         rs = db.getData(sql);
-        
-        while(rs.next()){
+
+        while (rs.next()) {
             Varegruppe varegruppe = new Varegruppe(rs.getInt("grp_nr"), rs.getString("navn"));
             varegruppeListe.add(varegruppe);
         }
@@ -285,6 +285,32 @@ public class DatabaseObjectHandler {
         return vare;
     }
 
+    public ArrayList getVareListe(int grp_nr) throws SQLException {
+        ArrayList<Vare> vareListe = new ArrayList();
+        String sql = "select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade, "
+                + "dekoration, grp_nr from vare where grp_nr=" + grp_nr;
+        ResultSet rs;
+        Varegruppe varegrp = getVareGruppe(grp_nr);
+        rs = db.getData(sql);
+        while (rs.next()) {
+            Vare vare = new Vare(
+                    rs.getInt("vare_nr"),
+                    rs.getString("navn"), 
+                    rs.getInt("højde"),
+                    rs.getInt("bredde"),
+                    rs.getDouble("indkøbspris"),
+                    rs.getDouble("salgspris"),
+                    rs.getString("typenavn"),
+                    rs.getString("overflade"),
+                    rs.getBoolean("dekoration"),
+                    varegrp);
+            vareListe.add(vare);
+        }
+        rs.close();
+
+        return vareListe;
+    }
+
     public void createVare(String navn, int højde, int bredde, double indkøbspris, double salgspris, String typenavn, String overflade, boolean dekoration, int gruppe_nr) throws SQLException {
         db.setData("insert into vare(navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade,"
                 + "dekoration, gruppe_nr) values ('" + navn + "','" + højde + "','" + bredde + "','" + indkøbspris + "','" + salgspris + "','" + typenavn + "','"
@@ -338,7 +364,6 @@ public class DatabaseObjectHandler {
         }
         return ordre;
     }
-
 
     public Vare_linje getVareLinje(int linje_nr, String ordre_nr) throws SQLException {
         Vare_linje vare_linje = null;

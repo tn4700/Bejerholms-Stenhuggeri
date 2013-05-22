@@ -28,6 +28,8 @@ public class ObjectHandlerTEST {
             
             System.out.println(dbhandler.getVaregruppeListe());
             
+            System.out.println(dbhandler.getVareListe(1));
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(ObjectHandlerTEST.class.getName()).log(Level.SEVERE, null, ex);

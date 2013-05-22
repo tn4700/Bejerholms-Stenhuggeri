@@ -126,7 +126,7 @@ public class Vare {
 
     @Override
     public String toString() {
-        return "Vare{" + "vare_nr=" + vare_nr + ", navn=" + navn + ", h\u00f8jde=" + højde + ", bredde=" + bredde + ", indk\u00f8bspris=" + indkøbspris + ", salgspris=" + salgspris + ", typenavn=" + typenavn + ", overflade=" + overflade + ", dekoration=" + dekoration + ", gruppe=" + gruppe + '}';
+        return "" + vare_nr + ". " + navn;
     }
     
     

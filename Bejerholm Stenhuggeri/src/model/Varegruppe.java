@@ -36,7 +36,7 @@ public class Varegruppe {
 
     @Override
     public String toString() {
-        return "Varegruppe{" + "grp_nr=" + grp_nr + ", navn=" + navn + '}';
+        return ""+ grp_nr + ". " + navn;
     }
     
     
