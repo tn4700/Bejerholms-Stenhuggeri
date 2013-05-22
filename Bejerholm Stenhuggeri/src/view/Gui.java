@@ -31,7 +31,7 @@ public class Gui extends javax.swing.JFrame {
     public Gui() {
         initComponents();
         try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "1234");
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
         }
@@ -176,12 +176,12 @@ public class Gui extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox();
-        jTextField25 = new javax.swing.JTextField();
+        jComboBox_LagerVaregruppe = new javax.swing.JComboBox();
+        jTextField_LagerMinPris = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jTextField26 = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
+        jTextField_LagerMaxPris = new javax.swing.JTextField();
+        jButton_LagerOpdater = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         jPanel_LagerTilføj = new javax.swing.JPanel();
@@ -219,7 +219,7 @@ public class Gui extends javax.swing.JFrame {
                 jButton_SøgActionPerformed(evt);
             }
         });
-        jPanel_Hovedmenu.add(jButton_Søg, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 173, 84));
+        jPanel_Hovedmenu.add(jButton_Søg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 173, 84));
 
         jButton_Salg.setText("Salg");
         jButton_Salg.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +227,7 @@ public class Gui extends javax.swing.JFrame {
                 jButton_SalgActionPerformed(evt);
             }
         });
-        jPanel_Hovedmenu.add(jButton_Salg, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 173, 84));
+        jPanel_Hovedmenu.add(jButton_Salg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 173, 84));
 
         jButton_Administration.setText("Administration");
         jButton_Administration.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +235,7 @@ public class Gui extends javax.swing.JFrame {
                 jButton_AdministrationActionPerformed(evt);
             }
         });
-        jPanel_Hovedmenu.add(jButton_Administration, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, 173, 84));
+        jPanel_Hovedmenu.add(jButton_Administration, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 173, 84));
 
         jButton_Lager.setText("Lager");
         jButton_Lager.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +243,7 @@ public class Gui extends javax.swing.JFrame {
                 jButton_LagerActionPerformed(evt);
             }
         });
-        jPanel_Hovedmenu.add(jButton_Lager, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 173, 84));
+        jPanel_Hovedmenu.add(jButton_Lager, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 173, 84));
 
         jPanel_CardMain.add(jPanel_Hovedmenu, "card_HovedMenu");
 
@@ -265,17 +265,17 @@ public class Gui extends javax.swing.JFrame {
         jPanel_Salg.setLayout(jPanel_SalgLayout);
         jPanel_SalgLayout.setHorizontalGroup(
             jPanel_SalgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_SalgLayout.createSequentialGroup()
-                .addGap(141, 141, 141)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_SalgLayout.createSequentialGroup()
+                .addContainerGap(201, Short.MAX_VALUE)
                 .addComponent(jButton_LynSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(137, 137, 137)
                 .addComponent(jButton_AlmSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addGap(188, 188, 188))
         );
         jPanel_SalgLayout.setVerticalGroup(
             jPanel_SalgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_SalgLayout.createSequentialGroup()
-                .addGap(142, 142, 142)
+                .addGap(157, 157, 157)
                 .addGroup(jPanel_SalgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_LynSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_AlmSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -764,7 +764,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel_Ordre_LinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7)
                     .addComponent(jButton5))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Ordre_Linje, "card_Ordre_Linje");
@@ -832,7 +832,7 @@ public class Gui extends javax.swing.JFrame {
                     .addGroup(jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addComponent(jLabel37)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_LynSalgBekræftigelse, "card_LynSalgBekræftigelse");
@@ -890,7 +890,7 @@ public class Gui extends javax.swing.JFrame {
                     .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addComponent(jLabel32)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_OrdreBekræftigelse, "card_OrdreBekræftigelse");
@@ -940,7 +940,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel_KonstanterLayout.setVerticalGroup(
             jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_KonstanterLayout.createSequentialGroup()
-                .addContainerGap(140, Short.MAX_VALUE)
+                .addContainerGap(155, Short.MAX_VALUE)
                 .addGroup(jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1000,7 +1000,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jButton19)
                     .addComponent(jButton20)
                     .addComponent(jButton21))
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addContainerGap(345, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Administration, "card_Administration");
@@ -1017,17 +1017,18 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel29.setText("Varegruppe");
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jTextField25.setText("jTextField25");
+        jComboBox_LagerVaregruppe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Alle" }));
 
         jLabel30.setText("Min pris");
 
         jLabel31.setText("Max pris");
 
-        jTextField26.setText("jTextField26");
-
-        jButton10.setText("Opdater");
+        jButton_LagerOpdater.setText("Opdater");
+        jButton_LagerOpdater.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_LagerOpdaterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1040,15 +1041,15 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel29)
-                                .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox_LagerVaregruppe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel30)
-                                .addComponent(jTextField25, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                                .addComponent(jTextField26))
+                                .addComponent(jTextField_LagerMinPris, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                .addComponent(jTextField_LagerMaxPris))
                             .addComponent(jLabel31))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 349, Short.MAX_VALUE)
-                        .addComponent(jButton10)))
+                        .addComponent(jButton_LagerOpdater)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -1057,17 +1058,17 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox_LagerVaregruppe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel30)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_LagerMinPris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel31)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_LagerMaxPris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton10)
+                .addComponent(jButton_LagerOpdater)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1115,7 +1116,7 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(jPanel_LagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton9)
                             .addComponent(jButton11))))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Lager, "card_Lager");
@@ -1128,7 +1129,7 @@ public class Gui extends javax.swing.JFrame {
         );
         jPanel_LagerTilføjLayout.setVerticalGroup(
             jPanel_LagerTilføjLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGap(0, 505, Short.MAX_VALUE)
         );
 
         jPanel_CardMain.add(jPanel_LagerTilføj, "card_LagerTilføj");
@@ -1158,7 +1159,7 @@ public class Gui extends javax.swing.JFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton12)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Søg, "card_Søg");
@@ -1228,7 +1229,7 @@ public class Gui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1265,6 +1266,10 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButton_LagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerActionPerformed
         layout.show(jPanel_CardMain, "card_Lager");
+        for (int i = 0; i < varegrup_list.size(); i++) {
+            jComboBox_LagerVaregruppe.addItem(varegrup_list.get(i));
+            
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_LagerActionPerformed
 
@@ -1390,6 +1395,10 @@ public class Gui extends javax.swing.JFrame {
          
     }//GEN-LAST:event_jButtonLynsalgAnnullerActionPerformed
 
+    private void jButton_LagerOpdaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerOpdaterActionPerformed
+           // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_LagerOpdaterActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1432,7 +1441,6 @@ public class Gui extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
@@ -1461,6 +1469,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButton_AlmSalg;
     private javax.swing.JButton jButton_DBconnect;
     private javax.swing.JButton jButton_Lager;
+    private javax.swing.JButton jButton_LagerOpdater;
     private javax.swing.JButton jButton_LynSalg;
     private javax.swing.JButton jButton_Salg;
     private javax.swing.JButton jButton_Søg;
@@ -1471,9 +1480,9 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
-    private javax.swing.JComboBox jComboBox6;
     private javax.swing.JComboBox jComboBox7;
     private javax.swing.JComboBox jComboBoxLynsalgVare;
+    private javax.swing.JComboBox jComboBox_LagerVaregruppe;
     private javax.swing.JComboBox jComboBox_Lynsalgvaregruppe;
     private javax.swing.JComboBox jComboBoxfjernValgtvare_lynsalg;
     private javax.swing.JLabel jLabe_DBnavn;
@@ -1567,8 +1576,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField23;
     private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
@@ -1578,6 +1585,8 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Brugernavn;
     private javax.swing.JTextField jTextField_DBnavn;
     private javax.swing.JTextField jTextField_Host;
+    private javax.swing.JTextField jTextField_LagerMaxPris;
+    private javax.swing.JTextField jTextField_LagerMinPris;
     private javax.swing.JTextField jTextField_Password;
     private javax.swing.JTextField jTextField_Port;
     private javax.swing.JTextPane jTextPane1;
