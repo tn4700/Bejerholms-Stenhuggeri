@@ -50,9 +50,10 @@ public class DatabaseObjectHandler {
         return postnr;
     }
 
-    public void createPostnummer(int post_nr, String bynavn) throws SQLException {
-        if (getPostnummer(post_nr) == null) {
-            db.setData("insert into postnummer(post_nr, byNavn) values ('" + post_nr + "','" + bynavn + "');");
+    public void createPostnummer(Postnummer postnummer) throws SQLException {
+        if (getPostnummer(postnummer.getPost_nr()) == null) {
+            db.setData("insert into postnummer(post_nr, byNavn) values ('" 
+                    + postnummer.getPost_nr() + "','" + postnummer.getByNavn() + "');");
         }
     }
 
@@ -78,13 +79,14 @@ public class DatabaseObjectHandler {
         return kunde;
     }
 
-    public void createKunde(String fornavn, String efternavn, String adresse, int tlf, Postnummer postnr) throws SQLException {
-
-        if (getKunde(tlf) == null) {
-            db.setData("insert into kunde(fornavn, efternavn, adresse, tlf, post_nr) values('" + fornavn + "','" + efternavn + "','" + adresse + "','" + tlf + "','" + postnr + "');");
+    public void createKunde(Kunde kunde) throws SQLException {
+        if (getKunde(kunde.getTlf()) == null) {
+            db.setData("insert into kunde(fornavn, efternavn, adresse, tlf, post_nr) values('" 
+                    + kunde.getFornavn() + "','" + kunde.getEfternavn() + "','" 
+                    + kunde.getAdresse() + "','" + kunde.getTlf() + "','" 
+                    + kunde.getPost_nr().getPost_nr() + "');");
+            createPostnummer(kunde.getPost_nr());
         }
-
-
     }
 
     public Samarbejdspartner getSamarbejdspartner(int tlf) throws SQLException {
@@ -112,11 +114,16 @@ public class DatabaseObjectHandler {
         return partner;
     }
 
-    public void createSamarbejdspartner(String firmanavn, String adresse, int tlf, int cvr_nr, int registrerings_nr, int konto_nr, String bank, int postnr) throws SQLException {
-        if (getSamarbejdspartner(tlf) == null) {
-            db.setData("insert into samarbejdspartner(firmanavn,adresse,tlf,cvr_nr,registrerings_nr,konto_nr,bank,postnr) "
-                    + "values('" + firmanavn + "','" + adresse + "','" + tlf + "','"
-                    + "" + cvr_nr + "','" + registrerings_nr + "','" + konto_nr + "','" + bank + "','" + postnr + "');");
+    public void createSamarbejdspartner(Samarbejdspartner samarbejdspartner) throws SQLException {
+        if (getSamarbejdspartner(samarbejdspartner.getTlf()) == null) {
+            db.setData("insert into samarbejdspartner(firmanavn,adresse,tlf,cvr_nr,registrerings_nr,"
+                    + "konto_nr,bank,postnr) "
+                    + "values('" + samarbejdspartner.getFirmanavn() + "','" 
+                    + samarbejdspartner.getAdresse() + "','" + samarbejdspartner.getTlf() + "','"
+                    + "" + samarbejdspartner.getCvr_nr() + "','" + samarbejdspartner.getRegistrerings_nr() 
+                    + "','" + samarbejdspartner.getKonto_nr() + "','" + samarbejdspartner.getBank() 
+                    + "','" + samarbejdspartner.getPost_nr().getPost_nr() + "');");
+            createPostnummer(samarbejdspartner.getPost_nr());
         }
     }
 
