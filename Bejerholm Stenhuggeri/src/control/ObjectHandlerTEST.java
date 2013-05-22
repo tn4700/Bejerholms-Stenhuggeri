@@ -24,18 +24,10 @@ public class ObjectHandlerTEST {
         try {
             DBConnection db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "1234");
             DatabaseObjectHandler dbhandler = new DatabaseObjectHandler(db);
+
             
-            Ordre ordre = dbhandler.getOrdre("00001");
-            System.out.println(ordre);
+            System.out.println(dbhandler.getVaregruppeListe());
             
-            Faktura faktura = dbhandler.getFaktura("0020332836-00001");
-            System.out.println(faktura);
-            
-            
-            dbhandler.createTegntype("Anettes tegntype", 152);
-            
-            Tegntype tegntype = dbhandler.getTegntype(15);
-            System.out.println(tegntype);
             
         } catch (SQLException ex) {
             Logger.getLogger(ObjectHandlerTEST.class.getName()).log(Level.SEVERE, null, ex);

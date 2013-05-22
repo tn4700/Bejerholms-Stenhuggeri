@@ -8,6 +8,7 @@ package control;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import model.Faktura;
 import model.Inskription_linje;
 import model.Inskription;
@@ -218,6 +219,19 @@ public class DatabaseObjectHandler {
         }
 
         return inskription_linje;
+    }
+    
+    public ArrayList getVaregruppeListe()throws SQLException{
+        String sql = "select grp_nr, navn from varegruppe";
+        ResultSet rs;
+        ArrayList<Varegruppe> varegruppeListe = new ArrayList<>();
+        rs = db.getData(sql);
+        
+        while(rs.next()){
+            Varegruppe varegruppe = new Varegruppe(rs.getInt("grp_nr"), rs.getString("navn"));
+            varegruppeListe.add(varegruppe);
+        }
+        return varegruppeListe;
     }
 
     public Varegruppe getVareGruppe(int grp_nr) throws SQLException {
