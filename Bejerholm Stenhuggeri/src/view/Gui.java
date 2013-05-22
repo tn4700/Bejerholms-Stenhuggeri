@@ -142,8 +142,8 @@ public class Gui extends javax.swing.JFrame {
         jPanel_LynSalgBekræftigelse = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
         jButton22 = new javax.swing.JButton();
-        jButton23 = new javax.swing.JButton();
-        jButton24 = new javax.swing.JButton();
+        jButtonLynsalg_ændre = new javax.swing.JButton();
+        jButtonLynsalgAnnuller = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
         jButton26 = new javax.swing.JButton();
         jLabel37 = new javax.swing.JLabel();
@@ -773,9 +773,19 @@ public class Gui extends javax.swing.JFrame {
 
         jButton22.setText("Godkend");
 
-        jButton23.setText("Ændre");
+        jButtonLynsalg_ændre.setText("Ændre");
+        jButtonLynsalg_ændre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLynsalg_ændreActionPerformed(evt);
+            }
+        });
 
-        jButton24.setText("Annuller");
+        jButtonLynsalgAnnuller.setText("Annuller");
+        jButtonLynsalgAnnuller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLynsalgAnnullerActionPerformed(evt);
+            }
+        });
 
         jButton25.setText("Print");
 
@@ -795,10 +805,10 @@ public class Gui extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel_LynSalgBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonLynsalg_ændre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonLynsalgAnnuller, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(75, 75, 75))
         );
         jPanel_LynSalgBekræftigelseLayout.setVerticalGroup(
@@ -811,9 +821,9 @@ public class Gui extends javax.swing.JFrame {
                             .addGroup(jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
                                 .addComponent(jButton22)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton23)
+                                .addComponent(jButtonLynsalg_ændre)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton24)
+                                .addComponent(jButtonLynsalgAnnuller)
                                 .addGap(96, 96, 96)
                                 .addComponent(jButton25)
                                 .addGap(26, 26, 26)
@@ -1364,8 +1374,21 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_fjernValgtVare_lynsalgActionPerformed
 
     private void jButtonLynsalgVidereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgVidereActionPerformed
-        // TODO add your handling code here:
+        layout.show(jPanel_CardMain, "card_LynSalgBekræftigelse");
     }//GEN-LAST:event_jButtonLynsalgVidereActionPerformed
+
+    private void jButtonLynsalg_ændreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalg_ændreActionPerformed
+         layout.show(jPanel_CardMain, "card_LynSalg");
+    }//GEN-LAST:event_jButtonLynsalg_ændreActionPerformed
+
+    private void jButtonLynsalgAnnullerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgAnnullerActionPerformed
+         jComboBoxLynsalgVare.removeAllItems();
+         jComboBoxfjernValgtvare_lynsalg.removeAllItems();
+         valgteVare_lynsalg.clear();
+         opdaterValgteVare();
+         layout.show(jPanel_CardMain, "card_HovedMenu");
+         
+    }//GEN-LAST:event_jButtonLynsalgAnnullerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1422,8 +1445,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton4;
@@ -1432,8 +1453,10 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButtonLynsalgAnnuller;
     private javax.swing.JButton jButtonLynsalgTilføj;
     private javax.swing.JButton jButtonLynsalgVidere;
+    private javax.swing.JButton jButtonLynsalg_ændre;
     private javax.swing.JButton jButton_Administration;
     private javax.swing.JButton jButton_AlmSalg;
     private javax.swing.JButton jButton_DBconnect;
