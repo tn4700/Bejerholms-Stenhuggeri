@@ -4,17 +4,26 @@
  */
 package view;
 
+import control.DatabaseObjectHandler;
+import model.Kunde;
+
 /**
  *
- * @author T
+ * @author Anette Stidsing
  */
 public class Panel_OrdreSalg extends javax.swing.JPanel {
+private Kunde kunde;
+private DatabaseObjectHandler dbhandler;
+
 
     /**
      * Creates new form NewJPanel4
      */
-    public Panel_OrdreSalg() {
+    public Panel_OrdreSalg(DatabaseObjectHandler dbhandler) {
+        this.dbhandler = dbhandler;
         initComponents();
+        jPanel_Kirkegård.setVisible(false);
+        jPanel_tilføjelse.setVisible(false);
     }
 
     /**
@@ -26,19 +35,346 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel_OrdreSalg = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField_tlf_ordresalg = new javax.swing.JTextField();
+        jTextField_fornavn_ordresalg = new javax.swing.JTextField();
+        jTextField_efternavn_ordresalg = new javax.swing.JTextField();
+        jTextField_adresse_ordresalg = new javax.swing.JTextField();
+        jTextField_postnr_ordresalg = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField_By_ordresalg = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jCheckBox_nysten = new javax.swing.JCheckBox();
+        jCheckBox_tilføjelse = new javax.swing.JCheckBox();
+        jCheckBox_gravsten = new javax.swing.JCheckBox();
+        jPanel_Kirkegård = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField_kirkegård_ordresalg = new javax.swing.JTextField();
+        jTextField_afdeling_ordresalg = new javax.swing.JTextField();
+        jTextField_gravtype_ordresalg = new javax.swing.JTextField();
+        jPanel_tilføjelse = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jTextField_værkstedstimer_ordresalg = new javax.swing.JTextField();
+        jTextField_rensning_ordresalg = new javax.swing.JTextField();
+        jTextField_transport_ordresalg = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jTextField_afhentning_ordresalg = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jTextField_levering_ordresalg = new javax.swing.JTextField();
+        jButton_videre_ordresalg = new javax.swing.JButton();
+
         setPreferredSize(new java.awt.Dimension(800, 500));
+
+        jPanel_OrdreSalg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setText("Tlf nr");
+
+        jLabel4.setText("Fornavn");
+
+        jLabel5.setText("Efternavn");
+
+        jLabel6.setText("Adresse");
+
+        jTextField_tlf_ordresalg.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField_tlf_ordresalgFocusLost(evt);
+            }
+        });
+        jTextField_tlf_ordresalg.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTextField_tlf_ordresalgInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+
+        jTextField_fornavn_ordresalg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_fornavn_ordresalgActionPerformed(evt);
+            }
+        });
+
+        jTextField_adresse_ordresalg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_adresse_ordresalgActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Post nr");
+
+        jLabel8.setText("By");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField_tlf_ordresalg)
+                            .addComponent(jTextField_fornavn_ordresalg, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField_efternavn_ordresalg, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField_adresse_ordresalg, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField_By_ordresalg)
+                            .addComponent(jTextField_postnr_ordresalg, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(220, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField_tlf_ordresalg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextField_adresse_ordresalg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField_fornavn_ordresalg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(jTextField_postnr_ordresalg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextField_efternavn_ordresalg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField_By_ordresalg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+
+        jPanel_OrdreSalg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 22, 670, 140));
+
+        jLabel9.setText("Kunde info");
+        jPanel_OrdreSalg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
+
+        buttonGroup1.add(jCheckBox_nysten);
+        jCheckBox_nysten.setText("Ny sten");
+        jCheckBox_nysten.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox_nystenStateChanged(evt);
+            }
+        });
+        jCheckBox_nysten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox_nystenActionPerformed(evt);
+            }
+        });
+        jPanel_OrdreSalg.add(jCheckBox_nysten, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
+
+        buttonGroup1.add(jCheckBox_tilføjelse);
+        jCheckBox_tilføjelse.setText("Tilføjelse");
+        jCheckBox_tilføjelse.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox_tilføjelseStateChanged(evt);
+            }
+        });
+        jPanel_OrdreSalg.add(jCheckBox_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
+
+        jCheckBox_gravsten.setText("Gravsten");
+        jCheckBox_gravsten.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox_gravstenStateChanged(evt);
+            }
+        });
+        jPanel_OrdreSalg.add(jCheckBox_gravsten, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, -1));
+
+        jPanel_Kirkegård.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_Kirkegård.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setText("Kirkegård");
+        jPanel_Kirkegård.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 23, -1, -1));
+
+        jLabel11.setText("Afdeling");
+        jPanel_Kirkegård.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 64, -1, -1));
+
+        jLabel12.setText("Gravtype");
+        jPanel_Kirkegård.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 102, -1, -1));
+        jPanel_Kirkegård.add(jTextField_kirkegård_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 81, -1));
+        jPanel_Kirkegård.add(jTextField_afdeling_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 81, -1));
+        jPanel_Kirkegård.add(jTextField_gravtype_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 81, -1));
+
+        jPanel_OrdreSalg.add(jPanel_Kirkegård, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 250, 180));
+
+        jPanel_tilføjelse.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_tilføjelse.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setText("Værkstedstimer");
+        jPanel_tilføjelse.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 14, -1, -1));
+
+        jLabel14.setText("Rensning");
+        jPanel_tilføjelse.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 52, -1, -1));
+
+        jLabel15.setText("Transport");
+        jPanel_tilføjelse.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        jPanel_tilføjelse.add(jTextField_værkstedstimer_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 80, -1));
+        jPanel_tilføjelse.add(jTextField_rensning_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 80, -1));
+        jPanel_tilføjelse.add(jTextField_transport_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 80, -1));
+
+        jLabel17.setText("Afhentning");
+        jPanel_tilføjelse.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
+        jPanel_tilføjelse.add(jTextField_afhentning_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 80, -1));
+
+        jLabel18.setText("Levering");
+        jPanel_tilføjelse.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
+        jPanel_tilføjelse.add(jTextField_levering_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 80, -1));
+
+        jPanel_OrdreSalg.add(jPanel_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 390, 180));
+
+        jButton_videre_ordresalg.setText("Videre");
+        jButton_videre_ordresalg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_videre_ordresalgActionPerformed(evt);
+            }
+        });
+        jPanel_OrdreSalg.add(jButton_videre_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel_OrdreSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 942, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel_OrdreSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_videre_ordresalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_videre_ordresalgActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_videre_ordresalgActionPerformed
+
+    private void jTextField_fornavn_ordresalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_fornavn_ordresalgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_fornavn_ordresalgActionPerformed
+
+    private void jTextField_adresse_ordresalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_adresse_ordresalgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_adresse_ordresalgActionPerformed
+
+    private void jCheckBox_nystenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_nystenActionPerformed
+      
+    }//GEN-LAST:event_jCheckBox_nystenActionPerformed
+
+    private void jCheckBox_gravstenStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox_gravstenStateChanged
+  
+    }//GEN-LAST:event_jCheckBox_gravstenStateChanged
+
+    private void jCheckBox_nystenStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox_nystenStateChanged
+         if(jCheckBox_nysten.isSelected() && jCheckBox_gravsten.isSelected()){
+             jPanel_Kirkegård.setVisible(true);
+         }else{
+             jPanel_Kirkegård.setVisible(false);
+         }
+    }//GEN-LAST:event_jCheckBox_nystenStateChanged
+
+    private void jCheckBox_tilføjelseStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox_tilføjelseStateChanged
+         if(jCheckBox_tilføjelse.isSelected() && jCheckBox_gravsten.isSelected()){
+             jPanel_tilføjelse.setVisible(true);
+         }else{
+             jPanel_tilføjelse.setVisible(false);
+         }
+    }//GEN-LAST:event_jCheckBox_tilføjelseStateChanged
+
+    private void jTextField_tlf_ordresalgInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextField_tlf_ordresalgInputMethodTextChanged
+         // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_tlf_ordresalgInputMethodTextChanged
+
+    private void jTextField_tlf_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_tlf_ordresalgFocusLost
+        try {
+           kunde = dbhandler.getKunde(Integer.parseInt(jTextField_tlf_ordresalg.getText()));
+           if(kunde != null){
+               jTextField_fornavn_ordresalg.setText(kunde.getFornavn());
+               jTextField_efternavn_ordresalg.setText(kunde.getEfternavn());
+               jTextField_adresse_ordresalg.setText(kunde.getAdresse());
+               jTextField_postnr_ordresalg.setText(""+kunde.getPost_nr().getPost_nr());
+               jTextField_By_ordresalg.setText(kunde.getPost_nr().getByNavn());
+           }
+           
+        } catch (Exception e) {
+        }
+   
+    }//GEN-LAST:event_jTextField_tlf_ordresalgFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton_videre_ordresalg;
+    private javax.swing.JCheckBox jCheckBox_gravsten;
+    private javax.swing.JCheckBox jCheckBox_nysten;
+    private javax.swing.JCheckBox jCheckBox_tilføjelse;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel_Kirkegård;
+    private javax.swing.JPanel jPanel_OrdreSalg;
+    private javax.swing.JPanel jPanel_tilføjelse;
+    private javax.swing.JTextField jTextField_By_ordresalg;
+    private javax.swing.JTextField jTextField_adresse_ordresalg;
+    private javax.swing.JTextField jTextField_afdeling_ordresalg;
+    private javax.swing.JTextField jTextField_afhentning_ordresalg;
+    private javax.swing.JTextField jTextField_efternavn_ordresalg;
+    private javax.swing.JTextField jTextField_fornavn_ordresalg;
+    private javax.swing.JTextField jTextField_gravtype_ordresalg;
+    private javax.swing.JTextField jTextField_kirkegård_ordresalg;
+    private javax.swing.JTextField jTextField_levering_ordresalg;
+    private javax.swing.JTextField jTextField_postnr_ordresalg;
+    private javax.swing.JTextField jTextField_rensning_ordresalg;
+    private javax.swing.JTextField jTextField_tlf_ordresalg;
+    private javax.swing.JTextField jTextField_transport_ordresalg;
+    private javax.swing.JTextField jTextField_værkstedstimer_ordresalg;
     // End of variables declaration//GEN-END:variables
 }

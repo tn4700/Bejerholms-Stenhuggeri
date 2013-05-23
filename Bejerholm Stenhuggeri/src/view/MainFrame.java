@@ -4,19 +4,29 @@
  */
 package view;
 
+import control.DBConnection;
+import control.DatabaseObjectHandler;
+
 /**
  *
  * @author T
  */
 public class MainFrame extends javax.swing.JFrame {
-
+private DBConnection db;
+private DatabaseObjectHandler dbhandler;
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
+        try {
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "1234");
+        } catch (Exception ex) {
+            System.out.println("fejl: " + ex);
+        }
+           dbhandler = new DatabaseObjectHandler(db);
         initComponents();
-        Panel_LynSalg lynsalg = new Panel_LynSalg();
-        jPanel1.add(lynsalg);
+        Panel_OrdreSalg ordresalg = new Panel_OrdreSalg(dbhandler);
+        jPanel1.add(ordresalg);
         
         
     }
@@ -36,7 +46,6 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(872, 650));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 255, 102));
