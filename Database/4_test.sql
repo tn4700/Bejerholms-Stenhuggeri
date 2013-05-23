@@ -10,7 +10,8 @@ update ordre
 set ordre_nr = 9
 where ordre_nr = 0;
 
-
+select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade, 
+                dekoration, grp_nr from vare;
 -- queries der udtrækker data fra mere end en tabel.
 
 select * from (faktura natural join ordre);
