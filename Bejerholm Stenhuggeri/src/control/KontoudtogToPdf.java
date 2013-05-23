@@ -32,7 +32,7 @@ public class KontoudtogToPdf {
         //Opretter diverse objekter der er brug for, for at lave et faktura objekt
         Postnummer postnummer = new Postnummer(4700, "Næstved");
         Kunde kunde = new Kunde("Niklas", "Renner", "Gottliebsvej 7", 53545733, postnummer);
-        Ordre ordre = new Ordre("00001", true, currentTime, currentTime, "bemærkning", "Ekstra bemærking", "Leveringsvej 45", "Kirkegården", 13, "Hans afdødesen", 1, 1, 0, true, kunde);
+       // Ordre ordre = new Ordre("00001", true, currentTime, currentTime, "bemærkning", "Ekstra bemærking", "Leveringsvej 45", "Kirkegården", 13, "Hans afdødesen", 1, 1, 0, true, kunde);
 
         //Varelinjer til ordren oprettes
         Vare_linje vl1 = null;
@@ -58,16 +58,16 @@ public class KontoudtogToPdf {
         vlr.add(vl8);
         vlr.add(vl9);
         vlr.add(vl10);
-        ordre.setVare_linjeListe(vlr);
+       // ordre.setVare_linjeListe(vlr);
 
         //Faktura_nr metode
-        String faktura_nr = "00" + kunde.getTlf() + "-" + ordre.getOrdre_nr();
+        //String faktura_nr = "00" + kunde.getTlf() + "-" + ordre.getOrdre_nr();
 
         //Faktura oprettes
         
-        Faktura faktura = new Faktura(faktura_nr, currentTime, "Torsten vedrørendesen", currentTime, "Faktureringsvej 15", true, false, ordre, null);
+       // Faktura faktura = new Faktura(faktura_nr, currentTime, "Torsten vedrørendesen", currentTime, "Faktureringsvej 15", true, false, ordre, null);
         Samarbejdspartner bedemand = new Samarbejdspartner("Firmanavn", "Adresse", 12345678, 123456, 6070, 4825318, "Boss Banken", postnummer);
-        faktura.setBedemand(bedemand);
+        //faktura.setBedemand(bedemand);
         /*Kontoudtog kontoudtog = new Kontoudtog(123, currentTime, "Vedrørende", currentTime, faktura);
         
          try {

@@ -20,6 +20,7 @@ public class Vare {
     private String overflade;
     private boolean dekoration;
     private Varegruppe gruppe;
+    private int vareStatus;
 
     public Vare(int vare_nr,
             String navn,
@@ -30,6 +31,7 @@ public class Vare {
             String typenavn,
             String overflade,
             boolean dekoration,
+            int vareStatus,
             Varegruppe gruppe) {
 
         this.vare_nr = vare_nr;
@@ -41,7 +43,16 @@ public class Vare {
         this.typenavn = typenavn;
         this.overflade = overflade;
         this.dekoration = dekoration;
+        this.vareStatus = vareStatus;
         this.gruppe = gruppe;
+    }
+
+    public int getVareStatus() {
+        return vareStatus;
+    }
+
+    public void setVareStatus(int vareStatus) {
+        this.vareStatus = vareStatus;
     }
 
     public int getVare_nr() {
@@ -108,7 +119,7 @@ public class Vare {
         this.overflade = overflade;
     }
 
-    public boolean isDekoration() {
+    public boolean getDekoration() {
         return dekoration;
     }
 

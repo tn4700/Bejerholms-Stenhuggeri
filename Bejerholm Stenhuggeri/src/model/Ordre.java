@@ -21,7 +21,6 @@ public class Ordre {
     private Timestamp afhentningsdato;
     private String bemærkning;
     private String bemærkning_ekstra;
-    private String leveringsadresse;
     private String kirkegård;
     private int afdeling;
     private String afdødnavn;
@@ -38,7 +37,6 @@ public class Ordre {
             Timestamp afhentningsdato,
             String bemærkning,
             String bemærkning_ekstra,
-            String leveringsadresse,
             String kirkegård,
             int afdeling,
             String afdødnavn,
@@ -50,13 +48,11 @@ public class Ordre {
 
         vare_linjeListe = new ArrayList();
         this.ordre_nr = ordre_nr;
-        this.ordrestatus = ordrestatus;
         this.ordretype = ordretype;
         this.leveringsdato = leveringsdato;
         this.afhentningsdato = afhentningsdato;
         this.bemærkning = bemærkning;
         this.bemærkning_ekstra = bemærkning_ekstra;
-        this.leveringsadresse = leveringsadresse;
         this.kirkegård = kirkegård;
         this.afdeling = afdeling;
         this.afdødnavn = afdødnavn;
@@ -141,14 +137,6 @@ public class Ordre {
 
     public void setBemærkning(String bemærkning) {
         this.bemærkning = bemærkning;
-    }
-
-    public String getLeveringsadresse() {
-        return leveringsadresse;
-    }
-
-    public void setLeveringsadresse(String leveringsadresse) {
-        this.leveringsadresse = leveringsadresse;
     }
 
     public String getKirkegård() {
@@ -251,11 +239,19 @@ public class Ordre {
             pris = antal * enhedsPris;
             total += pris;
         }
+        total += (total * 0.025);
+        return total;
+    }
+    
+    public double getSalgsMoms(){
+        double salgsMoms = getTotal();
+        salgsMoms = (salgsMoms * 0.25);
+        return salgsMoms;
+    }
+    
+    public double getTotalInklMoms(){
+        double total = getTotal() + getSalgsMoms();
         return total;
     }
 
-    @Override
-    public String toString() {
-        return "Ordre{" + "ordre_nr=" + ordre_nr + ", ordretype=" + ordretype + ", ordredato=" + ordredato + ", ordrestatus=" + ordrestatus + ", leveringsdato=" + leveringsdato + ", afhentningsdato=" + afhentningsdato + ", bemærkning=" + bemærkning + ", leveringsadresse=" + leveringsadresse + ", kirkegård=" + kirkegård + ", afdeling=" + afdeling + ", afdødnavn=" + afdødnavn + ", række=" + række + ", nummer=" + nummer + ", plads_navne=" + plads_navne + ", gravType=" + gravType + ", kunde=" + kunde + ", vare_linjeListe=" + vare_linjeListe + '}';
-    }
 }

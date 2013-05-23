@@ -52,7 +52,7 @@ public class DatabaseObjectHandler {
 
     public void createPostnummer(Postnummer postnummer) throws SQLException {
         if (getPostnummer(postnummer.getPost_nr()) == null) {
-            db.setData("insert into postnummer(post_nr, byNavn) values ('" 
+            db.setData("insert into postnummer(post_nr, byNavn) values ('"
                     + postnummer.getPost_nr() + "','" + postnummer.getByNavn() + "');");
         }
     }
@@ -81,9 +81,9 @@ public class DatabaseObjectHandler {
 
     public void createKunde(Kunde kunde) throws SQLException {
         if (getKunde(kunde.getTlf()) == null) {
-            db.setData("insert into kunde(fornavn, efternavn, adresse, tlf, post_nr) values('" 
-                    + kunde.getFornavn() + "','" + kunde.getEfternavn() + "','" 
-                    + kunde.getAdresse() + "','" + kunde.getTlf() + "','" 
+            db.setData("insert into kunde(fornavn, efternavn, adresse, tlf, post_nr) values('"
+                    + kunde.getFornavn() + "','" + kunde.getEfternavn() + "','"
+                    + kunde.getAdresse() + "','" + kunde.getTlf() + "','"
                     + kunde.getPost_nr().getPost_nr() + "');");
             createPostnummer(kunde.getPost_nr());
         }
@@ -118,10 +118,10 @@ public class DatabaseObjectHandler {
         if (getSamarbejdspartner(samarbejdspartner.getTlf()) == null) {
             db.setData("insert into samarbejdspartner(firmanavn,adresse,tlf,cvr_nr,registrerings_nr,"
                     + "konto_nr,bank,postnr) "
-                    + "values('" + samarbejdspartner.getFirmanavn() + "','" 
+                    + "values('" + samarbejdspartner.getFirmanavn() + "','"
                     + samarbejdspartner.getAdresse() + "','" + samarbejdspartner.getTlf() + "','"
-                    + "" + samarbejdspartner.getCvr_nr() + "','" + samarbejdspartner.getRegistrerings_nr() 
-                    + "','" + samarbejdspartner.getKonto_nr() + "','" + samarbejdspartner.getBank() 
+                    + "" + samarbejdspartner.getCvr_nr() + "','" + samarbejdspartner.getRegistrerings_nr()
+                    + "','" + samarbejdspartner.getKonto_nr() + "','" + samarbejdspartner.getBank()
                     + "','" + samarbejdspartner.getPost_nr().getPost_nr() + "');");
             createPostnummer(samarbejdspartner.getPost_nr());
         }
@@ -267,7 +267,7 @@ public class DatabaseObjectHandler {
         Vare vare = null;
         int grp_nr = 0;
         String sql = "select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, "
-                + "overflade, dekoration, grp_nr from vare where vare_nr=" + vare_nr;
+                + "overflade, dekoration, vareStatus, grp_nr from vare where vare_nr=" + vare_nr;
         ResultSet rs;
         rs = db.getData(sql);
 
@@ -282,6 +282,7 @@ public class DatabaseObjectHandler {
                     rs.getString("typenavn"),
                     rs.getString("overflade"),
                     rs.getBoolean("dekoration"),
+                    rs.getInt("vareStatus"),
                     null);
             grp_nr = rs.getInt("grp_nr");
         }
@@ -295,14 +296,14 @@ public class DatabaseObjectHandler {
     public ArrayList getVareListe(int grp_nr) throws SQLException {
         ArrayList<Vare> vareListe = new ArrayList();
         String sql = "select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade, "
-                + "dekoration, grp_nr from vare where grp_nr=" + grp_nr;
+                + "dekoration, vareStatus, grp_nr from vare where grp_nr=" + grp_nr;
         ResultSet rs;
         Varegruppe varegrp = getVareGruppe(grp_nr);
         rs = db.getData(sql);
         while (rs.next()) {
             Vare vare = new Vare(
                     rs.getInt("vare_nr"),
-                    rs.getString("navn"), 
+                    rs.getString("navn"),
                     rs.getInt("højde"),
                     rs.getInt("bredde"),
                     rs.getDouble("indkøbspris"),
@@ -310,6 +311,7 @@ public class DatabaseObjectHandler {
                     rs.getString("typenavn"),
                     rs.getString("overflade"),
                     rs.getBoolean("dekoration"),
+                    rs.getInt("vareStatus"),
                     varegrp);
             vareListe.add(vare);
         }
@@ -318,10 +320,17 @@ public class DatabaseObjectHandler {
         return vareListe;
     }
 
-    public void createVare(String navn, int højde, int bredde, double indkøbspris, double salgspris, String typenavn, String overflade, boolean dekoration, int gruppe_nr) throws SQLException {
+    public void createVare(Vare vare) throws SQLException {
         db.setData("insert into vare(navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade,"
-                + "dekoration, gruppe_nr) values ('" + navn + "','" + højde + "','" + bredde + "','" + indkøbspris + "','" + salgspris + "','" + typenavn + "','"
-                + "" + overflade + "','" + dekoration + "','" + gruppe_nr + "');");
+                + "dekoration, gruppe_nr) values ('" + vare.getNavn() + "','" + vare.getHøjde() + "','" 
+                + vare.getBredde() + "','" + vare.getIndkøbspris() + "','" + vare.getSalgspris() + "','" 
+                + vare.getTypenavn() + "','" + "" + vare.getOverflade() + "','" + vare.getDekoration() 
+                + "','" + vare.getGruppe() + "');");
+    }
+    
+    public void updateVareStatus(Vare vare) throws SQLException{
+        db.setData("update Vare set vareStatus = " + vare.getVareStatus() + "where vare_nr = " 
+                + vare.getVare_nr() + ";");
     }
 
     public int getMaxVareLinje(String ordre_nr) throws SQLException {
@@ -339,8 +348,8 @@ public class DatabaseObjectHandler {
         Ordre ordre = null;
         Vare_linje vare_linje = null;
         int tlf = 0;
-        String sql = "select tlf, ordre_nr,ordretype,ordredato,ordrestatus,leveringdato,afhentningsdato,bemærkning,bemærkning_ekstra,"
-                + "leveringsadresse,kirkegård,afdeling,afdødnavn,række,nummer,plads_navne,gravType from ordre where ordre_nr =" + ordre_nr;
+        String sql = "select tlf, ordre_nr,ordretype,ordredato,leveringdato,afhentningsdato,bemærkning,bemærkning_ekstra,"
+                + "kirkegård,afdeling,afdødnavn,række,nummer,plads_navne,gravType from ordre where ordre_nr =" + ordre_nr;
         ResultSet rs;
         rs = db.getData(sql);
         if (rs.next()) {
@@ -350,7 +359,6 @@ public class DatabaseObjectHandler {
                     rs.getTimestamp("afhentningsdato"),
                     rs.getString("bemærkning"),
                     rs.getString("bemærkning_ekstra"),
-                    rs.getString("leveringsadresse"),
                     rs.getString("kirkegård"),
                     rs.getInt("afdeling"),
                     rs.getString("afdødnavn"),
@@ -370,6 +378,26 @@ public class DatabaseObjectHandler {
             vare_linje = null;
         }
         return ordre;
+    }
+
+    public void createOrdre(Ordre ordre) throws SQLException {
+        if (getOrdre(ordre.getOrdre_nr()) == null) {
+            db.setData("insert into ordre (tlf, ordre_nr,ordretype,ordredato,"
+                    + "leveringdato,afhentningsdato,bemærkning,"
+                    + "bemærkning_ekstra,kirkegård,afdeling,"
+                    + "afdødnavn,række,nummer,gravType)"
+                    + "values ('" + ordre.getKunde().getTlf() + ","
+                    + ordre.getOrdre_nr() + "," + ordre.GetOrdretype() + ","
+                    + ordre.getOrdredato() + "," + ordre.getLeveringsdato() + "','" 
+                    + ordre.getAfhentningsdato() + "','"+ ordre.getBemærkning() + "','"
+                    + ordre.getBemærkning_ekstra() + "','"
+                    + ordre.getKirkegård() + "','" + ordre.getAfdeling() + "','"
+                    + ordre.getAfdødnavn() + "','" + ordre.getRække() + "','" + ordre.getNummer()
+                    + "','" + ordre.getGravType() + "');");
+        }
+        for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
+            createVareLinje(ordre.getVare_linjeListe().get(i), ordre.getOrdre_nr());
+        }
     }
 
     public Vare_linje getVareLinje(int linje_nr, String ordre_nr) throws SQLException {
@@ -410,6 +438,20 @@ public class DatabaseObjectHandler {
         }
 
         return vare_linje;
+    }
+    
+    public void createVareLinje(Vare_linje vareLinje, String ordre_nr) throws SQLException{
+        db.setData("insert into vare_linje (linje_nr, vare_nr, inskription_id, tom_linje_id, ordre_nr)"
+                    + "values ('" + vareLinje.getLinje_nr() + "','" + vareLinje.getVare().getVare_nr() 
+                    + "','" + vareLinje.getInskription().getId() + "','"
+                    + vareLinje.getTom_linje().getId() + "','" + ordre_nr + "');");
+        if(vareLinje.getVare()!=null){
+            updateVareStatus(vareLinje.getVare());
+        } else if(vareLinje.getInskription()!=null) {
+            
+        } else if(vareLinje.getTom_linje()!=null) {
+            
+        }
     }
 
     public Faktura getFaktura(String faktura_nr) throws SQLException {
