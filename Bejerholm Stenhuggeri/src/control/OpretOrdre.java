@@ -18,8 +18,8 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import model.Inskription_linje;
 import model.Inskription;
+import model.Inskription_linje;
 import model.Ordre;
 import model.Vare_linje;
 
@@ -216,8 +216,8 @@ public class OpretOrdre {
         createContent(cb, btFont, 12, black, 300, 484, "Inskription:", center);
 
         //Indsættelse af inskriptions-tekst
-        ArrayList<Inskription> inskription_linje_liste = null;
-        Inskription_linje inskription = null;
+        ArrayList<Inskription_linje> inskription_linje_liste = null;
+        Inskription inskription = null;
         for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
             if (ordre.getVare_linjeListe().get(i).getInskription() != null) {
                 inskription_linje_liste = ordre.getVare_linjeListe().get(i).getInskription().getInskription_linje_liste();

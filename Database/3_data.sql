@@ -54,14 +54,14 @@ values
 ('Opforgyldning af bogstaver i pol. sten','65.00'),
 ('Opforgyldning af bogstaver i ru sten','95.00');
 
-insert into inskription_linje (tegn_id, skrifttype)
+insert into inskription(tegn_id, skrifttype)
 values
 ('2','ARIAL'),
 ('4','OLD ENGLISH'),
 ('7','Agmena'),
 ('10','Flexo');
 
-insert into inskription(linje_nr, inskription_id, linje_type, inskription)
+insert into inskription_linje(linje_nr, inskription_id, linje_type, inskription)
 values
 ('1','1','1','Hej med dig'),('2','1','1','min mor'),('3','1','1','og du er'),('4','1','1','den bedste hej'),('5','1','1','med dig far'),
 ('1','2','2','Anette Mi Stidsing'),('2','2','2','* 25. 6. 1992  + 1. 1. 2013'),('3','2','1','Niklas Renner Nielsen'),('4','2','1','* 25. 6. 1992  + 1. 1. 2013'),('5','2','2','Hvil i fred'),

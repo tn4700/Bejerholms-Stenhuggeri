@@ -11,8 +11,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import model.Faktura;
-import model.Inskription_linje;
 import model.Inskription;
+import model.Inskription_linje;
 import model.Kunde;
 import model.Ordre;
 import model.Postnummer;
@@ -168,16 +168,16 @@ public class DatabaseObjectHandler {
         db.setData("insert into tegntype (navn, pris_pr_tegn) values('" + navn + "','" + pris_pr_tegn + "');");
     }
 
-    public Inskription getInskription(int linje_nr, int inskription_id) throws SQLException {
-        Inskription inskription = null;
-        String sql = "select linje_nr, inskription_id, linje_type, inskription from inskription "
+    public Inskription_linje getInskriptionLinje(int linje_nr, int inskription_id) throws SQLException {
+        Inskription_linje inskription_linje = null;
+        String sql = "select linje_nr, inskription_id, linje_type, inskription from inskription_linje "
                 + "where linje_nr = " + linje_nr + " and inskription_id = " + inskription_id;
         ResultSet rs;
 
         rs = db.getData(sql);
 
         if (rs.next()) {
-            inskription = new Inskription(
+            inskription_linje = new Inskription_linje(
                     rs.getInt("linje_nr"),
                     rs.getInt("inskription_id"),
                     rs.getInt("linje_type"),
@@ -185,12 +185,12 @@ public class DatabaseObjectHandler {
         }
         rs.close();
 
-        return inskription;
+        return inskription_linje;
     }
 
     public int getMaxInskriptionLinje(int inskription_id) throws SQLException {
         int max = 0;
-        String sql = "select max(linje_nr) from inskription where inskription_id =" + inskription_id;
+        String sql = "select max(linje_nr) from inskription_linje where inskription_id =" + inskription_id;
         ResultSet rs;
         rs = db.getData(sql);
         if (rs.next()) {
@@ -199,17 +199,17 @@ public class DatabaseObjectHandler {
         return max;
     }
 
-    public Inskription_linje getInskriptionLinje(int id) throws SQLException {
-        Inskription_linje inskription_linje = null;
+    public Inskription getInskription(int id) throws SQLException {
+        Inskription inskription = null;
         int tegn_id = 0;
-        Inskription inskription;
-        String sql = "select id, skrifttype, tegn_id from inskription_linje where id=" + id;
+        Inskription_linje inskription_linje;
+        String sql = "select id, skrifttype, tegn_id from inskription where id=" + id;
         ResultSet rs;
 
         rs = db.getData(sql);
 
         if (rs.next()) {
-            inskription_linje = new Inskription_linje(
+            inskription = new Inskription(
                     null,
                     null,
                     rs.getInt("id"),
@@ -218,15 +218,15 @@ public class DatabaseObjectHandler {
         }
         rs.close();
 
-        inskription_linje.setTegntype(getTegntype(tegn_id));
+        inskription.setTegntype(getTegntype(tegn_id));
 
-        for (int i = 1; i <= getMaxInskriptionLinje(inskription_linje.getId()); i++) {
-            inskription = getInskription(i, inskription_linje.getId());
-            inskription_linje.addInskription_linje(inskription);
-            inskription = null;
+        for (int i = 1; i <= getMaxInskriptionLinje(inskription.getId()); i++) {
+            inskription_linje = getInskriptionLinje(i, inskription.getId());
+            inskription.addInskription_linje(inskription_linje);
+            inskription_linje = null;
         }
 
-        return inskription_linje;
+        return inskription;
     }
 
     public ArrayList getVaregruppeListe() throws SQLException {
@@ -395,6 +395,8 @@ public class DatabaseObjectHandler {
                     + ordre.getKirkegård() + "','" + ordre.getAfdeling() + "','"
                     + ordre.getAfdødnavn() + "','" + ordre.getRække() + "','" + ordre.getNummer()
                     + "','" + ordre.getGravType() + "');");
+        } else {
+            throw new OrdreException("En ordre med ordrenummeret " + ordre.getOrdre_nr() + " findes allerede.");
         }
         for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
             createVareLinje(ordre.getVare_linjeListe().get(i), ordre.getOrdre_nr());
@@ -433,7 +435,7 @@ public class DatabaseObjectHandler {
         if (linjeType == 1) {
             vare_linje.setVare(getVare(id));
         } else if (linjeType == 2) {
-            vare_linje.setInskription_linje(getInskriptionLinje(id));
+            vare_linje.setInskription(getInskription(id));
         } else if (linjeType == 3) {
             vare_linje.setTom_linje(getTomLinje(id));
         }
@@ -447,10 +449,17 @@ public class DatabaseObjectHandler {
                     + "','" + vareLinje.getInskription().getId() + "','"
                     + vareLinje.getTom_linje().getId() + "','" + ordre_nr + "');");
         if(vareLinje.getVare()!=null){
-            if(vareLinje.getVare().getVareStatus() == 0) {
+            Vare vare = getVare(vareLinje.getVare().getVare_nr());
+            if(vare.getVareStatus() == 0) {
             updateVareStatus(vareLinje.getVare());
             } else {
-                throw new VareStatusException("Vare er ikke på lager");
+                String error = "Ugyldig vareStatus for vare_nr " + vare.getVare_nr() + ".";
+                if(vare.getVareStatus() == 1){
+                    error = "Vare er reserveret.";
+                } else if (vare.getVareStatus() == 2){
+                    error = "Vare er allerede solgt.";
+                } 
+                throw new VareStatusException(error);
             }
         } else if(vareLinje.getInskription()!=null) {
             

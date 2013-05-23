@@ -12,7 +12,7 @@ alter table tom_linje
 add column id int auto_increment,
 add primary key(id);
 
-alter table inskription_linje
+alter table inskription
 add column id int auto_increment,
 add primary key(id);
 
@@ -26,7 +26,7 @@ alter table vare_linje
 add column vare_nr int,
 add foreign key(vare_nr) references vare(vare_nr),
 add column inskription_id int,
-add foreign key(inskription_id) references inskription_linje(id),
+add foreign key(inskription_id) references inskription(id),
 add column tom_linje_id int,
 add foreign key(tom_linje_id) references tom_linje(id);
 
@@ -54,13 +54,13 @@ add column ordre_nr char(5),
 add foreign key(ordre_nr) references ordre(ordre_nr),
 add primary key(ordre_nr, linje_nr);
 
-alter table inskription_linje
+alter table inskription
 add column tegn_id int,
 add foreign key(tegn_id) references tegntype(id);
 
-alter table inskription
+alter table inskription_linje
 add column inskription_id int,
-add foreign key(inskription_id) references inskription_linje(id),
+add foreign key(inskription_id) references inskription(id),
 add primary key(inskription_id, linje_nr);
 
 alter table kunde

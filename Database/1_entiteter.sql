@@ -79,14 +79,14 @@ navn                    varchar(25) not null,
 primary key(grp_nr)
 ) engine =innodb;
 
-drop table if exists inskription_linje;
-create table inskription_linje
+drop table if exists inskription;
+create table inskription
 (
 skrifttype				varchar(25) not null
 ) engine = innodb;
 
-drop table if exists inskription;
-create table inskription
+drop table if exists inskription_linje;
+create table inskription_linje
 (
 linje_nr				int not null,
 inskription             varchar(50),
