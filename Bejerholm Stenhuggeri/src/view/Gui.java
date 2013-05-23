@@ -76,6 +76,16 @@ public class Gui extends javax.swing.JFrame {
         jTextAreaVareInfo = new javax.swing.JTextArea();
         jComboBoxfjernValgtvare_lynsalg = new javax.swing.JComboBox();
         jButton_fjernValgtVare_lynsalg = new javax.swing.JButton();
+        jPanel_OrdreBekræftigelse = new javax.swing.JPanel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel_købssum_lynsalg = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
         jPanel_OrdreSalg = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -139,22 +149,6 @@ public class Gui extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jComboBox5 = new javax.swing.JComboBox();
         jButton8 = new javax.swing.JButton();
-        jPanel_LynSalgBekræftigelse = new javax.swing.JPanel();
-        jSeparator3 = new javax.swing.JSeparator();
-        jButton22 = new javax.swing.JButton();
-        jButtonLynsalg_ændre = new javax.swing.JButton();
-        jButtonLynsalgAnnuller = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
-        jButton26 = new javax.swing.JButton();
-        jLabel37 = new javax.swing.JLabel();
-        jPanel_OrdreBekræftigelse = new javax.swing.JPanel();
-        jSeparator2 = new javax.swing.JSeparator();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
-        jLabel32 = new javax.swing.JLabel();
         jPanel_Konstanter = new javax.swing.JPanel();
         jButton18 = new javax.swing.JButton();
         jLabel33 = new javax.swing.JLabel();
@@ -166,7 +160,6 @@ public class Gui extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jPanel_Administration = new javax.swing.JPanel();
-        jButton19 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
         jPanel_Lager = new javax.swing.JPanel();
@@ -266,7 +259,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel_SalgLayout.setHorizontalGroup(
             jPanel_SalgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_SalgLayout.createSequentialGroup()
-                .addContainerGap(201, Short.MAX_VALUE)
+                .addContainerGap(271, Short.MAX_VALUE)
                 .addComponent(jButton_LynSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(137, 137, 137)
                 .addComponent(jButton_AlmSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,7 +272,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel_SalgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_LynSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_AlmSalg, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Salg, "card_Salg");
@@ -355,6 +348,38 @@ public class Gui extends javax.swing.JFrame {
         jPanel_LynSalg.add(jButton_fjernValgtVare_lynsalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
 
         jPanel_CardMain.add(jPanel_LynSalg, "card_LynSalg");
+
+        jPanel_OrdreBekræftigelse.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel_OrdreBekræftigelse.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 35, 21, 335));
+
+        jButton13.setText("Godkend");
+        jPanel_OrdreBekræftigelse.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 35, -1, -1));
+
+        jButton14.setText("Ændre");
+        jPanel_OrdreBekræftigelse.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 76, 75, -1));
+
+        jButton15.setText("Annuller");
+        jPanel_OrdreBekræftigelse.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 117, 75, -1));
+
+        jButton16.setText("Print");
+        jPanel_OrdreBekræftigelse.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 236, 75, -1));
+
+        jButton17.setText("Email");
+        jPanel_OrdreBekræftigelse.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 285, 75, -1));
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel38.setText("Ordre Bekræftigelse:");
+        jPanel_OrdreBekræftigelse.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jLabel_købssum_lynsalg.setText("jLabel32");
+        jPanel_OrdreBekræftigelse.add(jLabel_købssum_lynsalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, -1));
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel_OrdreBekræftigelse.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 150, 190));
+
+        jPanel_CardMain.add(jPanel_OrdreBekræftigelse, "card_OrdreBekræftigelse");
 
         jPanel_OrdreSalg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -697,7 +722,7 @@ public class Gui extends javax.swing.JFrame {
                                         .addComponent(jTextField23)))
                                 .addComponent(jLabel25)
                                 .addComponent(jScrollPane3)))
-                        .addGap(0, 89, Short.MAX_VALUE)))
+                        .addGap(0, 159, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -764,136 +789,10 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel_Ordre_LinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7)
                     .addComponent(jButton5))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Ordre_Linje, "card_Ordre_Linje");
-
-        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jButton22.setText("Godkend");
-
-        jButtonLynsalg_ændre.setText("Ændre");
-        jButtonLynsalg_ændre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLynsalg_ændreActionPerformed(evt);
-            }
-        });
-
-        jButtonLynsalgAnnuller.setText("Annuller");
-        jButtonLynsalgAnnuller.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLynsalgAnnullerActionPerformed(evt);
-            }
-        });
-
-        jButton25.setText("Print");
-
-        jButton26.setText("Email");
-
-        jLabel37.setText("Her vises et eksempel af faktura hvor Bejerholm er kunde");
-
-        javax.swing.GroupLayout jPanel_LynSalgBekræftigelseLayout = new javax.swing.GroupLayout(jPanel_LynSalgBekræftigelse);
-        jPanel_LynSalgBekræftigelse.setLayout(jPanel_LynSalgBekræftigelseLayout);
-        jPanel_LynSalgBekræftigelseLayout.setHorizontalGroup(
-            jPanel_LynSalgBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(jLabel37)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(jPanel_LynSalgBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonLynsalg_ændre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonLynsalgAnnuller, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(75, 75, 75))
-        );
-        jPanel_LynSalgBekræftigelseLayout.setVerticalGroup(
-            jPanel_LynSalgBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
-                .addGroup(jPanel_LynSalgBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel_LynSalgBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
-                                .addComponent(jButton22)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonLynsalg_ændre)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonLynsalgAnnuller)
-                                .addGap(96, 96, 96)
-                                .addComponent(jButton25)
-                                .addGap(26, 26, 26)
-                                .addComponent(jButton26))
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel_LynSalgBekræftigelseLayout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(jLabel37)))
-                .addContainerGap(135, Short.MAX_VALUE))
-        );
-
-        jPanel_CardMain.add(jPanel_LynSalgBekræftigelse, "card_LynSalgBekræftigelse");
-
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jButton13.setText("Godkend");
-
-        jButton14.setText("Ændre");
-
-        jButton15.setText("Annuller");
-
-        jButton16.setText("Print");
-
-        jButton17.setText("Email");
-
-        jLabel32.setText("Her vises et eksempel af ordre seddel / eller bare hvilken oplysninger der er tastet ind");
-
-        javax.swing.GroupLayout jPanel_OrdreBekræftigelseLayout = new javax.swing.GroupLayout(jPanel_OrdreBekræftigelse);
-        jPanel_OrdreBekræftigelse.setLayout(jPanel_OrdreBekræftigelseLayout);
-        jPanel_OrdreBekræftigelseLayout.setHorizontalGroup(
-            jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(jLabel32)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(75, 75, 75))
-        );
-        jPanel_OrdreBekræftigelseLayout.setVerticalGroup(
-            jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                                .addComponent(jButton13)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton14)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton15)
-                                .addGap(96, 96, 96)
-                                .addComponent(jButton16)
-                                .addGap(26, 26, 26)
-                                .addComponent(jButton17))
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(jLabel32)))
-                .addContainerGap(135, Short.MAX_VALUE))
-        );
-
-        jPanel_CardMain.add(jPanel_OrdreBekræftigelse, "card_OrdreBekræftigelse");
 
         jButton18.setText("Ændre");
 
@@ -935,12 +834,12 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(jTextField3)
                             .addComponent(jTextField4)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addContainerGap(463, Short.MAX_VALUE))
         );
         jPanel_KonstanterLayout.setVerticalGroup(
             jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_KonstanterLayout.createSequentialGroup()
-                .addContainerGap(155, Short.MAX_VALUE)
+                .addContainerGap(169, Short.MAX_VALUE)
                 .addGroup(jPanel_KonstanterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -963,13 +862,6 @@ public class Gui extends javax.swing.JFrame {
 
         jPanel_CardMain.add(jPanel_Konstanter, "card_Konstanter");
 
-        jButton19.setText("Ændre Konstanter");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
-            }
-        });
-
         jButton20.setText("Opret/ Rediger/ Slet Bruger");
 
         jButton21.setText("Import / Export CSV filer");
@@ -984,23 +876,20 @@ public class Gui extends javax.swing.JFrame {
         jPanel_AdministrationLayout.setHorizontalGroup(
             jPanel_AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_AdministrationLayout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(jButton19)
-                .addGap(18, 18, 18)
+                .addGap(256, 256, 256)
                 .addComponent(jButton20)
                 .addGap(18, 18, 18)
                 .addComponent(jButton21)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap(354, Short.MAX_VALUE))
         );
         jPanel_AdministrationLayout.setVerticalGroup(
             jPanel_AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_AdministrationLayout.createSequentialGroup()
                 .addGap(137, 137, 137)
                 .addGroup(jPanel_AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton19)
                     .addComponent(jButton20)
                     .addComponent(jButton21))
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Administration, "card_Administration");
@@ -1089,16 +978,17 @@ public class Gui extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(jPanel_LagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton9)
-                    .addGroup(jPanel_LagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_LagerLayout.createSequentialGroup()
                         .addComponent(jLabel27)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(168, 168, 168))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addGroup(jPanel_LagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel_LagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel28))
                     .addComponent(jButton11))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
         jPanel_LagerLayout.setVerticalGroup(
             jPanel_LagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1111,6 +1001,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel_LagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_LagerLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel_LagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1125,11 +1016,11 @@ public class Gui extends javax.swing.JFrame {
         jPanel_LagerTilføj.setLayout(jPanel_LagerTilføjLayout);
         jPanel_LagerTilføjLayout.setHorizontalGroup(
             jPanel_LagerTilføjLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 872, Short.MAX_VALUE)
+            .addGap(0, 942, Short.MAX_VALUE)
         );
         jPanel_LagerTilføjLayout.setVerticalGroup(
             jPanel_LagerTilføjLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 505, Short.MAX_VALUE)
+            .addGap(0, 519, Short.MAX_VALUE)
         );
 
         jPanel_CardMain.add(jPanel_LagerTilføj, "card_LagerTilføj");
@@ -1148,7 +1039,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jComboBox7, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField1)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(427, Short.MAX_VALUE))
+                .addContainerGap(497, Short.MAX_VALUE))
         );
         jPanel_SøgLayout.setVerticalGroup(
             jPanel_SøgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1159,7 +1050,7 @@ public class Gui extends javax.swing.JFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton12)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         jPanel_CardMain.add(jPanel_Søg, "card_Søg");
@@ -1278,11 +1169,6 @@ public class Gui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        layout.show(jPanel_CardMain, "card_Konstanter");
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton19ActionPerformed
-
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         layout.show(jPanel_CardMain, "card_LagerTilføj");
         // TODO add your handling code here:
@@ -1379,21 +1265,16 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_fjernValgtVare_lynsalgActionPerformed
 
     private void jButtonLynsalgVidereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgVidereActionPerformed
-        layout.show(jPanel_CardMain, "card_LynSalgBekræftigelse");
+        layout.show(jPanel_CardMain, "card_OrdreBekræftigelse");
+        double købssum = 0;
+       
+        for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
+             VisVare vareview = new VisVare(valgteVare_lynsalg.get(i));
+               jPanel6.add(vareview);
+               købssum = valgteVare_lynsalg.get(i).getSalgspris() + købssum;
+            
+        }jLabel_købssum_lynsalg.setText(""+købssum);
     }//GEN-LAST:event_jButtonLynsalgVidereActionPerformed
-
-    private void jButtonLynsalg_ændreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalg_ændreActionPerformed
-         layout.show(jPanel_CardMain, "card_LynSalg");
-    }//GEN-LAST:event_jButtonLynsalg_ændreActionPerformed
-
-    private void jButtonLynsalgAnnullerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgAnnullerActionPerformed
-         jComboBoxLynsalgVare.removeAllItems();
-         jComboBoxfjernValgtvare_lynsalg.removeAllItems();
-         valgteVare_lynsalg.clear();
-         opdaterValgteVare();
-         layout.show(jPanel_CardMain, "card_HovedMenu");
-         
-    }//GEN-LAST:event_jButtonLynsalgAnnullerActionPerformed
 
     private void jButton_LagerOpdaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerOpdaterActionPerformed
            // TODO add your handling code here:
@@ -1449,22 +1330,16 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JButton jButtonLynsalgAnnuller;
     private javax.swing.JButton jButtonLynsalgTilføj;
     private javax.swing.JButton jButtonLynsalgVidere;
-    private javax.swing.JButton jButtonLynsalg_ændre;
     private javax.swing.JButton jButton_Administration;
     private javax.swing.JButton jButton_AlmSalg;
     private javax.swing.JButton jButton_DBconnect;
@@ -1511,12 +1386,11 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1528,11 +1402,13 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Host;
     private javax.swing.JLabel jLabel_Password;
     private javax.swing.JLabel jLabel_Port;
+    private javax.swing.JLabel jLabel_købssum_lynsalg;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel_Administration;
     private javax.swing.JPanel jPanel_CardMain;
     private javax.swing.JPanel jPanel_DBconn;
@@ -1541,7 +1417,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Lager;
     private javax.swing.JPanel jPanel_LagerTilføj;
     private javax.swing.JPanel jPanel_LynSalg;
-    private javax.swing.JPanel jPanel_LynSalgBekræftigelse;
     private javax.swing.JPanel jPanel_OrdreBekræftigelse;
     private javax.swing.JPanel jPanel_OrdreSalg;
     private javax.swing.JPanel jPanel_Ordre_Linje;
@@ -1554,7 +1429,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextAreaLynsalg;
