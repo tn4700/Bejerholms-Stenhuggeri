@@ -8,9 +8,9 @@ package control.exceptions;
  *
  * @author NiklasRenner
  */
-public class VareStatusException extends ControlException{
+public class VareException extends ControlException{
     
-    public VareStatusException(String error){
+    public VareException(String error){
         super(error);
     }
 }

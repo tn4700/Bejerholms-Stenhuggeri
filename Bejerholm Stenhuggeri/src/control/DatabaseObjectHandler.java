@@ -4,11 +4,9 @@
  */
 package control;
 
-//import com.sun.org.apache.xerces.internal.impl.dv.xs.DateTimeDV;
 import control.exceptions.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import model.Faktura;
 import model.Inskription;
@@ -228,6 +226,13 @@ public class DatabaseObjectHandler {
 
         return inskription;
     }
+    
+    public void createInskription(Inskription inskription) throws SQLException{
+        db.setData("insert into inskription(tegn_id, skrifttype) values ('"
+                + inskription.getTegntype().getId() + "','" + inskription.getSkrifttype() 
+                + "');");
+        //createInskriptionsLinje - for løkke
+    }
 
     public ArrayList getVaregruppeListe() throws SQLException {
         String sql = "select grp_nr, navn from varegruppe";
@@ -443,7 +448,7 @@ public class DatabaseObjectHandler {
         return vare_linje;
     }
     
-    public void createVareLinje(Vare_linje vareLinje, String ordre_nr) throws SQLException, VareStatusException{
+    public void createVareLinje(Vare_linje vareLinje, String ordre_nr) throws SQLException, VareException{
         db.setData("insert into vare_linje (linje_nr, vare_nr, inskription_id, tom_linje_id, ordre_nr)"
                     + "values ('" + vareLinje.getLinje_nr() + "','" + vareLinje.getVare().getVare_nr() 
                     + "','" + vareLinje.getInskription().getId() + "','"
@@ -459,7 +464,7 @@ public class DatabaseObjectHandler {
                 } else if (vare.getVareStatus() == 2){
                     error = "Vare er allerede solgt.";
                 } 
-                throw new VareStatusException(error);
+                throw new VareException(error);
             }
         } else if(vareLinje.getInskription()!=null) {
             
