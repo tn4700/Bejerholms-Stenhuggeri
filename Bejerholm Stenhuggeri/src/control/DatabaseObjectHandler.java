@@ -5,6 +5,7 @@
 package control;
 
 //import com.sun.org.apache.xerces.internal.impl.dv.xs.DateTimeDV;
+import control.exceptions.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -380,7 +381,7 @@ public class DatabaseObjectHandler {
         return ordre;
     }
 
-    public void createOrdre(Ordre ordre) throws SQLException {
+    public void createOrdre(Ordre ordre) throws SQLException, ControlException{
         if (getOrdre(ordre.getOrdre_nr()) == null) {
             db.setData("insert into ordre (tlf, ordre_nr,ordretype,ordredato,"
                     + "leveringdato,afhentningsdato,bemærkning,"
@@ -440,13 +441,17 @@ public class DatabaseObjectHandler {
         return vare_linje;
     }
     
-    public void createVareLinje(Vare_linje vareLinje, String ordre_nr) throws SQLException{
+    public void createVareLinje(Vare_linje vareLinje, String ordre_nr) throws SQLException, VareStatusException{
         db.setData("insert into vare_linje (linje_nr, vare_nr, inskription_id, tom_linje_id, ordre_nr)"
                     + "values ('" + vareLinje.getLinje_nr() + "','" + vareLinje.getVare().getVare_nr() 
                     + "','" + vareLinje.getInskription().getId() + "','"
                     + vareLinje.getTom_linje().getId() + "','" + ordre_nr + "');");
         if(vareLinje.getVare()!=null){
+            if(vareLinje.getVare().getVareStatus() == 0) {
             updateVareStatus(vareLinje.getVare());
+            } else {
+                throw new VareStatusException("Vare er ikke på lager");
+            }
         } else if(vareLinje.getInskription()!=null) {
             
         } else if(vareLinje.getTom_linje()!=null) {
