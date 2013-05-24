@@ -19,14 +19,14 @@ private DatabaseObjectHandler dbhandler;
      */
     public MainFrame() {
         try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "1234");
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
         }
            dbhandler = new DatabaseObjectHandler(db);
         initComponents();
-        Panel_OrdreSalg ordresalg = new Panel_OrdreSalg(dbhandler);
-        jPanel1.add(ordresalg);
+        Panel_LynSalg lynsalg = new Panel_LynSalg();
+        jPanel1.add(lynsalg);
         
         
     }

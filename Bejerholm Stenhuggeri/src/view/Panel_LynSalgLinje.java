@@ -13,15 +13,23 @@ import model.Vare;
  */
 public class Panel_LynSalgLinje extends javax.swing.JPanel {
 private Vare vare;
+private Panel_LynSalg panel_lynsalg;
     /**
      * Creates new form Panel_LynSalgLinje
      */
-    public Panel_LynSalgLinje(Vare vare) {
-        this.vare = vare;
+    public Panel_LynSalgLinje(Vare vare, Panel_LynSalg panel_lynsalg ) {
+        this.vare = vare;    
+        this.panel_lynsalg = panel_lynsalg;
         initComponents();
         jLabel2.setText(vare.getNavn());
-        jLabel3.setText(""+vare.getSalgspris());
+        jLabel3.setText("Pris: "+vare.getSalgspris());
     }
+
+    public Vare getVare() {
+        return vare;
+    }
+
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,40 +42,43 @@ private Vare vare;
 
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setMinimumSize(new java.awt.Dimension(289, 38));
+        setBackground(new java.awt.Color(245, 245, 245));
+        setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153)));
+        setAlignmentX(0.0F);
+        setAlignmentY(0.0F);
+        setMinimumSize(new java.awt.Dimension(380, 38));
+        setPreferredSize(new java.awt.Dimension(490, 38));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Vare navn");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 12, -1, -1));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Pris");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 130, 20));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(26, 26, 26))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"))); // NOI18N
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 5, -1, 30));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // fjerner det valgte når der trykker på x
+        panel_lynsalg.removepanel(this);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
