@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import model.Inskription;
-import model.Kunde;
 import model.*;
 
 /**
@@ -26,6 +24,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private CardLayout layout;
     private Inskription inskription;
     private ArrayList<Inskription_linje> inskription_linjeListe;
+
 
     /**
      * Creates new form NewJPanel4
@@ -847,17 +846,18 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
     private void setInskriptionEksempel(JComboBox box, JLabel label, JTextField field) {
         int type = 0;
+
         if (box.getSelectedIndex() == 0) {
             label.setText(field.getText());
             label.setForeground(Color.darkGray);
         } else if (box.getSelectedIndex() == 1) {
+            
             label.setText(field.getText());
-            label.setForeground(Color.red);
+            label.setForeground(new Color(176, 6, 2));
         } else if (box.getSelectedIndex() == 2) {
             label.setText("(PLADS_NAVN)");
         }
     }
 
-    private void setInskriptionEksempel() {
-    }
+
 }
