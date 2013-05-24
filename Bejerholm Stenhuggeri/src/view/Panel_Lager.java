@@ -4,6 +4,12 @@
  */
 package view;
 
+import control.DBConnection;
+import control.DatabaseObjectHandler;
+import model.Varegruppe;
+import java.util.ArrayList;
+import model.Vare;
+
 /**
  *
  * @author T
@@ -13,8 +19,18 @@ public class Panel_Lager extends javax.swing.JPanel {
     /**
      * Creates new form NewJPanel5
      */
-    public Panel_Lager() {
+    private ArrayList<Vare> varelist;
+    private DatabaseObjectHandler dbhandler;
+    private DBConnection db;
+    private ArrayList<Varegruppe> varegrplist;
+
+    public Panel_Lager(DatabaseObjectHandler dbhandler) {
         initComponents();
+        varelist = new ArrayList();
+        varegrplist = new ArrayList();
+        this.dbhandler = dbhandler;
+        hentlister();
+        tilføjvaregrp();
     }
 
     /**
@@ -26,19 +42,261 @@ public class Panel_Lager extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel_Lager2 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea_Lager = new javax.swing.JTextArea();
+        jLabel35 = new javax.swing.JLabel();
+        jButton_Printvarepålager = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        jComboBox_LagerVaregruppe2 = new javax.swing.JComboBox();
+        jTextField_LagerMinPris2 = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jTextField_LagerMaxPris2 = new javax.swing.JTextField();
+        jButton_LagerOpdater2 = new javax.swing.JButton();
+        jLabel39 = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
+
         setPreferredSize(new java.awt.Dimension(800, 500));
+
+        jTextArea_Lager.setColumns(20);
+        jTextArea_Lager.setRows(5);
+        jScrollPane6.setViewportView(jTextArea_Lager);
+
+        jLabel35.setText("Varer på lager");
+
+        jButton_Printvarepålager.setText("Print");
+        jButton_Printvarepålager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_PrintvarepålagerActionPerformed(evt);
+            }
+        });
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel36.setText("Varegruppe");
+
+        jComboBox_LagerVaregruppe2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Alle" }));
+        jComboBox_LagerVaregruppe2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_LagerVaregruppe2ActionPerformed(evt);
+            }
+        });
+
+        jLabel37.setText("Min pris");
+
+        jLabel38.setText("Max pris");
+
+        jButton_LagerOpdater2.setText("Opdater");
+        jButton_LagerOpdater2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_LagerOpdater2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel36)
+                                .addComponent(jComboBox_LagerVaregruppe2, 0, 108, Short.MAX_VALUE)
+                                .addComponent(jLabel37)
+                                .addComponent(jTextField_LagerMinPris2)
+                                .addComponent(jTextField_LagerMaxPris2))
+                            .addComponent(jLabel38))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 275, Short.MAX_VALUE)
+                        .addComponent(jButton_LagerOpdater2)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox_LagerVaregruppe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField_LagerMinPris2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField_LagerMaxPris2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_LagerOpdater2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel39.setText("Filtrer Varer");
+
+        jButton12.setText("Tilføj Vare");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_Lager2Layout = new javax.swing.GroupLayout(jPanel_Lager2);
+        jPanel_Lager2.setLayout(jPanel_Lager2Layout);
+        jPanel_Lager2Layout.setHorizontalGroup(
+            jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_Lager2Layout.createSequentialGroup()
+                .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_Lager2Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton_Printvarepålager)
+                            .addGroup(jPanel_Lager2Layout.createSequentialGroup()
+                                .addComponent(jLabel35)
+                                .addGap(168, 168, 168)))
+                        .addGap(399, 399, 399)
+                        .addComponent(jButton12))
+                    .addGroup(jPanel_Lager2Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel39)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(194, Short.MAX_VALUE))
+        );
+        jPanel_Lager2Layout.setVerticalGroup(
+            jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_Lager2Layout.createSequentialGroup()
+                .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_Lager2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel35))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Lager2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel39)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel_Lager2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton_Printvarepålager)
+                            .addComponent(jButton12))))
+                .addContainerGap(141, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 959, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel_Lager2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 573, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel_Lager2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_LagerOpdater2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerOpdater2ActionPerformed
+//        jTextArea_Lager.setText("");
+//        Vare vare = (Vare) jButton_LagerOpdater2.ge
+        try{
+            
+        }catch(Exception ex){
+            System.out.println("fejl lagerupdate: "+ex);
+            
+        }
+    }//GEN-LAST:event_jButton_LagerOpdater2ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+//        layout.show(jPanel_CardMain, "card_LagerTilføj");
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jComboBox_LagerVaregruppe2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_LagerVaregruppe2ActionPerformed
+// TODOO
+    }//GEN-LAST:event_jComboBox_LagerVaregruppe2ActionPerformed
+
+    private void jButton_PrintvarepålagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_PrintvarepålagerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_PrintvarepålagerActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButton_LagerOpdater;
+    private javax.swing.JButton jButton_LagerOpdater1;
+    private javax.swing.JButton jButton_LagerOpdater2;
+    private javax.swing.JButton jButton_Printvarepålager;
+    private javax.swing.JComboBox jComboBox_LagerVaregruppe;
+    private javax.swing.JComboBox jComboBox_LagerVaregruppe1;
+    private javax.swing.JComboBox jComboBox_LagerVaregruppe2;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel_Lager;
+    private javax.swing.JPanel jPanel_Lager1;
+    private javax.swing.JPanel jPanel_Lager2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea_Lager;
+    private javax.swing.JTextField jTextField_LagerMaxPris;
+    private javax.swing.JTextField jTextField_LagerMaxPris1;
+    private javax.swing.JTextField jTextField_LagerMaxPris2;
+    private javax.swing.JTextField jTextField_LagerMinPris;
+    private javax.swing.JTextField jTextField_LagerMinPris1;
+    private javax.swing.JTextField jTextField_LagerMinPris2;
     // End of variables declaration//GEN-END:variables
+
+    public void hentlister (){
+        try {
+            varegrplist = dbhandler.getVaregruppeListe();
+            for (int i = 0; i < dbhandler.getMaxVareNr(); i++) {
+               // jTextArea_Lager.set
+            }
+        } catch (Exception e) {
+        }
+    }
+    public void tilføjvaregrp (){
+        for (int i = 0; i < varegrplist.size(); i++) {
+            jComboBox_LagerVaregruppe2.addItem(varegrplist.get(i));
+        }
+//        public void tilføjvare(){
+//            for (int i = 0; i < varelist.size(); i++) {
+//                jTextArea_Lager.setText(""+varelist.get(i));
+//            }
+        
+    }
 }

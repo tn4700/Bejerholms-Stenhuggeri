@@ -88,8 +88,12 @@ public class Panel_DBConnect extends javax.swing.JPanel {
         });
         jPanel_DBconn.add(jButton_DBconnect);
         jButton_DBconnect.setBounds(310, 380, 170, 40);
+
+        jLabel_ConnFejlbesked.setMaximumSize(new java.awt.Dimension(74, 28));
+        jLabel_ConnFejlbesked.setMinimumSize(new java.awt.Dimension(74, 28));
+        jLabel_ConnFejlbesked.setPreferredSize(new java.awt.Dimension(90, 30));
         jPanel_DBconn.add(jLabel_ConnFejlbesked);
-        jLabel_ConnFejlbesked.setBounds(370, 320, 0, 0);
+        jLabel_ConnFejlbesked.setBounds(280, 330, 230, 30);
 
         add(jPanel_DBconn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 959, 567));
     }// </editor-fold>//GEN-END:initComponents
@@ -103,6 +107,7 @@ public class Panel_DBConnect extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         if (db.isConnected()) {
+            jLabel_ConnFejlbesked.setText("");
             MainFrame mainFrame = new MainFrame(db);
         } else {
             jLabel_ConnFejlbesked.setForeground(Color.red);
