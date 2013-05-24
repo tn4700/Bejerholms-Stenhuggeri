@@ -62,6 +62,11 @@ public class Ordre {
         this.gravType = gravType;
         this.kunde = kunde;
     }
+    
+    public Ordre(Kunde kunde, ArrayList<Vare_linje> valgtevarer){
+        this.kunde = kunde;
+        this.vare_linjeListe = valgtevarer;
+    }
 
     public void addVare_linje(Vare_linje vare_linje) {
         vare_linjeListe.add(vare_linje);
