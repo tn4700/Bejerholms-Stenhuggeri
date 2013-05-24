@@ -6,9 +6,17 @@ package view;
 
 import control.DBConnection;
 import control.DatabaseObjectHandler;
+import control.exceptions.ControlException;
 import java.awt.CardLayout;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPanel;
+import model.Kunde;
+import model.Ordre;
 import model.Vare;
+import model.Vare_linje;
 import model.Varegruppe;
 
 /**
@@ -24,12 +32,14 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     private ArrayList<Varegruppe> varegrup_list;
     private ArrayList<Vare> vare_list;
     private ArrayList<Vare> valgteVare_lynsalg;
+    private Kunde kunde;
 
     /**
      * Creates new form NewJPanel
      */
     public Panel_LynSalg() {
         initComponents();
+        
 
         try {
             db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
@@ -38,6 +48,11 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         }
         layout = (CardLayout) (jPanel_MainCard.getLayout());
         dbhandler = new DatabaseObjectHandler(db);
+        try {
+            kunde = dbhandler.getKunde(50111211);
+        } catch (SQLException ex) {
+            System.out.println("Der skete en fejl ved hentning af kunde.");;
+        }
         vare_list = new ArrayList();
         valgteVare_lynsalg = new ArrayList();
         panel = new ArrayList();
@@ -72,11 +87,12 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jPanel_OrdreBekræftigelse = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        jButton_Ændre = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
         jLabel_købssum_lynsalg = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel_OversigtVarer = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(800, 500));
 
@@ -140,21 +156,31 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jPanel_LynSalg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
         jPanel_LynSalg.add(jLabel_fejlbesked, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, 220, 20));
 
-        jPanel_MainCard.add(jPanel_LynSalg, "card2");
+        jPanel_MainCard.add(jPanel_LynSalg, "card_LynSalg");
 
         jPanel_OrdreBekræftigelse.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel_OrdreBekræftigelse.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 35, 21, 335));
+        jPanel_OrdreBekræftigelse.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 35, 21, 290));
 
         jButton13.setText("Godkend");
-        jPanel_OrdreBekræftigelse.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, -1, -1));
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+        jPanel_OrdreBekræftigelse.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, -1, -1));
 
-        jButton14.setText("Ændre");
-        jPanel_OrdreBekræftigelse.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, 75, -1));
+        jButton_Ændre.setText("Ændre");
+        jButton_Ændre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ÆndreActionPerformed(evt);
+            }
+        });
+        jPanel_OrdreBekræftigelse.add(jButton_Ændre, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 90, 75, -1));
 
         jButton15.setText("Annuller");
-        jPanel_OrdreBekræftigelse.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, 75, -1));
+        jPanel_OrdreBekræftigelse.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 130, 75, -1));
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel38.setText("Ordre Bekræftigelse:");
@@ -166,6 +192,19 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
         jLabel4.setText("Samlet pris: ");
         jPanel_OrdreBekræftigelse.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, -1, -1));
+
+        javax.swing.GroupLayout jPanel_OversigtVarerLayout = new javax.swing.GroupLayout(jPanel_OversigtVarer);
+        jPanel_OversigtVarer.setLayout(jPanel_OversigtVarerLayout);
+        jPanel_OversigtVarerLayout.setHorizontalGroup(
+            jPanel_OversigtVarerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+        jPanel_OversigtVarerLayout.setVerticalGroup(
+            jPanel_OversigtVarerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+        );
+
+        jPanel_OrdreBekræftigelse.add(jPanel_OversigtVarer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 600, 190));
 
         jPanel_MainCard.add(jPanel_OrdreBekræftigelse, "card_OrdreBekræftigelse");
 
@@ -225,10 +264,10 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             Vare valgtvare = (Vare) jComboBoxLynsalgVare.getSelectedItem();
             valgteVare_lynsalg.add(valgtvare);
             vare_list.remove(valgtvare);
-            Panel_LynSalgLinje linje = new Panel_LynSalgLinje(valgtvare,this);
+            Panel_LynSalgLinje linje = new Panel_LynSalgLinje(valgtvare, this);
             panel.add(linje);
-            drawpanel();
-          
+            drawpanel(jPanel1);
+
 
         } else {
             // Brugeren skal have besked om, at det ikke var muligt at tilføje vare da listen er tom
@@ -239,21 +278,42 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonLynsalgTilføjActionPerformed
 
     private void jButtonLynsalgVidereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgVidereActionPerformed
-        double købssum = 0;
-        
-        for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
-            købssum = købssum + valgteVare_lynsalg.get(i).getSalgspris();
-            
-        }
-        jLabel_købssum_lynsalg.setText("" + købssum);
+
+        jLabel_købssum_lynsalg.setText("" + udregnpris());
+        drawpanel(jPanel_OversigtVarer);
         layout.show(jPanel_MainCard, "card_OrdreBekræftigelse");
     }//GEN-LAST:event_jButtonLynsalgVidereActionPerformed
+
+    private void jButton_ÆndreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ÆndreActionPerformed
+    layout.show(jPanel_MainCard, "card_LynSalg");
+    drawpanel(jPanel1);
+    }//GEN-LAST:event_jButton_ÆndreActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        ArrayList<Vare_linje> varelinjer = new ArrayList();
+        for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
+            Vare_linje linje = new Vare_linje(i,null,valgteVare_lynsalg.get(i),null,null);
+            varelinjer.add(linje);
+            
+        }
+        Ordre lynordre = new Ordre(kunde,varelinjer);
+        try {
+            dbhandler.createOrdre(lynordre);
+        }catch(Exception ex){
+            System.out.println("Der kunne ikke oprettes en ordre " + ex);
+        }
+       
+        
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton13ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButtonLynsalgTilføj;
     private javax.swing.JButton jButtonLynsalgVidere;
+    private javax.swing.JButton jButton_Ændre;
     private javax.swing.JComboBox jComboBoxLynsalgVare;
     private javax.swing.JComboBox jComboBox_Lynsalgvaregruppe;
     private javax.swing.JLabel jLabel1;
@@ -268,6 +328,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel_LynSalg;
     private javax.swing.JPanel jPanel_MainCard;
     private javax.swing.JPanel jPanel_OrdreBekræftigelse;
+    private javax.swing.JPanel jPanel_OversigtVarer;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextAreaVareInfo;
@@ -290,21 +351,36 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
         }
     }
-
-    private void drawpanel() {
-        jPanel1.removeAll();
-        jPanel1.updateUI();
+    /**Denne metode bruges til at tegne de valgte ind i et jpanel. 
+     * 
+     * @param jpanel Den kaldes med det panel som den skal tegne på
+     */
+    public void drawpanel(JPanel jpanel) {
+        jpanel.removeAll();
+        jpanel.updateUI();
         for (int i = 0; i < panel.size(); i++) {
-            jPanel1.add(panel.get(i));
+            jpanel.add(panel.get(i));
         }
-
     }
 
+   
+    
+//Fjener en vare både fra array og panel
     public void removepanel(Panel_LynSalgLinje i) {
         panel.remove(i);
-        valgteVare_lynsalg.remove(i.getVare());
-        drawpanel();
+        valgteVare_lynsalg.remove(i.getVare());           
+        jLabel_købssum_lynsalg.setText("" + udregnpris());
+
     }
-    
-    
+// Bruges til at opdatere købssum når der fjernes en varer og der trykkes på videre knappen.
+    public double udregnpris() {
+        double købssum = 0;
+
+        for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
+            købssum = købssum + valgteVare_lynsalg.get(i).getSalgspris();
+
+        }
+
+        return købssum;
+    }
 }

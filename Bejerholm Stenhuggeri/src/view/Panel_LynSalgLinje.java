@@ -4,6 +4,7 @@
  */
 package view;
 
+import javax.swing.JPanel;
 import model.Vare;
 
 
@@ -74,6 +75,7 @@ private Panel_LynSalg panel_lynsalg;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // fjerner det valgte når der trykker på x
         panel_lynsalg.removepanel(this);
+        panel_lynsalg.drawpanel( (JPanel)this.getParent());
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

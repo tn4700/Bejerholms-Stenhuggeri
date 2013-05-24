@@ -64,8 +64,21 @@ public class Ordre {
     }
     
     public Ordre(Kunde kunde, ArrayList<Vare_linje> valgtevarer){
-        this.kunde = kunde;
-        this.vare_linjeListe = valgtevarer;
+       ordre_nr = null;
+       ordretype = true;
+       leveringsdato = null;
+       afhentningsdato = null;
+       bemærkning = null;
+       bemærkning_ekstra = null;
+       kirkegård = null;
+       afdeling = 0;
+       afdødnavn = null;
+       række = 0;
+       nummer = 0;
+       plads_navne = 0;
+       gravType = false;
+       this.kunde = kunde;
+       this.vare_linjeListe = valgtevarer;
     }
 
     public void addVare_linje(Vare_linje vare_linje) {
