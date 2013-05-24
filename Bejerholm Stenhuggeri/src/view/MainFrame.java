@@ -6,6 +6,7 @@ package view;
 
 import control.DBConnection;
 import control.DatabaseObjectHandler;
+import java.awt.CardLayout;
 
 /**
  *
@@ -22,17 +23,26 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "5555");
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
         }
         if (db.isConnected()) {
             System.out.println("1");
             dbhandler = new DatabaseObjectHandler(db);
-            Panel_OrdreSalg lynsalg = new Panel_OrdreSalg(dbhandler);
-             jPanel1.add(lynsalg);
-//            Panel_LynSalg lynsalg = new Panel_LynSalg();
-//            jPanel1.add(lynsalg);
+
+            //Opret det panel som skal vises i framen
+            Panel_OrdreSalg ordresalg = new Panel_OrdreSalg(dbhandler);
+            // tilføj det til vores jpanel der skal fremvise det
+            jPanel1.add(ordresalg);
+            // Typecast panelet til cardlayout kald metoden addlayout med det panel der skal tilføjes samt en string der navngiver det. 
+            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(ordresalg, "OrdreSalg");
+            // Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
+            //((CardLayout) jPanel1.getLayout()).show(jPanel1, OrdreSalg);
+
+            Panel_LynSalg lynsalg = new Panel_LynSalg();
+            jPanel1.add(lynsalg);
+            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg, "LynSalg");
         } else {
             System.out.println("2");
             Panel_DBConnect dbConnect = new Panel_DBConnect();
@@ -59,6 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jComboBox1 = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
+        jComboBox2 = new javax.swing.JComboBox();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -70,10 +81,23 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(805, 510));
+        jPanel1.setLayout(new java.awt.CardLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "OrdreSalg", "LynSalg" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 160, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, (String) jComboBox2.getSelectedItem());        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,6 +135,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
