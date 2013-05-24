@@ -22,15 +22,17 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "5555");
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
         }
         if (db.isConnected()) {
             System.out.println("1");
             dbhandler = new DatabaseObjectHandler(db);
-            Panel_LynSalg lynsalg = new Panel_LynSalg();
-            jPanel1.add(lynsalg);
+            Panel_OrdreSalg lynsalg = new Panel_OrdreSalg(dbhandler);
+             jPanel1.add(lynsalg);
+//            Panel_LynSalg lynsalg = new Panel_LynSalg();
+//            jPanel1.add(lynsalg);
         } else {
             System.out.println("2");
             Panel_DBConnect dbConnect = new Panel_DBConnect();
@@ -61,13 +63,14 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 255, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(805, 510));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
