@@ -12,23 +12,38 @@ import control.DatabaseObjectHandler;
  * @author T
  */
 public class MainFrame extends javax.swing.JFrame {
-private DBConnection db;
-private DatabaseObjectHandler dbhandler;
+
+    private DBConnection db;
+    private DatabaseObjectHandler dbhandler;
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
+        initComponents();
         try {
             db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
         }
-           dbhandler = new DatabaseObjectHandler(db);
+        if (db.isConnected()) {
+            System.out.println("1");
+            dbhandler = new DatabaseObjectHandler(db);
+            Panel_LynSalg lynsalg = new Panel_LynSalg();
+            jPanel1.add(lynsalg);
+        } else {
+            System.out.println("2");
+            Panel_DBConnect dbConnect = new Panel_DBConnect();
+            jPanel1.add(dbConnect);
+        }
+    }
+
+    public MainFrame(DBConnection db) {
         initComponents();
+        this.db = db;
+        dbhandler = new DatabaseObjectHandler(db);
         Panel_LynSalg lynsalg = new Panel_LynSalg();
         jPanel1.add(lynsalg);
-        
-        
     }
 
     /**
