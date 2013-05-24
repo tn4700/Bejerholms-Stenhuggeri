@@ -47,7 +47,7 @@ public class Tegntype {
 
     @Override
     public String toString() {
-        return "Tegntype{" + "navn=" + navn + ", pris_pr_tegn=" + pris_pr_tegn + ", id=" + id + '}';
+        return navn;
     }
     
 }

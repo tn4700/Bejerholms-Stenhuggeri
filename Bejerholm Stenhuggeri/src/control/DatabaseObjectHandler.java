@@ -182,6 +182,17 @@ public class DatabaseObjectHandler {
     public void createTegntype(String navn, double pris_pr_tegn) throws SQLException {
         db.setData("insert into tegntype (navn, pris_pr_tegn) values('" + navn + "','" + pris_pr_tegn + "');");
     }
+    
+        public int getMaxTegnTypeID() throws SQLException{
+        int max = 0;
+        String sql = "select max(id) from tegntype";
+        ResultSet rs;
+        rs = db.getData(sql);
+        if (rs.next()) {
+            max = rs.getInt("max(id)");
+        }
+        return max;
+    }
 
     public Inskription_linje getInskriptionLinje(int linje_nr, int inskription_id) throws SQLException {
         Inskription_linje inskription_linje = null;
