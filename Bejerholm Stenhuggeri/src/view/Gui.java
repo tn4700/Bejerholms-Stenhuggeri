@@ -1268,12 +1268,12 @@ public class Gui extends javax.swing.JFrame {
         layout.show(jPanel_CardMain, "card_OrdreBekræftigelse");
         double købssum = 0;
        
-        for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
+     /*   for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
              VisVare vareview = new VisVare(valgteVare_lynsalg.get(i));
                jPanel6.add(vareview);
                købssum = valgteVare_lynsalg.get(i).getSalgspris() + købssum;
             
-        }jLabel_købssum_lynsalg.setText(""+købssum);
+        }*/jLabel_købssum_lynsalg.setText(""+købssum);
     }//GEN-LAST:event_jButtonLynsalgVidereActionPerformed
 
     private void jButton_LagerOpdaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerOpdaterActionPerformed

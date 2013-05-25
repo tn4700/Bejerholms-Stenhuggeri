@@ -10,6 +10,8 @@ import control.exceptions.ControlException;
 import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import javax.swing.JPanel;
 import model.Kunde;
 import model.Ordre;
@@ -36,19 +38,12 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     /**
      * Creates new form NewJPanel
      */
-    public Panel_LynSalg() {
+    public Panel_LynSalg(DatabaseObjectHandler dbhandler) {
+        this.dbhandler = dbhandler;
         initComponents();
         købssum = 0;
         jLabel6.setText("" + købssum);
-
-
-        try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
-        } catch (Exception ex) {
-            System.out.println("fejl: " + ex);
-        }
         layout = (CardLayout) (jPanel_MainCard.getLayout());
-        dbhandler = new DatabaseObjectHandler(db);
         try {
             kunde = dbhandler.getKunde(50111211);
         } catch (SQLException ex) {
@@ -159,6 +154,9 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jScrollPane5.setViewportView(jTextAreaVareInfo);
 
         jPanel_LynSalg.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 220, 210));
+
+        jPanel1.setName("LynSalg"); // NOI18N
+        jPanel1.setOpaque(false);
         jPanel_LynSalg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 490, 310));
 
         jLabel_overskrift.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -216,18 +214,9 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jLabel4.setText("Samlet pris: ");
         jPanel_OrdreBekræftigelse.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, -1, -1));
 
-        javax.swing.GroupLayout jPanel_OversigtVarerLayout = new javax.swing.GroupLayout(jPanel_OversigtVarer);
-        jPanel_OversigtVarer.setLayout(jPanel_OversigtVarerLayout);
-        jPanel_OversigtVarerLayout.setHorizontalGroup(
-            jPanel_OversigtVarerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-        jPanel_OversigtVarerLayout.setVerticalGroup(
-            jPanel_OversigtVarerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
-        );
-
-        jPanel_OrdreBekræftigelse.add(jPanel_OversigtVarer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 600, 330));
+        jPanel_OversigtVarer.setName("LynSalg"); // NOI18N
+        jPanel_OversigtVarer.setOpaque(false);
+        jPanel_OrdreBekræftigelse.add(jPanel_OversigtVarer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 580, 310));
 
         jPanel_MainCard.add(jPanel_OrdreBekræftigelse, "card_OrdreBekræftigelse");
 
@@ -383,11 +372,13 @@ public class Panel_LynSalg extends javax.swing.JPanel {
      * @param jpanel Den kaldes med det panel som den skal tegne på
      */
     public void drawpanel(JPanel jpanel) {
+        System.out.println(jpanel.getName());
         jpanel.removeAll();
         jpanel.updateUI();
         for (int i = 0; i < panel.size(); i++) {
             jpanel.add(panel.get(i));
         }
+
     }
 
 //Fjener en vare både fra array og panel
@@ -410,5 +401,31 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
 
         return købssum;
+    }
+
+    public void flytvarelinje(Panel_LynSalgLinje i, boolean flytvej) {
+
+        int plads = panel.indexOf(i);
+
+        if (flytvej == true) {
+
+            if (plads != panel.size() - 1) {
+                Collections.swap(panel, plads, plads + 1);
+                Collections.swap(valgteVare_lynsalg, plads, plads + 1);
+            }
+        } else {
+            if (plads != 0) {
+                Collections.swap(panel, plads, plads - 1);
+                Collections.swap(valgteVare_lynsalg, plads, plads - 1);
+            }
+        }
+
+        System.out.println("---------------------------------------");
+        for (int j = 0; j < valgteVare_lynsalg.size(); j++) {
+            System.out.println("" + valgteVare_lynsalg.get(j));
+
+        }
+
+
     }
 }

@@ -23,7 +23,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "1234");
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
         }
@@ -36,12 +36,12 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel1.add(ordresalg);
             // Typecast panelet til cardlayout kald metoden addlayout med det panel der skal tilføjes samt en string der navngiver det. 
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(ordresalg, "OrdreSalg");
-            // Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
-            //((CardLayout) jPanel1.getLayout()).show(jPanel1, OrdreSalg);
-//
-//            Panel_LynSalg lynsalg = new Panel_LynSalg();
-//            jPanel1.add(lynsalg);
-//            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg, "LynSalg");
+          //   Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
+            ((CardLayout) jPanel1.getLayout()).show(jPanel1, "OrdreSalg");
+
+        Panel_LynSalg lynsalg = new Panel_LynSalg(dbhandler);
+        jPanel1.add(lynsalg);
+          ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg, "LynSalg");
         } else {
             System.out.println("2");
             Panel_DBConnect dbConnect = new Panel_DBConnect();
@@ -53,7 +53,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         this.db = db;
         dbhandler = new DatabaseObjectHandler(db);
-        Panel_LynSalg lynsalg = new Panel_LynSalg();
+        Panel_LynSalg lynsalg = new Panel_LynSalg(dbhandler);
         jPanel1.add(lynsalg);
     }
 

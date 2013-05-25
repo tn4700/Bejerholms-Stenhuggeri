@@ -43,7 +43,9 @@ private Panel_LynSalg panel_lynsalg;
 
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButton_Slet = new javax.swing.JButton();
+        jButton_Op = new javax.swing.JButton();
+        jButton_Ned = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(245, 245, 245));
         setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153)));
@@ -60,27 +62,58 @@ private Panel_LynSalg panel_lynsalg;
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 130, 20));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 130, 20));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"))); // NOI18N
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Slet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"))); // NOI18N
+        jButton_Slet.setContentAreaFilled(false);
+        jButton_Slet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_SletActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 5, -1, 30));
+        add(jButton_Slet, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 3, 30, 30));
+
+        jButton_Op.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/op.png"))); // NOI18N
+        jButton_Op.setContentAreaFilled(false);
+        jButton_Op.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_OpActionPerformed(evt);
+            }
+        });
+        add(jButton_Op, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 4, 30, 30));
+
+        jButton_Ned.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ned.png"))); // NOI18N
+        jButton_Ned.setContentAreaFilled(false);
+        jButton_Ned.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_NedActionPerformed(evt);
+            }
+        });
+        add(jButton_Ned, new org.netbeans.lib.awtextra.AbsoluteConstraints(417, 4, 30, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton_SletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SletActionPerformed
         // fjerner det valgte når der trykker på x
         panel_lynsalg.removepanel(this);
         panel_lynsalg.drawpanel( (JPanel)this.getParent());
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton_SletActionPerformed
+
+    private void jButton_OpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OpActionPerformed
+    panel_lynsalg.flytvarelinje(this, false);
+    panel_lynsalg.drawpanel((JPanel)this.getParent());// TODO add your handling code here:
+    }//GEN-LAST:event_jButton_OpActionPerformed
+
+    private void jButton_NedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NedActionPerformed
+     panel_lynsalg.flytvarelinje(this,true);
+     panel_lynsalg.drawpanel((JPanel)this.getParent());
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_NedActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton_Ned;
+    private javax.swing.JButton jButton_Op;
+    private javax.swing.JButton jButton_Slet;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
