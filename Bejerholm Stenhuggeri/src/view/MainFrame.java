@@ -30,7 +30,6 @@ public class MainFrame extends javax.swing.JFrame {
         if (db.isConnected()) {
             System.out.println("1");
             dbhandler = new DatabaseObjectHandler(db);
-
             //Opret det panel som skal vises i framen
             Panel_OrdreSalg ordresalg = new Panel_OrdreSalg(dbhandler);
             // tilføj det til vores jpanel der skal fremvise det
@@ -70,6 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         jComboBox2 = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -80,11 +80,10 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 255, 102));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(805, 510));
         jPanel1.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "OrdreSalg", "LynSalg" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -93,6 +92,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 160, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -138,6 +140,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

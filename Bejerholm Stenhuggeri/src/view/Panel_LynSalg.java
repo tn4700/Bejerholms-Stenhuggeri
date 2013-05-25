@@ -98,9 +98,11 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jPanel_OversigtVarer = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(800, 500));
 
         jPanel_MainCard.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_MainCard.setOpaque(false);
         jPanel_MainCard.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel_MainCard.setLayout(new java.awt.CardLayout());
 
@@ -177,6 +179,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
         jPanel_MainCard.add(jPanel_LynSalg, "card_LynSalg");
 
+        jPanel_OrdreBekræftigelse.setOpaque(false);
         jPanel_OrdreBekræftigelse.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
