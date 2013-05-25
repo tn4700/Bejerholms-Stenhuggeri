@@ -29,8 +29,8 @@ public class Panel_Lager extends javax.swing.JPanel {
         varelist = new ArrayList();
         varegrplist = new ArrayList();
         this.dbhandler = dbhandler;
-        hentlister();
-        tilføjvaregrp();
+//        hentlister();
+//        tilføjvaregrp();
     }
 
     /**
@@ -279,16 +279,16 @@ public class Panel_Lager extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField_LagerMinPris1;
     private javax.swing.JTextField jTextField_LagerMinPris2;
     // End of variables declaration//GEN-END:variables
-
-    public void hentlister (){
-        try {
-            varegrplist = dbhandler.getVaregruppeListe();
-            for (int i = 0; i < dbhandler.getMaxVareNr(); i++) {
-               // jTextArea_Lager.set
-            }
-        } catch (Exception e) {
-        }
-    }
+//
+//    public void hentlister (){
+//        try {
+//            varegrplist = dbhandler.getVaregruppeListe();
+//            for (int i = 0; i < dbhandler.getMaxVareNr(); i++) {
+//               // jTextArea_Lager.set
+//            }
+//        } catch (Exception e) {
+//        }
+//    }
     public void tilføjvaregrp (){
         for (int i = 0; i < varegrplist.size(); i++) {
             jComboBox_LagerVaregruppe2.addItem(varegrplist.get(i));

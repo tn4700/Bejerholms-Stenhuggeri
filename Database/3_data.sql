@@ -26,8 +26,12 @@ values
 insert into vare (grp_nr,navn,højde,bredde,indkøbspris,salgspris,typenavn,overflade,dekoration,vareStatus)
 values
 ('2','fugl 181op',null,null,'116','286','O. Storm Broncedekoration',null,true,'0'),
-('1','DEN BEDSTE VARE','45','36','650','3200','Lys Halmstad','poleret',false,'2'),
-('1','granitplade','200','300','3000','10000','granitplade','overflade 3',false,'0'),
+('1','gravsten granit','45','36','650','3200','Lys Halmstad','poleret',false,'2'),
+('1','Orion','45','36','650','3200','Lys Halmstad','poleret',false,'2'),
+('1','Mørk halmstad','45','36','650','3200','Lys Halmstad','poleret',false,'2'),
+('1','gravsten granit','45','36','650','3200','Lys Halmstad','poleret',false,'2'),
+('3','granitplade','200','300','3000','10000','granitplade','overflade 3',false,'0'),
+('3','sort granit','100','36','650','3200','Lys Halmstad','poleret',false,'2'),
 ('2','fugl 85328v',null,null,'450','900','Strassacker Broncedekoration',null,true,'0');
 
 insert into ordre (tlf, ordre_nr,ordretype,ordredato,leveringdato,afhentningsdato,bemærkning,bemærkning_ekstra,kirkegård,afdeling,afdødnavn,række,nummer,plads_navne,gravType)

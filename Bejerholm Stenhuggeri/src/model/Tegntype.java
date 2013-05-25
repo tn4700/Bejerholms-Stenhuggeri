@@ -47,7 +47,7 @@ public class Tegntype {
 
     @Override
     public String toString() {
-        return navn;
+        return navn + " " + pris_pr_tegn;
     }
     
 }
