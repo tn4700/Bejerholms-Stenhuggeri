@@ -199,7 +199,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jPanel_main.setLayout(new java.awt.CardLayout());
 
-        jPanel_OrdreSalg.setPreferredSize(new java.awt.Dimension(800, 500));
+        jPanel_OrdreSalg.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_OrdreSalg.setPreferredSize(new java.awt.Dimension(1000, 800));
         jPanel_OrdreSalg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -215,7 +216,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         jLabel6.setText("Adresse");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
 
         jTextField_tlf_ordresalg.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -229,36 +230,37 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
-        jPanel3.add(jTextField_tlf_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 110, -1));
+        jPanel3.add(jTextField_tlf_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 140, -1));
 
         jTextField_fornavn_ordresalg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_fornavn_ordresalgActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField_fornavn_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 110, -1));
-        jPanel3.add(jTextField_efternavn_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 110, -1));
+        jPanel3.add(jTextField_fornavn_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 140, -1));
+        jPanel3.add(jTextField_efternavn_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 140, -1));
 
         jTextField_adresse_ordresalg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_adresse_ordresalgActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField_adresse_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 140, -1));
-        jPanel3.add(jTextField_postnr_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 60, -1));
+        jPanel3.add(jTextField_adresse_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 170, -1));
+        jPanel3.add(jTextField_postnr_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 60, -1));
 
         jLabel7.setText("Post nr");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, -1, -1));
-        jPanel3.add(jTextField_By_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 140, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
+        jPanel3.add(jTextField_By_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 170, -1));
 
         jLabel8.setText("By");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
 
-        jPanel_OrdreSalg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 410, 140));
+        jPanel_OrdreSalg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 490, 140));
 
         jLabel9.setText("Kunde info");
         jPanel_OrdreSalg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
+        jCheckBox_nysten.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(jCheckBox_nysten);
         jCheckBox_nysten.setText("Ny sten");
         jCheckBox_nysten.addActionListener(new java.awt.event.ActionListener() {
@@ -268,6 +270,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         });
         jPanel_OrdreSalg.add(jCheckBox_nysten, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
 
+        jCheckBox_tilføjelse.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(jCheckBox_tilføjelse);
         jCheckBox_tilføjelse.setText("Tilføjelse");
         jCheckBox_tilføjelse.addActionListener(new java.awt.event.ActionListener() {
@@ -277,6 +280,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         });
         jPanel_OrdreSalg.add(jCheckBox_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
 
+        jCheckBox_gravsten.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox_gravsten.setText("Gravsten");
         jCheckBox_gravsten.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,9 +300,9 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jLabel12.setText("Gravtype");
         jPanel_Kirkegård.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
-        jPanel_Kirkegård.add(jTextField_kirkegård_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 120, -1));
-        jPanel_Kirkegård.add(jTextField_afdeling_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 120, -1));
-        jPanel_Kirkegård.add(jTextField_gravtype_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 120, -1));
+        jPanel_Kirkegård.add(jTextField_kirkegård_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 170, -1));
+        jPanel_Kirkegård.add(jTextField_afdeling_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 170, -1));
+        jPanel_Kirkegård.add(jTextField_gravtype_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 170, -1));
 
         jLabel26.setText("Varegruppe:");
         jPanel_Kirkegård.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
@@ -308,14 +312,14 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jComboBox_varegruppe_nyStenActionPerformed(evt);
             }
         });
-        jPanel_Kirkegård.add(jComboBox_varegruppe_nySten, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 110, -1));
+        jPanel_Kirkegård.add(jComboBox_varegruppe_nySten, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 180, -1));
 
         jComboBox_vare_nysten.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_vare_nystenActionPerformed(evt);
             }
         });
-        jPanel_Kirkegård.add(jComboBox_vare_nysten, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 110, -1));
+        jPanel_Kirkegård.add(jComboBox_vare_nysten, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 180, -1));
 
         jLabel31.setText("Varer:");
         jPanel_Kirkegård.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
@@ -333,7 +337,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel_fejl_pris.setForeground(new java.awt.Color(204, 0, 0));
         jPanel_Kirkegård.add(jLabel_fejl_pris, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, -1));
 
-        jPanel_OrdreSalg.add(jPanel_Kirkegård, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 200, 270));
+        jPanel_OrdreSalg.add(jPanel_Kirkegård, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 280, 350));
 
         jPanel_tilføjelse.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_tilføjelse.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -364,7 +368,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jCheckBox_tilføjelse_inskriptionActionPerformed(evt);
             }
         });
-        jPanel_tilføjelse.add(jCheckBox_tilføjelse_inskription, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, -1, -1));
+        jPanel_tilføjelse.add(jCheckBox_tilføjelse_inskription, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, -1));
         jPanel_tilføjelse.add(jTextField_levering_ordresalg5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 50, -1));
         jPanel_tilføjelse.add(jSpinner_Rensning, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
         jPanel_tilføjelse.add(jSpinner_transport, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
@@ -382,7 +386,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel46.setText("I alt");
         jPanel_tilføjelse.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
-        jPanel_OrdreSalg.add(jPanel_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 210, 270));
+        jPanel_OrdreSalg.add(jPanel_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 210, 350));
 
         jButton_videre_ordresalg.setText("Videre");
         jButton_videre_ordresalg.addActionListener(new java.awt.event.ActionListener() {
@@ -390,7 +394,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jButton_videre_ordresalgActionPerformed(evt);
             }
         });
-        jPanel_OrdreSalg.add(jButton_videre_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 140, 30));
+        jPanel_OrdreSalg.add(jButton_videre_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 140, 30));
 
         jPanel_inskription_ordreSalg.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_inskription_ordreSalg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -555,7 +559,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jPanel_inskription_ordreSalg.add(jPanel_inskriptionEksempel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 290, 170));
 
-        jPanel_OrdreSalg.add(jPanel_inskription_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 320, 460));
+        jPanel_OrdreSalg.add(jPanel_inskription_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 360, 540));
 
         jPanel_main.add(jPanel_OrdreSalg, "card2");
 
@@ -573,6 +577,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jPanel_valgteVare_ordresalg.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_valgteVare_ordresalg.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel_valgteVare_ordresalg.setPreferredSize(new java.awt.Dimension(320, 14));
         jPanel_Ordre_Linje.add(jPanel_valgteVare_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 320, 380));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -1014,6 +1019,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                     vare.setSalgspris(Double.parseDouble(jTextField_pris_gravsten.getText()));
                 }
         }
+        
     }//GEN-LAST:event_jTextField_pris_gravstenFocusLost
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

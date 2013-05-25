@@ -137,7 +137,7 @@ public class Vare {
 
     @Override
     public String toString() {
-        return vare_nr + ". " + navn;
+        return vare_nr + ". " + navn +" "+salgspris;
     }
     
     
