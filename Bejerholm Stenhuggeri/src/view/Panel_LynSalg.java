@@ -97,11 +97,14 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jPanel_OversigtVarer = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(800, 500));
 
+        jPanel_MainCard.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_MainCard.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel_MainCard.setLayout(new java.awt.CardLayout());
 
+        jPanel_LynSalg.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_LynSalg.setOpaque(false);
         jPanel_LynSalg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -144,11 +147,13 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
+        jTextAreaVareInfo.setEditable(false);
         jTextAreaVareInfo.setBackground(new java.awt.Color(240, 240, 240));
         jTextAreaVareInfo.setColumns(20);
         jTextAreaVareInfo.setRows(5);
         jTextAreaVareInfo.setAutoscrolls(false);
         jTextAreaVareInfo.setBorder(null);
+        jTextAreaVareInfo.setMargin(new java.awt.Insets(5, 5, 5, 5));
         jScrollPane5.setViewportView(jTextAreaVareInfo);
 
         jPanel_LynSalg.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 220, 210));
