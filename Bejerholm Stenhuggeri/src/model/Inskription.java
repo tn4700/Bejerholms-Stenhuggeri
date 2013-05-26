@@ -18,14 +18,14 @@ public class Inskription {
     private String skrifttype;
 
     public Inskription(ArrayList<Inskription_linje> inskription_linje_liste, Tegntype tegntype, int id, String skrifttype) {
-        inskription_linje_liste = new ArrayList();
+        this.inskription_linje_liste = new ArrayList();
         this.inskription_linje_liste = inskription_linje_liste;
         this.tegntype = tegntype;
         this.id = id;
         this.skrifttype = skrifttype;
     }
-    
-    public void addInskription_linje(Inskription_linje inskription){
+
+    public void addInskription_linje(Inskription_linje inskription) {
         inskription_linje_liste.add(inskription);
     }
 
@@ -60,5 +60,17 @@ public class Inskription {
     public void setId(int id) {
         this.id = id;
     }
-    
+
+    public double getPris() {
+        double pris;
+        int antal = 0;
+        for (int i = 0; i < inskription_linje_liste.size(); i++) {
+            if (inskription_linje_liste.get(i).getLinje_type() == 1) {
+                String characters = inskription_linje_liste.get(i).getInskription().replace(" ", "");
+                antal += characters.length();
+            }
+        }
+        pris = antal * tegntype.getPris_pr_tegn();
+        return pris;
+    }
 }

@@ -24,13 +24,11 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private Kunde kunde;
     private DatabaseObjectHandler dbhandler;
     private CardLayout layout;
-    private ArrayList<Inskription_linje> inskription_linjeListe;
     private ArrayList<Varegruppe> varegruppeListe;
     private ArrayList<Vare> vareListe;
     private ArrayList<Vare> vareListeNysten;
     private ArrayList<Panel_OrdreSalgLinje> panelListe;
     private ArrayList<Vare> valgteVare_ordresalg;
-    private Vare_linje inskription_varelinje;
     private double købssum;
 
     /**
@@ -48,7 +46,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         layout = (CardLayout) (jPanel_main.getLayout());
         købssum = 0;
-        inskription_linjeListe = new ArrayList();
         varegruppeListe = new ArrayList();
         vareListe = new ArrayList();
         valgteVare_ordresalg = new ArrayList();
@@ -1510,7 +1507,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 //metoder der tjekker om inskription er valgt og opretter inskription varelinjeObjekt
     private Vare_linje getInskriptionVarelinje() {
 
-
+        ArrayList<Inskription_linje> inskription_linjeListe = new ArrayList();
 
         if (jTextFieldValgt(jTextField_Inskription_linje_1)) {
             Inskription_linje linje1 = new Inskription_linje(1, 0, getInskriptiontype(jComboBox_linjeType1), jTextField_Inskription_linje_1.getText());

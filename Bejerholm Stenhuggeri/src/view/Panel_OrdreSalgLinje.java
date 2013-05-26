@@ -27,10 +27,13 @@ public class Panel_OrdreSalgLinje extends javax.swing.JPanel {
         if(varelinje.getVare() != null){
             jLabel2.setText(varelinje.getVare().getNavn()); 
             jLabel3.setText("Pris: "+varelinje.getVare().getSalgspris());
-        }
-        if(varelinje.getTom_linje()!= null){
+        } else if(varelinje.getTom_linje()!= null){
             jLabel2.setText(varelinje.getTom_linje().getNavn()); 
             jLabel3.setText("Pris: "+varelinje.getTom_linje().getPris());
+        } else if(varelinje.getInskription()!=null){
+            String newDescription = varelinje.getInskription().getTegntype().getNavn().substring(0, 10) + "...";
+            jLabel2.setText(newDescription);
+            jLabel3.setText("Pris: " + varelinje.getInskription().getPris());
         }
         
        
