@@ -4,24 +4,11 @@
  */
 package view;
 
-import com.itextpdf.text.DocumentException;
-import control.DBConnection;
 import control.DatabaseObjectHandler;
-import control.ExportToCSV;
-import control.OpretFaktura;
-import control.OpretOrdre;
-import control.exceptions.ControlException;
 import java.awt.CardLayout;
-import java.awt.Desktop;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import model.Kunde;
 import model.Ordre;
@@ -37,7 +24,6 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
     private CardLayout layout;
     private ArrayList<Panel_LynSalgLinje> panel;
-    private DBConnection db;
     private DatabaseObjectHandler dbhandler;
     private ArrayList<Varegruppe> varegrup_list;
     private ArrayList<Vare> vare_list;
@@ -52,17 +38,72 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         this.dbhandler = dbhandler;
         initComponents();
         købssum = 0;
-        jLabel6.setText("" + købssum);
+        vare_list = new ArrayList();
+        valgteVare_lynsalg = new ArrayList();
+        panel = new ArrayList();
+        
+      
+
+        // opret CardLayout
         layout = (CardLayout) (jPanel_MainCard.getLayout());
+
+        // Hiv Kunden ud der bruges til Lynsalg - Hvilket er Firmaet i Korsør
         try {
             kunde = dbhandler.getKunde(50111211);
         } catch (SQLException ex) {
             System.out.println("Der skete en fejl ved hentning af kunde.");;
         }
+
+
+        // Hent varegrupper op put dem i varegrup_list Arrayet.
+        try {
+            varegrup_list = dbhandler.getVaregruppeListe();
+        } catch (Exception e) {
+        }
+        // fylder varegruppen op i jcomboboxen
+        udskrivVaregrp();
+
+    }
+/**
+ * Denne Constructor kaldes når der skal redigeres et ordre objekt
+ * @param dbhandler Send DBhandler med så den kan få adgang til data
+ * @param ordre     Det ordre objekt som skal redigeres
+ */
+    public Panel_LynSalg(DatabaseObjectHandler dbhandler, Ordre ordre) {
+        this.dbhandler = dbhandler;
+        initComponents();
         vare_list = new ArrayList();
         valgteVare_lynsalg = new ArrayList();
         panel = new ArrayList();
-        hentlister();
+        købssum = 0;
+        ArrayList<Vare_linje> varelinjer = ordre.getVare_linjeListe();
+        for (int i = 0; i < varelinjer.size(); i++) {
+            valgteVare_lynsalg.add(varelinjer.get(i).getVare());
+        }
+        for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
+            Panel_LynSalgLinje linje = new Panel_LynSalgLinje(valgteVare_lynsalg.get(i), this);
+            panel.add(linje);
+
+        }
+        drawpanel(jPanel_VareLinjer);
+        jLabel_VælgVareSum.setText("" + udregnpris());
+
+        // opret CardLayout
+        layout = (CardLayout) (jPanel_MainCard.getLayout());
+
+        // Hiv Kunden ud der bruges til Lynsalg - Hvilket er Firmaet i Korsør
+        try {
+            kunde = dbhandler.getKunde(50111211);
+        } catch (SQLException ex) {
+            System.out.println("Der skete en fejl ved hentning af kunde.");;
+        }
+
+
+        // Hent varegrupper op put dem i varegrup_list Arrayet.
+        try {
+            varegrup_list = dbhandler.getVaregruppeListe();
+        } catch (Exception e) {
+        }
         udskrivVaregrp();
 
     }
@@ -91,7 +132,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel_fejlbesked = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel_VælgVareSum = new javax.swing.JLabel();
         jPanel_OrdreBekræftigelse = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         jButton13 = new javax.swing.JButton();
@@ -180,10 +221,9 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jLabel5.setText("Total pris");
         jPanel_LynSalg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, -1, 20));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("jLabel6");
-        jPanel_LynSalg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 210, -1));
+        jLabel_VælgVareSum.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel_VælgVareSum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel_LynSalg.add(jLabel_VælgVareSum, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 210, 40));
 
         jPanel_MainCard.add(jPanel_LynSalg, "card_LynSalg");
 
@@ -253,23 +293,39 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox_LynsalgvaregruppeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_LynsalgvaregruppeActionPerformed
+        // Hvergang der bliver valgt en ny varegruppe skal den fjerne alle vare fra comboboxen så de nye kan fyldes i
         jComboBoxLynsalgVare.removeAllItems();
+        // Tag den Varegruppe der er valgt i comboboxen og lav det til et objekt af Varegruppe
         Varegruppe varegruppe = (Varegruppe) jComboBox_Lynsalgvaregruppe.getSelectedItem();
+      
         try {
+              //Fyld vare_list array'et op med de varer der er i den pågældende varegruppe.
             vare_list = dbhandler.getVareListe(varegruppe.getGrp_nr());
+            //Denne forløkke tjekker om der er nogle varer der allerede er valgt. De varer der er valgt bliver
+            // fjernet fra vare_list array'et så de ikke bliver vist i comboboxen igen.
             for (int i = 0; i < vare_list.size(); i++) {
-                if(vare_list.get(i).getVareStatus() !=2){
-                    jComboBoxLynsalgVare.addItem(vare_list.get(i));
-                
+                for (int j = 0; j < valgteVare_lynsalg.size(); j++) {
+                    if (vare_list.get(i).getVare_nr() == valgteVare_lynsalg.get(j).getVare_nr()) {
+                        vare_list.remove(i);
+                    }
                 }
             }
+            // DEnne for løkke fylder vare comboboxen op med de varer det er muligt at vælge i den pågældende varegruppe
+            for (int i = 0; i < vare_list.size(); i++) {
+                jComboBoxLynsalgVare.addItem(vare_list.get(i));
+
+            }
+
+
         } catch (Exception e) {
             System.out.println("fejl: " + e);
         }
     }//GEN-LAST:event_jComboBox_LynsalgvaregruppeActionPerformed
 
     private void jComboBoxLynsalgVareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLynsalgVareActionPerformed
+        // tøm Vareinfo hvergang en varer vælges
         jTextAreaVareInfo.setText("");
+        // Fyld Vareinfo boxen op med informationerne om den valgte vare - med mindre den er null
         if (jComboBoxLynsalgVare.getSelectedItem() != null) {
             Vare valgtvare = (Vare) jComboBoxLynsalgVare.getSelectedItem();
             jTextAreaVareInfo.append("" + valgtvare + "\n");
@@ -283,16 +339,22 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBoxLynsalgVareActionPerformed
 
     private void jButtonLynsalgTilføjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgTilføjActionPerformed
-
+            // Denne if sætning tjekker om der er nogle varer i comboboxen ellers kan den ikke tilføje
         if (jComboBoxLynsalgVare.getItemCount() != 0) {
-
+            // Laver den valgte vare i comboboxen om til et Vare objekt
             Vare valgtvare = (Vare) jComboBoxLynsalgVare.getSelectedItem();
+            // tilføj den valgte vare til arraylisten over valgte varer
             valgteVare_lynsalg.add(valgtvare);
-            vare_list.remove(valgtvare);
+           // fjern varen fra comboboxen
+            jComboBoxLynsalgVare.removeItem(valgtvare);
+            // opret et LynSalgLinje objekt - Dette er varelinjen der bliver vist med den valgte vare
             Panel_LynSalgLinje linje = new Panel_LynSalgLinje(valgtvare, this);
+            //tilføj det nyoprettede jpanel med varen til array'et panel som indeholder alle varelinjer.
             panel.add(linje);
+            // kald metoden drawpanel som tilføjer panelet til boksen så den bliver vist
             drawpanel(jPanel_VareLinjer);
-            jLabel6.setText("" + udregnpris());
+            // opdaterer labelen med købsummen
+            jLabel_VælgVareSum.setText("" + udregnpris());
 
 
         } else {
@@ -304,7 +366,6 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonLynsalgTilføjActionPerformed
 
     private void jButtonLynsalgVidereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgVidereActionPerformed
-
         jLabel_købssum_lynsalg.setText("" + udregnpris());
         drawpanel(jPanel_OversigtVarer);
         layout.show(jPanel_MainCard, "card_OrdreBekræftigelse");
@@ -323,7 +384,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
         }
         Ordre lynordre = new Ordre(kunde, varelinjer);
-        System.out.println(lynordre.getCurrentTime());
+
         try {
             dbhandler.createOrdre(lynordre);
         } catch (Exception ex) {
@@ -332,7 +393,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
 
 
-        
+
 
 
         // TODO add your handling code here:
@@ -351,7 +412,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel_VælgVareSum;
     private javax.swing.JLabel jLabel_fejlbesked;
     private javax.swing.JLabel jLabel_købssum_lynsalg;
     private javax.swing.JLabel jLabel_overskrift;
@@ -364,17 +425,6 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextAreaVareInfo;
     // End of variables declaration//GEN-END:variables
-
-    private void hentlister() {
-
-        try {
-            varegrup_list = dbhandler.getVaregruppeListe();
-
-        } catch (Exception e) {
-            System.out.println("ERRRWOR" + e);
-        }
-
-    }
 
     private void udskrivVaregrp() {
         for (int i = 0; i < varegrup_list.size(); i++) {
@@ -389,7 +439,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
      * @param jpanel Den kaldes med det panel som den skal tegne på
      */
     public void drawpanel(JPanel jpanel) {
-        System.out.println(jpanel.getName());
+
         jpanel.removeAll();
         jpanel.updateUI();
         for (int i = 0; i < panel.size(); i++) {
@@ -402,8 +452,10 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     public void removepanel(Panel_LynSalgLinje i) {
         panel.remove(i);
         valgteVare_lynsalg.remove(i.getVare());
+        // foretag en action til varegruppe combobox så den opdaterer varelisten i comboboxen med varer
+        jComboBox_Lynsalgvaregruppe.setSelectedIndex(jComboBox_Lynsalgvaregruppe.getSelectedIndex());
         jLabel_købssum_lynsalg.setText("" + udregnpris());
-        jLabel6.setText("" + udregnpris());
+        jLabel_VælgVareSum.setText("" + udregnpris());
 
     }
 // Bruges til at opdatere købssum når der fjernes en varer og der trykkes på videre knappen.
@@ -437,11 +489,6 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             }
         }
 
-        System.out.println("---------------------------------------");
-        for (int j = 0; j < valgteVare_lynsalg.size(); j++) {
-            System.out.println("" + valgteVare_lynsalg.get(j));
-
-        }
 
 
     }

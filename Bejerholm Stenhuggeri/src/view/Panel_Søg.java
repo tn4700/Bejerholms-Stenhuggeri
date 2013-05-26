@@ -4,16 +4,27 @@
  */
 package view;
 
+import control.DatabaseObjectHandler;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Ordre;
+
 /**
  *
  * @author T
  */
 public class Panel_Søg extends javax.swing.JPanel {
+    
+    private DatabaseObjectHandler dbHandler;
+    private MainFrame frame;
 
     /**
      * Creates new form NewJPanel1
      */
-    public Panel_Søg() {
+    public Panel_Søg(DatabaseObjectHandler dbhandler, MainFrame frame) {
+        this.dbHandler = dbhandler;
+        this.frame = frame;
         initComponents();
     }
 
@@ -26,19 +37,89 @@ public class Panel_Søg extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox_VælgType = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jButton_Søg = new javax.swing.JButton();
+        jTextField_SøgeNr = new javax.swing.JTextField();
+
         setPreferredSize(new java.awt.Dimension(800, 500));
+
+        jComboBox_VælgType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ordre", "Faktura", "Kontoudtog", "Provisionsseddel" }));
+
+        jLabel1.setText("Vælg type du vil søge efter:");
+
+        jButton_Søg.setText("Søg");
+        jButton_Søg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_SøgActionPerformed(evt);
+            }
+        });
+
+        jTextField_SøgeNr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(247, 247, 247)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField_SøgeNr, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton_Søg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addComponent(jComboBox_VælgType, 0, 273, Short.MAX_VALUE)))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox_VælgType, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField_SøgeNr, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_Søg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(215, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_SøgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SøgActionPerformed
+        if (jTextField_SøgeNr != null) {
+                        
+            if ((jComboBox_VælgType.getSelectedIndex() == 0)) {
+                try {
+                    int  ordrenr = Integer.parseInt(jTextField_SøgeNr.getText());
+                    String ordrenr2 = ""+ordrenr;
+                    
+                     try {
+                         Ordre ordre = dbHandler.getOrdre(ordrenr2);
+                   frame.skiftcard(ordre);
+                   
+                } catch (SQLException ex) {
+                    jLabel1.setText("Det var ikke muligt at hente den valgte ordre.");
+                }
+                    
+                } catch (Exception e) {
+                   jLabel1.setText("Ordre Nr skal være tal");
+                }
+                
+             
+            } else if (jComboBox_VælgType.getSelectedIndex() == 1) {
+            } else if (jComboBox_VælgType.getSelectedIndex() == 2) {
+            } else if (jComboBox_VælgType.getSelectedIndex() == 3) {
+            }
+        } else {
+            jLabel1.setText("Du mangler at indtaste noget i tekstfeltet");
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_SøgActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Søg;
+    private javax.swing.JComboBox jComboBox_VælgType;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField jTextField_SøgeNr;
     // End of variables declaration//GEN-END:variables
 }

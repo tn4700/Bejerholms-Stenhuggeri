@@ -7,6 +7,10 @@ package view;
 import control.DBConnection;
 import control.DatabaseObjectHandler;
 import java.awt.CardLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Ordre;
 
 /**
  *
@@ -32,9 +36,16 @@ public class MainFrame extends javax.swing.JFrame {
             dbhandler = new DatabaseObjectHandler(db);
             //Opret det panel som skal vises i framen
             Panel_OrdreSalg ordresalg = new Panel_OrdreSalg(dbhandler);
-            Panel_LynSalg lynsalg = new Panel_LynSalg(dbhandler);
+            Ordre ordre = null;
+            try {
+                ordre = dbhandler.getOrdre("00006");
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Panel_LynSalg lynsalg = new Panel_LynSalg(dbhandler,ordre);
             Panel_Lager lager = new Panel_Lager(dbhandler);
             Panel_Administration administration = new Panel_Administration(dbhandler);
+            Panel_Søg søg = new Panel_Søg(dbhandler,this);
             
             
             // tilføj det til vores jpanel der skal fremvise det
@@ -42,11 +53,13 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel1.add(lynsalg);
             jPanel1.add(lager);
             jPanel1.add(administration);
+            jPanel1.add(søg);
             // Typecast panelet til cardlayout kald metoden addlayout med det panel der skal tilføjes samt en string der navngiver det. 
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(ordresalg, "OrdreSalg");
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg, "LynSalg");
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lager, "Lager");
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(administration, "Administration");
+            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(søg, "Søg");
           //   Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
             ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
             
@@ -185,6 +198,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton_Lager.setBounds(410, 140, 130, 50);
 
         jButton_Ordre.setText("Ordre");
+        jButton_Ordre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_OrdreActionPerformed(evt);
+            }
+        });
         jPanel_Hovedmenu.add(jButton_Ordre);
         jButton_Ordre.setBounds(250, 250, 130, 50);
 
@@ -254,6 +272,11 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_LagerActionPerformed
 
+    private void jButton_OrdreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OrdreActionPerformed
+((CardLayout) jPanel1.getLayout()).show(jPanel1, "Søg");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_OrdreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -306,4 +329,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Hovedmenu;
     private javax.swing.JPanel jPanel_Salg;
     // End of variables declaration//GEN-END:variables
+public void skiftcard(Ordre ordre){
+    Panel_LynSalg lynsalg_ordre = new Panel_LynSalg(dbhandler,ordre);
+    jPanel1.add(lynsalg_ordre);
+    ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg_ordre, "LynSalg_Ordre");
+     ((CardLayout) jPanel1.getLayout()).show(jPanel1, "LynSalg_Ordre");
+}
 }
