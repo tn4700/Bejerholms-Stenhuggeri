@@ -156,6 +156,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel_eksempelInskription_3 = new javax.swing.JLabel();
         jLabel_eksempelInskription_4 = new javax.swing.JLabel();
         jLabel_eksempelInskription_5 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
         jLabel_fejlbesked_kunde_ordresalg = new javax.swing.JLabel();
         jPanel_Ordre_Linje = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
@@ -403,7 +405,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jCheckBox_tilføjelse_inskriptionActionPerformed(evt);
             }
         });
-        jPanel_tilføjelse.add(jCheckBox_tilføjelse_inskription, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, -1, -1));
+        jPanel_tilføjelse.add(jCheckBox_tilføjelse_inskription, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
 
         jTextField_levering_ordresalg5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -419,10 +421,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel_tilføjelse.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
         jLabel_tilføjelse_prisSum.setText("0");
-        jPanel_tilføjelse.add(jLabel_tilføjelse_prisSum, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
+        jPanel_tilføjelse.add(jLabel_tilføjelse_prisSum, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
 
         jLabel46.setText("I alt");
-        jPanel_tilføjelse.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+        jPanel_tilføjelse.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         jTextField_antal_værkstedstimer.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -431,12 +433,12 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         });
         jPanel_tilføjelse.add(jTextField_antal_værkstedstimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 30, -1));
         jPanel_tilføjelse.add(jLabel_fejlbesked_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
-        jPanel_tilføjelse.add(jTextField_kommentar_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 190, 30));
+        jPanel_tilføjelse.add(jTextField_kommentar_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 190, 30));
 
         jLabel33.setText("Kommentar");
-        jPanel_tilføjelse.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+        jPanel_tilføjelse.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
-        jPanel_OrdreSalg.add(jPanel_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 210, 330));
+        jPanel_OrdreSalg.add(jPanel_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 210, 290));
 
         jButton_videre_ordresalg.setText("Videre");
         jButton_videre_ordresalg.addActionListener(new java.awt.event.ActionListener() {
@@ -508,7 +510,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel34.setText("Skrifttype:");
         jPanel_inskription_ordreSalg.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
-        jPanel_inskription_ordreSalg.add(jComboBox_tegntype_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 300, -1));
+        jPanel_inskription_ordreSalg.add(jComboBox_tegntype_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 210, -1));
         jPanel_inskription_ordreSalg.add(jTextField_skrifttype, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 240, -1));
 
         jComboBox_linjeType3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ny", "Gammel", "Plads" }));
@@ -609,6 +611,12 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jPanel_inskription_ordreSalg.add(jPanel_inskriptionEksempel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 290, 170));
 
+        jLabel35.setText("Pris i alt:");
+        jPanel_inskription_ordreSalg.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
+
+        jLabel38.setText("jLabel38");
+        jPanel_inskription_ordreSalg.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, -1, -1));
+
         jPanel_OrdreSalg.add(jPanel_inskription_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 360, 460));
 
         jLabel_fejlbesked_kunde_ordresalg.setForeground(new java.awt.Color(153, 0, 0));
@@ -616,6 +624,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jPanel_main.add(jPanel_OrdreSalg, "card2");
 
+        jPanel_Ordre_Linje.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_Ordre_Linje.setMinimumSize(new java.awt.Dimension(800, 500));
         jPanel_Ordre_Linje.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel_Ordre_Linje.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -629,7 +638,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel_Ordre_Linje.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 420, 80, 40));
 
         jPanel_valgteVare_ordresalg.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel_valgteVare_ordresalg.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel_valgteVare_ordresalg.setPreferredSize(new java.awt.Dimension(380, 40));
         jPanel_Ordre_Linje.add(jPanel_valgteVare_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 320, 380));
 
@@ -962,17 +970,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jCheckBox_tilføjelse_inskriptionActionPerformed
 
-    private void jCheckBox_gravstenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_gravstenActionPerformed
-        if (jCheckBox_nysten.isSelected() && jCheckBox_gravsten.isSelected()) {
-            jPanel_Kirkegård.setVisible(true);
-            jPanel_inskription_ordreSalg.setVisible(true);
-        }
-
-        if (jCheckBox_tilføjelse.isSelected() && jCheckBox_gravsten.isSelected()) {
-            jPanel_tilføjelse.setVisible(true);
-        }
-    }//GEN-LAST:event_jCheckBox_gravstenActionPerformed
-
     private void jCheckBox_tilføjelseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_tilføjelseActionPerformed
 
         if (jCheckBox_tilføjelse.isSelected() && jCheckBox_gravsten.isSelected()) {
@@ -1198,6 +1195,17 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jCheckBox_redigerPris_gravstenActionPerformed
 
+    private void jCheckBox_gravstenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_gravstenActionPerformed
+        if (jCheckBox_nysten.isSelected() && jCheckBox_gravsten.isSelected()) {
+            jPanel_Kirkegård.setVisible(true);
+            jPanel_inskription_ordreSalg.setVisible(true);
+        }
+
+        if (jCheckBox_tilføjelse.isSelected() && jCheckBox_gravsten.isSelected()) {
+            jPanel_tilføjelse.setVisible(true);
+        }
+    }//GEN-LAST:event_jCheckBox_gravstenActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton13;
@@ -1253,8 +1261,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
