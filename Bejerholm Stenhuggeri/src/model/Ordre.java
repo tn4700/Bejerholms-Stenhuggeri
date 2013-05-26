@@ -49,13 +49,13 @@ public class Ordre {
         this.ordre_nr = ordre_nr;
         this.ordretype = ordretype;
         this.ordredato = ordredato;
-        if(leveringsdato != null){
-        this.leveringsdato = leveringsdato;
+        if (leveringsdato != null) {
+            this.leveringsdato = leveringsdato;
         } else {
             this.leveringsdato = getCurrentTime();
         }
-        if(afhentningsdato != null) {
-        this.afhentningsdato = afhentningsdato;
+        if (afhentningsdato != null) {
+            this.afhentningsdato = afhentningsdato;
         } else {
             this.afhentningsdato = getCurrentTime();
         }
@@ -69,22 +69,23 @@ public class Ordre {
         this.gravType = gravType;
         this.kunde = kunde;
     }
-    
-    public Ordre(Kunde kunde, ArrayList<Vare_linje> valgtevarer){
-       ordre_nr = null;
-       ordretype = true;
-       leveringsdato = null;
-       afhentningsdato = null;
-       bemærkning = null;
-       bemærkning_ekstra = null;
-       kirkegård = null;
-       afdeling = 0;
-       afdødnavn = null;
-       række = 0;
-       nummer = 0;
-       gravType = false;
-       this.kunde = kunde;
-       this.vare_linjeListe = valgtevarer;
+
+    public Ordre(Kunde kunde, ArrayList<Vare_linje> valgtevarer) {
+        ordre_nr = null;
+        ordretype = true;
+        this.ordredato = getCurrentTime();
+        this.leveringsdato = getCurrentTime();
+        this.afhentningsdato = getCurrentTime();
+        bemærkning = null;
+        bemærkning_ekstra = null;
+        kirkegård = null;
+        afdeling = 0;
+        afdødnavn = null;
+        række = 0;
+        nummer = 0;
+        gravType = false;
+        this.kunde = kunde;
+        this.vare_linjeListe = valgtevarer;
     }
 
     public void addVare_linje(Vare_linje vare_linje) {
@@ -194,7 +195,7 @@ public class Ordre {
     public void setNummer(int nummer) {
         this.nummer = nummer;
     }
-    
+
     public boolean getGravType() {
         return gravType;
     }
@@ -220,7 +221,7 @@ public class Ordre {
     }
 
     public double getTotal() {
-        
+
         int antal = 0;
         double enhedsPris = 0;
         double pris = 0;
@@ -250,21 +251,20 @@ public class Ordre {
         total += (total * 0.025);
         return total;
     }
-    
-    public double getSalgsMoms(){
+
+    public double getSalgsMoms() {
         double salgsMoms = getTotal();
         salgsMoms = (salgsMoms * 0.25);
         return salgsMoms;
     }
-    
-    public double getTotalInklMoms(){
+
+    public double getTotalInklMoms() {
         double total = getTotal() + getSalgsMoms();
         return total;
     }
 
-    public final Timestamp getCurrentTime(){
+    public final Timestamp getCurrentTime() {
         Timestamp timestamp = new Timestamp(new Date().getTime());
         return timestamp;
     }
-    
 }

@@ -4,14 +4,24 @@
  */
 package view;
 
+import com.itextpdf.text.DocumentException;
 import control.DBConnection;
 import control.DatabaseObjectHandler;
+import control.ExportToCSV;
+import control.OpretFaktura;
+import control.OpretOrdre;
 import control.exceptions.ControlException;
 import java.awt.CardLayout;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import model.Kunde;
 import model.Ordre;
@@ -76,7 +86,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jButtonLynsalgVidere = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextAreaVareInfo = new javax.swing.JTextArea();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel_VareLinjer = new javax.swing.JPanel();
         jLabel_overskrift = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel_fejlbesked = new javax.swing.JLabel();
@@ -155,9 +165,9 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
         jPanel_LynSalg.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 220, 210));
 
-        jPanel1.setName("LynSalg"); // NOI18N
-        jPanel1.setOpaque(false);
-        jPanel_LynSalg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 490, 310));
+        jPanel_VareLinjer.setName("LynSalg"); // NOI18N
+        jPanel_VareLinjer.setOpaque(false);
+        jPanel_LynSalg.add(jPanel_VareLinjer, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 490, 310));
 
         jLabel_overskrift.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_overskrift.setText("Lyn Salg");
@@ -248,7 +258,10 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         try {
             vare_list = dbhandler.getVareListe(varegruppe.getGrp_nr());
             for (int i = 0; i < vare_list.size(); i++) {
-                jComboBoxLynsalgVare.addItem(vare_list.get(i));
+                if(vare_list.get(i).getVareStatus() !=2){
+                    jComboBoxLynsalgVare.addItem(vare_list.get(i));
+                
+                }
             }
         } catch (Exception e) {
             System.out.println("fejl: " + e);
@@ -278,7 +291,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             vare_list.remove(valgtvare);
             Panel_LynSalgLinje linje = new Panel_LynSalgLinje(valgtvare, this);
             panel.add(linje);
-            drawpanel(jPanel1);
+            drawpanel(jPanel_VareLinjer);
             jLabel6.setText("" + udregnpris());
 
 
@@ -299,7 +312,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
     private void jButton_ÆndreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ÆndreActionPerformed
         layout.show(jPanel_MainCard, "card_LynSalg");
-        drawpanel(jPanel1);
+        drawpanel(jPanel_VareLinjer);
     }//GEN-LAST:event_jButton_ÆndreActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -310,12 +323,16 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
         }
         Ordre lynordre = new Ordre(kunde, varelinjer);
+        System.out.println(lynordre.getCurrentTime());
         try {
             dbhandler.createOrdre(lynordre);
         } catch (Exception ex) {
             System.out.println("Der kunne ikke oprettes en ordre " + ex);
         }
 
+
+
+        
 
 
         // TODO add your handling code here:
@@ -338,11 +355,11 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_fejlbesked;
     private javax.swing.JLabel jLabel_købssum_lynsalg;
     private javax.swing.JLabel jLabel_overskrift;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_LynSalg;
     private javax.swing.JPanel jPanel_MainCard;
     private javax.swing.JPanel jPanel_OrdreBekræftigelse;
     private javax.swing.JPanel jPanel_OversigtVarer;
+    private javax.swing.JPanel jPanel_VareLinjer;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextAreaVareInfo;
