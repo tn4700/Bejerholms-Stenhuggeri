@@ -63,5 +63,11 @@ public class Vare_linje {
     public void setTom_linje(Tom_linje tom_linje) {
         this.tom_linje = tom_linje;
     }
+
+    @Override
+    public String toString() {
+        return "Vare_linje{" + "linje_nr=" + linje_nr + ", ordre_nr=" + ordre_nr + ", vare=" + vare + ", inskription=" + inskription + ", tom_linje=" + tom_linje + '}';
+    }
+    
     
 }

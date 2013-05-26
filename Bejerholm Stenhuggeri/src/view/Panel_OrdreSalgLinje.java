@@ -6,29 +6,38 @@ package view;
 
 import javax.swing.JPanel;
 import model.Vare;
+import model.Vare_linje;
 
 /**
  *
  * @author Anette
  */
 public class Panel_OrdreSalgLinje extends javax.swing.JPanel {
-    private Vare vare;
+    private Vare_linje varelinje;
     private Panel_OrdreSalg panel_ordresalg;
     
     /**
      * Creates new form Panel_OrdreSalgLinje
      */
-    public Panel_OrdreSalgLinje(Vare vare, Panel_OrdreSalg panel_ordresalg) {
+    public Panel_OrdreSalgLinje(Vare_linje varelinje, Panel_OrdreSalg panel_ordresalg) {
         initComponents();
-        this.vare = vare;
+        this.varelinje = varelinje;
         this.panel_ordresalg = panel_ordresalg;
         
-        jLabel2.setText(vare.getNavn());
-        jLabel3.setText("Pris: "+vare.getSalgspris());
+        if(varelinje.getVare() != null){
+            jLabel2.setText(varelinje.getVare().getNavn()); 
+            jLabel3.setText("Pris: "+varelinje.getVare().getSalgspris());
+        }
+        if(varelinje.getTom_linje()!= null){
+            jLabel2.setText(varelinje.getTom_linje().getNavn()); 
+            jLabel3.setText("Pris: "+varelinje.getTom_linje().getPris());
+        }
+        
+       
         
     }
-  public Vare getVare() {
-        return vare;
+  public Vare_linje getVarelinje() {
+        return varelinje;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,22 +54,22 @@ public class Panel_OrdreSalgLinje extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(380, 38));
+        setPreferredSize(new java.awt.Dimension(300, 38));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153)));
-        jPanel1.setMinimumSize(new java.awt.Dimension(380, 38));
+        jPanel1.setMinimumSize(new java.awt.Dimension(300, 38));
         jPanel1.setPreferredSize(new java.awt.Dimension(320, 38));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Vare navn");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 50));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 40));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 130, 40));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 90, 40));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"))); // NOI18N
         jButton1.setContentAreaFilled(false);
@@ -69,17 +78,19 @@ public class Panel_OrdreSalgLinje extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, -1, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
