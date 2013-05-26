@@ -4,17 +4,20 @@
  */
 package view;
 
+import control.DatabaseObjectHandler;
+
 /**
  *
  * @author T
  */
 public class Panel_Administration extends javax.swing.JPanel {
-
+private DatabaseObjectHandler dbhandler;
     /**
      * Creates new form NewJPanel6
      */
-    public Panel_Administration() {
+    public Panel_Administration(DatabaseObjectHandler dbhandler) {
         initComponents();
+        this.dbhandler = dbhandler;
     }
 
     /**
