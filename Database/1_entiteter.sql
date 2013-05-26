@@ -35,7 +35,6 @@ afdeling				int,
 afdødnavn				varchar(50),
 række					int,
 nummer					int,
-plads_navne				int,
 gravType				boolean,
 primary key(ordre_nr)
 ) engine = innodb;

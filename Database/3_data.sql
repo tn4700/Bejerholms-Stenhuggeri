@@ -34,12 +34,12 @@ values
 ('3','sort granit','100','36','650','3200','Lys Halmstad','poleret',false,'2'),
 ('2','fugl 85328v',null,null,'450','900','Strassacker Broncedekoration',null,true,'0');
 
-insert into ordre (tlf, ordre_nr,ordretype,ordredato,leveringdato,afhentningsdato,bemærkning,bemærkning_ekstra,kirkegård,afdeling,afdødnavn,række,nummer,plads_navne,gravType)
+insert into ordre (tlf, ordre_nr,ordretype,ordredato,leveringdato,afhentningsdato,bemærkning,bemærkning_ekstra,kirkegård,afdeling,afdødnavn,række,nummer,gravType)
 values
-('20332836','00001',true,'2013-04-30 12:50:32','2013-05-10 12:50:32','2013-05-15 12:50:32','Bemærkning','Bemærkning_ekstra','Vor Frue Kirke','10','Gunner','10','1','1',true),
-('50111211','00002',true,'2013-04-1 13:00:00','2013-05-11 13:00:00','2013-05-16 13:00:00','Bemærkning','Bemærkning_ekstra','Vor Frue Kirke','11','Gunner','10','2','1',true),
-('31255685','00003',true,'2013-04-2 13:00:00','2013-06-11 13:00:00','2013-05-17 13:00:00','Bemærkning','Bemærkning_ekstra','Kirkegård','12','Gunner','11','1','1',true),
-('28931093','00004',true,'2013-04-2 13:00:00','2013-06-11 13:00:00','2013-05-18 13:00:00','Bemærkning','Bemærkning_ekstra','Kirkegård','13','Gunner','11','2','1',true);
+('20332836','00001',true,'2013-04-30 12:50:32','2013-05-10 12:50:32','2013-05-15 12:50:32','Bemærkning','Bemærkning_ekstra','Vor Frue Kirke','10','Gunner','10','1',true),
+('50111211','00002',true,'2013-04-1 13:00:00','2013-05-11 13:00:00','2013-05-16 13:00:00','Bemærkning','Bemærkning_ekstra','Vor Frue Kirke','11','Gunner','10','2',true),
+('31255685','00003',true,'2013-04-2 13:00:00','2013-06-11 13:00:00','2013-05-17 13:00:00','Bemærkning','Bemærkning_ekstra','Kirkegård','12','Gunner','11','1',true),
+('28931093','00004',true,'2013-04-2 13:00:00','2013-06-11 13:00:00','2013-05-18 13:00:00','Bemærkning','Bemærkning_ekstra','Kirkegård','13','Gunner','11','2',true);
 
 insert into tegntype (navn,pris_pr_tegn)
 values
