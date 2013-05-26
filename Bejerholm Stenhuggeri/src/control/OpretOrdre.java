@@ -123,8 +123,8 @@ public class OpretOrdre {
         cb.stroke();
 
         //Indsættelse af data i ordrebekræftelse  
-        String timeStamp = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
-        createContent(cb, btFont, 12, black, 571, 624, timeStamp, right);
+        String ordredato = new SimpleDateFormat("dd-MM-yyyy").format(ordre.getOrdredato());
+        createContent(cb, btFont, 12, black, 571, 624, ordredato, right);
         String tlf = ordre.getKunde().getTlf() + "";
         createContent(cb, btFont, 12, black, 571, 604, tlf, right);
         String ordre_nr = ordre.getOrdre_nr();
@@ -173,7 +173,7 @@ public class OpretOrdre {
         cb.stroke();
 
         //Indsæt data til info-tabeller
-        if (ordre.GetOrdretype()) {
+        if (ordre.getOrdretype()) {
             createContent(cb, tFont, 12, black, 150, 544, "" + 1, center);
             cb.rectangle(125, 520, 50, 20);
             cb.fill();
@@ -187,14 +187,14 @@ public class OpretOrdre {
         } else {
             createContent(cb, tFont, 12, black, 150, 504, "Urne", center);
         }
-        if (ordre.getAfhentningsdato() != null) {
+        if (!ordre.getOrdretype()) {
             String afhDato = new SimpleDateFormat("dd-MM-yyyy").format(ordre.getAfhentningsdato());
             createContent(cb, tFont, 12, black, 330, 544, afhDato, center);
         } else {
             cb.rectangle(280, 540, 100, 20);
             cb.fill();
         }
-        if (ordre.getLeveringsdato() != null) {
+        if (ordre.getOrdretype()) {
             String levDato = new SimpleDateFormat("dd-MM-yyyy").format(ordre.getLeveringsdato());
             createContent(cb, tFont, 12, black, 330, 524, levDato, center);
         } else {

@@ -71,20 +71,20 @@ public class DatabaseObjectHandler {
                     rs.getInt("tlf"),
                     null);
             post_nr = rs.getInt("post_nr");
+            rs.close();
+            kunde.setPost_nr(getPostnummer(post_nr));
         }
-        rs.close();
-        kunde.setPost_nr(getPostnummer(post_nr));
 
         return kunde;
     }
 
     public void createKunde(Kunde kunde) throws SQLException {
         if (getKunde(kunde.getTlf()) == null) {
+            createPostnummer(kunde.getPost_nr());
             db.setData("insert into kunde(fornavn, efternavn, adresse, tlf, post_nr) values('"
                     + kunde.getFornavn() + "','" + kunde.getEfternavn() + "','"
                     + kunde.getAdresse() + "','" + kunde.getTlf() + "','"
                     + kunde.getPost_nr().getPost_nr() + "');");
-            createPostnummer(kunde.getPost_nr());
         }
     }
 
@@ -144,8 +144,8 @@ public class DatabaseObjectHandler {
         rs.close();
         return tomlinje;
     }
-    
-    public int getMaxTomLinjeId() throws SQLException{
+
+    public int getMaxTomLinjeId() throws SQLException {
         int max = 0;
         String sql = "select max(id) from tom_linje";
         ResultSet rs;
@@ -182,8 +182,8 @@ public class DatabaseObjectHandler {
     public void createTegntype(String navn, double pris_pr_tegn) throws SQLException {
         db.setData("insert into tegntype (navn, pris_pr_tegn) values('" + navn + "','" + pris_pr_tegn + "');");
     }
-    
-        public int getMaxTegnTypeID() throws SQLException{
+
+    public int getMaxTegnTypeID() throws SQLException {
         int max = 0;
         String sql = "select max(id) from tegntype";
         ResultSet rs;
@@ -266,7 +266,7 @@ public class DatabaseObjectHandler {
 
     public void createInskription(Inskription inskription) throws SQLException {
         db.setData("insert into inskription(tegn_id, skrifttype) values ('"
-                + "','" + inskription.getTegntype().getId() + "','" + inskription.getSkrifttype()
+                + inskription.getTegntype().getId() + "','" + inskription.getSkrifttype()
                 + "');");
         createInskriptionLinje(inskription.getInskription_linje_liste(), getMaxInskriptionId());
     }
@@ -376,14 +376,14 @@ public class DatabaseObjectHandler {
 
     public void createVare(Vare vare) throws SQLException {
         db.setData("insert into vare(navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade,"
-                + "dekoration, gruppe_nr) values ('" + vare.getNavn() + "','" + vare.getHøjde() + "','"
+                + "dekoration, grp_nr, vareStatus) values ('" + vare.getNavn() + "','" + vare.getHøjde() + "','"
                 + vare.getBredde() + "','" + vare.getIndkøbspris() + "','" + vare.getSalgspris() + "','"
-                + vare.getTypenavn() + "','" + "" + vare.getOverflade() + "','" + vare.getDekoration()
-                + "','" + vare.getGruppe() + "');");
+                + vare.getTypenavn() + "','" + "" + vare.getOverflade() + "','" + boolToInt(vare.getDekoration())
+                + "','" + vare.getGruppe().getGrp_nr() + "',0);");
     }
 
     public void updateVareStatus(Vare vare) throws SQLException {
-        db.setData("update Vare set vareStatus = " + vare.getVareStatus() + "where vare_nr = "
+        db.setData("update Vare set vareStatus = " + vare.getVareStatus() + " where vare_nr = "
                 + vare.getVare_nr() + ";");
     }
 
@@ -403,12 +403,13 @@ public class DatabaseObjectHandler {
         Vare_linje vare_linje = null;
         int tlf = 0;
         String sql = "select tlf, ordre_nr,ordretype,ordredato,leveringdato,afhentningsdato,bemærkning,bemærkning_ekstra,"
-                + "kirkegård,afdeling,afdødnavn,række,nummer,plads_navne,gravType from ordre where ordre_nr =" + ordre_nr;
+                + "kirkegård,afdeling,afdødnavn,række,nummer,gravType from ordre where ordre_nr =" + ordre_nr;
         ResultSet rs;
         rs = db.getData(sql);
         if (rs.next()) {
             ordre = new Ordre(rs.getString("ordre_nr"),
                     rs.getBoolean("ordretype"),
+                    rs.getTimestamp("ordredato"),
                     rs.getTimestamp("leveringdato"),
                     rs.getTimestamp("afhentningsdato"),
                     rs.getString("bemærkning"),
@@ -418,41 +419,59 @@ public class DatabaseObjectHandler {
                     rs.getString("afdødnavn"),
                     rs.getInt("række"),
                     rs.getInt("nummer"),
-                    rs.getInt("plads_navne"),
                     rs.getBoolean("gravType"),
                     null);
             tlf = rs.getInt("tlf");
+            rs.close();
+            
+            ordre.setKunde(getKunde(tlf));
+            int max = getMaxVareLinje(ordre.getOrdre_nr());
+            for (int i = 1; i <= max; i++) {
+                vare_linje = getVareLinje(i, ordre.getOrdre_nr());
+                ordre.addVare_linje(vare_linje);
+                vare_linje = null;
+            }
         }
-        rs.close();
-        ordre.setKunde(getKunde(tlf));
-        int max = getMaxVareLinje(ordre.getOrdre_nr());
-        for (int i = 1; i <= max; i++) {
-            vare_linje = getVareLinje(i, ordre.getOrdre_nr());
-            ordre.addVare_linje(vare_linje);
-            vare_linje = null;
-        }
+
         return ordre;
     }
 
+    public String getNextOrdreNr() throws SQLException {
+        int max = 0;
+        ResultSet rs;
+        rs = db.getData("select MAX(ordre_nr) from ordre;");
+        if (rs.next()) {
+            max = Integer.parseInt(rs.getString("MAX(ordre_nr)"));
+        }
+        String next = Integer.toString(max + 1);
+        int count = 5 - next.length();
+        for (int i = 0; i < count; i++) {
+            next = "0" + next;
+        }
+        return next;
+    }
+
     public void createOrdre(Ordre ordre) throws SQLException, ControlException {
-        if (getOrdre(ordre.getOrdre_nr()) == null) {
-            db.setData("insert into ordre (tlf, ordre_nr,ordretype,ordredato,"
+        String ordre_nr = getNextOrdreNr();
+        createKunde(ordre.getKunde());
+        if (getOrdre(ordre_nr) == null) {
+            db.setData("insert into ordre(tlf,ordre_nr,ordretype,ordredato,"
                     + "leveringdato,afhentningsdato,bemærkning,"
                     + "bemærkning_ekstra,kirkegård,afdeling,"
                     + "afdødnavn,række,nummer,gravType)"
-                    + "values ('" + ordre.getKunde().getTlf() + ","
-                    + ordre.getOrdre_nr() + "," + ordre.GetOrdretype() + ","
-                    + ordre.getOrdredato() + "," + ordre.getLeveringsdato() + "','"
+                    + "values ('" + ordre.getKunde().getTlf() + "','"
+                    + ordre_nr + "','" + boolToInt(ordre.getOrdretype()) + "','"
+                    + ordre.getOrdredato() + "','" + ordre.getLeveringsdato() + "','"
                     + ordre.getAfhentningsdato() + "','" + ordre.getBemærkning() + "','"
                     + ordre.getBemærkning_ekstra() + "','"
                     + ordre.getKirkegård() + "','" + ordre.getAfdeling() + "','"
                     + ordre.getAfdødnavn() + "','" + ordre.getRække() + "','" + ordre.getNummer()
-                    + "','" + ordre.getGravType() + "');");
+                    + "','" + boolToInt(ordre.getGravType()) + "');");
         } else {
-            throw new OrdreException("En ordre med ordrenummeret " + ordre.getOrdre_nr() + " findes allerede.");
+            throw new OrdreException("En ordre med ordrenummeret " + ordre_nr + " findes allerede.");
         }
         for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
-            createVareLinje(ordre.getVare_linjeListe().get(i), ordre.getOrdre_nr());
+            createVareLinje(ordre.getVare_linjeListe().get(i), ordre_nr);
         }
     }
 
@@ -558,5 +577,26 @@ public class DatabaseObjectHandler {
             faktura.setBedemand(getSamarbejdspartner(tlf));
         }
         return faktura;
+    }
+
+    public int getMaxVareNr() throws SQLException {
+        int max = 0;
+        ResultSet rs;
+        rs = db.getData("select MAX(vare_nr) from vare");
+        if (rs.next()) {
+            max = rs.getInt("MAX(vare_nr)");
+        }
+        return max;
+    }
+
+    public int boolToInt(boolean b) {
+        int result = 0;
+        if (b) {
+            result = 1;
+        }
+        return result;
+
+        //Alternativ løsning
+        //return b ? 1 : 0;
     }
 }

@@ -6,6 +6,7 @@ package model;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -16,7 +17,6 @@ public class Ordre {
     private String ordre_nr;
     private boolean ordretype;      //1 - ny sten, 0 - tilføjelse
     private Timestamp ordredato;
-    private int ordrestatus;
     private Timestamp leveringsdato;
     private Timestamp afhentningsdato;
     private String bemærkning;
@@ -26,13 +26,13 @@ public class Ordre {
     private String afdødnavn;
     private int række;
     private int nummer;
-    private int plads_navne;
     private boolean gravType;       //1 - Kiste, 0 - Urne 
     private Kunde kunde;
     private ArrayList<Vare_linje> vare_linjeListe;
 
     public Ordre(String ordre_nr,
             boolean ordretype,
+            Timestamp ordredato,
             Timestamp leveringsdato,
             Timestamp afhentningsdato,
             String bemærkning,
@@ -42,15 +42,23 @@ public class Ordre {
             String afdødnavn,
             int række,
             int nummer,
-            int plads_navne,
             boolean gravType,
             Kunde kunde) {
 
         vare_linjeListe = new ArrayList();
         this.ordre_nr = ordre_nr;
         this.ordretype = ordretype;
+        this.ordredato = ordredato;
+        if(leveringsdato != null){
         this.leveringsdato = leveringsdato;
+        } else {
+            this.leveringsdato = getCurrentTime();
+        }
+        if(afhentningsdato != null) {
         this.afhentningsdato = afhentningsdato;
+        } else {
+            this.afhentningsdato = getCurrentTime();
+        }
         this.bemærkning = bemærkning;
         this.bemærkning_ekstra = bemærkning_ekstra;
         this.kirkegård = kirkegård;
@@ -58,7 +66,6 @@ public class Ordre {
         this.afdødnavn = afdødnavn;
         this.række = række;
         this.nummer = nummer;
-        this.plads_navne = plads_navne;
         this.gravType = gravType;
         this.kunde = kunde;
     }
@@ -75,7 +82,6 @@ public class Ordre {
        afdødnavn = null;
        række = 0;
        nummer = 0;
-       plads_navne = 0;
        gravType = false;
        this.kunde = kunde;
        this.vare_linjeListe = valgtevarer;
@@ -109,7 +115,7 @@ public class Ordre {
         this.ordre_nr = ordre_nr;
     }
 
-    public boolean GetOrdretype() {
+    public boolean getOrdretype() {
         return ordretype;
     }
 
@@ -123,14 +129,6 @@ public class Ordre {
 
     public void setOrdredato(Timestamp ordredato) {
         this.ordredato = ordredato;
-    }
-
-    public int getOrdrestatus() {
-        return ordrestatus;
-    }
-
-    public void setOrdrestatus(int ordrestatus) {
-        this.ordrestatus = ordrestatus;
     }
 
     public Timestamp getLeveringsdato() {
@@ -196,15 +194,7 @@ public class Ordre {
     public void setNummer(int nummer) {
         this.nummer = nummer;
     }
-
-    public int getPlads_navne() {
-        return plads_navne;
-    }
-
-    public void setPlads_navne(int plads_navne) {
-        this.plads_navne = plads_navne;
-    }
-
+    
     public boolean getGravType() {
         return gravType;
     }
@@ -272,4 +262,9 @@ public class Ordre {
         return total;
     }
 
+    public final Timestamp getCurrentTime(){
+        Timestamp timestamp = new Timestamp(new Date().getTime());
+        return timestamp;
+    }
+    
 }
