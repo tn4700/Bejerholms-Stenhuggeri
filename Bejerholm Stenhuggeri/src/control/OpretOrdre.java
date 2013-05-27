@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import model.Inskription;
 import model.Inskription_linje;
 import model.Ordre;
@@ -123,8 +122,7 @@ public class OpretOrdre {
         cb.stroke();
 
         //Indsættelse af data i ordrebekræftelse  
-        String ordredato = new SimpleDateFormat("dd-MM-yyyy").format(ordre.getOrdredato());
-        createContent(cb, btFont, 12, black, 571, 624, ordredato, right);
+        createContent(cb, btFont, 12, black, 571, 624, Utility.formatTimestampToString(ordre.getOrdredato()), right);
         String tlf = ordre.getKunde().getTlf() + "";
         createContent(cb, btFont, 12, black, 571, 604, tlf, right);
         String ordre_nr = ordre.getOrdre_nr();
@@ -188,15 +186,13 @@ public class OpretOrdre {
             createContent(cb, tFont, 12, black, 150, 504, "Urne", center);
         }
         if (!ordre.getOrdretype()) {
-            String afhDato = new SimpleDateFormat("dd-MM-yyyy").format(ordre.getAfhentningsdato());
-            createContent(cb, tFont, 12, black, 330, 544, afhDato, center);
+            createContent(cb, tFont, 12, black, 330, 544, Utility.formatTimestampToString(ordre.getAfhentningsdato()), center);
         } else {
             cb.rectangle(280, 540, 100, 20);
             cb.fill();
         }
         if (ordre.getOrdretype()) {
-            String levDato = new SimpleDateFormat("dd-MM-yyyy").format(ordre.getLeveringsdato());
-            createContent(cb, tFont, 12, black, 330, 524, levDato, center);
+            createContent(cb, tFont, 12, black, 330, 524, Utility.formatTimestampToString(ordre.getLeveringsdato()), center);
         } else {
             cb.rectangle(280, 520, 100, 20);
             cb.fill();
@@ -299,18 +295,18 @@ public class OpretOrdre {
             
             createContent(cb, tFont, 12, black, 63, tmpY, ""+antal, center);
             createContent(cb, tFont, 12, black, 110, tmpY, beskrivelse, left);
-            createContent(cb, tFont, 12, black, 465, tmpY, ""+NumberFormat.getCurrencyInstance().format(enhedsPris), right);
-            createContent(cb, tFont, 12, black, 565, tmpY, ""+NumberFormat.getCurrencyInstance().format(pris), right);
+            createContent(cb, tFont, 12, black, 465, tmpY, ""+Utility.formatDoubleToKr(enhedsPris), right);
+            createContent(cb, tFont, 12, black, 565, tmpY, ""+Utility.formatDoubleToKr(pris), right);
             
             tmpY = tmpY - 20;
         }
-        createContent(cb, tFont, 12, black, 565, 144, ""+NumberFormat.getCurrencyInstance().format(Math.floor(total*+0.025)), right);
+        createContent(cb, tFont, 12, black, 565, 144, ""+Utility.formatDoubleToKr(Math.floor(total*+0.025)), right);
         total += Math.floor((total*0.025));
-        createContent(cb, tFont, 12, black, 565, 124, ""+NumberFormat.getCurrencyInstance().format(total), right);
-        createContent(cb, tFont, 12, black, 565, 104, ""+NumberFormat.getCurrencyInstance().format(total*0.25), right);
+        createContent(cb, tFont, 12, black, 565, 124, ""+Utility.formatDoubleToKr(total), right);
+        createContent(cb, tFont, 12, black, 565, 104, ""+Utility.formatDoubleToKr(total*0.25), right);
         total += (total*0.25);
         total = Math.floor(total+0.5);
-        createContent(cb, tFont, 12, black, 565, 84, ""+NumberFormat.getCurrencyInstance().format(total), right);
+        createContent(cb, tFont, 12, black, 565, 84, ""+Utility.formatDoubleToKr(total), right);
         
         //Indsættelse af bemærkning tabel
         createContent(cb, btFont, 12, black, 29, 64, "Bemærkninger:", left);

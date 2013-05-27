@@ -4,6 +4,7 @@
  */
 package model;
 
+import control.Utility;
 import java.sql.Timestamp;
 
 /**
@@ -12,23 +13,25 @@ import java.sql.Timestamp;
  */
 public class Kontoudtog {
 
-    private int kontoudtog_nr;
+    private String kontoudtog_nr;
     private Timestamp dato;
     private Timestamp sendt_dato;
-    private Provisionsseddel provisionsseddel;
-    
-    public Kontoudtog(int kontoudtog_nr, Timestamp dato, Timestamp sendt_dato, Provisionsseddel provisionsseddel) {
+
+    public Kontoudtog(String kontoudtog_nr, Timestamp dato, Timestamp sendt_dato) {
         this.kontoudtog_nr = kontoudtog_nr;
-        this.dato = dato;
+        if (dato != null) {
+            this.dato = dato;
+        } else {
+            this.dato = Utility.getCurrentTime();
+        }
         this.sendt_dato = sendt_dato;
-        this.provisionsseddel = provisionsseddel;
     }
 
-    public int getKontoudtog_nr() {
+    public String getKontoudtog_nr() {
         return kontoudtog_nr;
     }
 
-    public void setKontoudtog_nr(int kontoudtog_nr) {
+    public void setKontoudtog_nr(String kontoudtog_nr) {
         this.kontoudtog_nr = kontoudtog_nr;
     }
 
@@ -46,13 +49,5 @@ public class Kontoudtog {
 
     public void setSendt_dato(Timestamp sendt_dato) {
         this.sendt_dato = sendt_dato;
-    }
-
-    public Provisionsseddel getProvisionsseddel() {
-        return provisionsseddel;
-    }
-
-    public void setProvisionsseddel(Provisionsseddel provisionsseddel) {
-        this.provisionsseddel = provisionsseddel;
     }
 }

@@ -32,15 +32,13 @@ add foreign key(tom_linje_id) references tom_linje(id);
 
 alter table faktura
 add column ordre_nr char(5),
-add foreign key(ordre_nr) references ordre(ordre_nr);
-
-alter table provisionsseddel
-add column faktura_nr char(16),
-add foreign key(faktura_nr) references faktura(faktura_nr);
-
-alter table kontoudtog
+add foreign key(ordre_nr) references ordre(ordre_nr),
 add column provisions_nr char(5),
 add foreign key(provisions_nr) references provisionsseddel(provisions_nr);
+
+alter table provisionsseddel
+add column kontoudtog_nr char(5),
+add foreign key(kontoudtog_nr) references kontoudtog(kontoudtog_nr);
 
 #fase 4 - For hver 1:n forbindelse tilføjes primærnøglen fra 1-siden som fremmednøgle 
 #på n-siden.

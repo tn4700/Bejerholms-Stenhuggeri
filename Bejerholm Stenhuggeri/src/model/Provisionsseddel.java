@@ -12,21 +12,21 @@ import java.sql.Timestamp;
  */
 public class Provisionsseddel {
 
-    private int provisions_nr;
+    private String provisions_nr;
     private Timestamp dato;
-    private Faktura faktura;
+    private Kontoudtog kontoudtog;
 
-    public Provisionsseddel(int provisions_nr, Timestamp dato, Faktura faktura) {
+    public Provisionsseddel(String provisions_nr, Timestamp dato, Kontoudtog kontoudtog) {
         this.provisions_nr = provisions_nr;
         this.dato = dato;
-        this.faktura = faktura;
+        this.kontoudtog = kontoudtog;
     }
 
-    public int getProvisions_nr() {
+    public String getProvisions_nr() {
         return provisions_nr;
     }
 
-    public void setProvisions_nr(int provisions_nr) {
+    public void setProvisions_nr(String provisions_nr) {
         this.provisions_nr = provisions_nr;
     }
 
@@ -38,13 +38,11 @@ public class Provisionsseddel {
         this.dato = dato;
     }
 
-    public Faktura getFaktura() {
-        return faktura;
+    public Kontoudtog getKontoudtog() {
+        return kontoudtog;
     }
 
-    public void setFaktura(Faktura faktura) {
-        this.faktura = faktura;
+    public void setKontoudtog(Kontoudtog kontoudtog) {
+        this.kontoudtog = kontoudtog;
     }
-
-   
 }

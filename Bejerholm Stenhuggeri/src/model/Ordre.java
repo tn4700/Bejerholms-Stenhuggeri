@@ -4,9 +4,9 @@
  */
 package model;
 
+import control.Utility;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -57,12 +57,12 @@ public class Ordre {
         if (leveringsdato != null) {
             this.leveringsdato = leveringsdato;
         } else {
-            this.leveringsdato = getCurrentTime();
+            this.leveringsdato = Utility.getCurrentTime();
         }
         if (afhentningsdato != null) {
             this.afhentningsdato = afhentningsdato;
         } else {
-            this.afhentningsdato = getCurrentTime();
+            this.afhentningsdato = Utility.getCurrentTime();
         }
         this.bemærkning = bemærkning;
         this.bemærkning_ekstra = bemærkning_ekstra;
@@ -78,9 +78,9 @@ public class Ordre {
     public Ordre(Kunde kunde, ArrayList<Vare_linje> valgtevarer) {
         ordre_nr = null;
         ordretype = true;
-        this.ordredato = getCurrentTime();
-        this.leveringsdato = getCurrentTime();
-        this.afhentningsdato = getCurrentTime();
+        this.ordredato = Utility.getCurrentTime();
+        this.leveringsdato = Utility.getCurrentTime();
+        this.afhentningsdato = Utility.getCurrentTime();
         bemærkning = null;
         bemærkning_ekstra = null;
         kirkegård = null;
@@ -266,10 +266,5 @@ public class Ordre {
     public double getTotalInklMoms() {
         double total = getTotal() + getSalgsMoms();
         return total;
-    }
-
-    public final Timestamp getCurrentTime() {
-        Timestamp timestamp = new Timestamp(new Date().getTime());
-        return timestamp;
     }
 }

@@ -24,7 +24,7 @@ public class DatabaseObjectHandler {
 
     public Postnummer getPostnummer(int post_nr) throws SQLException {
         Postnummer postnr = null;
-        String sql = "select post_nr, bynavn from postnummer where post_nr = " + post_nr;
+        String sql = "select post_nr, bynavn from postnummer where post_nr = " + post_nr + ";";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -48,7 +48,7 @@ public class DatabaseObjectHandler {
     public Kunde getKunde(int tlf) throws SQLException {
         Kunde kunde = null;
         int post_nr = 0;
-        String sql = "select fornavn, efternavn, adresse, tlf, post_nr from kunde where tlf= " + tlf;
+        String sql = "select fornavn, efternavn, adresse, tlf, post_nr from kunde where tlf = " + tlf + ";";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -82,7 +82,7 @@ public class DatabaseObjectHandler {
         ResultSet rs;
         int post_nr = 0;
         String sql = "select firmanavn, adresse, tlf, cvr_nr, registrerings_nr, konto_nr, bank, post_nr"
-                + " from samarbejdspartner where samarbejdspartner.tlf = " + tlf;
+                + " from samarbejdspartner where samarbejdspartner.tlf = " + tlf + ";";
         rs = db.getData(sql);
 
         if (rs.next()) {
@@ -117,7 +117,7 @@ public class DatabaseObjectHandler {
 
     public Tom_linje getTomLinje(int id) throws SQLException {
         Tom_linje tomlinje = null;
-        String sql = "select navn, pris, antal, kommentar, id from tom_linje where id =" + id;
+        String sql = "select navn, pris, antal, kommentar, id from tom_linje where id =" + id + ";";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -174,7 +174,7 @@ public class DatabaseObjectHandler {
 
     public int getMaxTegnTypeID() throws SQLException {
         int max = 0;
-        String sql = "select max(id) from tegntype";
+        String sql = "select max(id) from tegntype;";
         ResultSet rs;
         rs = db.getData(sql);
         if (rs.next()) {
@@ -186,7 +186,7 @@ public class DatabaseObjectHandler {
     public Inskription_linje getInskriptionLinje(int linje_nr, int inskription_id) throws SQLException {
         Inskription_linje inskription_linje = null;
         String sql = "select linje_nr, inskription_id, linje_type, inskription from inskription_linje "
-                + "where linje_nr = " + linje_nr + " and inskription_id = " + inskription_id;
+                + "where linje_nr = " + linje_nr + " and inskription_id = " + inskription_id + ";";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -214,7 +214,7 @@ public class DatabaseObjectHandler {
 
     public int getMaxInskriptionLinje(int inskription_id) throws SQLException {
         int max = 0;
-        String sql = "select max(linje_nr) from inskription_linje where inskription_id =" + inskription_id;
+        String sql = "select max(linje_nr) from inskription_linje where inskription_id =" + inskription_id + ";";
         ResultSet rs;
         rs = db.getData(sql);
         if (rs.next()) {
@@ -227,7 +227,7 @@ public class DatabaseObjectHandler {
         Inskription inskription = null;
         int tegn_id = 0;
         Inskription_linje inskription_linje;
-        String sql = "select id, skrifttype, tegn_id from inskription where id=" + id;
+        String sql = "select id, skrifttype, tegn_id from inskription where id=" + id + ";";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -264,7 +264,7 @@ public class DatabaseObjectHandler {
 
     public int getMaxInskriptionId() throws SQLException {
         int max = 0;
-        String sql = "select max(id) from inskription";
+        String sql = "select max(id) from inskription;";
         ResultSet rs;
         rs = db.getData(sql);
         if (rs.next()) {
@@ -274,7 +274,7 @@ public class DatabaseObjectHandler {
     }
 
     public ArrayList getVaregruppeListe() throws SQLException {
-        String sql = "select grp_nr, navn from varegruppe";
+        String sql = "select grp_nr, navn from varegruppe;";
         ResultSet rs;
         ArrayList<Varegruppe> varegruppeListe = new ArrayList();
         rs = db.getData(sql);
@@ -288,7 +288,7 @@ public class DatabaseObjectHandler {
 
     public Varegruppe getVareGruppe(int grp_nr) throws SQLException {
         Varegruppe varegruppe = null;
-        String sql = "select grp_nr, navn from varegruppe where grp_nr=" + grp_nr;
+        String sql = "select grp_nr, navn from varegruppe where grp_nr=" + grp_nr + ";";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -311,7 +311,7 @@ public class DatabaseObjectHandler {
     public int getMaxVareNr() throws SQLException {
         int max = 0;
         ResultSet rs;
-        rs = db.getData("select MAX(vare_nr) from vare");
+        rs = db.getData("select MAX(vare_nr) from vare;");
         if (rs.next()) {
             max = rs.getInt("MAX(vare_nr)");
         }
@@ -322,7 +322,7 @@ public class DatabaseObjectHandler {
         Vare vare = null;
         int grp_nr = 0;
         String sql = "select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, "
-                + "overflade, dekoration, vareStatus, grp_nr from vare where vare_nr=" + vare_nr;
+                + "overflade, dekoration, vareStatus, grp_nr from vare where vare_nr=" + vare_nr + ";";
         ResultSet rs;
         rs = db.getData(sql);
 
@@ -351,7 +351,7 @@ public class DatabaseObjectHandler {
     public ArrayList getVareListe(int grp_nr) throws SQLException {
         ArrayList<Vare> vareListe = new ArrayList();
         String sql = "select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade, "
-                + "dekoration, vareStatus, grp_nr from vare where grp_nr=" + grp_nr;
+                + "dekoration, vareStatus, grp_nr from vare where grp_nr=" + grp_nr + ";";
         ResultSet rs;
         Varegruppe varegrp = getVareGruppe(grp_nr);
         rs = db.getData(sql);
@@ -390,7 +390,7 @@ public class DatabaseObjectHandler {
 
     public int getMaxVareLinje(String ordre_nr) throws SQLException {
         int max = 0;
-        String sql = "select max(linje_nr) from vare_linje where ordre_nr = '" + ordre_nr + "'";
+        String sql = "select max(linje_nr) from vare_linje where ordre_nr = '" + ordre_nr + "';";
         ResultSet rs;
         rs = db.getData(sql);
         if (rs.next()) {
@@ -404,7 +404,7 @@ public class DatabaseObjectHandler {
         Vare_linje vare_linje = null;
         int tlf = 0;
         String sql = "select tlf, ordre_nr,ordretype,ordredato,leveringdato,afhentningsdato,bemærkning,bemærkning_ekstra,"
-                + "kirkegård,afdeling,afdødnavn,række,nummer,gravType from ordre where ordre_nr =" + ordre_nr;
+                + "kirkegård,afdeling,afdødnavn,række,nummer,gravType from ordre where ordre_nr =" + ordre_nr + ";";
         ResultSet rs;
         rs = db.getData(sql);
         if (rs.next()) {
@@ -485,7 +485,7 @@ public class DatabaseObjectHandler {
         int id = 0;
 
         String sql = "select linje_nr, ordre_nr, vare_nr, inskription_id, tom_linje_id "
-                + "from vare_linje where linje_nr = " + linje_nr + " and ordre_nr = " + ordre_nr;
+                + "from vare_linje where linje_nr = " + linje_nr + " and ordre_nr = " + ordre_nr + ";";
         ResultSet rs = db.getData(sql);
 
         if (rs.next()) {
@@ -553,10 +553,11 @@ public class DatabaseObjectHandler {
     public Faktura getFaktura(String faktura_nr) throws SQLException {
         Faktura faktura = null;
         int tlf = 0;
-        String ordre_nr = "";
-        String sql = "select bedemand_tlf, ordre_nr, faktura_nr, faktureringsdato, vedrørende, "
-                + "sendt_dato, faktureringsadresse, fakturatype, betalingsstatus from faktura "
-                + "where faktura_nr = '" + faktura_nr + "';";
+        String ordre_nr = null;
+        String provisions_nr = null;
+        String sql = "select bedemand_tlf, provisions_nr ordre_nr, faktura_nr, faktureringsdato,"
+                + "vedrørende, sendt_dato, faktureringsadresse, fakturatype, betalingsstatus from "
+                + "faktura where faktura_nr = '" + faktura_nr + "';";
 
         ResultSet rs = db.getData(sql);
 
@@ -569,32 +570,32 @@ public class DatabaseObjectHandler {
                     rs.getBoolean("fakturatype"),
                     rs.getBoolean("betalingsstatus"),
                     null,
+                    null,
                     null);
+            provisions_nr = rs.getString("provisions_nr");
             ordre_nr = rs.getString("ordre_nr");
             tlf = rs.getInt("bedemand_tlf");
         }
         rs.close();
 
         faktura.setOrdre(getOrdre(ordre_nr));
-        if (tlf != 0) {
+        if (faktura.getFakturatype()) {
             faktura.setBedemand(getSamarbejdspartner(tlf));
+            faktura.setProvisionsseddel(getProvisionsseddel(provisions_nr));
         }
         return faktura;
     }
 
-    public void createFaktura(Faktura faktura) throws SQLException {
+    public void createFaktura(Faktura faktura) throws SQLException, ControlException {
         String faktura_nr = "00" + faktura.getOrdre().getKunde().getTlf() + "-" + faktura.getOrdre().getOrdre_nr();
 
         if (faktura.getFakturatype()) {
-            db.setData("insert into faktura (ordre_nr, faktura_nr,faktureringsdato,"
-                    + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
-                    + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
-                    + faktura.getFaktureringsdato() + "','" + faktura.getVedrørende() + "','"
-                    + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse() + "','"
-                    + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
-                    + "');");
-        } else {
+            if(faktura.getBedemand()!= null && faktura.getProvisionsseddel() != null) {
             createSamarbejdspartner(faktura.getBedemand());
+            createProvisionsseddel(faktura.getProvisionsseddel());
+            } else {
+                throw new ControlException("Ugylige fakturaoplysninger(bedemandsordre men ingen samarbejdspartner og/eller provisionsseddel valgt");
+            }
             db.setData("insert into faktura (ordre_nr, faktura_nr, bedemand_tlf, faktureringsdato,"
                     + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
                     + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
@@ -603,24 +604,103 @@ public class DatabaseObjectHandler {
                     + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse() + "','"
                     + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
                     + "');");
+        } else {
+            db.setData("insert into faktura (ordre_nr, faktura_nr,faktureringsdato,"
+                    + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
+                    + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
+                    + faktura.getFaktureringsdato() + "','" + faktura.getVedrørende() + "','"
+                    + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse() + "','"
+                    + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
+                    + "');");
         }
     }
 
-    public Kontoudtog getKontoudtog() throws SQLException {
-        return null;
+    public String getNextKontoudtogNr() throws SQLException {
+        int max = 0;
+        ResultSet rs;
+        rs = db.getData("select MAX(kontoudtog_nr) from kontoudtog;");
+        if (rs.next()) {
+            max = Integer.parseInt(rs.getString("MAX(kontoudtog_nr)"));
+        }
+        String next = Integer.toString(max + 1);
+        int count = 5 - next.length();
+        for (int i = 0; i < count; i++) {
+            next = "0" + next;
+        }
+        return next;
     }
 
-    public void createKontoudtog(Kontoudtog kontoudtog) throws SQLException {
+    public Kontoudtog getKontoudtog(String kontoudtog_nr) throws SQLException {
+        Kontoudtog kontoudtog = null;
+        ResultSet rs;
+        rs = db.getData("Select kontoudtog_nr,dato,sendt_dato from Kontoudtog where "
+                + "kontoudtog_nr = '" + kontoudtog_nr + "';");
+        if (rs.next()) {
+            kontoudtog = new Kontoudtog(rs.getString("kontoudtog_nr"),
+                    rs.getTimestamp("dato"),
+                    rs.getTimestamp("sendt_dato"));
+            rs.close();
+        }
+        return kontoudtog;
     }
 
-    public Provisionsseddel getProvisionsseddel(String faktura_nr) throws SQLException {
+    public void createKontoudtog(Kontoudtog kontoudtog) throws SQLException, ControlException {
+        String kontoudtog_nr = getNextKontoudtogNr();
+        if (getKontoudtog(kontoudtog_nr) == null) {
+            db.setData("Insert into Kontoudtog(kontoudtog_nr, dato, sendt_dato) values('"
+                    + kontoudtog_nr + "','" + kontoudtog.getDato() + "','"
+                    + kontoudtog.getSendt_dato() + "');");
+        } else {
+            throw new ControlException("Et kontoudtog med kontoudtog_nr " + kontoudtog_nr + " findes allerede.");
+        }
+    }
+
+    public Provisionsseddel getProvisionsseddel(String provisions_nr) throws SQLException {
         Provisionsseddel provisionsseddel = null;
         ResultSet rs;
-        rs = db.getData("Select ");
-        return null;
+        rs = db.getData("Select provisions_nr, kontoudtog_nr, dato from Provisionsseddel where "
+                + "provisions_nr = '" + provisions_nr + "';");
+        if (rs.next()) {
+            provisionsseddel = new Provisionsseddel(rs.getString("provisions_nr"),
+                    rs.getTimestamp("dato"),
+                    null);
+            rs.close();
+            String kontoudtog_nr = rs.getString("kontoudtog_nr");
+            Kontoudtog kontoudtog = getKontoudtog(kontoudtog_nr);
+            provisionsseddel.setKontoudtog(kontoudtog);
+        }
+        return provisionsseddel;
     }
 
-    public void createProvisionsseddel() throws SQLException {
+    public String getNextProvisionsNr() throws SQLException {
+        int max = 0;
+        ResultSet rs;
+        rs = db.getData("select MAX(provisions_nr) from provisionsseddel;");
+        if (rs.next()) {
+            max = Integer.parseInt(rs.getString("MAX(provisions_nr)"));
+        }
+        String next = Integer.toString(max + 1);
+        int count = 5 - next.length();
+        for (int i = 0; i < count; i++) {
+            next = "0" + next;
+        }
+        return next;
+    }
+
+    public void createProvisionsseddel(Provisionsseddel provisionsseddel) throws SQLException, ControlException {
+        String provisions_nr = getNextProvisionsNr();
+        if (getProvisionsseddel(provisions_nr) == null) {
+            if(provisionsseddel.getKontoudtog()!=null){
+            createKontoudtog(provisionsseddel.getKontoudtog());
+            } else {
+                throw new ControlException("Ugyldigt provisionsseddel objekt, intet kontoudtog er oprettet.");
+            }
+            db.setData("Insert into Provisionsseddel(provisions_nr, kontoudtog_nr, dato) values('"
+                    + provisions_nr + "','" + provisions_nr + "','"
+                    + provisionsseddel.getDato() + "');");
+        } else {
+            throw new ControlException("En provisionsseddel med provisions_nr " + provisions_nr + " findes allerede.");
+        }
     }
 
     public User getUser(String username) throws SQLException {

@@ -95,26 +95,26 @@ values
 ('4700','Bedemand Berner','Fiktivvej 666','11112222','16276483','1233','6070123458','BankenC'),
 ('4700','Bedemand Berner','Fiktivvej 666','11112224','16276484','1234','6070123459','BankenD');
 
-insert into faktura (bedemand_tlf, ordre_nr, faktura_nr,faktureringsdato,vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)
+insert into kontoudtog (kontoudtog_nr,dato,sendt_dato)
 values
-(null, '00001', '0020332836-00001','2013-04-30 11:50:32','Martin Hana','2013-05-01 11:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
-(null,'00002', '0050111211-00002','2013-04-30 12:50:32','Thomas Nielsen','2013-05-01 12:50:32','Østre Ringvej 49 2.TV, 4700 Næstved',true,false),
-(null,'00003', '0031255685-00003','2013-04-30 13:50:32','Niklas Nielsen','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
-('58350001','00004', '0028931093-00004','2013-04-30 14:50:32','Anette Stidsing','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
+('00001','2013-04-30 11:50:32','2013-04-30 11:20:32'),
+('00002','2013-04-30 12:50:32','2013-04-30 12:20:32'),
+('00003','2013-04-30 13:50:32','2013-04-30 13:20:32'),
+('00004','2013-04-30 14:50:32','2013-04-30 14:20:32');
 
-insert into provisionsseddel (faktura_nr, provisions_nr,dato)
+insert into provisionsseddel (provisions_nr, kontoudtog_nr, dato)
 values
-('0020332836-00001','00001','2013-05-01 14:20:32'),
-('0050111211-00002','00002','2013-05-02 15:20:32'),
-('0031255685-00003','00003','2013-05-03 16:20:32'),
-('0028931093-00004','00004','2013-05-04 17:20:32');
+('00001','00001','2013-05-01 14:20:32'),
+('00002','00002','2013-05-02 15:20:32'),
+('00003','00003','2013-05-03 16:20:32'),
+('00004','00004','2013-05-04 17:20:32');
 
-insert into kontoudtog (provisions_nr, kontoudtog_nr,dato,sendt_dato)
+insert into faktura (bedemand_tlf, provisions_nr, ordre_nr, faktura_nr,faktureringsdato,vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)
 values
-('00001','00001','2013-04-30 11:50:32','2013-04-30 11:20:32'),
-('00002','00002','2013-04-30 12:50:32','2013-04-30 12:20:32'),
-('00003','00003','2013-04-30 13:50:32','2013-04-30 13:20:32'),
-('00004','00004','2013-04-30 14:50:32','2013-04-30 14:20:32');
+(null, null, '00001', '0020332836-00001','2013-04-30 11:50:32','Martin Hana','2013-05-01 11:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
+(null, null,'00002', '0050111211-00002','2013-04-30 12:50:32','Thomas Nielsen','2013-05-01 12:50:32','Østre Ringvej 49 2.TV, 4700 Næstved',true,false),
+(null, null,'00003', '0031255685-00003','2013-04-30 13:50:32','Niklas Nielsen','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
+('58350001', '00001','00004', '0028931093-00004','2013-04-30 14:50:32','Anette Stidsing','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
 
 insert into user (brugernavn,pw)
 values

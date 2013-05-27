@@ -21,6 +21,7 @@ public class Faktura {
     private boolean betalingsstatus; // True = betalt, false = ikke betalt
     private Ordre ordre;
     private Samarbejdspartner bedemand;
+    private Provisionsseddel provisionsseddel;
 
     public Faktura(String faktura_nr,
             Timestamp faktureringsdato,
@@ -30,7 +31,8 @@ public class Faktura {
             boolean fakturatype,
             boolean betalingsstatus,
             Ordre ordre,
-            Samarbejdspartner bedemand) {
+            Samarbejdspartner bedemand,
+            Provisionsseddel provisionsseddel) {
 
         this.faktura_nr = faktura_nr;
         this.faktureringsdato = faktureringsdato;
@@ -41,6 +43,15 @@ public class Faktura {
         this.betalingsstatus = betalingsstatus;
         this.ordre = ordre;
         this.bedemand = bedemand;
+        this.provisionsseddel = provisionsseddel;
+    }
+
+    public Provisionsseddel getProvisionsseddel() {
+        return provisionsseddel;
+    }
+
+    public void setProvisionsseddel(Provisionsseddel provisionsseddel) {
+        this.provisionsseddel = provisionsseddel;
     }
 
     public Ordre getOrdre() {

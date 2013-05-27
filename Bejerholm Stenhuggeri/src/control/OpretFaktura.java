@@ -14,9 +14,6 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import model.Faktura;
 import model.Vare_linje;
 
@@ -99,8 +96,7 @@ public class OpretFaktura {
 
         //Indsættelse af dato og fakturanummer
         createContent(cb, btFont, 12, black, 385, 525, "DATO:", left);
-        String timeStamp = new SimpleDateFormat("dd. MMM yyyy").format(Calendar.getInstance().getTime());
-        createContent(cb, tFont, 12, black, 575, 525, timeStamp, right);
+        createContent(cb, tFont, 12, black, 575, 525, Utility.getCurrentTimeToString(), right);
         createContent(cb, btFont, 12, black, 385, 509, "FAKTURANR:", left);
         String faktura_nr = faktura.getFaktura_nr();
         createContent(cb, tFont, 12, black, 575, 509, faktura_nr, right);
@@ -183,19 +179,19 @@ public class OpretFaktura {
             
             createContent(cb, tFont, 12, black, 63, tmpY, ""+antal, center);
             createContent(cb, tFont, 12, black, 110, tmpY, beskrivelse, left);
-            createContent(cb, tFont, 12, black, 465, tmpY, ""+NumberFormat.getCurrencyInstance().format(enhedsPris), right);
-            createContent(cb, tFont, 12, black, 565, tmpY, ""+NumberFormat.getCurrencyInstance().format(pris), right);
+            createContent(cb, tFont, 12, black, 465, tmpY, ""+Utility.formatDoubleToKr(enhedsPris), right);
+            createContent(cb, tFont, 12, black, 565, tmpY, ""+Utility.formatDoubleToKr(pris), right);
             
             tmpY = tmpY - 20;
         }
-        createContent(cb, tFont, 12, black, 565, 204, ""+NumberFormat.getCurrencyInstance().format(Math.floor(total*+0.025)), right);
+        createContent(cb, tFont, 12, black, 565, 204, ""+Utility.formatDoubleToKr(Math.floor(total*+0.025)), right);
         total += Math.floor((total*0.025));
-        createContent(cb, tFont, 12, black, 565, 184, ""+NumberFormat.getCurrencyInstance().format(total), right);
+        createContent(cb, tFont, 12, black, 565, 184, ""+Utility.formatDoubleToKr(total), right);
         createContent(cb, tFont, 12, black, 565, 164, "25,00%", right);
-        createContent(cb, tFont, 12, black, 565, 144, ""+NumberFormat.getCurrencyInstance().format(total*0.25), right);
+        createContent(cb, tFont, 12, black, 565, 144, ""+Utility.formatDoubleToKr(total*0.25), right);
         total += (total*0.25);
         total = Math.floor(total+0.5);
-        createContent(cb, tFont, 12, black, 565, 124, ""+NumberFormat.getCurrencyInstance().format(total), right);
+        createContent(cb, tFont, 12, black, 565, 124, ""+Utility.formatDoubleToKr(total), right);
         
         //Indsættelse af betalingsbetingelser og kontaktinfo
         createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
