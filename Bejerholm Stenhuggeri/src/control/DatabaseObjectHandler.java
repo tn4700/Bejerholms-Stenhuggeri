@@ -639,6 +639,14 @@ public class DatabaseObjectHandler {
             throw new ControlException("Bruger findes allerede.");
         }
     }
+    
+    public void deleteUser(User user) throws SQLException{
+        db.setData("delete from user where brugernavn = " + user.getUsername() + ";");
+    }
+    
+    public void editUser(User user) throws SQLException{
+        db.setData("update table user set pw = " + user.getPassword() + " where brugernavn = " + user.getUsername() + ";");
+    }
 
     public int boolToInt(boolean b) {
         int result = 0;
