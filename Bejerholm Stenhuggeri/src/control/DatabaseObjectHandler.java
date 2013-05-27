@@ -423,7 +423,7 @@ public class DatabaseObjectHandler {
                     null);
             tlf = rs.getInt("tlf");
             rs.close();
-            
+
             ordre.setKunde(getKunde(tlf));
             int max = getMaxVareLinje(ordre.getOrdre_nr());
             for (int i = 1; i <= max; i++) {
@@ -577,6 +577,30 @@ public class DatabaseObjectHandler {
             faktura.setBedemand(getSamarbejdspartner(tlf));
         }
         return faktura;
+    }
+
+    public void createFaktura(Faktura faktura) throws SQLException {
+        String faktura_nr = "00" + faktura.getOrdre().getKunde().getTlf() + "-" + faktura.getOrdre().getOrdre_nr();
+        
+        if (faktura.getFakturatype()) {
+            db.setData("insert into faktura (ordre_nr, faktura_nr,faktureringsdato,"
+                    + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
+                    + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
+                    + faktura.getFaktureringsdato() + "','" + faktura.getVedrørende() + "','"
+                    + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse() + "','"
+                    + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
+                    + "');");
+        } else {
+            createSamarbejdspartner(faktura.getBedemand());
+            db.setData("insert into faktura (ordre_nr, faktura_nr, bedemand_tlf, faktureringsdato,"
+                    + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
+                    + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','" 
+                    + faktura.getBedemand().getTlf() + "','"
+                    + faktura.getFaktureringsdato() + "','" + faktura.getVedrørende() + "','"
+                    + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse() + "','"
+                    + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
+                    + "');");
+        }
     }
 
     public int getMaxVareNr() throws SQLException {

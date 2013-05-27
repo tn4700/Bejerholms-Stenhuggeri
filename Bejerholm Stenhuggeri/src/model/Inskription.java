@@ -61,8 +61,7 @@ public class Inskription {
         this.id = id;
     }
 
-    public double getPris() {
-        double pris;
+    public int getAntalTegn() {
         int antal = 0;
         for (int i = 0; i < inskription_linje_liste.size(); i++) {
             if (inskription_linje_liste.get(i).getLinje_type() == 1) {
@@ -70,7 +69,11 @@ public class Inskription {
                 antal += characters.length();
             }
         }
-        pris = antal * tegntype.getPris_pr_tegn();
+        return antal;
+    }
+
+    public double getPris() {
+        double pris = getAntalTegn() * tegntype.getPris_pr_tegn();
         return pris;
     }
 }
