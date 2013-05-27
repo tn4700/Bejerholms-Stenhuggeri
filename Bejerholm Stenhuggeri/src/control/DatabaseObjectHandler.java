@@ -8,19 +8,7 @@ import control.exceptions.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.Faktura;
-import model.Inskription;
-import model.Inskription_linje;
-import model.Kunde;
-import model.Ordre;
-import model.Postnummer;
-import model.Samarbejdspartner;
-import model.Tegntype;
-import model.Tom_linje;
-import model.User;
-import model.Vare;
-import model.Vare_linje;
-import model.Varegruppe;
+import model.*;
 
 /**
  *
@@ -618,6 +606,22 @@ public class DatabaseObjectHandler {
         }
     }
 
+    public Kontoudtog getKontoudtog() throws SQLException {
+
+        return null;
+    }
+
+    public void createKontoudtog(Kontoudtog kontoudtog) throws SQLException {
+    }
+
+    public Provisionsseddel getProvisionsseddel() throws SQLException {
+
+        return null;
+    }
+
+    public void createProvisionsseddel() throws SQLException {
+    }
+
     public User getUser(String username) throws SQLException {
         ResultSet rs;
         User user = null;
@@ -631,7 +635,7 @@ public class DatabaseObjectHandler {
         return user;
     }
 
-    public void setUser(User user) throws SQLException, ControlException{
+    public void createUser(User user) throws SQLException, ControlException {
         if (getUser(user.getUsername()) == null) {
             db.setData("insert into user(brugernavn,pw)values('" + user.getUsername()
                     + "','" + user.getPassword() + "');");
@@ -639,12 +643,12 @@ public class DatabaseObjectHandler {
             throw new ControlException("Bruger findes allerede.");
         }
     }
-    
-    public void deleteUser(User user) throws SQLException{
+
+    public void deleteUser(User user) throws SQLException {
         db.setData("delete from user where brugernavn = " + user.getUsername() + ";");
     }
-    
-    public void editUser(User user) throws SQLException{
+
+    public void editUser(User user) throws SQLException {
         db.setData("update table user set pw = " + user.getPassword() + " where brugernavn = " + user.getUsername() + ";");
     }
 

@@ -139,8 +139,8 @@ firmanavn               varchar(50) not null,
 adresse                 varchar(50) not null,
 tlf                     char(8) not null,        # 8 cifre uden landekode
 cvr_nr                  char(8),        # Et CVR nummer er på 8 cifre
-registrerings_nr			char(4),
-konto_nr		      		char(10),			# Reg + Kontonr
+registrerings_nr		char(4),
+konto_nr		      	char(10),			# Reg + Kontonr
 bank 					varchar(20),
 primary key(tlf)
 ) engine = innodb;
