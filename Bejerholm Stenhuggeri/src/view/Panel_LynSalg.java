@@ -6,15 +6,18 @@ package view;
 
 import control.DatabaseObjectHandler;
 import java.awt.CardLayout;
+import java.awt.LayoutManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import model.Kunde;
 import model.Ordre;
 import model.Vare;
 import model.Vare_linje;
 import model.Varegruppe;
+
 
 /**
  *
@@ -41,8 +44,8 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         vare_list = new ArrayList();
         valgteVare_lynsalg = new ArrayList();
         panel = new ArrayList();
-        
-      
+        jPanel_VareLinjer.setLayout((LayoutManager) new WrapLayout());
+
 
         // opret CardLayout
         layout = (CardLayout) (jPanel_MainCard.getLayout());
@@ -64,11 +67,13 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         udskrivVaregrp();
 
     }
-/**
- * Denne Constructor kaldes når der skal redigeres et ordre objekt
- * @param dbhandler Send DBhandler med så den kan få adgang til data
- * @param ordre     Det ordre objekt som skal redigeres
- */
+
+    /**
+     * Denne Constructor kaldes når der skal redigeres et ordre objekt
+     *
+     * @param dbhandler Send DBhandler med så den kan få adgang til data
+     * @param ordre Det ordre objekt som skal redigeres
+     */
     public Panel_LynSalg(DatabaseObjectHandler dbhandler, Ordre ordre) {
         this.dbhandler = dbhandler;
         initComponents();
@@ -78,7 +83,13 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         købssum = 0;
         ArrayList<Vare_linje> varelinjer = ordre.getVare_linjeListe();
         for (int i = 0; i < varelinjer.size(); i++) {
-            valgteVare_lynsalg.add(varelinjer.get(i).getVare());
+            if(varelinjer.get(i).getVare() == null){
+                
+            }else
+            {
+                   valgteVare_lynsalg.add(varelinjer.get(i).getVare());
+            }
+         
         }
         for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
             Panel_LynSalgLinje linje = new Panel_LynSalgLinje(valgteVare_lynsalg.get(i), this);
@@ -105,6 +116,14 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         } catch (Exception e) {
         }
         udskrivVaregrp();
+        jPanel_VareLinjer.setLayout(new WrapLayout());
+        jPanel_OversigtVarer.setLayout(new WrapLayout());
+        jScrollPane1.getViewport().setOpaque(false);
+        jScrollPane2.getViewport().setOpaque(false);
+
+
+   
+        
 
     }
 
@@ -127,6 +146,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jButtonLynsalgVidere = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextAreaVareInfo = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel_VareLinjer = new javax.swing.JPanel();
         jLabel_overskrift = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -141,6 +161,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jLabel38 = new javax.swing.JLabel();
         jLabel_købssum_lynsalg = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel_OversigtVarer = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -206,9 +227,19 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
         jPanel_LynSalg.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 220, 210));
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 51, 51));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(500, 100));
+
+        jPanel_VareLinjer.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_VareLinjer.setName("LynSalg"); // NOI18N
         jPanel_VareLinjer.setOpaque(false);
-        jPanel_LynSalg.add(jPanel_VareLinjer, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 490, 310));
+        jScrollPane1.setViewportView(jPanel_VareLinjer);
+
+        jPanel_LynSalg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 520, 280));
 
         jLabel_overskrift.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_overskrift.setText("Lyn Salg");
@@ -239,7 +270,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
                 jButton13ActionPerformed(evt);
             }
         });
-        jPanel_OrdreBekræftigelse.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, -1, -1));
+        jPanel_OrdreBekræftigelse.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, -1, -1));
 
         jButton_Ændre.setText("Ændre");
         jButton_Ændre.addActionListener(new java.awt.event.ActionListener() {
@@ -247,10 +278,10 @@ public class Panel_LynSalg extends javax.swing.JPanel {
                 jButton_ÆndreActionPerformed(evt);
             }
         });
-        jPanel_OrdreBekræftigelse.add(jButton_Ændre, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 90, 75, -1));
+        jPanel_OrdreBekræftigelse.add(jButton_Ændre, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 90, 75, -1));
 
         jButton15.setText("Annuller");
-        jPanel_OrdreBekræftigelse.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 130, 75, -1));
+        jPanel_OrdreBekræftigelse.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 75, -1));
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel38.setText("Ordre Bekræftigelse:");
@@ -264,9 +295,16 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jLabel4.setText("Samlet pris: ");
         jPanel_OrdreBekræftigelse.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, -1, -1));
 
+        jScrollPane2.setBorder(null);
+        jScrollPane2.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
+        jScrollPane2.setOpaque(false);
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(500, 100));
+
         jPanel_OversigtVarer.setName("LynSalg"); // NOI18N
         jPanel_OversigtVarer.setOpaque(false);
-        jPanel_OrdreBekræftigelse.add(jPanel_OversigtVarer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 580, 310));
+        jScrollPane2.setViewportView(jPanel_OversigtVarer);
+
+        jPanel_OrdreBekræftigelse.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, 240));
 
         jPanel_MainCard.add(jPanel_OrdreBekræftigelse, "card_OrdreBekræftigelse");
 
@@ -297,9 +335,9 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jComboBoxLynsalgVare.removeAllItems();
         // Tag den Varegruppe der er valgt i comboboxen og lav det til et objekt af Varegruppe
         Varegruppe varegruppe = (Varegruppe) jComboBox_Lynsalgvaregruppe.getSelectedItem();
-      
+
         try {
-              //Fyld vare_list array'et op med de varer der er i den pågældende varegruppe.
+            //Fyld vare_list array'et op med de varer der er i den pågældende varegruppe.
             vare_list = dbhandler.getVareListe(varegruppe.getGrp_nr());
             //Denne forløkke tjekker om der er nogle varer der allerede er valgt. De varer der er valgt bliver
             // fjernet fra vare_list array'et så de ikke bliver vist i comboboxen igen.
@@ -312,7 +350,10 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             }
             // DEnne for løkke fylder vare comboboxen op med de varer det er muligt at vælge i den pågældende varegruppe
             for (int i = 0; i < vare_list.size(); i++) {
-                jComboBoxLynsalgVare.addItem(vare_list.get(i));
+                if (vare_list.get(i).getVareStatus() != 3) {
+                    jComboBoxLynsalgVare.addItem(vare_list.get(i));
+                }
+
 
             }
 
@@ -339,13 +380,13 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBoxLynsalgVareActionPerformed
 
     private void jButtonLynsalgTilføjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgTilføjActionPerformed
-            // Denne if sætning tjekker om der er nogle varer i comboboxen ellers kan den ikke tilføje
+        // Denne if sætning tjekker om der er nogle varer i comboboxen ellers kan den ikke tilføje
         if (jComboBoxLynsalgVare.getItemCount() != 0) {
             // Laver den valgte vare i comboboxen om til et Vare objekt
             Vare valgtvare = (Vare) jComboBoxLynsalgVare.getSelectedItem();
             // tilføj den valgte vare til arraylisten over valgte varer
             valgteVare_lynsalg.add(valgtvare);
-           // fjern varen fra comboboxen
+            // fjern varen fra comboboxen
             jComboBoxLynsalgVare.removeItem(valgtvare);
             // opret et LynSalgLinje objekt - Dette er varelinjen der bliver vist med den valgte vare
             Panel_LynSalgLinje linje = new Panel_LynSalgLinje(valgtvare, this);
@@ -421,6 +462,8 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel_OrdreBekræftigelse;
     private javax.swing.JPanel jPanel_OversigtVarer;
     private javax.swing.JPanel jPanel_VareLinjer;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextAreaVareInfo;
