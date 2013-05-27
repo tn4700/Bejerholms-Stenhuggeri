@@ -18,8 +18,11 @@ public class Inskription {
     private String skrifttype;
 
     public Inskription(ArrayList<Inskription_linje> inskription_linje_liste, Tegntype tegntype, int id, String skrifttype) {
-        this.inskription_linje_liste = new ArrayList();
-        this.inskription_linje_liste = inskription_linje_liste;
+        if (inskription_linje_liste != null) {
+            this.inskription_linje_liste = inskription_linje_liste;
+        } else {
+            this.inskription_linje_liste = new ArrayList();
+        }
         this.tegntype = tegntype;
         this.id = id;
         this.skrifttype = skrifttype;
