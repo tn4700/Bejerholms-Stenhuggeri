@@ -13,14 +13,12 @@ public class Tom_linje {
     private String navn;
     private double pris;
     private int antal;
-    private String kommentar;
     private int id;
 
-    public Tom_linje(String navn, double pris, int antal, String kommentar, int id) {
+    public Tom_linje(String navn, double pris, int antal, int id) {
         this.navn = navn;
         this.pris = pris;
         this.antal = antal;
-        this.kommentar = kommentar;
         this.id = id;
     }
 
@@ -35,9 +33,6 @@ public class Tom_linje {
     public double getPris() {
         return pris;
     }
-    public double getSamletPris(){
-        return pris * antal;
-    }
 
     public void setPris(double pris) {
         this.pris = pris;
@@ -51,26 +46,16 @@ public class Tom_linje {
         this.antal = antal;
     }
 
-    public String getKommentar() {
-        return kommentar;
-    }
-
-    public void setKommentar(String kommentar) {
-        this.kommentar = kommentar;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Tom_linje{" + "navn=" + navn + ", pris=" + pris + ", antal=" + antal + ", kommentar=" + kommentar + ", id=" + id + '}';
-    }
+    }   
     
+    public double getSamletPris(){
+        return antal * pris;
+    }
     
 }
