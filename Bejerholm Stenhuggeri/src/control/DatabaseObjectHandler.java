@@ -4,11 +4,13 @@
  */
 package control;
 
+import com.mysql.jdbc.NotImplemented;
 import control.exceptions.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.*;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -584,11 +586,43 @@ public class DatabaseObjectHandler {
                     + ordre.getAfdødnavn() + "','" + ordre.getRække() + "','" + ordre.getNummer()
                     + "','" + boolToInt(ordre.getGravType()) + "');");
         } else {
-            throw new OrdreException("En ordre med ordrenummeret " + ordre_nr + " findes allerede.");
+            throw new ControlException("En ordre med ordrenummeret " + ordre_nr + " findes allerede.");
         }
         for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
             createVareLinje(ordre.getVare_linjeListe().get(i), ordre_nr);
         }
+    }
+
+    public void deleteOrdre(Ordre ordre) throws SQLException {
+        for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
+            deleteVareLinje(ordre.getVare_linjeListe().get(i), ordre.getOrdre_nr());
+        }
+        db.setData("delete from ordre where ordre_nr = '" + ordre.getOrdre_nr() + "';");
+    }
+
+    public void editOrdre(Ordre ordre) throws SQLException, ControlException {
+        //Henter den originale ordre ind og sletter alle vare_linjer fra den
+        Ordre gammelOrdre = getOrdre(ordre.getOrdre_nr());
+        for (int i = 0; i < gammelOrdre.getVare_linjeListe().size(); i++) {
+            deleteVareLinje(gammelOrdre.getVare_linjeListe().get(i), gammelOrdre.getOrdre_nr());
+        }
+        //Opretter vare_linjer fra det opdaterede ordre objekt
+        for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
+            createVareLinje(ordre.getVare_linjeListe().get(i), ordre.getOrdre_nr());
+        }
+        if (getKunde(ordre.getKunde().getTlf()) == null) {
+            createKunde(ordre.getKunde());
+        } else {
+            editKunde(ordre.getKunde());
+        }
+        db.setData("update ordre set tlf = '" + ordre.getKunde().getTlf() + "', ordretype = '" + boolToInt(ordre.getOrdretype())
+                + "', ordredato = '" + ordre.getOrdredato() + "', leveringsdato = " + ordre.getLeveringsdato()
+                + "', afhentningsdato = '" + ordre.getAfhentningsdato() + "', bemærkning = '" + ordre.getBemærkning()
+                + "', bemærkning_ekstra = " + ordre.getBemærkning_ekstra() + "', kirkegård = "
+                + ordre.getKirkegård() + "', afdeling = '" + ordre.getAfdeling() + "', afdødnavn = '" + ordre.getAfdødnavn()
+                + "', række = " + ordre.getRække() + "', nummer = "
+                + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
+                + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';");
     }
 
     public Vare_linje getVareLinje(int linje_nr, String ordre_nr) throws SQLException {
@@ -630,7 +664,7 @@ public class DatabaseObjectHandler {
         return vare_linje;
     }
 
-    public void createVareLinje(Vare_linje vareLinje, String ordre_nr) throws SQLException, VareException {
+    public void createVareLinje(Vare_linje vareLinje, String ordre_nr) throws SQLException, ControlException {
         if (vareLinje.getVare() != null) {
             Vare vare = getVare(vareLinje.getVare().getVare_nr());
             if (vare.getVareStatus() == 0) {
@@ -645,7 +679,7 @@ public class DatabaseObjectHandler {
                 } else if (vare.getVareStatus() == 2) {
                     error = "Vare er allerede solgt.";
                 }
-                throw new VareException(error);
+                throw new ControlException(error);
             }
         } else if (vareLinje.getInskription() != null) {
             createInskription(vareLinje.getInskription());
@@ -660,6 +694,25 @@ public class DatabaseObjectHandler {
                     + "values ('" + vareLinje.getLinje_nr() + "','" + tom_linje_id
                     + "','" + ordre_nr + "');");
         }
+    }
+
+    public void deleteVareLinje(Vare_linje vare_linje, String ordre_nr) throws SQLException {
+        if (vare_linje.getInskription() != null) {
+            deleteInskription(vare_linje.getInskription());
+        } else if (vare_linje.getTom_linje() != null) {
+            deleteTomLinje(vare_linje.getTom_linje());
+        } else if (vare_linje.getVare() != null) {
+            vare_linje.getVare().setVareStatus(0);
+            updateVareStatus(vare_linje.getVare());
+        }
+        db.setData("delete from vare_linje where linje_nr = '" + vare_linje.getLinje_nr()
+                + "' and ordre_nr = '" + ordre_nr + "';");
+    }
+
+    public void editVareLinje(Vare_linje vare_linje, String ordre_nr) {
+        //Umulig at lave, brug i stedet deleteVareLinje på alle varelinjer tilhørende
+        //ordrenummeret og opret derefter dem igen med createVareLinje
+        throw new NotImplementedException();
     }
 
     public Faktura getFaktura(String faktura_nr) throws SQLException {
@@ -727,6 +780,26 @@ public class DatabaseObjectHandler {
         }
     }
 
+    public void deleteFaktura(Faktura faktura) throws SQLException {
+        if (faktura.getFakturatype()) {
+            if (getProvisionsseddel(faktura.getProvisionsseddel().getProvisions_nr()) != null) {
+                deleteProvisionsseddel(faktura.getProvisionsseddel());
+            }
+        }
+        db.setData("delete from faktura where faktura_nr = '" + faktura.getFaktura_nr() + "';");
+    }
+
+    public void editFaktura(Faktura faktura) throws SQLException, ControlException {
+        Faktura oldFaktura = getFaktura(faktura.getFaktura_nr());
+        deleteFaktura(oldFaktura);
+        if (getKunde(faktura.getBedemand().getTlf()) == null) {
+            createSamarbejdspartner(faktura.getBedemand());
+        } else {
+            editSamarbejdspartner(faktura.getBedemand());
+        }
+        createFaktura(faktura);
+    }
+
     public String getNextKontoudtogNr() throws SQLException {
         int max = 0;
         ResultSet rs;
@@ -765,6 +838,10 @@ public class DatabaseObjectHandler {
         } else {
             throw new ControlException("Et kontoudtog med kontoudtog_nr " + kontoudtog_nr + " findes allerede.");
         }
+    }
+
+    public void deleteKontoudtog(Kontoudtog kontoudtog) throws SQLException {
+        db.setData("delete from kontoudtog where kontoudtog_nr = '" + kontoudtog.getKontoudtog_nr() + "';");
     }
 
     public Provisionsseddel getProvisionsseddel(String provisions_nr) throws SQLException {
@@ -813,6 +890,14 @@ public class DatabaseObjectHandler {
         } else {
             throw new ControlException("En provisionsseddel med provisions_nr " + provisions_nr + " findes allerede.");
         }
+    }
+
+    public void deleteProvisionsseddel(Provisionsseddel provisionsseddel) throws SQLException {
+        if (getKontoudtog(provisionsseddel.getKontoudtog().getKontoudtog_nr()) != null) {
+            deleteKontoudtog(provisionsseddel.getKontoudtog());
+        }
+        db.setData("delete from provisionsseddel where provisions_nr = '"
+                + provisionsseddel.getProvisions_nr() + "';");
     }
 
     public User getUser(String username) throws SQLException {
