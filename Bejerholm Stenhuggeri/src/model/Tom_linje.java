@@ -35,6 +35,9 @@ public class Tom_linje {
     public double getPris() {
         return pris;
     }
+    public double getSamletPris(){
+        return pris * antal;
+    }
 
     public void setPris(double pris) {
         this.pris = pris;
