@@ -45,6 +45,10 @@ public class DatabaseObjectHandler {
         }
     }
 
+    public void editPostnummer(Postnummer postnummer) throws SQLException {
+        db.setData("update postnummer set byNavn = '" + "' where post_nr = '" + postnummer.getPost_nr() + "';");
+    }
+
     public Kunde getKunde(int tlf) throws SQLException {
         Kunde kunde = null;
         int post_nr = 0;
@@ -75,6 +79,16 @@ public class DatabaseObjectHandler {
                     + kunde.getAdresse() + "','" + kunde.getTlf() + "','"
                     + kunde.getPost_nr().getPost_nr() + "');");
         }
+    }
+
+    public void editKunde(Kunde kunde) throws SQLException {
+        if (getPostnummer(kunde.getPost_nr().getPost_nr()) == null) {
+            createPostnummer(kunde.getPost_nr());
+        }
+        db.setData("update kunde set fornavn = '" + kunde.getFornavn() + "', efternavn = '"
+                + kunde.getEfternavn() + "', adresse = '" + kunde.getAdresse()
+                + "', post_nr = " + kunde.getPost_nr().getPost_nr() + "' where tlf = '"
+                + kunde.getTlf() + "';");
     }
 
     public Samarbejdspartner getSamarbejdspartner(int tlf) throws SQLException {
@@ -115,9 +129,21 @@ public class DatabaseObjectHandler {
         }
     }
 
+    public void editSamarbejdspartner(Samarbejdspartner samarbejdspartner) throws SQLException {
+        if (getPostnummer(samarbejdspartner.getPost_nr().getPost_nr()) == null) {
+            createPostnummer(samarbejdspartner.getPost_nr());
+        }
+        db.setData("update samarbejdspartner set firmanavn = '" + samarbejdspartner.getFirmanavn() + "', adresse = '"
+                + samarbejdspartner.getAdresse() + "', cvr_nr = '" + samarbejdspartner.getCvr_nr()
+                + "', registrerings_nr = " + samarbejdspartner.getRegistrerings_nr() + "', konto_nr = '"
+                + samarbejdspartner.getKonto_nr() + "', bank = '" + samarbejdspartner.getBank()
+                + "', post_nr = " + samarbejdspartner.getPost_nr().getPost_nr() + "' where tlf = '"
+                + samarbejdspartner.getTlf() + "';");
+    }
+
     public Tom_linje getTomLinje(int id) throws SQLException {
         Tom_linje tomlinje = null;
-        String sql = "select navn, pris, antal, kommentar, id from tom_linje where id =" + id + ";";
+        String sql = "select navn, pris, antal, id from tom_linje where id =" + id + ";";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -127,7 +153,6 @@ public class DatabaseObjectHandler {
                     rs.getString("navn"),
                     rs.getDouble("pris"),
                     rs.getInt("antal"),
-                    rs.getString("kommentar"),
                     rs.getInt("id"));
         }
         rs.close();
@@ -146,9 +171,19 @@ public class DatabaseObjectHandler {
     }
 
     public void createTomLinje(Tom_linje tom_linje) throws SQLException {
-        db.setData("insert into tom_linje(navn,pris,antal,kommentar) values('"
+        db.setData("insert into tom_linje(navn,pris,antal) values('"
                 + tom_linje.getNavn() + "','" + tom_linje.getPris() + "','"
-                + tom_linje.getAntal() + "','" + tom_linje.getKommentar() + "');");
+                + tom_linje.getAntal() + "');");
+    }
+
+    public void deleteTomLinje(Tom_linje tom_linje) throws SQLException {
+        db.setData("delete from tom_linje where id = '" + tom_linje.getId() + "';");
+    }
+
+    public void editTomLinje(Tom_linje tom_linje) throws SQLException {
+        db.setData("update tom_linje set navn = '" + tom_linje.getNavn() + "', pris = '"
+                + tom_linje.getPris() + "', antal = '" + tom_linje.getAntal()
+                + "' where id = '" + tom_linje.getId() + "';");
     }
 
     public Tegntype getTegntype(int id) throws SQLException {
@@ -168,8 +203,19 @@ public class DatabaseObjectHandler {
         return tegntype;
     }
 
-    public void createTegntype(String navn, double pris_pr_tegn) throws SQLException {
-        db.setData("insert into tegntype (navn, pris_pr_tegn) values('" + navn + "','" + pris_pr_tegn + "');");
+    public void createTegntype(Tegntype tegntype) throws SQLException {
+        db.setData("insert into tegntype (navn, pris_pr_tegn) values('" + tegntype.getNavn()
+                + "','" + tegntype.getPris_pr_tegn() + "');");
+    }
+
+    public void deleteTegntype(Tegntype tegntype) throws SQLException {
+        db.setData("delete from tegntype where id = '" + tegntype.getId() + "';");
+    }
+
+    public void editTegntype(Tegntype tegntype) throws SQLException {
+        db.setData("update tegntype set navn = '" + tegntype.getNavn() + "', pris_pr_tegn = '"
+                + tegntype.getPris_pr_tegn() + "' where id = '"
+                + tegntype.getId() + "';");
     }
 
     public int getMaxTegnTypeID() throws SQLException {
@@ -209,6 +255,20 @@ public class DatabaseObjectHandler {
                     + "inskription)values('" + inskription_linje_liste.get(i).getLinje_nr() + "','"
                     + inskription_id + "','" + inskription_linje_liste.get(i).getLinje_type()
                     + "','" + inskription_linje_liste.get(i).getInskription() + "');");
+        }
+    }
+
+    public void deleteInskriptionLinjer(ArrayList<Inskription_linje> inskription_linje_liste) throws SQLException {
+        db.setData("delete from inskription_linje where inskription_id = '"
+                + inskription_linje_liste.get(0).getInskription_id() + "';");
+    }
+
+    public void editInskriptionLinjer(ArrayList<Inskription_linje> inskription_linje_liste) throws SQLException {
+        for (int i = 0; i < inskription_linje_liste.size(); i++) {
+            db.setData("update inskription_linje set linje_nr = '" + inskription_linje_liste.get(i).getLinje_nr()
+                    + "', linje_type = '" + inskription_linje_liste.get(i).getLinje_type()
+                    + "', inskription = '" + inskription_linje_liste.get(i).getInskription()
+                    + "' where inskription_id = '" + inskription_linje_liste.get(i).getInskription_id() + "';");
         }
     }
 
@@ -262,6 +322,22 @@ public class DatabaseObjectHandler {
         createInskriptionLinje(inskription.getInskription_linje_liste(), getMaxInskriptionId());
     }
 
+    public void deleteInskription(Inskription inskription) throws SQLException {
+        deleteInskriptionLinjer(inskription.getInskription_linje_liste());
+        db.setData("delete from inskription where id = '" + inskription.getId() + "';");
+    }
+
+    public void editInskription(Inskription inskription) throws SQLException {
+        if (getTegntype(inskription.getTegntype().getId()) == null) {
+            createTegntype(inskription.getTegntype());
+            inskription.getTegntype().setId(getMaxTegnTypeID());
+        }
+        editInskriptionLinjer(inskription.getInskription_linje_liste());
+        db.setData("update inskription set tegn_id = '" + inskription.getTegntype().getId()
+                + "', skrifttype = '" + inskription.getSkrifttype() + "' where id = '"
+                + inskription.getId() + "';");
+    }
+
     public int getMaxInskriptionId() throws SQLException {
         int max = 0;
         String sql = "select max(id) from inskription;";
@@ -304,8 +380,27 @@ public class DatabaseObjectHandler {
         return varegruppe;
     }
 
-    public void createVaregruppe(int grp_nr, String navn) throws SQLException {
-        db.setData("insert into varegruppe(navn) values ('" + navn + "');");
+    public int getMaxGrpNr() throws SQLException {
+        int max = 0;
+        ResultSet rs;
+        rs = db.getData("select MAX(grp_nr) from varegruppe");
+        if (rs.next()) {
+            max = rs.getInt("MAX(grp_nr)");
+        }
+        return max;
+    }
+
+    public void createVaregruppe(Varegruppe varegruppe) throws SQLException {
+        db.setData("insert into varegruppe(navn) values ('" + varegruppe.getNavn() + "');");
+    }
+
+    public void deleteVaregruppe(Varegruppe varegruppe) throws SQLException {
+        db.setData("delete from varegruppe where grp_nr = '" + varegruppe.getGrp_nr() + "';");
+    }
+
+    public void editVaregruppe(Varegruppe varegruppe) throws SQLException {
+        db.setData("update varegruppe set navn = '" + varegruppe.getNavn() + "' where grp_nr = '"
+                + varegruppe.getGrp_nr() + "';");
     }
 
     public int getMaxVareNr() throws SQLException {
@@ -381,6 +476,23 @@ public class DatabaseObjectHandler {
                 + vare.getBredde() + "','" + vare.getIndkøbspris() + "','" + vare.getSalgspris() + "','"
                 + vare.getTypenavn() + "','" + "" + vare.getOverflade() + "','" + boolToInt(vare.getDekoration())
                 + "','" + vare.getGruppe().getGrp_nr() + "',0);");
+    }
+
+    public void deleteVare(Vare vare) throws SQLException {
+        db.setData("delete from vare where vare_nr = '" + vare.getVare_nr() + "';");
+    }
+
+    public void editVare(Vare vare) throws SQLException {
+        if (getVareGruppe(vare.getGruppe().getGrp_nr()) == null) {
+            createVaregruppe(vare.getGruppe());
+            vare.getGruppe().setGrp_nr(getMaxGrpNr());
+        }
+        db.setData("update vare set navn = '" + vare.getNavn() + "', højde = '" + vare.getHøjde()
+                + "', bredde = '" + vare.getBredde() + "', indkøbspris = " + vare.getIndkøbspris()
+                + "', salgspris = '" + vare.getSalgspris() + "', typenavn = '" + vare.getTypenavn()
+                + "', overflade = " + vare.getOverflade() + "', dekoration = "
+                + boolToInt(vare.getDekoration()) + "', vareStatus = '" + vare.getVareStatus()
+                + "' where vare_nr = '" + vare.getVare_nr() + "';");
     }
 
     public void updateVareStatus(Vare vare) throws SQLException {
@@ -590,9 +702,9 @@ public class DatabaseObjectHandler {
         String faktura_nr = "00" + faktura.getOrdre().getKunde().getTlf() + "-" + faktura.getOrdre().getOrdre_nr();
 
         if (faktura.getFakturatype()) {
-            if(faktura.getBedemand()!= null && faktura.getProvisionsseddel() != null) {
-            createSamarbejdspartner(faktura.getBedemand());
-            createProvisionsseddel(faktura.getProvisionsseddel());
+            if (faktura.getBedemand() != null && faktura.getProvisionsseddel() != null) {
+                createSamarbejdspartner(faktura.getBedemand());
+                createProvisionsseddel(faktura.getProvisionsseddel());
             } else {
                 throw new ControlException("Ugylige fakturaoplysninger(bedemandsordre men ingen samarbejdspartner og/eller provisionsseddel valgt");
             }
@@ -690,8 +802,8 @@ public class DatabaseObjectHandler {
     public void createProvisionsseddel(Provisionsseddel provisionsseddel) throws SQLException, ControlException {
         String provisions_nr = getNextProvisionsNr();
         if (getProvisionsseddel(provisions_nr) == null) {
-            if(provisionsseddel.getKontoudtog()!=null){
-            createKontoudtog(provisionsseddel.getKontoudtog());
+            if (provisionsseddel.getKontoudtog() != null) {
+                createKontoudtog(provisionsseddel.getKontoudtog());
             } else {
                 throw new ControlException("Ugyldigt provisionsseddel objekt, intet kontoudtog er oprettet.");
             }

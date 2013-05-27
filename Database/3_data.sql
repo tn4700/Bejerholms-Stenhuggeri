@@ -72,12 +72,12 @@ values
 ('1','3','1','Hej'),('2','3','1','mor'),('3','3','3',''),('4','3','3',''),('5','3','3',''),
 ('1','4','1','Kagemand 2000-2001'),('2','4','1','hvil i fred'),('3','4','0',''),('4','4','0',''),('5','4','0','');
 
-insert into tom_linje (navn,pris,antal,kommentar)
+insert into tom_linje (navn,pris,antal)
 values
-('Navn1','1000','1','fiktiv vare 1'),
-('Navn2','2000','2','fiktiv vare 2'),
-('Navn3','3000','1','fiktiv vare 3'),
-('Navn4','4000','1','fiktiv vare 4');
+('Navn1','1000','1'),
+('Navn2','2000','2'),
+('Navn3','3000','1'),
+('Navn4','4000','1');
 
 
 insert into vare_linje (linje_nr, vare_nr, inskription_id, tom_linje_id, ordre_nr)

@@ -50,8 +50,7 @@ create table tom_linje
 (
 navn                    varchar(50) not null,
 pris                    double not null,
-antal                   int not null,
-kommentar               varchar(100)
+antal                   int not null
 )engine = innodb;
 
 drop table if exists vare;
