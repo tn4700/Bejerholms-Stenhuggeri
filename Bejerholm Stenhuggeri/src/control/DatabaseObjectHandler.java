@@ -17,6 +17,7 @@ import model.Postnummer;
 import model.Samarbejdspartner;
 import model.Tegntype;
 import model.Tom_linje;
+import model.User;
 import model.Vare;
 import model.Vare_linje;
 import model.Varegruppe;
@@ -256,10 +257,10 @@ public class DatabaseObjectHandler {
         inskription.setTegntype(getTegntype(tegn_id));
 
         for (int i = 1; i <= getMaxInskriptionLinje(inskription.getId()); i++) {
-            if(getInskriptionLinje(i, inskription.getId())!=null){
-            inskription_linje = getInskriptionLinje(i, inskription.getId());
-            inskription.addInskription_linje(inskription_linje);
-            inskription_linje = null;
+            if (getInskriptionLinje(i, inskription.getId()) != null) {
+                inskription_linje = getInskriptionLinje(i, inskription.getId());
+                inskription.addInskription_linje(inskription_linje);
+                inskription_linje = null;
             }
         }
 
@@ -317,6 +318,16 @@ public class DatabaseObjectHandler {
 
     public void createVaregruppe(int grp_nr, String navn) throws SQLException {
         db.setData("insert into varegruppe(navn) values ('" + navn + "');");
+    }
+
+    public int getMaxVareNr() throws SQLException {
+        int max = 0;
+        ResultSet rs;
+        rs = db.getData("select MAX(vare_nr) from vare");
+        if (rs.next()) {
+            max = rs.getInt("MAX(vare_nr)");
+        }
+        return max;
     }
 
     public Vare getVare(int vare_nr) throws SQLException {
@@ -607,14 +618,26 @@ public class DatabaseObjectHandler {
         }
     }
 
-    public int getMaxVareNr() throws SQLException {
-        int max = 0;
+    public User getUser(String username) throws SQLException {
         ResultSet rs;
-        rs = db.getData("select MAX(vare_nr) from vare");
+        User user = null;
+        rs = db.getData("Select brugernavn, pw from user where brugernavn = " + username + ";");
+
         if (rs.next()) {
-            max = rs.getInt("MAX(vare_nr)");
+            user = new User(
+                    rs.getString("brugernavn"),
+                    rs.getString("pw"));
         }
-        return max;
+        return user;
+    }
+
+    public void setUser(User user) throws SQLException, ControlException{
+        if (getUser(user.getUsername()) == null) {
+            db.setData("insert into user(brugernavn,pw)values('" + user.getUsername()
+                    + "','" + user.getPassword() + "');");
+        } else {
+            throw new ControlException("Bruger findes allerede.");
+        }
     }
 
     public int boolToInt(boolean b) {
@@ -624,7 +647,5 @@ public class DatabaseObjectHandler {
         }
         return result;
 
-        //Alternativ løsning
-        //return b ? 1 : 0;
     }
 }
