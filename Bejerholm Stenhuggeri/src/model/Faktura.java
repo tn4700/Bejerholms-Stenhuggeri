@@ -17,8 +17,8 @@ public class Faktura {
     private String vedrørende;
     private Timestamp sendt_dato;
     private String faktureringsadresse;
-    private boolean fakturatype;
-    private boolean betalingsstatus;
+    private boolean fakturatype; //True = bedemand, false = normal
+    private boolean betalingsstatus; // True = betalt, false = ikke betalt
     private Ordre ordre;
     private Samarbejdspartner bedemand;
 
@@ -107,7 +107,7 @@ public class Faktura {
         this.fakturatype = fakturatype;
     }
 
-    public boolean isBetalingsstatus() {
+    public boolean getBetalingsstatus() {
         return betalingsstatus;
     }
 

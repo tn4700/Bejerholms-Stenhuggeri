@@ -286,13 +286,7 @@ public class OpretOrdre {
                 antal = 1;
                 enhedsPris = vare_linje.getVare().getSalgspris();
             } else if(vare_linje.getInskription()!=null){
-                antal = 0;
-                for (int j = 0; j < vare_linje.getInskription().getInskription_linje_liste().size(); j++) {
-                    String characters = vare_linje.getInskription().getInskription_linje_liste().get(j).getInskription().replaceAll(" ", "");
-                    if(vare_linje.getInskription().getInskription_linje_liste().get(j).getLinje_type()==1){
-                    antal += characters.length();
-                    }
-                }
+                antal = vare_linje.getInskription().getAntalTegn();
                 enhedsPris = vare_linje.getInskription().getTegntype().getPris_pr_tegn();
                 beskrivelse = vare_linje.getInskription().getTegntype().getNavn();
             } else if(vare_linje.getTom_linje()!=null){

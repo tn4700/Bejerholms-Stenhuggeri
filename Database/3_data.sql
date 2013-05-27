@@ -26,12 +26,12 @@ values
 insert into vare (grp_nr,navn,højde,bredde,indkøbspris,salgspris,typenavn,overflade,dekoration,vareStatus)
 values
 ('2','fugl 181op',null,null,'116','286','O. Storm Broncedekoration',null,true,'0'),
-('1','gravsten granit','45','36','650','3200','Lys Halmstad','poleret',false,'2'),
-('1','Orion','45','36','650','3200','Lys Halmstad','poleret',false,'2'),
-('1','Mørk halmstad','45','36','650','3200','Lys Halmstad','poleret',false,'2'),
-('1','gravsten granit','45','36','650','3200','Lys Halmstad','poleret',false,'2'),
+('1','gravsten granit','45','36','650','3200','Lys Halmstad','poleret',false,'0'),
+('1','Orion','45','36','650','3200','Lys Halmstad','poleret',false,'0'),
+('1','Mørk halmstad','45','36','650','3200','Lys Halmstad','poleret',false,'0'),
+('1','gravsten granit','45','36','650','3200','Lys Halmstad','poleret',false,'0'),
 ('3','granitplade','200','300','3000','10000','granitplade','overflade 3',false,'0'),
-('3','sort granit','100','36','650','3200','Lys Halmstad','poleret',false,'2'),
+('3','sort granit','100','36','650','3200','Lys Halmstad','poleret',false,'0'),
 ('2','fugl 85328v',null,null,'450','900','Strassacker Broncedekoration',null,true,'0');
 
 insert into ordre (tlf, ordre_nr,ordretype,ordredato,leveringdato,afhentningsdato,bemærkning,bemærkning_ekstra,kirkegård,afdeling,afdødnavn,række,nummer,gravType)
@@ -43,20 +43,20 @@ values
 
 insert into tegntype (navn,pris_pr_tegn)
 values
-('Indhuggede bogstaver m/ alm. farve','65.00'),
-('Indhuggede bogstaver m/ guld','90.00'),
-('Indhuggede bogstaver m/ guld i ru sten','115.00'),
-('Faksimile indhuggede m/ farve','98.00'),
-('Faksimile indhuggede m/ guld','118.00'),
-('Indhuggede bogstaver i egen sten- m/ alm. farve','75.00'),
-('Indhuggede bogstaver i egen sten- m/ alm. guld','118.00'),
-('Håndtegnet bogstaver/ Håndhugget','130.00'),
-('Håndtegnet bogstaver/ Sandblæste','90.00'),
+('Indh. m/ alm. farve','65.00'),
+('Indh. m/ guld','90.00'),
+('Indh. m/ guld i ru sten','115.00'),
+('Faks. indh. m/ farve','98.00'),
+('Faks. indh. m/ guld','118.00'),
+('Indh. i egen sten- m/ alm. farve','75.00'),
+('Indh. i egen sten- m/ alm. guld','118.00'),
+('Håndtegnet & Håndhugget','130.00'),
+('Håndtegnet & Sandblæste','90.00'),
 ('Bronce bogstaver','75.00'),
-('Opmaling af eksisterende bogstaver','35.00'),
-('Oppudsning af Bronce bogstaver','55.00'),
-('Opforgyldning af bogstaver i pol. sten','65.00'),
-('Opforgyldning af bogstaver i ru sten','95.00');
+('Opmaling af eksisterende','35.00'),
+('Oppudsning af Bronce','55.00'),
+('Opforgyldning i pol. sten','65.00'),
+('Opforgyldning i ru sten','95.00');
 
 insert into inskription(tegn_id, skrifttype)
 values

@@ -256,9 +256,11 @@ public class DatabaseObjectHandler {
         inskription.setTegntype(getTegntype(tegn_id));
 
         for (int i = 1; i <= getMaxInskriptionLinje(inskription.getId()); i++) {
+            if(getInskriptionLinje(i, inskription.getId())!=null){
             inskription_linje = getInskriptionLinje(i, inskription.getId());
             inskription.addInskription_linje(inskription_linje);
             inskription_linje = null;
+            }
         }
 
         return inskription;
@@ -420,16 +422,19 @@ public class DatabaseObjectHandler {
                     rs.getInt("række"),
                     rs.getInt("nummer"),
                     rs.getBoolean("gravType"),
+                    null,
                     null);
             tlf = rs.getInt("tlf");
             rs.close();
-            
+
             ordre.setKunde(getKunde(tlf));
             int max = getMaxVareLinje(ordre.getOrdre_nr());
             for (int i = 1; i <= max; i++) {
-                vare_linje = getVareLinje(i, ordre.getOrdre_nr());
-                ordre.addVare_linje(vare_linje);
-                vare_linje = null;
+                if (getVareLinje(i, ordre.getOrdre_nr()) != null) {
+                    vare_linje = getVareLinje(i, ordre.getOrdre_nr());
+                    ordre.addVare_linje(vare_linje);
+                    vare_linje = null;
+                }
             }
         }
 
@@ -501,15 +506,14 @@ public class DatabaseObjectHandler {
                 linjeType = 3;
                 id = rs.getInt("tom_linje_id");
             }
-        }
-        rs.close();
-
-        if (linjeType == 1) {
-            vare_linje.setVare(getVare(id));
-        } else if (linjeType == 2) {
-            vare_linje.setInskription(getInskription(id));
-        } else if (linjeType == 3) {
-            vare_linje.setTom_linje(getTomLinje(id));
+            rs.close();
+            if (linjeType == 1) {
+                vare_linje.setVare(getVare(id));
+            } else if (linjeType == 2) {
+                vare_linje.setInskription(getInskription(id));
+            } else if (linjeType == 3) {
+                vare_linje.setTom_linje(getTomLinje(id));
+            }
         }
 
         return vare_linje;
@@ -577,6 +581,30 @@ public class DatabaseObjectHandler {
             faktura.setBedemand(getSamarbejdspartner(tlf));
         }
         return faktura;
+    }
+
+    public void createFaktura(Faktura faktura) throws SQLException {
+        String faktura_nr = "00" + faktura.getOrdre().getKunde().getTlf() + "-" + faktura.getOrdre().getOrdre_nr();
+
+        if (faktura.getFakturatype()) {
+            db.setData("insert into faktura (ordre_nr, faktura_nr,faktureringsdato,"
+                    + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
+                    + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
+                    + faktura.getFaktureringsdato() + "','" + faktura.getVedrørende() + "','"
+                    + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse() + "','"
+                    + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
+                    + "');");
+        } else {
+            createSamarbejdspartner(faktura.getBedemand());
+            db.setData("insert into faktura (ordre_nr, faktura_nr, bedemand_tlf, faktureringsdato,"
+                    + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
+                    + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
+                    + faktura.getBedemand().getTlf() + "','"
+                    + faktura.getFaktureringsdato() + "','" + faktura.getVedrørende() + "','"
+                    + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse() + "','"
+                    + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
+                    + "');");
+        }
     }
 
     public int getMaxVareNr() throws SQLException {

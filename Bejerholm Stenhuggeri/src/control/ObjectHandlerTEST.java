@@ -41,7 +41,7 @@ public class ObjectHandlerTEST {
 
             //Opret Ordre
             Ordre ordre = new Ordre(null,true,ts,ts,ts,"Giver ikke en fuck","Ikke en","En stor kirkegård",
-                    1,"Mor",1,1,true,k);
+                    1,"Mor",1,1,true,k, null);
             
             //Opret vare
             Varegruppe vg = dbhandler.getVareGruppe(1);

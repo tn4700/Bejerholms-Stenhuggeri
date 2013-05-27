@@ -43,9 +43,14 @@ public class Ordre {
             int række,
             int nummer,
             boolean gravType,
-            Kunde kunde) {
-
-        vare_linjeListe = new ArrayList();
+            Kunde kunde,
+            ArrayList<Vare_linje> vare_linjeListe) {
+        
+        if(vare_linjeListe!=null){
+           this.vare_linjeListe = vare_linjeListe;
+        } else {
+           this.vare_linjeListe = new ArrayList(); 
+        }
         this.ordre_nr = ordre_nr;
         this.ordretype = ordretype;
         this.ordredato = ordredato;
