@@ -607,15 +607,16 @@ public class DatabaseObjectHandler {
     }
 
     public Kontoudtog getKontoudtog() throws SQLException {
-
         return null;
     }
 
     public void createKontoudtog(Kontoudtog kontoudtog) throws SQLException {
     }
 
-    public Provisionsseddel getProvisionsseddel() throws SQLException {
-
+    public Provisionsseddel getProvisionsseddel(String faktura_nr) throws SQLException {
+        Provisionsseddel provisionsseddel = null;
+        ResultSet rs;
+        rs = db.getData("Select ");
         return null;
     }
 

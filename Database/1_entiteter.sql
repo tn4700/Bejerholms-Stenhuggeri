@@ -117,7 +117,6 @@ create table kontoudtog
 (
 kontoudtog_nr          	char(5) not null,            # Unikt nr som står i topppen af kontoudtogs seddelen
 dato                    datetime,       # Dato for oprettelse af kontoudtogs seddelen
-vedrørende              varchar(100),
 sendt_dato              datetime,       # Dato for hvornår Kontoudtog er sendt
 primary key(kontoudtog_nr)
 )engine = innodb;
@@ -125,10 +124,8 @@ primary key(kontoudtog_nr)
 drop table if exists provisionsseddel;
 create table provisionsseddel
 (
-provisions_nr           char(5) not null,            # Unikt nummer som står i toppen af provisions seddelen 
-dato                    datetime,       # Dato for oprettelse af provisionsseddel
-vedrørende              varchar(100),   
-overførelsesbetingelser varchar(100),
+provisions_nr           char(5) not null,      
+dato                    datetime,    
 primary key(provisions_nr)
 ) engine = innodb;
 
