@@ -14,14 +14,12 @@ public class Kontoudtog {
 
     private int kontoudtog_nr;
     private Timestamp dato;
-    private String vedrørende;
     private Timestamp sendt_dato;
     private Provisionsseddel provisionsseddel;
     
-    public Kontoudtog(int kontoudtog_nr, Timestamp dato, String vedrørende, Timestamp sendt_dato, Provisionsseddel provisionsseddel) {
+    public Kontoudtog(int kontoudtog_nr, Timestamp dato, Timestamp sendt_dato, Provisionsseddel provisionsseddel) {
         this.kontoudtog_nr = kontoudtog_nr;
         this.dato = dato;
-        this.vedrørende = vedrørende;
         this.sendt_dato = sendt_dato;
         this.provisionsseddel = provisionsseddel;
     }
@@ -40,14 +38,6 @@ public class Kontoudtog {
 
     public void setDato(Timestamp dato) {
         this.dato = dato;
-    }
-
-    public String getVedrørende() {
-        return vedrørende;
-    }
-
-    public void setVedrørende(String vedrørende) {
-        this.vedrørende = vedrørende;
     }
 
     public Timestamp getSendt_dato() {
