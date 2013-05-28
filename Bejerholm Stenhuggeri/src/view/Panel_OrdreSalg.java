@@ -205,10 +205,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel_ordrebekræftigelse_ordreSalg = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jButton_godkend_ordresalg = new javax.swing.JButton();
-        jButton_Ændre_ordresalg = new javax.swing.JButton();
         jButton_annuller_ordresalg = new javax.swing.JButton();
         jLabel_købssum__bekræftelse_ordresalg = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
+        jButton_ændre_ordreSalg = new javax.swing.JButton();
 
         jLabel37.setText("jLabel37");
 
@@ -326,6 +326,12 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel12.setText("Gravtype");
         jPanel_Kirkegård.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
         jPanel_Kirkegård.add(jTextField_kirkegård_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 120, -1));
+
+        jTextField_afdeling_ordresalg.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField_afdeling_ordresalgFocusLost(evt);
+            }
+        });
         jPanel_Kirkegård.add(jTextField_afdeling_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 120, -1));
 
         jLabel_fejl_pris.setForeground(new java.awt.Color(204, 0, 0));
@@ -428,7 +434,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel_fejlbesked_tilføjelse.setForeground(new java.awt.Color(204, 0, 0));
         jPanel_tilføjelse.add(jLabel_fejlbesked_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
-        jPanel_OrdreSalg.add(jPanel_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 210, 280));
+        jPanel_OrdreSalg.add(jPanel_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 210, 210));
 
         jButton_videre_ordresalg.setText("Videre");
         jButton_videre_ordresalg.addActionListener(new java.awt.event.ActionListener() {
@@ -912,15 +918,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jButton_godkend_ordresalgActionPerformed(evt);
             }
         });
-        jPanel_ordrebekræftigelse_ordreSalg.add(jButton_godkend_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, -1, -1));
-
-        jButton_Ændre_ordresalg.setText("Ændre");
-        jButton_Ændre_ordresalg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Ændre_ordresalgActionPerformed(evt);
-            }
-        });
-        jPanel_ordrebekræftigelse_ordreSalg.add(jButton_Ændre_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 90, 75, -1));
+        jPanel_ordrebekræftigelse_ordreSalg.add(jButton_godkend_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, 80, -1));
 
         jButton_annuller_ordresalg.setText("Annuller");
         jButton_annuller_ordresalg.addActionListener(new java.awt.event.ActionListener() {
@@ -928,7 +926,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jButton_annuller_ordresalgActionPerformed(evt);
             }
         });
-        jPanel_ordrebekræftigelse_ordreSalg.add(jButton_annuller_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 75, -1));
+        jPanel_ordrebekræftigelse_ordreSalg.add(jButton_annuller_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 80, -1));
 
         jLabel_købssum__bekræftelse_ordresalg.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel_købssum__bekræftelse_ordresalg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -937,6 +935,14 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jLabel35.setText("Samlet pris: ");
         jPanel_ordrebekræftigelse_ordreSalg.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, -1, -1));
+
+        jButton_ændre_ordreSalg.setText("Ændre");
+        jButton_ændre_ordreSalg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ændre_ordreSalgActionPerformed(evt);
+            }
+        });
+        jPanel_ordrebekræftigelse_ordreSalg.add(jButton_ændre_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 90, 80, -1));
 
         jPanel_main.add(jPanel_ordrebekræftigelse_ordreSalg, "card_ordrebekræftelse_ordresalg");
 
@@ -1211,9 +1217,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         if (jTextFieldValgt(jTextField_bemærkning_2)) {
             ordre.setBemærkning_ekstra(jTextField_bemærkning_2.getText());
         }
-
-
-
         try {
             String ordrenr = dbhandler.createOrdre(ordre);
             try {
@@ -1224,7 +1227,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             }
 
             try {
-
                 dbhandler.createOrdre(ordre);
 
                 OpretOrdre ordrePDF = new OpretOrdre(ordre);
@@ -1232,9 +1234,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             } catch (Exception e) {
                 System.out.println("der ekete eb fejl med oprettelse af pfd'en");
             }
-
-
-
             Desktop desktop = Desktop.getDesktop();
             File file = new File("docs/ordrePDF.pdf");
             desktop.open(file);
@@ -1244,11 +1243,17 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton_godkend_ordresalgActionPerformed
 
-    private void jButton_Ændre_ordresalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Ændre_ordresalgActionPerformed
-    }//GEN-LAST:event_jButton_Ændre_ordresalgActionPerformed
-
     private void jButton_annuller_ordresalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_annuller_ordresalgActionPerformed
     }//GEN-LAST:event_jButton_annuller_ordresalgActionPerformed
+
+    private void jTextField_afdeling_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_afdeling_ordresalgFocusLost
+         // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_afdeling_ordresalgFocusLost
+
+    private void jButton_ændre_ordreSalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ændre_ordreSalgActionPerformed
+      layout.show(jPanel_main, "card_Ordre_Linje");    
+    }//GEN-LAST:event_jButton_ændre_ordreSalgActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -1259,7 +1264,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JButton jButton_tilføj_specielLinje;
     private javax.swing.JButton jButton_tilføj_vare_ordreSalg;
     private javax.swing.JButton jButton_videre_ordresalg;
-    private javax.swing.JButton jButton_Ændre_ordresalg;
+    private javax.swing.JButton jButton_ændre_ordreSalg;
     private javax.swing.JCheckBox jCheckBox_gravsten;
     private javax.swing.JCheckBox jCheckBox_kiste;
     private javax.swing.JCheckBox jCheckBox_nysten;
@@ -1753,9 +1758,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         return vare_linje_nysten;
     }
-    //metode der tjekker hvilken type tegntype der er valgt og udskriver dem i det jLabel metoden er kaldt med
 
-    private void setInskriptionEksempel(JComboBox box, JLabel label, JTextField field) {
+
+    //metode der tjekker hvilken type tegntype der er valgt og udskriver dem i det jLabel metoden er kaldt med
+   private void setInskriptionEksempel(JComboBox box, JLabel label, JTextField field) {
         int type = 0;
 
         if (box.getSelectedIndex() == 0) {
@@ -1772,7 +1778,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         }
     }
 
-    // metode der returnerer inskriptiontype efter valgt index i combobox
+    // metode der returnerer korrekt inskriptiontype efter index i combobox
     private int getInskriptiontype(JComboBox box) {
         int type = 0;
         if (box.getSelectedIndex() == 0) {
