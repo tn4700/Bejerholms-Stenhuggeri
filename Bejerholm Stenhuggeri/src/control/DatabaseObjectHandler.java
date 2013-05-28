@@ -442,6 +442,18 @@ public class DatabaseObjectHandler {
 
         return vare;
     }
+    
+    public ArrayList<Vare> getAlleVarer() throws SQLException{
+        ArrayList<Vare> vareListe = new ArrayList();
+        ArrayList<Varegruppe> vareGruppeListe = getVaregruppeListe();
+        for (int i = 0; i < vareGruppeListe.size(); i++) {
+            ArrayList<Vare> tmpVareListe = getVareListe(vareGruppeListe.get(i).getGrp_nr());
+            for (int j = 0; j < tmpVareListe.size(); j++) {
+                vareListe.add(tmpVareListe.get(j));
+            }
+        }
+        return vareListe;
+    }
 
     public ArrayList getVareListe(int grp_nr) throws SQLException {
         ArrayList<Vare> vareListe = new ArrayList();
@@ -722,7 +734,7 @@ public class DatabaseObjectHandler {
         int tlf = 0;
         String ordre_nr = null;
         String provisions_nr = null;
-        String sql = "select bedemand_tlf, provisions_nr ordre_nr, faktura_nr, faktureringsdato,"
+        String sql = "select bedemand_tlf, provisions_nr, ordre_nr, faktura_nr, faktureringsdato,"
                 + "vedrørende, sendt_dato, faktureringsadresse, fakturatype, betalingsstatus from "
                 + "faktura where faktura_nr = '" + faktura_nr + "';";
 

@@ -111,9 +111,9 @@ values
 
 insert into faktura (bedemand_tlf, provisions_nr, ordre_nr, faktura_nr,faktureringsdato,vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)
 values
-(null, null, '00001', '0020332836-00001','2013-04-30 11:50:32','Martin Hana','2013-05-01 11:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
-(null, null,'00002', '0050111211-00002','2013-04-30 12:50:32','Thomas Nielsen','2013-05-01 12:50:32','Østre Ringvej 49 2.TV, 4700 Næstved',true,false),
-(null, null,'00003', '0031255685-00003','2013-04-30 13:50:32','Niklas Nielsen','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,true),
+(null, null, '00001', '0020332836-00001','2013-04-30 11:50:32','Martin Hana','2013-05-01 11:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',false,true),
+(null, null,'00002', '0050111211-00002','2013-04-30 12:50:32','Thomas Nielsen','2013-05-01 12:50:32','Østre Ringvej 49 2.TV, 4700 Næstved',false,false),
+(null, null,'00003', '0031255685-00003','2013-04-30 13:50:32','Niklas Nielsen','2013-05-01 13:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',false,true),
 ('58350001', '00001','00004', '0028931093-00004','2013-04-30 14:50:32','Anette Stidsing','2013-05-01 14:50:32','Østre Ringvej 40 1.TV, 4700 Næstved',true,false);
 
 insert into user (brugernavn,pw)
