@@ -252,7 +252,7 @@ public class DatabaseObjectHandler {
     public void createInskriptionLinje(ArrayList<Inskription_linje> inskription_linje_liste, int inskription_id) throws SQLException {
         for (int i = 0; i < inskription_linje_liste.size(); i++) {
             db.setData("insert into inskription_linje(linje_nr, inskription_id, linje_type, "
-                    + "inskription)values('" + inskription_linje_liste.get(i).getLinje_nr() + "','"
+                    + "inskription)values('" + i+1 + "','"
                     + inskription_id + "','" + inskription_linje_liste.get(i).getLinje_type()
                     + "','" + inskription_linje_liste.get(i).getInskription() + "');");
         }
@@ -668,12 +668,13 @@ public class DatabaseObjectHandler {
     }
 
     public void createVareLinje(Vare_linje vareLinje, String ordre_nr) throws SQLException, ControlException {
+        int id = getMaxVareLinje(ordre_nr) + 1;
         if (vareLinje.getVare() != null) {
             Vare vare = getVare(vareLinje.getVare().getVare_nr());
             if (vare.getVareStatus() == 0) {
                 updateVareStatus(vareLinje.getVare());
                 db.setData("insert into vare_linje (linje_nr, vare_nr, ordre_nr)"
-                        + "values ('" + vareLinje.getLinje_nr() + "','" + vareLinje.getVare().getVare_nr()
+                        + "values ('" + id + "','" + vareLinje.getVare().getVare_nr()
                         + "','" + ordre_nr + "');");
             } else {
                 String error = "Ugyldig vareStatus for vare_nr " + vare.getVare_nr() + ".";
@@ -688,13 +689,13 @@ public class DatabaseObjectHandler {
             createInskription(vareLinje.getInskription());
             int inskription_id = getMaxInskriptionId();
             db.setData("insert into vare_linje (linje_nr, inskription_id, ordre_nr)"
-                    + "values ('" + vareLinje.getLinje_nr() + "','" + inskription_id
+                    + "values ('" + id + "','" + inskription_id
                     + "','" + ordre_nr + "');");
         } else if (vareLinje.getTom_linje() != null) {
             createTomLinje(vareLinje.getTom_linje());
             int tom_linje_id = getMaxTomLinjeId();
             db.setData("insert into vare_linje (linje_nr, tom_linje_id, ordre_nr)"
-                    + "values ('" + vareLinje.getLinje_nr() + "','" + tom_linje_id
+                    + "values ('" + id + "','" + tom_linje_id
                     + "','" + ordre_nr + "');");
         }
     }
@@ -717,12 +718,12 @@ public class DatabaseObjectHandler {
         //ordrenummeret og opret derefter dem igen med createVareLinje
     }
 
-    public Faktura getFaktura(String faktura_nr) throws SQLException {
+    public Faktura getFaktura(String faktura_nr) throws SQLException, ControlException {
         Faktura faktura = null;
         int tlf = 0;
         String ordre_nr = null;
         String provisions_nr = null;
-        String sql = "select bedemand_tlf, provisions_nr ordre_nr, faktura_nr, faktureringsdato,"
+        String sql = "select bedemand_tlf, provisions_nr, ordre_nr, faktura_nr, faktureringsdato,"
                 + "vedrørende, sendt_dato, faktureringsadresse, fakturatype, betalingsstatus from "
                 + "faktura where faktura_nr = '" + faktura_nr + "';";
 
@@ -747,8 +748,12 @@ public class DatabaseObjectHandler {
 
         faktura.setOrdre(getOrdre(ordre_nr));
         if (faktura.getFakturatype()) {
+            if(tlf==0 || provisions_nr==null){
             faktura.setBedemand(getSamarbejdspartner(tlf));
             faktura.setProvisionsseddel(getProvisionsseddel(provisions_nr));
+            } else {
+                throw new ControlException("Ugyldige fakturaoplysninger. Fakturatype bedemand men ingen bedemand og/eller provisionsseddel findes.");
+            }
         }
         return faktura;
     }

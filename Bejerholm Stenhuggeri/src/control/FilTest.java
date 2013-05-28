@@ -5,6 +5,7 @@
 package control;
 
 import com.itextpdf.text.DocumentException;
+import control.exceptions.ControlException;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,6 +34,8 @@ public class FilTest {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
+        } catch (ControlException ex) {
+            System.out.println(ex.getMessage());
         }
         try {
             ExportToCSV.export(db);
