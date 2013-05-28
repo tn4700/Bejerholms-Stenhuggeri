@@ -25,11 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
-        
-    }
-
-    public MainFrame(DBConnection db) {
-        initComponents();
+         initComponents();
         try {
             db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root1");
 
@@ -72,6 +68,10 @@ public class MainFrame extends javax.swing.JFrame {
             Panel_DBConnect dbConnect = new Panel_DBConnect();
             jPanel1.add(dbConnect);
         }
+    }
+
+    public MainFrame(DBConnection db) {
+       
     }
 
     /**
