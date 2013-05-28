@@ -31,7 +31,7 @@ public class FilTest {
         faktura = dbhandler.getFaktura("0020332836-00001");
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         try {
