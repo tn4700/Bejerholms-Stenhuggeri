@@ -43,9 +43,9 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         initComponents();
 
         jPanel_Kirkegård.setVisible(false);
-        jPanel_tilføjelse.setVisible(false); 
+        jPanel_tilføjelse.setVisible(false);
         jPanel_inskription_ordreSalg.setVisible(false);
-        
+
         jCheckBox_gravsten.setVisible(false);
         jTextField_redigerPris_ordre_linje.setVisible(false);
         jLabel_pris_gravsten1.setVisible(false);
@@ -934,16 +934,16 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(valgteVare_ordresalg.size() == 0){
+        if (valgteVare_ordresalg.size() == 0) {
             JOptionPane.showMessageDialog(this, "Der er ingen vare tilføjet ordren",
-                        "vælg vare", JOptionPane.INFORMATION_MESSAGE);
-        } else{
-             layout.show(jPanel_main, "card_ordrebekræftelse_ordresalg");
-        jLabel_købssum__bekræftelse_ordresalg.setText("" + udregnpris());
+                    "vælg vare", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            layout.show(jPanel_main, "card_ordrebekræftelse_ordresalg");
+            jLabel_købssum__bekræftelse_ordresalg.setText("" + udregnpris());
         }
-        
-       
-       
+
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jComboBox_linjeType2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_linjeType2ActionPerformed
@@ -952,7 +952,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
     private void jButton_videre_ordresalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_videre_ordresalgActionPerformed
         skiftPanel();
- 
+
 
     }//GEN-LAST:event_jButton_videre_ordresalgActionPerformed
 
@@ -1050,12 +1050,17 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox_varegruppeListe_ordre_linjeActionPerformed
 
     private void jButton_tilføj_vare_ordreSalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_tilføj_vare_ordreSalgActionPerformed
-        
-        if(jCheckBox_redigerPris_gravsten1.isSelected()){
-          Vare vare = (Vare) jComboBox_vareListe_ordre_linje.getSelectedItem();
-          vare.setSalgspris(Double.parseDouble(jTextField_redigerPris_ordre_linje.getText()));
+
+        if (jCheckBox_redigerPris_gravsten1.isSelected()) {
+            Vare vare = (Vare) jComboBox_vareListe_ordre_linje.getSelectedItem();
+            vare.setSalgspris(Double.parseDouble(jTextField_redigerPris_ordre_linje.getText()));
+            Vare_linje vare_linje = new Vare_linje(0, null, vare, null, null);
+            try {
+                dbhandler.editVareLinje(vare_linje, null);
+            } catch (Exception e) {
+            }
         }
-        
+
         if (jComboBox_vareListe_ordre_linje.getItemCount() != 0) {
 
             Vare valgtvare = (Vare) jComboBox_vareListe_ordre_linje.getSelectedItem();
@@ -1073,8 +1078,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         } else {
             // Brugeren skal have besked om, at det ikke var muligt at tilføje vare da listen er tom
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton_tilføj_vare_ordreSalgActionPerformed
 
     private void jTextField_værkstedstimer_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_værkstedstimer_ordresalgFocusLost
@@ -1140,7 +1145,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox_vareListe_ordre_linjeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
+
         layout.show(jPanel_main, "card_ordreSalg");
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1199,11 +1204,11 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_annuller_ordresalgActionPerformed
 
     private void jTextField_afdeling_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_afdeling_ordresalgFocusLost
-         // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_afdeling_ordresalgFocusLost
 
     private void jButton_ændre_ordreSalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ændre_ordreSalgActionPerformed
-      layout.show(jPanel_main, "card_Ordre_Linje");    
+        layout.show(jPanel_main, "card_Ordre_Linje");
     }//GEN-LAST:event_jButton_ændre_ordreSalgActionPerformed
 
     private void jTextField_redigerPris_ordre_linjeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_redigerPris_ordre_linjeFocusLost
@@ -1211,19 +1216,18 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField_redigerPris_ordre_linjeFocusLost
 
     private void jCheckBox_redigerPris_gravsten1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_redigerPris_gravsten1ActionPerformed
-        if(jCheckBox_redigerPris_gravsten1.isSelected()){
+        if (jCheckBox_redigerPris_gravsten1.isSelected()) {
             jTextField_redigerPris_ordre_linje.setVisible(true);
             jLabel_pris_gravsten1.setVisible(true);
-        }else{
+        } else {
             jTextField_redigerPris_ordre_linje.setVisible(false);
             jLabel_pris_gravsten1.setVisible(false);
         }
     }//GEN-LAST:event_jCheckBox_redigerPris_gravsten1ActionPerformed
 
     private void jPanel_valgteVare_ordresalgComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jPanel_valgteVare_ordresalgComponentRemoved
-          opdaterVareListe();
+        opdaterVareListe();
     }//GEN-LAST:event_jPanel_valgteVare_ordresalgComponentRemoved
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -1367,10 +1371,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
     private void fyldVaregruppe() {
         for (int i = 0; i < varegruppeListe.size(); i++) {
-                jComboBox_varegruppeListe_ordre_linje.addItem(varegruppeListe.get(i));
+            jComboBox_varegruppeListe_ordre_linje.addItem(varegruppeListe.get(i));
         }
     }
-    
+
     //metode der fylder combobox med tegntyper
     private void fyldTegntype() {
         int max;
@@ -1410,8 +1414,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             System.out.println("fejl: " + e);
         }
     }
-
-
 
     private void opretInskription_linje() {
 
@@ -1524,7 +1526,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         }
     }
-    
+
     private boolean kundeValgt() {
         boolean result = false;
         if (jTextFieldValgt(jTextField_tlf_ordresalg) && jTextFieldValgt(jTextField_fornavn_ordresalg) && jTextFieldValgt(jTextField_efternavn_ordresalg) && jTextFieldValgt(jTextField_adresse_ordresalg) && jTextFieldValgt(jTextField_postnr_ordresalg) && jTextFieldValgt(jTextField_By_ordresalg)) {
@@ -1532,8 +1534,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         }
         return result;
     }
-
-
 
     public void drawpanel(JPanel jpanel) {
         jpanel.removeAll();
@@ -1569,7 +1569,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         return købssum;
     }
 
-
 //metode der returnerer false hvis en tekst ikke er double (tjekker om der er bogstaver i teksten)
     public boolean isDouble(String input) {
         boolean b = true;
@@ -1589,9 +1588,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         }
         return result;
     }
-    
-    
-    
+
 //metode der udregner købssummen af de tilføjelser der er valgt
     private void udregnSumTilføjelser() {
         double sumtotal = 0;
@@ -1616,13 +1613,22 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
     //nedenstående metoder returnerer vare_linje  
     private Vare_linje getNyStenVarelinje() {
-
-        Vare_linje vare_linje = new Vare_linje(0, null, (Vare) jComboBox_vareListe_ordre_linje.getSelectedItem(), null, null);
-        return vare_linje;
+        Vare_linje vare_linje;
+        if (jCheckBox_redigerPris_gravsten1.isSelected()) {
+            Vare vare = (Vare) jComboBox_vareListe_ordre_linje.getSelectedItem();
+            vare.setSalgspris(Double.parseDouble(jTextField_redigerPris_ordre_linje.getText()));
+            try {
+                dbhandler.editVare(vare);
+            } catch (Exception e) {
+            }
+            vare_linje = new Vare_linje(0, null, vare, null, null);
+        } else {
+            vare_linje = new Vare_linje(0, null, (Vare) jComboBox_vareListe_ordre_linje.getSelectedItem(), null, null);
+            
+        }return vare_linje;
     }
 
     private Vare_linje getVærkstedstimerVarelinje() {
-
 
         Tom_linje værksted_linje = new Tom_linje("Værkstedstimer", Double.parseDouble(jTextField_værkstedstimer_ordresalg.getText()), Integer.parseInt(jTextField_antal_værkstedstimer.getText()), 0);
         Vare_linje vare_linje_værksted = new Vare_linje(0, null, null, null, værksted_linje);
@@ -1692,9 +1698,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         return vare_linje_nysten;
     }
 
-
     //metode der tjekker hvilken type tegntype der er valgt og udskriver dem i det jLabel metoden er kaldt med
-   private void setInskriptionEksempel(JComboBox box, JLabel label, JTextField field) {
+    private void setInskriptionEksempel(JComboBox box, JLabel label, JTextField field) {
         int type = 0;
 
         if (box.getSelectedIndex() == 0) {
@@ -1723,7 +1728,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         }
         return type;
     }
-    
+
 // metoden tjekker hvilke checkboxe der er valgt gravsten/nysten/tilføjelse og sætter de nødvendige paneler til at være synlige
     public void setVisiblePanel() {
         if (jCheckBox_nysten.isSelected()) {
@@ -1734,11 +1739,11 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             if (jCheckBox_gravsten.isSelected()) {
                 jPanel_Kirkegård.setVisible(true);
             }
-            if(!jCheckBox_gravsten.isSelected()){
-            jPanel_Kirkegård.setVisible(false);
+            if (!jCheckBox_gravsten.isSelected()) {
+                jPanel_Kirkegård.setVisible(false);
+            }
         }
-        }
-           
+
         if (jCheckBox_tilføjelse.isSelected()) {
             jPanel_Kirkegård.setVisible(false);
             jPanel_inskription_ordreSalg.setVisible(false);
@@ -1749,9 +1754,9 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jPanel_Kirkegård.setVisible(true);
                 jPanel_inskription_ordreSalg.setVisible(true);
             }
-            if(!jCheckBox_gravsten.isSelected()){
-            jPanel_Kirkegård.setVisible(false);
-        }
+            if (!jCheckBox_gravsten.isSelected()) {
+                jPanel_Kirkegård.setVisible(false);
+            }
         }
 
     }
