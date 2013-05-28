@@ -25,7 +25,6 @@ public class OpretKontoudtog {
 
     //Faktura objekt m.m. som bruges til indholdet i fakturaen
     private Faktura faktura;
-    
     private Provisionsseddel provisionsseddel;
     // Kontoudtog objekt
     private Kontoudtog kontoudtog;
@@ -37,11 +36,13 @@ public class OpretKontoudtog {
     private BaseFont infoFont;
     //Skrift til fed into om virksomheden
     private BaseFont binfoFont;
-/**
- * Når denne constructor kaldes skal faktura indeholde et provisionsseddel objekt
- * og Provisionsseddel skal indeholde et kontoudtog objekt
- * @param faktura Den faktura som der skal laves en kontoudtog linje på
- */
+
+    /**
+     * Når denne constructor kaldes skal faktura indeholde et provisionsseddel
+     * objekt og Provisionsseddel skal indeholde et kontoudtog objekt
+     *
+     * @param faktura Den faktura som der skal laves en kontoudtog linje på
+     */
     public OpretKontoudtog(Faktura faktura) {
         this.faktura = faktura;
         provisionsseddel = faktura.getProvisionsseddel();
@@ -98,11 +99,11 @@ public class OpretKontoudtog {
 
         //Indsættelse af data om kundenavn og faktureringsadresse
         createContent(cb, btFont, 12, black, 25, 660, "Faktureres til:", left);
-         String firmanavn = faktura.getBedemand().getFirmanavn();
-         createContent(cb, tFont, 12, black, 130, 660, firmanavn, left);
+        String firmanavn = faktura.getBedemand().getFirmanavn();
+        createContent(cb, tFont, 12, black, 130, 660, firmanavn, left);
         String adresse = faktura.getBedemand().getAdresse();
         createContent(cb, tFont, 12, black, 130, 644, adresse, left);
-        String postnrby = faktura.getBedemand().getPost_nr().getPost_nr() + " " + faktura.getBedemand().getPost_nr().getPost_nr();
+        String postnrby = faktura.getBedemand().getPost_nr().getPost_nr() + " " + faktura.getBedemand().getPost_nr().getByNavn();
         createContent(cb, tFont, 12, black, 130, 628, postnrby, left);
 
         createContent(cb, btFont, 12, black, 385, 525, "DATO:", left);
@@ -111,6 +112,13 @@ public class OpretKontoudtog {
         createContent(cb, btFont, 12, black, 385, 509, "Kontoudtog nr:", left);
         String faktura_nr = kontoudtog.getKontoudtog_nr();
         createContent(cb, tFont, 12, black, 575, 509, faktura_nr, right);
+
+        createContent(cb, btFont, 12, black, 25, 541, "Vedrørende:", left);
+        String ordre_nr = faktura.getOrdre().getOrdre_nr();
+        createContent(cb, tFont, 12, black, 25, 525, "Bejerholms Stenhuggeri ApS tilgodhavende ", left);
+ 
+
+
 
         //Farv tabel baggrund
         cb.setRGBColorFill(216, 228, 232);
@@ -161,21 +169,21 @@ public class OpretKontoudtog {
         createContent(cb, tFont, 12, black, 63, 444, "1", center);
         createContent(cb, tFont, 12, black, 110, 444, "Provisions Nr: " + provisionsseddel.getProvisions_nr(), left);
         createContent(cb, tFont, 12, black, 465, 444, "(" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getProvisionBeløb(false)) + ")", right);
-        createContent(cb, tFont, 12, black, 565, 444, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getProvisionBeløb(true)), right);
+        createContent(cb, tFont, 12, black, 565, 444, "-" + NumberFormat.getCurrencyInstance().format(+faktura.getOrdre().getProvisionBeløb(false)), right);
 
 
         createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
         createContent(cb, tFont, 12, black, 150, 104, "Dags Dato", left);
         createContent(cb, tFont, 12, black, 25, 84, "Overført til konto: Reg nr: " + faktura.getBedemand().getRegistrerings_nr() + " Konto nr: " + faktura.getBedemand().getKonto_nr(), left);
         createContent(cb, tFont, 12, black, 25, 64, "Ordrenummer og navn bedes anført ved bankoverførsel", left);
-        createContent(cb, tFont, 10, black, 25, 24, "Hvis der er spørgsmål til dette kontoudtog, bedes De venligst kontakte os(se kontaktinfo i toppen af fakturaen)", left);
+        createContent(cb, tFont, 10, black, 25, 24, "Hvis der er spørgsmål til dette kontoudtog, bedes De venligst kontakte os(se kontaktinfo i toppen af siden)", left);
 
         double total = 0;
-        createContent(cb, tFont, 12, black, 565, 184, "" + NumberFormat.getCurrencyInstance().format(total), right);
+        createContent(cb, tFont, 12, black, 565, 184, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getTotal()), right);
         createContent(cb, tFont, 12, black, 565, 164, "25,00%", right);
-        createContent(cb, tFont, 12, black, 565, 144, "" + NumberFormat.getCurrencyInstance().format(total * 0.25), right);
+        createContent(cb, tFont, 12, black, 565, 144, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getSalgsMoms()), right);
         total += (total * 0.25);
-        createContent(cb, tFont, 12, black, 565, 124, "" + NumberFormat.getCurrencyInstance().format(total), right);
+        createContent(cb, tFont, 12, black, 565, 124, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getTotalInklMoms()), right);
         doc.close();
 
     }
