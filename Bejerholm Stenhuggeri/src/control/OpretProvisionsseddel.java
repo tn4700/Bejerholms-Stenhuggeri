@@ -38,9 +38,9 @@ public class OpretProvisionsseddel {
     //Skrift til fed into om virksomheden
     private BaseFont binfoFont;
 
-    public OpretProvisionsseddel(Faktura faktura, Provisionsseddel provisionsseddel) {
-        this.provisionsseddel = provisionsseddel;
-        this.faktura = faktura;
+    public OpretProvisionsseddel(Faktura faktura) {
+         this.faktura = faktura;
+         provisionsseddel = faktura.getProvisionsseddel();
     }
 
     public void genererProvisionsseddel(String filNavn) throws IOException, DocumentException {
@@ -92,11 +92,11 @@ public class OpretProvisionsseddel {
 
         //Indsættelse af data om kundenavn og faktureringsadresse
         createContent(cb, btFont, 12, black, 25, 660, "Faktureres til:", left);
-        String navn = provisionsseddel.getFaktura().getBedemand().getFirmanavn();
+        String navn = faktura.getBedemand().getFirmanavn();
         createContent(cb, tFont, 12, black, 25, 644, navn, left);
-        String adresse = provisionsseddel.getFaktura().getBedemand().getAdresse();
+        String adresse = faktura.getBedemand().getAdresse();
         createContent(cb, tFont, 12, black, 25, 628, adresse, left);
-        String postnrby = provisionsseddel.getFaktura().getBedemand().getPost_nr().getPost_nr() + " " + provisionsseddel.getFaktura().getBedemand().getPost_nr().getByNavn();
+        String postnrby = faktura.getBedemand().getPost_nr().getPost_nr() + " " + faktura.getBedemand().getPost_nr().getByNavn();
         createContent(cb, tFont, 12, black, 25, 612, postnrby, left);
 
         //Indsættelse af dato og fakturanummer
@@ -104,7 +104,7 @@ public class OpretProvisionsseddel {
         String timeStamp = new SimpleDateFormat("dd. MMM yyyy").format(Calendar.getInstance().getTime());
         createContent(cb, tFont, 12, black, 575, 525, timeStamp, right);
         createContent(cb, btFont, 12, black, 385, 509, "FAKTURANR:", left);
-        int provisions_nr = provisionsseddel.getProvisions_nr();
+        String provisions_nr = provisionsseddel.getProvisions_nr();
         createContent(cb, tFont, 12, black, 575, 509, ""+provisions_nr, right);
 
         //Indsættelse af ordrenummer og evt. hvem stenen er vedrørende
@@ -182,9 +182,9 @@ public class OpretProvisionsseddel {
         
         //Indsættelse af betalingsbetingelser og kontaktinfo
         createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
-        createContent(cb, tFont, 12, black, 150, 104, provisionsseddel.getOverførelsesbetingelser(), left);
+        createContent(cb, tFont, 12, black, 150, 104, "indsæt betingelser her",  left);
         createContent(cb, tFont, 12, black, 25, 84, "Bankoverførsel", left);
-        createContent(cb, tFont, 12, black, 25, 64, "Overføres til følgende konto: "+provisionsseddel.getFaktura().getBedemand().getRegistrerings_nr()+" - "+provisionsseddel.getFaktura().getBedemand().getKonto_nr(), left);
+        createContent(cb, tFont, 12, black, 25, 64, "Overføres til følgende konto: "+faktura.getBedemand().getRegistrerings_nr()+" - "+faktura.getBedemand().getKonto_nr(), left);
         createContent(cb, tFont, 8, black, 25, 24, "Hvis der er spørgsmål til denne kreditnota, bedes De venligst kontakt René Bejerholm Poulsen, 58 35 00 04, bejerholm@bejerholms-stenhuggeri.dk", left);
 
         //test

@@ -25,44 +25,44 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
-         initComponents();
+        initComponents();
         try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root1");
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
 
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
         }
         if (db.isConnected()) {
-           
+
             dbhandler = new DatabaseObjectHandler(db);
             //Opret det panel som skal vises i framen
-            Panel_OrdreSalg ordresalg = new Panel_OrdreSalg(dbhandler);
-            Panel_LynSalg lynsalg = new Panel_LynSalg(dbhandler,this);
+            Panel_OrdreSalg ordresalg = new Panel_OrdreSalg(dbhandler, this);
+            Panel_LynSalg lynsalg = new Panel_LynSalg(dbhandler, this);
             Panel_Lager lager = new Panel_Lager(dbhandler);
-            Panel_Administration administration = new Panel_Administration(dbhandler);
-            Panel_Søg søg = new Panel_Søg(dbhandler,this);
-            
-            
+            Panel_Søg søg = new Panel_Søg(dbhandler, this);
+            Panel_CSVFiler csv = new Panel_CSVFiler(db);
+
+
             // tilføj det til vores jpanel der skal fremvise det
             jPanel1.add(ordresalg);
             jPanel1.add(lynsalg);
             jPanel1.add(lager);
-            jPanel1.add(administration);
             jPanel1.add(søg);
+            jPanel1.add(csv);
             // Typecast panelet til cardlayout kald metoden addlayout med det panel der skal tilføjes samt en string der navngiver det. 
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(ordresalg, "OrdreSalg");
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg, "LynSalg");
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lager, "Lager");
-            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(administration, "Administration");
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(søg, "Søg");
-          //   Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
+            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(csv, "Csv");
+            //   Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
             ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
-            
-            
 
-      
-      
-      
+
+
+
+
+
         } else {
             System.out.println("2");
             Panel_DBConnect dbConnect = new Panel_DBConnect();
@@ -71,7 +71,6 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public MainFrame(DBConnection db) {
-       
     }
 
     /**
@@ -85,17 +84,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         jComboBox1 = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
+        jPanel_Hovedmenu = new javax.swing.JPanel();
+        jButton_Administration = new javax.swing.JButton();
+        jButton_Salg = new javax.swing.JButton();
+        jButton_Lager = new javax.swing.JButton();
+        jButton_Ordre = new javax.swing.JButton();
         jPanel_Administraion = new javax.swing.JPanel();
         jButton_BrugerAdministration = new javax.swing.JButton();
         jButton_Eksporter = new javax.swing.JButton();
         jPanel_Salg = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jPanel_Hovedmenu = new javax.swing.JPanel();
-        jButton_Administration = new javax.swing.JButton();
-        jButton_Salg = new javax.swing.JButton();
-        jButton_Lager = new javax.swing.JButton();
-        jButton_Ordre = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox();
         jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -112,6 +111,47 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(805, 510));
         jPanel1.setLayout(new java.awt.CardLayout());
+
+        jPanel_Hovedmenu.setOpaque(false);
+        jPanel_Hovedmenu.setLayout(null);
+
+        jButton_Administration.setText("Administration");
+        jButton_Administration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AdministrationActionPerformed(evt);
+            }
+        });
+        jPanel_Hovedmenu.add(jButton_Administration);
+        jButton_Administration.setBounds(410, 250, 130, 50);
+
+        jButton_Salg.setText("Salg");
+        jButton_Salg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_SalgActionPerformed(evt);
+            }
+        });
+        jPanel_Hovedmenu.add(jButton_Salg);
+        jButton_Salg.setBounds(250, 140, 130, 50);
+
+        jButton_Lager.setText("Lager");
+        jButton_Lager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_LagerActionPerformed(evt);
+            }
+        });
+        jPanel_Hovedmenu.add(jButton_Lager);
+        jButton_Lager.setBounds(410, 140, 130, 50);
+
+        jButton_Ordre.setText("Ordre");
+        jButton_Ordre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_OrdreActionPerformed(evt);
+            }
+        });
+        jPanel_Hovedmenu.add(jButton_Ordre);
+        jButton_Ordre.setBounds(250, 250, 130, 50);
+
+        jPanel1.add(jPanel_Hovedmenu, "Hovedmenu");
 
         jPanel_Administraion.setLayout(null);
 
@@ -158,47 +198,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1.add(jPanel_Salg, "Salg");
 
-        jPanel_Hovedmenu.setOpaque(false);
-        jPanel_Hovedmenu.setLayout(null);
-
-        jButton_Administration.setText("Administration");
-        jButton_Administration.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_AdministrationActionPerformed(evt);
-            }
-        });
-        jPanel_Hovedmenu.add(jButton_Administration);
-        jButton_Administration.setBounds(410, 250, 130, 50);
-
-        jButton_Salg.setText("Salg");
-        jButton_Salg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_SalgActionPerformed(evt);
-            }
-        });
-        jPanel_Hovedmenu.add(jButton_Salg);
-        jButton_Salg.setBounds(250, 140, 130, 50);
-
-        jButton_Lager.setText("Lager");
-        jButton_Lager.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_LagerActionPerformed(evt);
-            }
-        });
-        jPanel_Hovedmenu.add(jButton_Lager);
-        jButton_Lager.setBounds(410, 140, 130, 50);
-
-        jButton_Ordre.setText("Ordre");
-        jButton_Ordre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_OrdreActionPerformed(evt);
-            }
-        });
-        jPanel_Hovedmenu.add(jButton_Ordre);
-        jButton_Ordre.setBounds(250, 250, 130, 50);
-
-        jPanel1.add(jPanel_Hovedmenu, "Hovedmenu");
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "OrdreSalg", "LynSalg" }));
@@ -228,20 +227,21 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton_AdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministrationActionPerformed
+            ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Administration");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_AdministrationActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- ((CardLayout) jPanel1.getLayout()).show(jPanel1, "LynSalg");
- // TODO add your handling code here:
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "LynSalg");
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
- ((CardLayout) jPanel1.getLayout()).show(jPanel1, "OrdreSalg");        // TODO add your handling code here:
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "OrdreSalg");        // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
- ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -250,21 +250,21 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_BrugerAdministrationActionPerformed
 
     private void jButton_EksporterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EksporterActionPerformed
-        // TODO add your handling code here:
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Csv");         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_EksporterActionPerformed
 
     private void jButton_SalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalgActionPerformed
-     ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Salg");
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Salg");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SalgActionPerformed
 
     private void jButton_LagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerActionPerformed
-     ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Lager");
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Lager");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_LagerActionPerformed
 
     private void jButton_OrdreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OrdreActionPerformed
-((CardLayout) jPanel1.getLayout()).show(jPanel1, "Søg");
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Søg");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_OrdreActionPerformed
 
@@ -320,14 +320,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Hovedmenu;
     private javax.swing.JPanel jPanel_Salg;
     // End of variables declaration//GEN-END:variables
-public void skiftcard(Ordre ordre){
-    Panel_LynSalg lynsalg_ordre = new Panel_LynSalg(dbhandler,ordre);
-    jPanel1.add(lynsalg_ordre);
-    ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg_ordre, "LynSalg_Ordre");
-     ((CardLayout) jPanel1.getLayout()).show(jPanel1, "LynSalg_Ordre");
-}
-public void vishovedmenu()
-{
-   ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu"); 
-}
+    public void skiftcard(Ordre ordre) {
+        Panel_LynSalg lynsalg_ordre = new Panel_LynSalg(dbhandler, ordre);
+        jPanel1.add(lynsalg_ordre);
+        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg_ordre, "LynSalg_Ordre");
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "LynSalg_Ordre");
+    }
+
+    public void vishovedmenu() {
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
+    }
 }
