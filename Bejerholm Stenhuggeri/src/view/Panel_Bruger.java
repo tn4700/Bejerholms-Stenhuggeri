@@ -4,17 +4,49 @@
  */
 package view;
 
+import control.DBConnection;
+import control.DatabaseObjectHandler;
+import java.awt.Component;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.User;
+
+
 /**
  *
  * @author T
  */
-public class Panel_Bruger extends javax.swing.JPanel {
 
+public class Panel_Bruger extends javax.swing.JPanel {
+private DatabaseObjectHandler dbhandler;
+private DBConnection db;
+private User user;
+private ArrayList<User> userlist;
+User valgtebruger;
     /**
      * Creates new form Panel_Bruger
      */
-    public Panel_Bruger() {
+    public Panel_Bruger(DBConnection db) {
+        this.db = db;
+        dbhandler = new DatabaseObjectHandler(db);
         initComponents();
+        // fiktiv ham der er logget ind
+        user = new User("martin", "123");
+    try {
+        //      
+              userlist = dbhandler.getUserList();
+    } catch (SQLException ex) {
+        System.out.println("DEr kunne ikke henstes brugere" + ex);
+    }
+
+        for (int i = 0; i < userlist.size(); i++) {
+            jComboBox1.addItem(userlist.get(i));
+        }
+  
+        
     }
 
     /**
@@ -26,19 +58,142 @@ public class Panel_Bruger extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox();
+        jTextField_brugerNavn = new javax.swing.JTextField();
+        jTextField_brugerKode = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton_slet = new javax.swing.JButton();
+
         setPreferredSize(new java.awt.Dimension(800, 500));
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jTextField_brugerNavn.setText("Bruger Navn");
+        jTextField_brugerNavn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_brugerNavnActionPerformed(evt);
+            }
+        });
+
+        jTextField_brugerKode.setText("Kode");
+
+        jButton1.setText("Hent");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Rediger");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton_slet.setText("Slet");
+        jButton_slet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_sletActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(583, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField_brugerKode, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_brugerNavn, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(50, 50, 50))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(43, 43, 43)
+                                .addComponent(jButton_slet))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)))
+                        .addGap(31, 31, 31))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jTextField_brugerNavn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField_brugerKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton_slet))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+       
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jTextField_brugerNavnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_brugerNavnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_brugerNavnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       valgtebruger = (User) jComboBox1.getSelectedItem();
+        jTextField_brugerNavn.setText(valgtebruger.getUsername());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton_sletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_sletActionPerformed
+       try {
+            if(valgtebruger.getUsername().equals("Bejerholm")){
+                System.out.println("Admin kan ikke slettes fra systemmet");
+            }else{
+            dbhandler.deleteUser(valgtebruger);
+                System.out.println("jeg har sleet det her");
+            }
+        } catch (Exception e) {
+            System.out.println("feg" +e);
+        }
+
+    }//GEN-LAST:event_jButton_sletActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      try {
+            if(valgtebruger.getUsername().equals("Bejerholm")){
+                System.out.println("Admin navnet kan ikke rettes på systemmet");
+            }else{
+            dbhandler.editUser(valgtebruger);
+                System.out.println("jeg har rette det her");
+            }
+        } catch (Exception e) {
+            System.out.println("feg" +e);
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton_slet;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JTextField jTextField_brugerKode;
+    private javax.swing.JTextField jTextField_brugerNavn;
     // End of variables declaration//GEN-END:variables
+
 }
