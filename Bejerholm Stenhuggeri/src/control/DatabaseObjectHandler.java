@@ -729,7 +729,7 @@ public class DatabaseObjectHandler {
         //ordrenummeret og opret derefter dem igen med createVareLinje
     }
 
-    public Faktura getFaktura(String faktura_nr) throws SQLException {
+    public Faktura getFaktura(String faktura_nr) throws SQLException, ControlException {
         Faktura faktura = null;
         int tlf = 0;
         String ordre_nr = null;
@@ -759,8 +759,12 @@ public class DatabaseObjectHandler {
 
         faktura.setOrdre(getOrdre(ordre_nr));
         if (faktura.getFakturatype()) {
+            if(tlf!=0 && provisions_nr!=null){
             faktura.setBedemand(getSamarbejdspartner(tlf));
             faktura.setProvisionsseddel(getProvisionsseddel(provisions_nr));
+            } else {
+                throw new ControlException("Fakturatype er bedemand, men der er ingen samarbejdspartner og/eller provisionsseddel");
+            }
         }
         return faktura;
     }
