@@ -59,7 +59,7 @@ public class ObjectHandlerTEST {
             inskription.addInskription_linje(new Inskription_linje(5, 0, 2, "Hvil i fred"));
             
             //Opret tom linje
-            Tom_linje tl = new Tom_linje("Fixet noget", 22.50, 1, "Kommentar?", 0);
+            Tom_linje tl = new Tom_linje("Fixet noget", 22.50, 1, 0);
             
             //Opret vare_linjer
             ordre.addVare_linje(new Vare_linje(1, null, test, null, null));

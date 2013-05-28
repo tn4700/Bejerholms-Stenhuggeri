@@ -4,13 +4,11 @@
  */
 package control;
 
-import com.mysql.jdbc.NotImplemented;
 import control.exceptions.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -717,7 +715,6 @@ public class DatabaseObjectHandler {
     public void editVareLinje(Vare_linje vare_linje, String ordre_nr) {
         //Umulig at lave, brug i stedet deleteVareLinje på alle varelinjer tilhørende
         //ordrenummeret og opret derefter dem igen med createVareLinje
-        throw new NotImplementedException();
     }
 
     public Faktura getFaktura(String faktura_nr) throws SQLException {
