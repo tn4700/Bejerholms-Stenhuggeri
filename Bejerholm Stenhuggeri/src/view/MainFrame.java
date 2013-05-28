@@ -25,24 +25,18 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
+        
+    }
+
+    public MainFrame(DBConnection db) {
         initComponents();
-        try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
-        } catch (Exception ex) {
-            System.out.println("fejl: " + ex);
-        }
+       
         if (db.isConnected()) {
            
             dbhandler = new DatabaseObjectHandler(db);
             //Opret det panel som skal vises i framen
             Panel_OrdreSalg ordresalg = new Panel_OrdreSalg(dbhandler);
-            Ordre ordre = null;
-            try {
-                ordre = dbhandler.getOrdre("00006");
-            } catch (SQLException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Panel_LynSalg lynsalg = new Panel_LynSalg(dbhandler,ordre);
+            Panel_LynSalg lynsalg = new Panel_LynSalg(dbhandler,this);
             Panel_Lager lager = new Panel_Lager(dbhandler);
             Panel_Administration administration = new Panel_Administration(dbhandler);
             Panel_Søg søg = new Panel_Søg(dbhandler,this);
@@ -73,14 +67,6 @@ public class MainFrame extends javax.swing.JFrame {
             Panel_DBConnect dbConnect = new Panel_DBConnect();
             jPanel1.add(dbConnect);
         }
-    }
-
-    public MainFrame(DBConnection db) {
-        initComponents();
-        this.db = db;
-        dbhandler = new DatabaseObjectHandler(db);
-        Panel_LynSalg lynsalg = new Panel_LynSalg(dbhandler);
-        jPanel1.add(lynsalg);
     }
 
     /**
@@ -334,5 +320,9 @@ public void skiftcard(Ordre ordre){
     jPanel1.add(lynsalg_ordre);
     ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg_ordre, "LynSalg_Ordre");
      ((CardLayout) jPanel1.getLayout()).show(jPanel1, "LynSalg_Ordre");
+}
+public void vishovedmenu()
+{
+   ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu"); 
 }
 }

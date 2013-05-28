@@ -542,7 +542,7 @@ public class DatabaseObjectHandler {
 
             ordre.setKunde(getKunde(tlf));
             int max = getMaxVareLinje(ordre.getOrdre_nr());
-            for (int i = 1; i <= max; i++) {
+            for (int i = 0; i <= max; i++) {
                 if (getVareLinje(i, ordre.getOrdre_nr()) != null) {
                     vare_linje = getVareLinje(i, ordre.getOrdre_nr());
                     ordre.addVare_linje(vare_linje);
@@ -569,7 +569,7 @@ public class DatabaseObjectHandler {
         return next;
     }
 
-    public void createOrdre(Ordre ordre) throws SQLException, ControlException {
+    public String createOrdre(Ordre ordre) throws SQLException, ControlException {
         String ordre_nr = getNextOrdreNr();
         createKunde(ordre.getKunde());
         if (getOrdre(ordre_nr) == null) {
@@ -591,6 +591,10 @@ public class DatabaseObjectHandler {
         for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
             createVareLinje(ordre.getVare_linjeListe().get(i), ordre_nr);
         }
+        
+        
+        
+        return ordre_nr;
     }
 
     public void deleteOrdre(Ordre ordre) throws SQLException {
@@ -598,6 +602,7 @@ public class DatabaseObjectHandler {
             deleteVareLinje(ordre.getVare_linjeListe().get(i), ordre.getOrdre_nr());
         }
         db.setData("delete from ordre where ordre_nr = '" + ordre.getOrdre_nr() + "';");
+        
     }
 
     public void editOrdre(Ordre ordre) throws SQLException, ControlException {
@@ -903,7 +908,7 @@ public class DatabaseObjectHandler {
     public User getUser(String username) throws SQLException {
         ResultSet rs;
         User user = null;
-        rs = db.getData("Select brugernavn, pw from user where brugernavn = " + username + ";");
+        rs = db.getData("Select brugernavn, pw from user where brugernavn = '" + username + "';");
 
         if (rs.next()) {
             user = new User(

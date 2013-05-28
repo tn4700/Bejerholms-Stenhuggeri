@@ -4,20 +4,27 @@
  */
 package view;
 
+import com.itextpdf.text.DocumentException;
 import control.DatabaseObjectHandler;
+import control.OpretFaktura;
 import java.awt.CardLayout;
 import java.awt.LayoutManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import model.Faktura;
 import model.Kunde;
 import model.Ordre;
 import model.Vare;
 import model.Vare_linje;
 import model.Varegruppe;
-
+import control.Utility;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,11 +40,13 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     private ArrayList<Vare> valgteVare_lynsalg;
     private Kunde kunde;
     private double købssum;
+    private MainFrame frame;
 
     /**
      * Creates new form NewJPanel
      */
-    public Panel_LynSalg(DatabaseObjectHandler dbhandler) {
+    public Panel_LynSalg(DatabaseObjectHandler dbhandler, MainFrame frame) {
+        this.frame = frame;
         this.dbhandler = dbhandler;
         initComponents();
         købssum = 0;
@@ -65,6 +74,10 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         }
         // fylder varegruppen op i jcomboboxen
         udskrivVaregrp();
+        jPanel_VareLinjer.setLayout(new WrapLayout());
+        jPanel_OversigtVarer.setLayout(new WrapLayout());
+        jScrollPane1.getViewport().setOpaque(false);
+        jScrollPane2.getViewport().setOpaque(false);
 
     }
 
@@ -83,13 +96,11 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         købssum = 0;
         ArrayList<Vare_linje> varelinjer = ordre.getVare_linjeListe();
         for (int i = 0; i < varelinjer.size(); i++) {
-            if(varelinjer.get(i).getVare() == null){
-                
-            }else
-            {
-                   valgteVare_lynsalg.add(varelinjer.get(i).getVare());
+            if (varelinjer.get(i).getVare() == null) {
+            } else {
+                valgteVare_lynsalg.add(varelinjer.get(i).getVare());
             }
-         
+
         }
         for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
             Panel_LynSalgLinje linje = new Panel_LynSalgLinje(valgteVare_lynsalg.get(i), this);
@@ -122,8 +133,8 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jScrollPane2.getViewport().setOpaque(false);
 
 
-   
-        
+
+
 
     }
 
@@ -155,9 +166,9 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jLabel_VælgVareSum = new javax.swing.JLabel();
         jPanel_OrdreBekræftigelse = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton13 = new javax.swing.JButton();
+        jButton_godkend = new javax.swing.JButton();
         jButton_Ændre = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
+        jButton_Annuller = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
         jLabel_købssum_lynsalg = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -262,15 +273,15 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jPanel_OrdreBekræftigelse.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel_OrdreBekræftigelse.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 35, 21, 290));
+        jPanel_OrdreBekræftigelse.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, 21, 420));
 
-        jButton13.setText("Godkend");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        jButton_godkend.setText("Godkend");
+        jButton_godkend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                jButton_godkendActionPerformed(evt);
             }
         });
-        jPanel_OrdreBekræftigelse.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, -1, -1));
+        jPanel_OrdreBekræftigelse.add(jButton_godkend, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 50, 150, -1));
 
         jButton_Ændre.setText("Ændre");
         jButton_Ændre.addActionListener(new java.awt.event.ActionListener() {
@@ -278,10 +289,15 @@ public class Panel_LynSalg extends javax.swing.JPanel {
                 jButton_ÆndreActionPerformed(evt);
             }
         });
-        jPanel_OrdreBekræftigelse.add(jButton_Ændre, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 90, 75, -1));
+        jPanel_OrdreBekræftigelse.add(jButton_Ændre, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 90, 150, -1));
 
-        jButton15.setText("Annuller");
-        jPanel_OrdreBekræftigelse.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 75, -1));
+        jButton_Annuller.setText("Annuller");
+        jButton_Annuller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AnnullerActionPerformed(evt);
+            }
+        });
+        jPanel_OrdreBekræftigelse.add(jButton_Annuller, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 130, 150, -1));
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel38.setText("Ordre Bekræftigelse:");
@@ -350,7 +366,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             }
             // DEnne for løkke fylder vare comboboxen op med de varer det er muligt at vælge i den pågældende varegruppe
             for (int i = 0; i < vare_list.size(); i++) {
-                if (vare_list.get(i).getVareStatus() != 3) {
+                if (vare_list.get(i).getVareStatus() == 0) {
                     jComboBoxLynsalgVare.addItem(vare_list.get(i));
                 }
 
@@ -417,33 +433,71 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         drawpanel(jPanel_VareLinjer);
     }//GEN-LAST:event_jButton_ÆndreActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        ArrayList<Vare_linje> varelinjer = new ArrayList();
-        for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
-            Vare_linje linje = new Vare_linje(i, null, valgteVare_lynsalg.get(i), null, null);
-            varelinjer.add(linje);
+    private void jButton_godkendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_godkendActionPerformed
+        int status = JOptionPane.showConfirmDialog(this, "Godkender du ordren, oprettes fakturaseddel og ordren kan ikke redigeres", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
+        if (status == 0) {
+
+
+            ArrayList<Vare_linje> varelinjer = new ArrayList();
+            for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
+                Vare_linje linje = new Vare_linje(i, null, valgteVare_lynsalg.get(i), null, null);
+                varelinjer.add(linje);
+
+            }
+            Ordre lynordre = new Ordre(kunde, varelinjer);
+
+            try {
+                String ordrenr = dbhandler.createOrdre(lynordre);
+                lynordre = dbhandler.getOrdre(ordrenr);
+                Faktura nyfaktura = new Faktura(ordrenr, Utility.getCurrentTime(), "Køb i butik", Utility.getCurrentTime(), lynordre.getKunde().getAdresse(), false, false, lynordre, null, null);
+                System.out.println("Ordren er blevet oprettet korrekt");
+                try {
+                    dbhandler.createFaktura(nyfaktura);
+                } catch (Exception e) {
+                    System.out.println("Det opstod en fejl ved oprettelse af faktura" + e);
+                }
+
+                try {
+                    OpretFaktura opretFaktura = new OpretFaktura(nyfaktura);
+                    opretFaktura.genererFaktura("FakturaTest.pdf");
+
+                    Desktop desktop = Desktop.getDesktop();
+                    File file = new File("docs/FakturaTest.pdf");
+                    desktop.open(file);
+                } catch (FileNotFoundException ex) {
+                    System.out.println("Luk andre pdf'er før du prøver at se en ny!");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (DocumentException ex) {
+                    ex.printStackTrace();
+                }
+            } catch (Exception ex) {
+                System.out.println("Der kunne ikke oprettes en ordre " + ex);
+            }
+            jButton_Annuller.doClick();
         }
-        Ordre lynordre = new Ordre(kunde, varelinjer);
-
-        try {
-            dbhandler.createOrdre(lynordre);
-        } catch (Exception ex) {
-            System.out.println("Der kunne ikke oprettes en ordre " + ex);
-        }
 
 
+    }//GEN-LAST:event_jButton_godkendActionPerformed
+
+    private void jButton_AnnullerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AnnullerActionPerformed
+        vare_list = new ArrayList();
+        valgteVare_lynsalg = new ArrayList();
+        panel = new ArrayList();
+       jPanel_OversigtVarer.removeAll();
+       jPanel_VareLinjer.removeAll();
+       udregnpris();
+       frame.vishovedmenu();
 
 
 
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_jButton_AnnullerActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButtonLynsalgTilføj;
     private javax.swing.JButton jButtonLynsalgVidere;
+    private javax.swing.JButton jButton_Annuller;
+    private javax.swing.JButton jButton_godkend;
     private javax.swing.JButton jButton_Ændre;
     private javax.swing.JComboBox jComboBoxLynsalgVare;
     private javax.swing.JComboBox jComboBox_Lynsalgvaregruppe;
