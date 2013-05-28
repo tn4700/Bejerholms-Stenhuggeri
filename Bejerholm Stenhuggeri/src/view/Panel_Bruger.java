@@ -178,6 +178,7 @@ User valgtebruger;
             if(valgtebruger.getUsername().equals("Bejerholm")){
                 System.out.println("Admin navnet kan ikke rettes på systemmet");
             }else{
+                valgtebruger.setPassword(jTextField_brugerKode.getText());
             dbhandler.editUser(valgtebruger);
                 System.out.println("jeg har rette det her");
             }

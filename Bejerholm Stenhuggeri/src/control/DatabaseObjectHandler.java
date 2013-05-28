@@ -960,6 +960,7 @@ public class DatabaseObjectHandler {
     }
 
     public void editUser(User user) throws SQLException {
+        System.out.println("DEn her bruger prøver jeg at opdatere " + user.getUsername()+ " Kode: " +user.getPassword() );
         db.setData("update user set pw = '" + user.getPassword() + "' where brugernavn = '" + user.getUsername() + "';");
     }
 
