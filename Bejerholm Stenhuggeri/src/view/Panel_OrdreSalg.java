@@ -5,8 +5,11 @@
 package view;
 
 import control.DatabaseObjectHandler;
+import control.OpretOrdre;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -1181,7 +1184,14 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         
         
             try {
-//                dbhandler.createOrdre(ordre);
+                dbhandler.createOrdre(ordre);
+                OpretOrdre ordrePDF = new OpretOrdre(ordre);
+                ordrePDF.genererOrdre("ordrePDF"+ordre.getOrdre_nr()+"");
+                
+                Desktop desktop = Desktop.getDesktop();
+                File file = new File("docs/Ordretest.pdf");
+                desktop.open(file);
+                
         } catch (Exception ex) {
             System.out.println("Der kunne ikke oprettes en ordre " + ex);
         }
