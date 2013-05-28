@@ -1,36 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
-import control.DBConnection;
 import control.DatabaseObjectHandler;
-import model.Varegruppe;
-import java.util.ArrayList;
-import model.Vare;
+import java.awt.LayoutManager;
 
-/**
- *
- * @author T
- */
 public class Panel_Lager extends javax.swing.JPanel {
 
-    /**
-     * Creates new form NewJPanel5
-     */
-    private ArrayList<Vare> varelist;
     private DatabaseObjectHandler dbhandler;
-    private DBConnection db;
-    private ArrayList<Varegruppe> varegrplist;
 
     public Panel_Lager(DatabaseObjectHandler dbhandler) {
         initComponents();
-        varelist = new ArrayList();
-        varegrplist = new ArrayList();
         this.dbhandler = dbhandler;
-//        hentlister();
-//        tilføjvaregrp();
+         vareLinjePanel.setLayout((LayoutManager) new WrapLayout());
+        try {
+            for (int i = 1; i < 8; i++) {
+                vareLinjePanel.add(new Panel_LagerLinje(dbhandler.getVare(i), this));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -42,261 +29,327 @@ public class Panel_Lager extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel_Lager2 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea_Lager = new javax.swing.JTextArea();
-        jLabel35 = new javax.swing.JLabel();
-        jButton_Printvarepålager = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel36 = new javax.swing.JLabel();
-        jComboBox_LagerVaregruppe2 = new javax.swing.JComboBox();
-        jTextField_LagerMinPris2 = new javax.swing.JTextField();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jTextField_LagerMaxPris2 = new javax.swing.JTextField();
-        jButton_LagerOpdater2 = new javax.swing.JButton();
-        jLabel39 = new javax.swing.JLabel();
-        jButton12 = new javax.swing.JButton();
+        vareLinjeScrollPane = new javax.swing.JScrollPane();
+        vareLinjePanel = new javax.swing.JPanel();
+        vareInfoPanel = new javax.swing.JPanel();
+        sletVareButton = new javax.swing.JButton();
+        redigerVareButton = new javax.swing.JButton();
+        købVareButton = new javax.swing.JButton();
+        vareNrLabel = new javax.swing.JLabel();
+        vareHøjdeLabel = new javax.swing.JLabel();
+        vareNavnLabel = new javax.swing.JLabel();
+        vareBreddeLabel = new javax.swing.JLabel();
+        indkøbsPrisLabel = new javax.swing.JLabel();
+        typeNavnLabel = new javax.swing.JLabel();
+        salgsPrisLabel = new javax.swing.JLabel();
+        overfladeLabel = new javax.swing.JLabel();
+        vareNrTextField = new javax.swing.JTextField();
+        vareHøjdeTextField = new javax.swing.JTextField();
+        vareNavnTextField = new javax.swing.JTextField();
+        vareBreddeTextField = new javax.swing.JTextField();
+        indkøbsPrisTextField = new javax.swing.JTextField();
+        typeNavnTextField = new javax.swing.JTextField();
+        salgsPrisTextField = new javax.swing.JTextField();
+        overfladeTextField = new javax.swing.JTextField();
+        vareStatusLabel = new javax.swing.JLabel();
+        dekorationLabel = new javax.swing.JLabel();
+        vareGruppeLabel = new javax.swing.JLabel();
+        vareStatusTextField = new javax.swing.JTextField();
+        dekorationTextField = new javax.swing.JTextField();
+        vareGruppeTextField = new javax.swing.JTextField();
+        vælgVareGruppeComboBox = new javax.swing.JComboBox();
+        vareInfoOverskriftLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        opretNyVareButton = new javax.swing.JButton();
+        filtrerVarelistButton = new javax.swing.JButton();
+        vareFilterGruppeLabel = new javax.swing.JLabel();
+        maxBreddeLabel = new javax.swing.JLabel();
+        maxHøjdeLabel = new javax.swing.JLabel();
+        minimumPrisLabel = new javax.swing.JLabel();
+        maxPrisLabel = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        maxBreddeTextField = new javax.swing.JTextField();
+        maxHøjdeTextField = new javax.swing.JTextField();
+        minPrisTextField = new javax.swing.JTextField();
+        maxPrisTextField = new javax.swing.JTextField();
+        vareOverskriftLabel1 = new javax.swing.JLabel();
+        vareInfoOverskriftLabel1 = new javax.swing.JLabel();
 
+        setMaximumSize(new java.awt.Dimension(800, 500));
+        setMinimumSize(new java.awt.Dimension(800, 500));
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(800, 500));
+        setLayout(null);
 
-        jTextArea_Lager.setColumns(20);
-        jTextArea_Lager.setRows(5);
-        jScrollPane6.setViewportView(jTextArea_Lager);
+        vareLinjeScrollPane.setBackground(new java.awt.Color(255, 51, 51));
+        vareLinjeScrollPane.setBorder(null);
+        vareLinjeScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        vareLinjeScrollPane.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
+        vareLinjeScrollPane.setOpaque(false);
+        vareLinjeScrollPane.setPreferredSize(new java.awt.Dimension(500, 100));
 
-        jLabel35.setText("Varer på lager");
+        vareLinjePanel.setBackground(new java.awt.Color(255, 255, 255));
+        vareLinjePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        vareLinjePanel.setName("LynSalg"); // NOI18N
+        vareLinjePanel.setOpaque(false);
+        vareLinjeScrollPane.setViewportView(vareLinjePanel);
 
-        jButton_Printvarepålager.setText("Print");
-        jButton_Printvarepålager.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_PrintvarepålagerActionPerformed(evt);
-            }
-        });
+        add(vareLinjeScrollPane);
+        vareLinjeScrollPane.setBounds(10, 40, 330, 450);
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        vareInfoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        vareInfoPanel.setOpaque(false);
+        vareInfoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel36.setText("Varegruppe");
+        sletVareButton.setText("Rediger vare");
+        vareInfoPanel.add(sletVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, -1));
 
-        jComboBox_LagerVaregruppe2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Alle" }));
-        jComboBox_LagerVaregruppe2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_LagerVaregruppe2ActionPerformed(evt);
-            }
-        });
+        redigerVareButton.setText("Slet vare");
+        vareInfoPanel.add(redigerVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
 
-        jLabel37.setText("Min pris");
+        købVareButton.setText("Køb vare");
+        vareInfoPanel.add(købVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, -1, -1));
 
-        jLabel38.setText("Max pris");
+        vareNrLabel.setText("Vare nr.");
+        vareInfoPanel.add(vareNrLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 45, -1, -1));
 
-        jButton_LagerOpdater2.setText("Opdater");
-        jButton_LagerOpdater2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_LagerOpdater2ActionPerformed(evt);
-            }
-        });
+        vareHøjdeLabel.setText("Højde");
+        vareInfoPanel.add(vareHøjdeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 45, -1, -1));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel36)
-                                .addComponent(jComboBox_LagerVaregruppe2, 0, 108, Short.MAX_VALUE)
-                                .addComponent(jLabel37)
-                                .addComponent(jTextField_LagerMinPris2)
-                                .addComponent(jTextField_LagerMaxPris2))
-                            .addComponent(jLabel38))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 275, Short.MAX_VALUE)
-                        .addComponent(jButton_LagerOpdater2)))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel36)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox_LagerVaregruppe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel37)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_LagerMinPris2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel38)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_LagerMaxPris2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        vareNavnLabel.setText("Vare navn");
+        vareInfoPanel.add(vareNavnLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 19, -1, -1));
+
+        vareBreddeLabel.setText("Bredde");
+        vareInfoPanel.add(vareBreddeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 71, -1, -1));
+
+        indkøbsPrisLabel.setText("Indkøbspris");
+        vareInfoPanel.add(indkøbsPrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 71, -1, -1));
+
+        typeNavnLabel.setText("Typenavn");
+        vareInfoPanel.add(typeNavnLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 148, -1, -1));
+
+        salgsPrisLabel.setText("Salgspris");
+        vareInfoPanel.add(salgsPrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 97, -1, -1));
+
+        overfladeLabel.setText("Overflade");
+        vareInfoPanel.add(overfladeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 97, -1, -1));
+
+        vareNrTextField.setEditable(false);
+        vareNrTextField.setText("<Vare_nr>");
+        vareInfoPanel.add(vareNrTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 39, 141, -1));
+
+        vareHøjdeTextField.setEditable(false);
+        vareHøjdeTextField.setText("<Højde>");
+        vareInfoPanel.add(vareHøjdeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 39, 110, -1));
+
+        vareNavnTextField.setEditable(false);
+        vareNavnTextField.setText("<Vare_navn>");
+        vareInfoPanel.add(vareNavnTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 13, 345, -1));
+
+        vareBreddeTextField.setEditable(false);
+        vareBreddeTextField.setText("<Bredde>");
+        vareInfoPanel.add(vareBreddeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 65, 110, -1));
+
+        indkøbsPrisTextField.setEditable(false);
+        indkøbsPrisTextField.setText("<Indkøbspris>");
+        vareInfoPanel.add(indkøbsPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 65, 141, -1));
+
+        typeNavnTextField.setEditable(false);
+        typeNavnTextField.setText("<Typenavn>");
+        vareInfoPanel.add(typeNavnTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 143, 345, -1));
+
+        salgsPrisTextField.setEditable(false);
+        salgsPrisTextField.setText("<Salgspris>");
+        vareInfoPanel.add(salgsPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 91, 141, -1));
+
+        overfladeTextField.setEditable(false);
+        overfladeTextField.setText("<Overflade>");
+        vareInfoPanel.add(overfladeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 91, 110, -1));
+
+        vareStatusLabel.setText("Varestatus");
+        vareInfoPanel.add(vareStatusLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 123, -1, -1));
+
+        dekorationLabel.setText("Dekoration");
+        vareInfoPanel.add(dekorationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 123, -1, -1));
+
+        vareGruppeLabel.setText("Varegruppe");
+        vareInfoPanel.add(vareGruppeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 174, -1, -1));
+
+        vareStatusTextField.setEditable(false);
+        vareStatusTextField.setText("<Varestatus>");
+        vareInfoPanel.add(vareStatusTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 117, 141, -1));
+
+        dekorationTextField.setEditable(false);
+        dekorationTextField.setText("<Dekoration>");
+        vareInfoPanel.add(dekorationTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 117, 110, -1));
+
+        vareGruppeTextField.setEditable(false);
+        vareGruppeTextField.setText("<Varegruppe>");
+        vareInfoPanel.add(vareGruppeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 168, 141, -1));
+
+        vælgVareGruppeComboBox.setEnabled(false);
+        vareInfoPanel.add(vælgVareGruppeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 168, 186, -1));
+
+        add(vareInfoPanel);
+        vareInfoPanel.setBounds(350, 40, 440, 250);
+
+        vareInfoOverskriftLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        vareInfoOverskriftLabel.setText("Varefilter");
+        vareInfoOverskriftLabel.setToolTipText("lol");
+        add(vareInfoOverskriftLabel);
+        vareInfoOverskriftLabel.setBounds(360, 300, 90, 22);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setOpaque(false);
+
+        opretNyVareButton.setText("Opret ny vare");
+
+        filtrerVarelistButton.setText("Filtrer");
+
+        vareFilterGruppeLabel.setText("Vælg varegruppe");
+
+        maxBreddeLabel.setText("Max bredde");
+
+        maxHøjdeLabel.setText("Max højde");
+
+        minimumPrisLabel.setText("Min. pris");
+
+        maxPrisLabel.setText("Max pris");
+
+        maxBreddeTextField.setText("jTextField1");
+
+        maxHøjdeTextField.setText("jTextField2");
+
+        minPrisTextField.setText("jTextField3");
+
+        maxPrisTextField.setText("jTextField4");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(vareFilterGruppeLabel)
                 .addGap(18, 18, 18)
-                .addComponent(jButton_LagerOpdater2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(maxBreddeLabel)
+                .addGap(18, 18, 18)
+                .addComponent(maxBreddeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(minimumPrisLabel)
+                .addGap(18, 18, 18)
+                .addComponent(minPrisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(maxHøjdeLabel)
+                .addGap(18, 18, 18)
+                .addComponent(maxHøjdeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(maxPrisLabel)
+                .addGap(18, 18, 18)
+                .addComponent(maxPrisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(248, 248, 248)
+                .addComponent(filtrerVarelistButton)
+                .addGap(9, 9, 9)
+                .addComponent(opretNyVareButton))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(vareFilterGruppeLabel))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(maxBreddeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(minPrisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(maxBreddeLabel)
+                            .addComponent(minimumPrisLabel))))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(maxHøjdeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(maxPrisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(maxHøjdeLabel)
+                            .addComponent(maxPrisLabel))))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(filtrerVarelistButton)
+                    .addComponent(opretNyVareButton)))
         );
 
-        jLabel39.setText("Filtrer Varer");
+        add(jPanel1);
+        jPanel1.setBounds(350, 330, 440, 160);
 
-        jButton12.setText("Tilføj Vare");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
+        vareOverskriftLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        vareOverskriftLabel1.setText("Vareliste");
+        vareOverskriftLabel1.setToolTipText("lol");
+        add(vareOverskriftLabel1);
+        vareOverskriftLabel1.setBounds(20, 10, 79, 22);
 
-        javax.swing.GroupLayout jPanel_Lager2Layout = new javax.swing.GroupLayout(jPanel_Lager2);
-        jPanel_Lager2.setLayout(jPanel_Lager2Layout);
-        jPanel_Lager2Layout.setHorizontalGroup(
-            jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_Lager2Layout.createSequentialGroup()
-                .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_Lager2Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton_Printvarepålager)
-                            .addGroup(jPanel_Lager2Layout.createSequentialGroup()
-                                .addComponent(jLabel35)
-                                .addGap(168, 168, 168)))
-                        .addGap(399, 399, 399)
-                        .addComponent(jButton12))
-                    .addGroup(jPanel_Lager2Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel39)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(194, Short.MAX_VALUE))
-        );
-        jPanel_Lager2Layout.setVerticalGroup(
-            jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_Lager2Layout.createSequentialGroup()
-                .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_Lager2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel35))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Lager2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel39)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel_Lager2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel_Lager2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_Printvarepålager)
-                            .addComponent(jButton12))))
-                .addContainerGap(141, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 959, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel_Lager2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 573, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel_Lager2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        vareInfoOverskriftLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        vareInfoOverskriftLabel1.setText("Vareinfo");
+        vareInfoOverskriftLabel1.setToolTipText("lol");
+        add(vareInfoOverskriftLabel1);
+        vareInfoOverskriftLabel1.setBounds(360, 10, 77, 22);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton_LagerOpdater2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerOpdater2ActionPerformed
-//        jTextArea_Lager.setText("");
-//        Vare vare = (Vare) jButton_LagerOpdater2.ge
-        try{
-            
-        }catch(Exception ex){
-            System.out.println("fejl lagerupdate: "+ex);
-            
-        }
-    }//GEN-LAST:event_jButton_LagerOpdater2ActionPerformed
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-//        layout.show(jPanel_CardMain, "card_LagerTilføj");
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jComboBox_LagerVaregruppe2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_LagerVaregruppe2ActionPerformed
-// TODOO
-    }//GEN-LAST:event_jComboBox_LagerVaregruppe2ActionPerformed
-
-    private void jButton_PrintvarepålagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_PrintvarepålagerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_PrintvarepålagerActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JButton jButton_LagerOpdater;
-    private javax.swing.JButton jButton_LagerOpdater1;
-    private javax.swing.JButton jButton_LagerOpdater2;
-    private javax.swing.JButton jButton_Printvarepålager;
-    private javax.swing.JComboBox jComboBox_LagerVaregruppe;
-    private javax.swing.JComboBox jComboBox_LagerVaregruppe1;
-    private javax.swing.JComboBox jComboBox_LagerVaregruppe2;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel_Lager;
-    private javax.swing.JPanel jPanel_Lager1;
-    private javax.swing.JPanel jPanel_Lager2;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea_Lager;
-    private javax.swing.JTextField jTextField_LagerMaxPris;
-    private javax.swing.JTextField jTextField_LagerMaxPris1;
-    private javax.swing.JTextField jTextField_LagerMaxPris2;
-    private javax.swing.JTextField jTextField_LagerMinPris;
-    private javax.swing.JTextField jTextField_LagerMinPris1;
-    private javax.swing.JTextField jTextField_LagerMinPris2;
+    private javax.swing.JLabel dekorationLabel;
+    private javax.swing.JTextField dekorationTextField;
+    private javax.swing.JButton filtrerVarelistButton;
+    private javax.swing.JLabel indkøbsPrisLabel;
+    private javax.swing.JTextField indkøbsPrisTextField;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton købVareButton;
+    private javax.swing.JLabel maxBreddeLabel;
+    private javax.swing.JTextField maxBreddeTextField;
+    private javax.swing.JLabel maxHøjdeLabel;
+    private javax.swing.JTextField maxHøjdeTextField;
+    private javax.swing.JLabel maxPrisLabel;
+    private javax.swing.JTextField maxPrisTextField;
+    private javax.swing.JTextField minPrisTextField;
+    private javax.swing.JLabel minimumPrisLabel;
+    private javax.swing.JButton opretNyVareButton;
+    private javax.swing.JLabel overfladeLabel;
+    private javax.swing.JTextField overfladeTextField;
+    private javax.swing.JButton redigerVareButton;
+    private javax.swing.JLabel salgsPrisLabel;
+    private javax.swing.JTextField salgsPrisTextField;
+    private javax.swing.JButton sletVareButton;
+    private javax.swing.JLabel typeNavnLabel;
+    private javax.swing.JTextField typeNavnTextField;
+    private javax.swing.JLabel vareBreddeLabel;
+    private javax.swing.JTextField vareBreddeTextField;
+    private javax.swing.JLabel vareFilterGruppeLabel;
+    private javax.swing.JLabel vareGruppeLabel;
+    private javax.swing.JTextField vareGruppeTextField;
+    private javax.swing.JLabel vareHøjdeLabel;
+    private javax.swing.JTextField vareHøjdeTextField;
+    private javax.swing.JLabel vareInfoOverskriftLabel;
+    private javax.swing.JLabel vareInfoOverskriftLabel1;
+    private javax.swing.JPanel vareInfoPanel;
+    private javax.swing.JPanel vareLinjePanel;
+    private javax.swing.JScrollPane vareLinjeScrollPane;
+    private javax.swing.JLabel vareNavnLabel;
+    private javax.swing.JTextField vareNavnTextField;
+    private javax.swing.JLabel vareNrLabel;
+    private javax.swing.JTextField vareNrTextField;
+    private javax.swing.JLabel vareOverskriftLabel1;
+    private javax.swing.JLabel vareStatusLabel;
+    private javax.swing.JTextField vareStatusTextField;
+    private javax.swing.JComboBox vælgVareGruppeComboBox;
     // End of variables declaration//GEN-END:variables
-//
-//    public void hentlister (){
-//        try {
-//            varegrplist = dbhandler.getVaregruppeListe();
-//            for (int i = 0; i < dbhandler.getMaxVareNr(); i++) {
-//               // jTextArea_Lager.set
-//            }
-//        } catch (Exception e) {
-//        }
-//    }
-    public void tilføjvaregrp (){
-        for (int i = 0; i < varegrplist.size(); i++) {
-            jComboBox_LagerVaregruppe2.addItem(varegrplist.get(i));
-        }
-//        public void tilføjvare(){
-//            for (int i = 0; i < varelist.size(); i++) {
-//                jTextArea_Lager.setText(""+varelist.get(i));
-//            }
-        
-    }
 }
