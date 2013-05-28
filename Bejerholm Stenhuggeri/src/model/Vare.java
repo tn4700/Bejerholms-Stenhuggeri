@@ -134,6 +134,26 @@ public class Vare {
     public void setGruppe(Varegruppe gruppe) {
         this.gruppe = gruppe;
     }
+    
+    public String getDekorationToString(){
+        String dekorationString = "Nej.";
+        if(dekoration) {
+            dekorationString = "Ja.";
+        }
+        return dekorationString;
+    }
+    
+    public String getVareStatusToString(){
+        String statusString = "Ugyldig status.";
+        if(vareStatus==0){
+        statusString = "Vare på lager.";
+        } else         if(vareStatus==1){
+        statusString = "Vare reserveret.";
+        } else         if(vareStatus==2){
+        statusString = "Vare solgt.";
+        }
+        return statusString;
+    }
 
     @Override
     public String toString() {
