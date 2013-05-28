@@ -931,6 +931,20 @@ public class DatabaseObjectHandler {
         }
         return user;
     }
+    
+    public ArrayList<User> getUserList() throws SQLException {
+        ResultSet rs;
+        ArrayList<User> userList = new ArrayList();
+        rs = db.getData("Select brugernavn, pw from user;");
+
+        while (rs.next()) {
+            User user = new User(
+                    rs.getString("brugernavn"),
+                    rs.getString("pw"));
+            userList.add(user);
+        }
+        return userList;
+    }
 
     public void createUser(User user) throws SQLException, ControlException {
         if (getUser(user.getUsername()) == null) {
