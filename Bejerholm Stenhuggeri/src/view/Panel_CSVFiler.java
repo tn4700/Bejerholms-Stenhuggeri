@@ -7,8 +7,6 @@ package view;
 import control.DBConnection;
 import control.DatabaseObjectHandler;
 import control.ExportToCSV;
-import java.awt.Color;
-import javax.swing.JFileChooser;
 
 /**
  *
