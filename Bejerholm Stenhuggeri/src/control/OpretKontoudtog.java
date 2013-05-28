@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import model.Faktura;
 import model.Kontoudtog;
+import model.Provisionsseddel;
 
 /**
  *
@@ -24,6 +25,8 @@ public class OpretKontoudtog {
 
     //Faktura objekt m.m. som bruges til indholdet i fakturaen
     private Faktura faktura;
+    
+    private Provisionsseddel provisionsseddel;
     // Kontoudtog objekt
     private Kontoudtog kontoudtog;
     //Skrift til alm. tekst
@@ -34,10 +37,15 @@ public class OpretKontoudtog {
     private BaseFont infoFont;
     //Skrift til fed into om virksomheden
     private BaseFont binfoFont;
-
-    public OpretKontoudtog(Faktura faktura, Kontoudtog kontoudtog) {
+/**
+ * Når denne constructor kaldes skal faktura indeholde et provisionsseddel objekt
+ * og Provisionsseddel skal indeholde et kontoudtog objekt
+ * @param faktura Den faktura som der skal laves en kontoudtog linje på
+ */
+    public OpretKontoudtog(Faktura faktura) {
         this.faktura = faktura;
-        this.kontoudtog = kontoudtog;
+        provisionsseddel = faktura.getProvisionsseddel();
+        this.kontoudtog = provisionsseddel.getKontoudtog();
     }
 
     public void genererFaktura(String filNavn) throws IOException, DocumentException {
@@ -90,8 +98,8 @@ public class OpretKontoudtog {
 
         //Indsættelse af data om kundenavn og faktureringsadresse
         createContent(cb, btFont, 12, black, 25, 660, "Faktureres til:", left);
-    //  String firmanavn = kontoudtog.getFaktura().getBedemand().getFirmanavn();
-    //  createContent(cb, tFont, 12, black, 130, 660, firmanavn, left);
+         String firmanavn = faktura.getBedemand().getFirmanavn();
+         createContent(cb, tFont, 12, black, 130, 660, firmanavn, left);
         String adresse = faktura.getBedemand().getAdresse();
         createContent(cb, tFont, 12, black, 130, 644, adresse, left);
         String postnrby = faktura.getBedemand().getPost_nr().getPost_nr() + " " + faktura.getBedemand().getPost_nr().getPost_nr();
@@ -101,8 +109,8 @@ public class OpretKontoudtog {
         String timeStamp = new SimpleDateFormat("dd. MMM yyyy").format(Calendar.getInstance().getTime());
         createContent(cb, tFont, 12, black, 575, 525, timeStamp, right);
         createContent(cb, btFont, 12, black, 385, 509, "Kontoudtog nr:", left);
-        int faktura_nr = kontoudtog.getKontoudtog_nr();
-        createContent(cb, tFont, 12, black, 575, 509, Integer.toString(faktura_nr), right);
+        String faktura_nr = kontoudtog.getKontoudtog_nr();
+        createContent(cb, tFont, 12, black, 575, 509, faktura_nr, right);
 
         //Farv tabel baggrund
         cb.setRGBColorFill(216, 228, 232);
@@ -146,28 +154,28 @@ public class OpretKontoudtog {
         // første vare linje
         createContent(cb, tFont, 12, black, 63, 464, "1", center);
         createContent(cb, tFont, 12, black, 110, 464, "Ordrenr: " + faktura.getOrdre().getOrdre_nr(), left);
-        createContent(cb, tFont, 12, black, 465, 464, "" + NumberFormat.getCurrencyInstance().format(13232), right);
-        createContent(cb, tFont, 12, black, 565, 464, "" + NumberFormat.getCurrencyInstance().format(1423), right);
+        createContent(cb, tFont, 12, black, 465, 464, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getTotal()), right);
+        createContent(cb, tFont, 12, black, 565, 464, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getTotal()), right);
 
         // anden vare linje
         createContent(cb, tFont, 12, black, 63, 444, "1", center);
-        createContent(cb, tFont, 12, black, 110, 444, "Provisions Nr: 12455", left);
-        createContent(cb, tFont, 12, black, 465, 444, "(" + NumberFormat.getCurrencyInstance().format(1232)+ ")", right);
-        createContent(cb, tFont, 12, black, 565, 444, "" + NumberFormat.getCurrencyInstance().format(-1223), right);
-        
-        
-         createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
-        createContent(cb, tFont, 12, black, 150, 104, "fix", left);
-        createContent(cb, tFont, 12, black, 25, 84, "Sydbank: 6821  -  1021974", left);
+        createContent(cb, tFont, 12, black, 110, 444, "Provisions Nr: " + provisionsseddel.getProvisions_nr(), left);
+        createContent(cb, tFont, 12, black, 465, 444, "(" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getProvisionBeløb(false)) + ")", right);
+        createContent(cb, tFont, 12, black, 565, 444, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getProvisionBeløb(true)), right);
+
+
+        createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
+        createContent(cb, tFont, 12, black, 150, 104, "Dags Dato", left);
+        createContent(cb, tFont, 12, black, 25, 84, "Overført til konto: Reg nr: " + faktura.getBedemand().getRegistrerings_nr() + " Konto nr: " + faktura.getBedemand().getKonto_nr(), left);
         createContent(cb, tFont, 12, black, 25, 64, "Ordrenummer og navn bedes anført ved bankoverførsel", left);
-        createContent(cb, tFont, 10, black, 25, 24, "Hvis der er spørgsmål til denne faktura, bedes De venligst kontakte os(se kontaktinfo i toppen af fakturaen)", left);
-        
+        createContent(cb, tFont, 10, black, 25, 24, "Hvis der er spørgsmål til dette kontoudtog, bedes De venligst kontakte os(se kontaktinfo i toppen af fakturaen)", left);
+
         double total = 0;
-          createContent(cb, tFont, 12, black, 565, 184, ""+NumberFormat.getCurrencyInstance().format(total), right);
+        createContent(cb, tFont, 12, black, 565, 184, "" + NumberFormat.getCurrencyInstance().format(total), right);
         createContent(cb, tFont, 12, black, 565, 164, "25,00%", right);
-        createContent(cb, tFont, 12, black, 565, 144, ""+NumberFormat.getCurrencyInstance().format(total*0.25), right);
-        total += (total*0.25);
-        createContent(cb, tFont, 12, black, 565, 124, ""+NumberFormat.getCurrencyInstance().format(total), right);
+        createContent(cb, tFont, 12, black, 565, 144, "" + NumberFormat.getCurrencyInstance().format(total * 0.25), right);
+        total += (total * 0.25);
+        createContent(cb, tFont, 12, black, 565, 124, "" + NumberFormat.getCurrencyInstance().format(total), right);
         doc.close();
 
     }
