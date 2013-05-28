@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -218,7 +218,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.setOpaque(false);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Tlf nr");
@@ -272,8 +271,9 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jPanel_OrdreSalg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 410, 140));
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Kunde info");
-        jPanel_OrdreSalg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+        jPanel_OrdreSalg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         jCheckBox_nysten.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(jCheckBox_nysten);
@@ -309,7 +309,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jPanel_Kirkegård.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_Kirkegård.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel_Kirkegård.setOpaque(false);
         jPanel_Kirkegård.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setText("Kirkegård");
@@ -336,11 +335,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jCheckBox_kiste.setText("Kiste");
         jPanel_Kirkegård.add(jCheckBox_kiste, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
 
-        jPanel_OrdreSalg.add(jPanel_Kirkegård, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 200, 130));
+        jPanel_OrdreSalg.add(jPanel_Kirkegård, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 200, 130));
 
         jPanel_tilføjelse.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_tilføjelse.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel_tilføjelse.setOpaque(false);
         jPanel_tilføjelse.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setText("Værkstedstimer");
@@ -415,7 +413,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel_fejlbesked_tilføjelse.setForeground(new java.awt.Color(204, 0, 0));
         jPanel_tilføjelse.add(jLabel_fejlbesked_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
-        jPanel_OrdreSalg.add(jPanel_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 210, 280));
+        jPanel_OrdreSalg.add(jPanel_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 200, 280));
 
         jButton_videre_ordresalg.setText("Videre");
         jButton_videre_ordresalg.addActionListener(new java.awt.event.ActionListener() {
@@ -427,7 +425,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jPanel_inskription_ordreSalg.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_inskription_ordreSalg.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel_inskription_ordreSalg.setOpaque(false);
         jPanel_inskription_ordreSalg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Inskription:");
@@ -489,7 +486,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel34.setText("Skrifttype:");
         jPanel_inskription_ordreSalg.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
-        jPanel_inskription_ordreSalg.add(jComboBox_tegntype_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 310, -1));
+        jPanel_inskription_ordreSalg.add(jComboBox_tegntype_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 300, -1));
         jPanel_inskription_ordreSalg.add(jTextField_skrifttype, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 240, -1));
 
         jComboBox_linjeType3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ny", "Gammel", "Plads" }));
@@ -588,19 +585,18 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 .addContainerGap(128, Short.MAX_VALUE))
         );
 
-        jPanel_inskription_ordreSalg.add(jPanel_inskriptionEksempel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 290, 170));
+        jPanel_inskription_ordreSalg.add(jPanel_inskriptionEksempel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 290, 170));
 
         jLabel_fejlbesked_skrifttypeIkkeValgt.setForeground(new java.awt.Color(204, 0, 0));
         jPanel_inskription_ordreSalg.add(jLabel_fejlbesked_skrifttypeIkkeValgt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
 
-        jPanel_OrdreSalg.add(jPanel_inskription_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 360, 470));
+        jPanel_OrdreSalg.add(jPanel_inskription_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 330, 470));
 
         jLabel_fejlbesked_kunde_ordresalg.setForeground(new java.awt.Color(153, 0, 0));
         jPanel_OrdreSalg.add(jLabel_fejlbesked_kunde_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
 
         jPanel_nySten_vælgVare.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_nySten_vælgVare.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel_nySten_vælgVare.setOpaque(false);
         jPanel_nySten_vælgVare.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel26.setText("Varegruppe:");
@@ -645,7 +641,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel_fejl_gravsten.setForeground(new java.awt.Color(204, 0, 0));
         jPanel_nySten_vælgVare.add(jLabel_fejl_gravsten, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
-        jPanel_OrdreSalg.add(jPanel_nySten_vælgVare, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 200, 150));
+        jPanel_OrdreSalg.add(jPanel_nySten_vælgVare, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 200, 140));
 
         jPanel_main.add(jPanel_OrdreSalg, "card_ordreSalg");
 
@@ -1175,21 +1171,26 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
     private void jButton_godkend_ordresalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_godkend_ordresalgActionPerformed
          ArrayList<Vare_linje> varelinjer = new ArrayList();
+         System.out.println(valgteVare_ordresalg.size());
         for (int i = 0; i < valgteVare_ordresalg.size(); i++) {
            varelinjer.add(valgteVare_ordresalg.get(i));
         }
+        System.out.println(varelinjer.size());
         Postnummer postnr = new Postnummer(Integer.parseInt(jTextField_postnr_ordresalg.getText()), jTextField_By_ordresalg.getText());
-        Kunde kunde = new Kunde(jTextField_fornavn_ordresalg.getText(), jTextField_efternavn_ordresalg.getText(), jTextField_adresse_ordresalg.getText(), Integer.parseInt(jTextField_tlf_ordresalg.getText()), postnr);
-        Ordre ordre = new Ordre(kunde, varelinjer);
+        Kunde kunde1 = new Kunde(jTextField_fornavn_ordresalg.getText(), jTextField_efternavn_ordresalg.getText(), jTextField_adresse_ordresalg.getText(), Integer.parseInt(jTextField_tlf_ordresalg.getText()), postnr);
         
+        Ordre ordre = new Ordre(kunde1, varelinjer);
+       
+      
         
             try {
-                dbhandler.createOrdre(ordre);
+                 String ordrenr = dbhandler.createOrdre(ordre);
+                  ordre = dbhandler.getOrdre(ordrenr);
                 OpretOrdre ordrePDF = new OpretOrdre(ordre);
-                ordrePDF.genererOrdre("ordrePDF"+ordre.getOrdre_nr()+"");
+                ordrePDF.genererOrdre("ordrePDF.pdf");
                 
                 Desktop desktop = Desktop.getDesktop();
-                File file = new File("docs/Ordretest.pdf");
+                File file = new File("docs/ordrePDF.pdf");
                 desktop.open(file);
                 
         } catch (Exception ex) {
@@ -1416,7 +1417,7 @@ private void opretInskription_linje(){
     if(jTextFieldValgt(jTextField_Inskription_linje_1)||jTextFieldValgt(jTextField_Inskription_linje_2)||jTextFieldValgt(jTextField_Inskription_linje_3)||jTextFieldValgt(jTextField_Inskription_linje_4)||jTextFieldValgt(jTextField_Inskription_linje_4)){
         if(jTextFieldValgt(jTextField_skrifttype)){
             
-             Vare_linje inskription_linje_nysten = getInskriptionVarelinje();
+              Vare_linje inskription_linje_nysten = getInskriptionVarelinje();
                 Panel_OrdreSalgLinje varelinje = new Panel_OrdreSalgLinje(inskription_linje_nysten, this);
 
                 panelListe.add(varelinje);
@@ -1719,7 +1720,6 @@ private void opretTilføjelselinje(){
         }
         Inskription inskription = new Inskription(inskription_linjeListe, (Tegntype) jComboBox_tegntype_ordresalg.getSelectedItem(), 0, jTextField_skrifttype.getText());
         Vare_linje vare_linje_nysten = new Vare_linje(0, null, null, inskription, null);
-
 
         return vare_linje_nysten;
     }
