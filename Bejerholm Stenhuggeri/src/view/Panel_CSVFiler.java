@@ -4,16 +4,25 @@
  */
 package view;
 
+import control.DBConnection;
+import control.DatabaseObjectHandler;
+import control.ExportToCSV;
+import java.awt.Color;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author T
  */
 public class Panel_CSVFiler extends javax.swing.JPanel {
-
+private DBConnection db;
+private DatabaseObjectHandler dbhandler;
     /**
      * Creates new form Panel_CSVFiler
      */
-    public Panel_CSVFiler() {
+    public Panel_CSVFiler(DBConnection db) {
+        this.db = db;
+        dbhandler = new DatabaseObjectHandler(db);
         initComponents();
     }
 
@@ -26,19 +35,57 @@ public class Panel_CSVFiler extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
         setPreferredSize(new java.awt.Dimension(800, 500));
+
+        jButton2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButton2.setText("Export");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(284, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(148, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            ExportToCSV.export(db);
+            jLabel1.setText("<html><div style=\"text-align: center;\"> <font color='green'>Exporteret korrekt</font> <br>Filerne kan ses på stien 'C:\\CSVFiler'</html>");
+        } catch (Exception e) {
+            jLabel1.setText("<html><div style=\"text-align: center;\"><font color='red'>Fejl ved exportering</font> <br>Undersøg evt. om filen 'C:\\CSVFiler' har funktionen skrivebeskyttelse slået fra i instillinger.</html>");
+            System.out.println("Fejl ved csvfiler button export" +e);
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
