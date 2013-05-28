@@ -442,6 +442,18 @@ public class DatabaseObjectHandler {
 
         return vare;
     }
+    
+    public ArrayList<Vare> getAlleVarer() throws SQLException{
+        ArrayList<Vare> vareListe = new ArrayList();
+        ArrayList<Varegruppe> vareGruppeListe = getVaregruppeListe();
+        for (int i = 0; i < vareGruppeListe.size(); i++) {
+            ArrayList<Vare> tmpVareListe = getVareListe(vareGruppeListe.get(i).getGrp_nr());
+            for (int j = 0; j < tmpVareListe.size(); j++) {
+                vareListe.add(tmpVareListe.get(j));
+            }
+        }
+        return vareListe;
+    }
 
     public ArrayList getVareListe(int grp_nr) throws SQLException {
         ArrayList<Vare> vareListe = new ArrayList();
@@ -748,7 +760,7 @@ public class DatabaseObjectHandler {
 
         faktura.setOrdre(getOrdre(ordre_nr));
         if (faktura.getFakturatype()) {
-            if(tlf==0 || provisions_nr==null){
+            if(tlf!=0 || provisions_nr!=null){
             faktura.setBedemand(getSamarbejdspartner(tlf));
             faktura.setProvisionsseddel(getProvisionsseddel(provisions_nr));
             } else {
@@ -918,6 +930,20 @@ public class DatabaseObjectHandler {
                     rs.getString("pw"));
         }
         return user;
+    }
+    
+    public ArrayList<User> getUserList() throws SQLException {
+        ResultSet rs;
+        ArrayList<User> userList = new ArrayList();
+        rs = db.getData("Select brugernavn, pw from user;");
+
+        while (rs.next()) {
+            User user = new User(
+                    rs.getString("brugernavn"),
+                    rs.getString("pw"));
+            userList.add(user);
+        }
+        return userList;
     }
 
     public void createUser(User user) throws SQLException, ControlException {
