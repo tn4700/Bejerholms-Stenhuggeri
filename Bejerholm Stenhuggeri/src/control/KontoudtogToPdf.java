@@ -9,12 +9,9 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.*;
 
 /**
@@ -27,61 +24,68 @@ public class KontoudtogToPdf {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        DBConnection db = null;
         
-      
-        try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("fejl: " + ex);
-        }
-        DatabaseObjectHandler dbhandler = new DatabaseObjectHandler(db);
+        //Opretter Timestamp med tiden lige nu
+        Date date = new Date();
+        Timestamp currentTime = new Timestamp(date.getTime());
         
-
-
-
         //Opretter diverse objekter der er brug for, for at lave et faktura objekt
         Postnummer postnummer = new Postnummer(4700, "Næstved");
         Kunde kunde = new Kunde("Niklas", "Renner", "Gottliebsvej 7", 53545733, postnummer);
-        Faktura faktura = null;
-        System.out.println("d");
-        try {
-            faktura = dbhandler.getFaktura("0028931093-00004");
-            System.out.println("Faktura " + faktura);
-            System.out.println("gejl");
-           // System.out.println("Provision " + faktura.getProvisionsseddel().getProvisions_nr() + " - Kontoutog" + faktura.getProvisionsseddel().getProvisions_nr());
-            
-        } catch (SQLException ex) {
-            System.out.println("Fejl: " +ex);
-        }
+       // Ordre ordre = new Ordre("00001", true, currentTime, currentTime, "bemærkning", "Ekstra bemærking", "Leveringsvej 45", "Kirkegården", 13, "Hans afdødesen", 1, 1, 0, true, kunde);
 
+        //Varelinjer til ordren oprettes
+        Vare_linje vl1 = null;
+        Vare_linje vl2 = null;
+        Vare_linje vl3 = null;
+        Vare_linje vl4 = null;
+        Vare_linje vl5 = null;
+        Vare_linje vl6 = null;
+        Vare_linje vl7 = null;
+        Vare_linje vl8 = null;
+        Vare_linje vl9 = null;
+        Vare_linje vl10 = null;
 
+        //Varelinjer sættes ind i arrayliste og bliver indsat i ordre objektet
+        ArrayList<Vare_linje> vlr = new ArrayList();
+        vlr.add(vl1);
+        vlr.add(vl2);
+        vlr.add(vl3);
+        vlr.add(vl4);
+        vlr.add(vl5);
+        vlr.add(vl6);
+        vlr.add(vl7);
+        vlr.add(vl8);
+        vlr.add(vl9);
+        vlr.add(vl10);
+       // ordre.setVare_linjeListe(vlr);
+
+        //Faktura_nr metode
+        //String faktura_nr = "00" + kunde.getTlf() + "-" + ordre.getOrdre_nr();
+
+        //Faktura oprettes
         
-   
-        Kontoudtog kontoudtog = new Kontoudtog("123", Utility.getCurrentTime(), Utility.getCurrentTime());
-         Provisionsseddel prov = new Provisionsseddel("123", Utility.getCurrentTime(), kontoudtog);
-         faktura.setProvisionsseddel(prov);
-
-        faktura.getProvisionsseddel().setKontoudtog(kontoudtog);
-
-        try {
-            System.out.println("asd");
-            OpretKontoudtog opretKontoudtog = new OpretKontoudtog(faktura);
+       // Faktura faktura = new Faktura(faktura_nr, currentTime, "Torsten vedrørendesen", currentTime, "Faktureringsvej 15", true, false, ordre, null);
+        Samarbejdspartner bedemand = new Samarbejdspartner("Firmanavn", "Adresse", 12345678, 123456, 6070, 4825318, "Boss Banken", postnummer);
+        //faktura.setBedemand(bedemand);
+        /*Kontoudtog kontoudtog = new Kontoudtog(123, currentTime, "Vedrørende", currentTime, faktura);
+        
+         try {
+            OpretKontoudtog opretKontoudtog = new OpretKontoudtog(faktura,kontoudtog);
             opretKontoudtog.genererFaktura("test1.pdf");
 
             Desktop desktop = Desktop.getDesktop();
             File file = new File("docs/test1.pdf");
             desktop.open(file);
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex){
             System.out.println("Luk andre pdf'er før du prøver at se en ny!");
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (DocumentException ex) {
             ex.printStackTrace();
-        }
+        }*/
 
-
+        
         // TODO code application logic here
     }
 }

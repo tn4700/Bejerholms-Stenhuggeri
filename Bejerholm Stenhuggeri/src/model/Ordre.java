@@ -45,11 +45,11 @@ public class Ordre {
             boolean gravType,
             Kunde kunde,
             ArrayList<Vare_linje> vare_linjeListe) {
-
-        if (vare_linjeListe != null) {
-            this.vare_linjeListe = vare_linjeListe;
+        
+        if(vare_linjeListe!=null){
+           this.vare_linjeListe = vare_linjeListe;
         } else {
-            this.vare_linjeListe = new ArrayList();
+           this.vare_linjeListe = new ArrayList(); 
         }
         this.ordre_nr = ordre_nr;
         this.ordretype = ordretype;
@@ -266,23 +266,5 @@ public class Ordre {
     public double getTotalInklMoms() {
         double total = getTotal() + getSalgsMoms();
         return total;
-    }
-/**
- * Denne metode returnerer provisionsbeløbet på ordren med eller uden moms
- * @param moms True = Med moms / False = uden
- * @return returnerer provisionsbeløbet
- */
-    public double getProvisionBeløb(Boolean moms) {
-        double total = 0;
-        double provision = 0;
-        if (moms) {
-            total = getTotalInklMoms();
-            provision = total / 100 * 15;
-        } else {
-            total = getTotal();
-            provision = total / 100 * 15;
-        }
-        return provision;
-
     }
 }

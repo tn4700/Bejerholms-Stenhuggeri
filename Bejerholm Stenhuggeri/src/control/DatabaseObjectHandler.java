@@ -722,7 +722,7 @@ public class DatabaseObjectHandler {
         int tlf = 0;
         String ordre_nr = null;
         String provisions_nr = null;
-        String sql = "select bedemand_tlf,ordre_nr, faktura_nr, faktureringsdato,"
+        String sql = "select bedemand_tlf, provisions_nr ordre_nr, faktura_nr, faktureringsdato,"
                 + "vedrørende, sendt_dato, faktureringsadresse, fakturatype, betalingsstatus from "
                 + "faktura where faktura_nr = '" + faktura_nr + "';";
 
@@ -739,7 +739,7 @@ public class DatabaseObjectHandler {
                     null,
                     null,
                     null);
-         
+            provisions_nr = rs.getString("provisions_nr");
             ordre_nr = rs.getString("ordre_nr");
             tlf = rs.getInt("bedemand_tlf");
         }
@@ -849,14 +849,16 @@ public class DatabaseObjectHandler {
     public Provisionsseddel getProvisionsseddel(String provisions_nr) throws SQLException {
         Provisionsseddel provisionsseddel = null;
         ResultSet rs;
-        rs = db.getData("Select provisions_nr, dato from Provisionsseddel where "
+        rs = db.getData("Select provisions_nr, kontoudtog_nr, dato from Provisionsseddel where "
                 + "provisions_nr = '" + provisions_nr + "';");
         if (rs.next()) {
             provisionsseddel = new Provisionsseddel(rs.getString("provisions_nr"),
                     rs.getTimestamp("dato"),
                     null);
             rs.close();
-           
+            String kontoudtog_nr = rs.getString("kontoudtog_nr");
+            Kontoudtog kontoudtog = getKontoudtog(kontoudtog_nr);
+            provisionsseddel.setKontoudtog(kontoudtog);
         }
         return provisionsseddel;
     }
