@@ -30,7 +30,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     public MainFrame(DBConnection db) {
         initComponents();
-       
+        try {
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root1");
+
+        } catch (Exception ex) {
+            System.out.println("fejl: " + ex);
+        }
         if (db.isConnected()) {
            
             dbhandler = new DatabaseObjectHandler(db);
