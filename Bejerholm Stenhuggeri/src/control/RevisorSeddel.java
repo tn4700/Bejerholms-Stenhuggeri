@@ -10,6 +10,13 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Vare;
+import model.Varegruppe;
 
 /**
  *
@@ -17,6 +24,8 @@ import java.io.IOException;
  */
 public class RevisorSeddel {
 
+    DBConnection db;
+    DatabaseObjectHandler dbhandler;
     private BaseFont tFont;
     //Skrift til fed alm. tekst
     private BaseFont btFont;
@@ -24,14 +33,15 @@ public class RevisorSeddel {
     private BaseFont infoFont;
     //Skrift til fed into om virksomheden
     private BaseFont binfoFont;
-    
-   private int år;
-    
-     public RevisorSeddel(int år) {
+    private int år;
+
+    public RevisorSeddel(int år, DBConnection db) {
         this.år = år;
+        this.db = db;
+        dbhandler = new DatabaseObjectHandler(db);
     }
-    
-     public void genererFaktura(String filNavn) throws IOException, DocumentException {
+
+    public void genererFaktura(String filNavn) throws IOException, DocumentException {
         //Opretter nyt dokument til indhold
         Document doc = new Document();
         //Sti'en for pdf'en der oprettes
@@ -61,6 +71,8 @@ public class RevisorSeddel {
 
         //Sæt Logo ind og faktura overskrift
         createContent(cb, btFont, 28, lightblue, 25, 725, "Lageropgørelse", left);
+        createContent(cb, btFont, 18, black, 35, 700, "For året " + år, left);
+
         Image companyLogo = Image.getInstance("images/bejerholm.gif");
         companyLogo.setAbsolutePosition(375, 675);
         companyLogo.scalePercent(25);
@@ -76,10 +88,10 @@ public class RevisorSeddel {
         createContent(cb, infoFont, 11, black, 575, 588, "CVR-NR: 32931898", right);
         createContent(cb, binfoFont, 11, black, 575, 576, "Sydbank  -  Reg. nr. 6821", right);
         createContent(cb, binfoFont, 11, black, 575, 564, "Konto 1021974", right);
-        
-    
- 
-   
+
+
+
+
 
         //Tegn tabel
         cb.rectangle(25, 200, 550, 300);
@@ -89,27 +101,54 @@ public class RevisorSeddel {
         // Den her er varegruppe boksen
         cb.moveTo(275, 500);
         cb.lineTo(275, 200);
-         // det her er antal varer
+        // det her er antal varer
         cb.moveTo(375, 500);
         cb.lineTo(375, 200);
         cb.moveTo(475, 500);
         cb.lineTo(475, 200);
-      
-     
-      
-        cb.stroke();
-        
-        
 
+
+
+        cb.stroke();
+        int x = 464;
+        ArrayList<Varegruppe> grupper = new ArrayList();
+        ArrayList<Vare> vare = new ArrayList();
         //Indsæt navne på tabel elementer
         createContent(cb, btFont, 12, black, 150, 484, "Varegruppe", center);
         createContent(cb, btFont, 12, black, 325, 484, "Antal varer", center);
         createContent(cb, btFont, 12, black, 425, 484, "Købspris", center);
         createContent(cb, btFont, 12, black, 525, 484, "Salgspris", center);
+        try {
+            grupper = dbhandler.getVaregruppeListe();
+        } catch (SQLException ex) {
+            System.out.println("Der skete en fejl ved udtræk af maxvaregrp" + ex);
+        }
+
+        for (int i = 0; i < grupper.size(); i++) {
+
+            double grupværdi = 0;
+            double grupværdi1 = 0;
+            try {
+                vare = dbhandler.getVareListe(grupper.get(i).getGrp_nr());
+            } catch (SQLException ex) {
+                Logger.getLogger(RevisorSeddel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            for (int j = 0; j < vare.size(); j++) {
+                grupværdi = grupværdi + vare.get(j).getIndkøbspris();
+                grupværdi1 = grupværdi1 + vare.get(j).getSalgspris();
+
+            }
+
+            createContent(cb, tFont, 12, black, 110, x, +grupper.get(i).getGrp_nr() + " - " + grupper.get(i).getNavn(), left);
+            createContent(cb, tFont, 12, black, 330, x, "" + vare.size(), center);
+            createContent(cb, tFont, 12, black, 465, x, "" + NumberFormat.getCurrencyInstance().format(grupværdi), right);
+            createContent(cb, tFont, 12, black, 565, x, "" + NumberFormat.getCurrencyInstance().format(grupværdi1), right);
+            x = x - 20;
+        }
 
 
-     doc.close();
-     }
+        doc.close();
+    }
 
     public void createContent(PdfContentByte cb, BaseFont font, int fontSize, BaseColor color, float x, float y, String text, int align) {
         //Start med indsættelsen af data til det enkelte tekst objekt

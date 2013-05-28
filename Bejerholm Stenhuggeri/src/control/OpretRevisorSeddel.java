@@ -20,9 +20,16 @@ public class OpretRevisorSeddel {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        DBConnection db = null;
         // TODO code application logic here
         try {
-            RevisorSeddel revisorseddel = new RevisorSeddel(2012);
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
+
+        } catch (Exception ex) {
+            System.out.println("fejl: " + ex);
+        }
+        try {
+            RevisorSeddel revisorseddel = new RevisorSeddel(2012,db);
             revisorseddel.genererFaktura("test2.pdf");
 
             Desktop desktop = Desktop.getDesktop();
