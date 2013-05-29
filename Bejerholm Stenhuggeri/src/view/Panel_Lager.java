@@ -5,30 +5,31 @@ import control.Utility;
 import java.awt.LayoutManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Faktura;
 import model.Vare;
 import model.Varegruppe;
 
 public class Panel_Lager extends javax.swing.JPanel {
-    
+
     private DatabaseObjectHandler dbhandler;
     private ArrayList<Vare> vareListe;
     private ArrayList<Varegruppe> vareGruppeListe;
-    
+
     public Panel_Lager(DatabaseObjectHandler dbhandler) {
         initComponents();
+        vareListe = new ArrayList();
         this.dbhandler = dbhandler;
         vareLinjePanel.setLayout((LayoutManager) new WrapLayout());
         try {
+            ArrayList<Faktura> fl = dbhandler.getFakturaListe();
+            System.out.println(fl);
             vareGruppeListe = dbhandler.getVaregruppeListe();
-            vareGruppeComboBox.addItem(new Varegruppe(0,"Alle varegrupper"));
+            vareGruppeComboBox.addItem(new Varegruppe(0, "Alle varegrupper"));
             for (int i = 0; i < vareGruppeListe.size(); i++) {
                 vareGruppeComboBox.addItem(vareGruppeListe.get(i));
             }
-            vareListe = dbhandler.getAlleVarer();
-            for (int i = 0; i < vareListe.size(); i++) {
-                vareLinjePanel.add(new Panel_LagerLinje(vareListe.get(i), this));
-            }
-            
+            getFiltreretVareListe();
+            opdaterPanel();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -90,6 +91,8 @@ public class Panel_Lager extends javax.swing.JPanel {
         minBreddeTextField = new javax.swing.JTextField();
         minimumHøjdeLabel = new javax.swing.JLabel();
         minimumBreddeLabel = new javax.swing.JLabel();
+        vareStatusFilterLabel = new javax.swing.JLabel();
+        vareStatusComboBox = new javax.swing.JComboBox();
         vareOverskriftLabel1 = new javax.swing.JLabel();
         vareInfoOverskriftLabel1 = new javax.swing.JLabel();
 
@@ -219,7 +222,7 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareFilterPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         opretNyVareButton.setText("Opret ny vare");
-        vareFilterPanel.add(opretNyVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 126, -1, -1));
+        vareFilterPanel.add(opretNyVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 122, -1, -1));
 
         filtrerVarelistButton.setText("Filtrer");
         filtrerVarelistButton.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +230,7 @@ public class Panel_Lager extends javax.swing.JPanel {
                 filtrerVarelistButtonActionPerformed(evt);
             }
         });
-        vareFilterPanel.add(filtrerVarelistButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 126, -1, -1));
+        vareFilterPanel.add(filtrerVarelistButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 122, -1, -1));
 
         vareFilterGruppeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         vareFilterGruppeLabel.setText("Vælg varegruppe");
@@ -235,47 +238,54 @@ public class Panel_Lager extends javax.swing.JPanel {
 
         maxBreddeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         maxBreddeLabel.setText("Max bredde");
-        vareFilterPanel.add(maxBreddeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 91, -1, -1));
+        vareFilterPanel.add(maxBreddeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 98, -1, -1));
 
         maxHøjdeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         maxHøjdeLabel.setText("Max højde");
-        vareFilterPanel.add(maxHøjdeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 66, -1, -1));
+        vareFilterPanel.add(maxHøjdeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 73, -1, -1));
 
         minimumPrisLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         minimumPrisLabel.setText("Min. pris");
-        vareFilterPanel.add(minimumPrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 40, -1, -1));
+        vareFilterPanel.add(minimumPrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 47, -1, -1));
 
         maxPrisLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         maxPrisLabel.setText("Max pris");
-        vareFilterPanel.add(maxPrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
+        vareFilterPanel.add(maxPrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 47, -1, -1));
 
         vareFilterPanel.add(vareGruppeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 13, 315, -1));
 
         maxBreddeTextField.setText("0");
-        vareFilterPanel.add(maxBreddeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 88, 100, -1));
+        vareFilterPanel.add(maxBreddeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 95, 100, -1));
 
         maxHøjdeTextField.setText("0");
-        vareFilterPanel.add(maxHøjdeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 63, 100, -1));
+        vareFilterPanel.add(maxHøjdeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 70, 100, -1));
 
         minPrisTextField.setText("0");
-        vareFilterPanel.add(minPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 37, 100, -1));
+        vareFilterPanel.add(minPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 44, 100, -1));
 
         maxPrisTextField.setText("0");
-        vareFilterPanel.add(maxPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 37, 100, -1));
+        vareFilterPanel.add(maxPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 44, 100, -1));
 
         minHøjdeTextField.setText("0");
-        vareFilterPanel.add(minHøjdeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 63, 100, -1));
+        vareFilterPanel.add(minHøjdeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 70, 100, -1));
 
         minBreddeTextField.setText("0");
-        vareFilterPanel.add(minBreddeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 88, 100, -1));
+        vareFilterPanel.add(minBreddeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 95, 100, -1));
 
         minimumHøjdeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         minimumHøjdeLabel.setText("Min. højde");
-        vareFilterPanel.add(minimumHøjdeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 66, -1, -1));
+        vareFilterPanel.add(minimumHøjdeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 73, -1, -1));
 
         minimumBreddeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         minimumBreddeLabel.setText("Min. bredde");
-        vareFilterPanel.add(minimumBreddeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 91, -1, -1));
+        vareFilterPanel.add(minimumBreddeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 98, -1, -1));
+
+        vareStatusFilterLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        vareStatusFilterLabel.setText("Varestatus");
+        vareFilterPanel.add(vareStatusFilterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 126, -1, -1));
+
+        vareStatusComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "På lager", "Reserveret", "Solgt", "Alle varer" }));
+        vareFilterPanel.add(vareStatusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 123, 100, -1));
 
         add(vareFilterPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 450, 160));
 
@@ -291,21 +301,7 @@ public class Panel_Lager extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void filtrerVarelistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrerVarelistButtonActionPerformed
-        try {
-            Varegruppe varegruppe = (Varegruppe) vareGruppeComboBox.getSelectedItem();
-            vareListe = dbhandler.getFiltreretVareListe(
-                    varegruppe.getGrp_nr(),
-                    Integer.parseInt(minHøjdeTextField.getText()),
-                    Integer.parseInt(maxHøjdeTextField.getText()),
-                    Integer.parseInt(minBreddeTextField.getText()),
-                    Integer.parseInt(maxBreddeTextField.getText()),
-                    Double.parseDouble(minPrisTextField.getText()),
-                    Double.parseDouble(maxPrisTextField.getText()));
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (NumberFormatException ex){
-            ex.printStackTrace();
-        }
+        getFiltreretVareListe();
         opdaterPanel();
     }//GEN-LAST:event_filtrerVarelistButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -355,21 +351,42 @@ public class Panel_Lager extends javax.swing.JPanel {
     private javax.swing.JLabel vareNrLabel;
     private javax.swing.JTextField vareNrTextField;
     private javax.swing.JLabel vareOverskriftLabel1;
+    private javax.swing.JComboBox vareStatusComboBox;
+    private javax.swing.JLabel vareStatusFilterLabel;
     private javax.swing.JLabel vareStatusLabel;
     private javax.swing.JTextField vareStatusTextField;
     private javax.swing.JComboBox vælgVareGruppeComboBox;
     // End of variables declaration//GEN-END:variables
 
-    public void opdaterPanel() {
-        
+    public final void opdaterPanel() {
+
         vareLinjePanel.removeAll();
         vareLinjePanel.updateUI();
         for (int i = 0; i < vareListe.size(); i++) {
             vareLinjePanel.add(new Panel_LagerLinje(vareListe.get(i), this));
         }
-        
+
     }
-    
+
+    public final void getFiltreretVareListe() {
+        try {
+            Varegruppe varegruppe = (Varegruppe) vareGruppeComboBox.getSelectedItem();
+            vareListe = dbhandler.getFiltreretVareListe(
+                    varegruppe.getGrp_nr(),
+                    Integer.parseInt(minHøjdeTextField.getText()),
+                    Integer.parseInt(maxHøjdeTextField.getText()),
+                    Integer.parseInt(minBreddeTextField.getText()),
+                    Integer.parseInt(maxBreddeTextField.getText()),
+                    Double.parseDouble(minPrisTextField.getText()),
+                    Double.parseDouble(maxPrisTextField.getText()),
+                    vareStatusComboBox.getSelectedIndex());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void enterInfo(Vare vare) {
         vareNrTextField.setText(vare.getVare_nr() + "");
         vareNavnTextField.setText(vare.getNavn());

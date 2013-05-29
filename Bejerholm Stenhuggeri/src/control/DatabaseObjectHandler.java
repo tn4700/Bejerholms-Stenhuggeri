@@ -527,7 +527,7 @@ public class DatabaseObjectHandler {
                 + "' where vare_nr = '" + vare.getVare_nr() + "';");
     }
 
-    public ArrayList<Vare> getFiltreretVareListe(int grp_nr, int minHøjde, int maxHøjde, int minBredde, int maxBredde, double minPris, double maxPris) throws SQLException {
+    public ArrayList<Vare> getFiltreretVareListe(int grp_nr, int minHøjde, int maxHøjde, int minBredde, int maxBredde, double minPris, double maxPris, int vareStatus) throws SQLException {
         ArrayList<Vare> vareListe = new ArrayList();
         ArrayList<Integer> grpList = new ArrayList();
         boolean firstUsed = false;
@@ -536,7 +536,7 @@ public class DatabaseObjectHandler {
         String sql = "select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade, "
                 + "dekoration, vareStatus, grp_nr from vare";
 
-        if (varegruppe == null && minHøjde == 0 && maxHøjde == 0 && minBredde == 0 && maxBredde == 0 && minPris == 0 && maxPris == 0) {
+        if (varegruppe == null && minHøjde == 0 && maxHøjde == 0 && minBredde == 0 && maxBredde == 0 && minPris == 0 && maxPris == 0 && vareStatus == 3) {
             sql += ";";
         } else {
             sql += " where ";
@@ -584,6 +584,13 @@ public class DatabaseObjectHandler {
                     sql += " and ";
                 }
                 sql += "salgspris <= '" + maxPris + "'";
+                firstUsed = true;
+            }
+            if (vareStatus == 0 || vareStatus == 1 || vareStatus == 2) {
+                if (firstUsed) {
+                    sql += " and ";
+                }
+                sql += "varestatus = '" + vareStatus + "'";
             }
             sql += ";";
         }
@@ -855,6 +862,26 @@ public class DatabaseObjectHandler {
     public void editVareLinje(Vare_linje vare_linje, String ordre_nr) {
         //Umulig at lave, brug i stedet deleteVareLinje på alle varelinjer tilhørende
         //ordrenummeret og opret derefter dem igen med createVareLinje
+    }
+    
+    public ArrayList<String> getFakturaNumre() throws SQLException{
+        ArrayList<String> nrListe = new ArrayList();
+        ResultSet rs;
+        rs = db.getData("select faktura_nr from faktura");
+        while(rs.next()){
+            nrListe.add(rs.getString("faktura_nr"));
+        }
+        rs.close();
+        return nrListe;
+    }
+    
+    public ArrayList<Faktura> getFakturaListe() throws SQLException, ControlException{
+        ArrayList<Faktura> fakturaListe = new ArrayList();
+        ArrayList<String> nrListe = getFakturaNumre();
+        for (int i = 0; i < nrListe.size(); i++) {
+            fakturaListe.add(getFaktura(nrListe.get(i)));
+        }
+        return fakturaListe;
     }
 
     public Faktura getFaktura(String faktura_nr) throws SQLException, ControlException {
