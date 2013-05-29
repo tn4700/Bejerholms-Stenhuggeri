@@ -5,10 +5,14 @@
 package view;
 
 import control.DatabaseObjectHandler;
+import control.exceptions.ControlException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Faktura;
 import model.Ordre;
+import model.Vare;
 
 /**
  *
@@ -18,6 +22,8 @@ public class Panel_Søg extends javax.swing.JPanel {
     
     private DatabaseObjectHandler dbHandler;
     private MainFrame frame;
+    private ArrayList<Faktura> fakturaliste;
+    private Faktura faktura;
 
     /**
      * Creates new form NewJPanel1
@@ -25,7 +31,20 @@ public class Panel_Søg extends javax.swing.JPanel {
     public Panel_Søg(DatabaseObjectHandler dbhandler, MainFrame frame) {
         this.dbHandler = dbhandler;
         this.frame = frame;
+        try {
+            faktura = dbhandler.getFaktura("0028931093-00004");
+            System.out.println(faktura);
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(Panel_Søg.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ControlException ex) {
+            Logger.getLogger(Panel_Søg.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         initComponents();
+         Panel_Søg_Faktura panel = new Panel_Søg_Faktura(faktura);
+            jPanel1.add(panel);
     }
 
     /**
@@ -37,16 +56,31 @@ public class Panel_Søg extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox_VælgType = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jPanel2 = new javax.swing.JPanel();
         jButton_Søg = new javax.swing.JButton();
         jTextField_SøgeNr = new javax.swing.JTextField();
+        jComboBox_VælgType = new javax.swing.JComboBox();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
+        setMinimumSize(new java.awt.Dimension(830, 500));
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(800, 500));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox_VælgType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ordre", "Faktura", "Kontoudtog", "Provisionsseddel" }));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 94));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 420, 410));
 
-        jLabel1.setText("Vælg type du vil søge efter:");
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 20, 460));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jPanel2.setOpaque(false);
 
         jButton_Søg.setText("Søg");
         jButton_Søg.addActionListener(new java.awt.event.ActionListener() {
@@ -57,33 +91,57 @@ public class Panel_Søg extends javax.swing.JPanel {
 
         jTextField_SøgeNr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(247, 247, 247)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField_SøgeNr, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton_Søg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addComponent(jComboBox_VælgType, 0, 273, Short.MAX_VALUE)))
-                .addContainerGap(280, Short.MAX_VALUE))
+        jComboBox_VælgType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ordre", "Faktura", "Kontoudtog", "Provisionsseddel" }));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox_VælgType, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_SøgeNr, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Søg, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox_VælgType, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField_SøgeNr, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton_Søg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(215, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jComboBox_VælgType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jTextField_SøgeNr, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(jButton_Søg, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 280, 160));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jPanel3.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 278, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 208, Short.MAX_VALUE)
+        );
+
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 280, 210));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Søg");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Igangværende fakturaer");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_SøgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SøgActionPerformed
@@ -95,8 +153,8 @@ public class Panel_Søg extends javax.swing.JPanel {
                     String ordrenr2 = ""+ordrenr;
                     
                      try {
-                         Ordre ordre = dbHandler.getOrdre(ordrenr2);
-                   frame.skiftcard(ordre);
+                         Vare vare = dbHandler.getVare(1);
+                   frame.skiftcard(vare);
                    
                 } catch (SQLException ex) {
                     jLabel1.setText("Det var ikke muligt at hente den valgte ordre.");
@@ -120,6 +178,11 @@ public class Panel_Søg extends javax.swing.JPanel {
     private javax.swing.JButton jButton_Søg;
     private javax.swing.JComboBox jComboBox_VælgType;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField_SøgeNr;
     // End of variables declaration//GEN-END:variables
 }

@@ -82,26 +82,19 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     }
 
     /**
-     * Denne Constructor kaldes når der skal redigeres et ordre objekt
+     * Denne Constructor kaldes når der skal redigeres et vare objekt
      *
      * @param dbhandler Send DBhandler med så den kan få adgang til data
      * @param ordre Det ordre objekt som skal redigeres
      */
-    public Panel_LynSalg(DatabaseObjectHandler dbhandler, Ordre ordre) {
+    public Panel_LynSalg(DatabaseObjectHandler dbhandler, Vare vare) {
         this.dbhandler = dbhandler;
         initComponents();
         vare_list = new ArrayList();
         valgteVare_lynsalg = new ArrayList();
         panel = new ArrayList();
         købssum = 0;
-        ArrayList<Vare_linje> varelinjer = ordre.getVare_linjeListe();
-        for (int i = 0; i < varelinjer.size(); i++) {
-            if (varelinjer.get(i).getVare() == null) {
-            } else {
-                valgteVare_lynsalg.add(varelinjer.get(i).getVare());
-            }
-
-        }
+        valgteVare_lynsalg.add(vare);
         for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
             Panel_LynSalgLinje linje = new Panel_LynSalgLinje(valgteVare_lynsalg.get(i), this);
             panel.add(linje);

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Ordre;
+import model.Vare;
 
 /**
  *
@@ -320,8 +321,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Hovedmenu;
     private javax.swing.JPanel jPanel_Salg;
     // End of variables declaration//GEN-END:variables
-    public void skiftcard(Ordre ordre) {
-        Panel_LynSalg lynsalg_ordre = new Panel_LynSalg(dbhandler, ordre);
+    public void skiftcard(Vare vare) {
+        Panel_LynSalg lynsalg_ordre = new Panel_LynSalg(dbhandler, vare);
         jPanel1.add(lynsalg_ordre);
         ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg_ordre, "LynSalg_Ordre");
         ((CardLayout) jPanel1.getLayout()).show(jPanel1, "LynSalg_Ordre");
