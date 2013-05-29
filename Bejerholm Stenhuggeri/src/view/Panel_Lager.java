@@ -307,6 +307,7 @@ public class Panel_Lager extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void filtrerVarelistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrerVarelistButtonActionPerformed
+        resetInfo();
         getFiltreretVareListe();
         opdaterPanel();
     }//GEN-LAST:event_filtrerVarelistButtonActionPerformed

@@ -28,7 +28,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "2335");
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
 
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
