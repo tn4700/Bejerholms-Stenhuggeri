@@ -81,11 +81,11 @@ public class Ordre {
         this.ordredato = Utility.getCurrentTime();
         this.leveringsdato = Utility.getCurrentTime();
         this.afhentningsdato = Utility.getCurrentTime();
-        bemærkning = null;
-        bemærkning_ekstra = null;
-        kirkegård = null;
+        bemærkning = "";
+        bemærkning_ekstra = "";
+        kirkegård = "";
         afdeling = 0;
-        afdødnavn = null;
+        afdødnavn = "";
         række = 0;
         nummer = 0;
         gravType = false;

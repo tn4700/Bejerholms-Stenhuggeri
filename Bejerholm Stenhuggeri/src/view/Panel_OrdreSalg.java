@@ -121,6 +121,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel39 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel_fejlbesked_gravsten = new javax.swing.JLabel();
+        jSeparator11 = new javax.swing.JSeparator();
         jButton_videre_ordresalg = new javax.swing.JButton();
         jPanel_inskription_ordreSalg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -151,6 +152,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel_eksempelInskription_4 = new javax.swing.JLabel();
         jLabel_eksempelInskription_5 = new javax.swing.JLabel();
         jLabel_fejlbesked_skrifttypeIkkeValgt = new javax.swing.JLabel();
+        jSeparator9 = new javax.swing.JSeparator();
         jLabel_fejlbesked_kunde_ordresalg = new javax.swing.JLabel();
         jPanel_tilføjelse = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
@@ -204,10 +206,14 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel83 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jComboBox_year_leveringsdato = new javax.swing.JComboBox();
+        jSeparator8 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JSeparator();
+        jSeparator12 = new javax.swing.JSeparator();
+        jSeparator13 = new javax.swing.JSeparator();
+        jSeparator14 = new javax.swing.JSeparator();
         jPanel_Ordre_Linje = new javax.swing.JPanel();
         jPanel_specielLinje = new javax.swing.JPanel();
         jLabel_fejlbesked_speciel_linje = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -215,20 +221,21 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jTextField_pris_specielLinje = new javax.swing.JTextField();
         jTextField_antal_speciel_linje = new javax.swing.JTextField();
         jButton_tilføj_specielLinje = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel32 = new javax.swing.JLabel();
         jComboBox_varegruppeListe_ordre_linje = new javax.swing.JComboBox();
         jLabel19 = new javax.swing.JLabel();
         jComboBox_vareListe_ordre_linje = new javax.swing.JComboBox();
         jLabel20 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel_vareinfo_vare = new javax.swing.JLabel();
         jLabel_vareinfo_højde = new javax.swing.JLabel();
         jLabel_vareinfo_bredde = new javax.swing.JLabel();
         jLabel_vareinfo_varenavn = new javax.swing.JLabel();
         jLabel_vareinfo_pris = new javax.swing.JLabel();
         jLabel_vareinfo_varegruppe = new javax.swing.JLabel();
         jLabel_vareinfo_overflade = new javax.swing.JLabel();
+        jLabel_indkøbspris = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
         jTextField_redigerPris_ordre_linje = new javax.swing.JTextField();
         jCheckBox_redigerPris_gravsten1 = new javax.swing.JCheckBox();
         jLabel_pris_gravsten1 = new javax.swing.JLabel();
@@ -244,33 +251,32 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
+        jLabel21 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jTextField_bemærkning_1 = new javax.swing.JTextField();
+        jTextField_bemærkning_2 = new javax.swing.JTextField();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        jSeparator15 = new javax.swing.JSeparator();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jPanel_ordrebekræftigelse_ordreSalg = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jButton_godkend_ordresalg = new javax.swing.JButton();
         jButton_annuller_ordresalg = new javax.swing.JButton();
         jButton_ændre_ordreSalg = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        jTextField_bemærkning_3 = new javax.swing.JTextField();
-        jTextField_bemærkning_4 = new javax.swing.JTextField();
-        jLabel52 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jLabel54 = new javax.swing.JLabel();
-        jLabel61 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         jLabel_købssum__bekræftelse_ordresalg = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
-        jSeparator7 = new javax.swing.JSeparator();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
 
         jLabel37.setText("jLabel37");
 
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(800, 500));
 
+        jPanel_main.setOpaque(false);
         jPanel_main.setLayout(new java.awt.CardLayout());
 
         jPanel_OrdreSalg.setBackground(new java.awt.Color(255, 255, 255));
@@ -279,6 +285,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel_OrdreSalg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setOpaque(false);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Tlf nr");
@@ -369,6 +376,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel_OrdreSalg.add(jCheckBox_gravsten, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, -1, -1));
 
         jPanel_Kirkegård.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_Kirkegård.setOpaque(false);
         jPanel_Kirkegård.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setText("Kirkegård");
@@ -429,6 +437,9 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel_fejlbesked_gravsten.setText("jLabel15");
         jPanel_Kirkegård.add(jLabel_fejlbesked_gravsten, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 200, -1));
 
+        jSeparator11.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel_Kirkegård.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 290));
+
         jPanel_OrdreSalg.add(jPanel_Kirkegård, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 230, 220));
 
         jButton_videre_ordresalg.setText("Videre>>");
@@ -437,9 +448,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jButton_videre_ordresalgActionPerformed(evt);
             }
         });
-        jPanel_OrdreSalg.add(jButton_videre_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 140, 30));
+        jPanel_OrdreSalg.add(jButton_videre_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 140, 30));
 
         jPanel_inskription_ordreSalg.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_inskription_ordreSalg.setOpaque(false);
         jPanel_inskription_ordreSalg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -500,10 +512,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel_inskription_ordreSalg.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         jLabel34.setText("Skrifttype:");
-        jPanel_inskription_ordreSalg.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+        jPanel_inskription_ordreSalg.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
 
         jPanel_inskription_ordreSalg.add(jComboBox_tegntype_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 290, -1));
-        jPanel_inskription_ordreSalg.add(jTextField_skrifttype, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 230, 20));
+        jPanel_inskription_ordreSalg.add(jTextField_skrifttype, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 230, 30));
 
         jComboBox_linjeType3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ny", "Gammel", "Plads" }));
         jComboBox_linjeType3.addActionListener(new java.awt.event.ActionListener() {
@@ -601,17 +613,21 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 .addContainerGap(128, Short.MAX_VALUE))
         );
 
-        jPanel_inskription_ordreSalg.add(jPanel_inskriptionEksempel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 270, 170));
+        jPanel_inskription_ordreSalg.add(jPanel_inskriptionEksempel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 270, 170));
 
         jLabel_fejlbesked_skrifttypeIkkeValgt.setForeground(new java.awt.Color(204, 0, 0));
         jPanel_inskription_ordreSalg.add(jLabel_fejlbesked_skrifttypeIkkeValgt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
 
-        jPanel_OrdreSalg.add(jPanel_inskription_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 320, 500));
+        jSeparator9.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel_inskription_ordreSalg.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 0, 450));
+
+        jPanel_OrdreSalg.add(jPanel_inskription_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 320, 480));
 
         jLabel_fejlbesked_kunde_ordresalg.setForeground(new java.awt.Color(153, 0, 0));
         jPanel_OrdreSalg.add(jLabel_fejlbesked_kunde_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
 
         jPanel_tilføjelse.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_tilføjelse.setOpaque(false);
         jPanel_tilføjelse.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel26.setText("Værkstedstimer");
@@ -739,6 +755,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel_OrdreSalg.add(jPanel_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 230, 320));
 
         jPanel_levering.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_levering.setOpaque(false);
         jPanel_levering.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_fejlbesked_tilføjelse.setForeground(new java.awt.Color(204, 0, 0));
@@ -798,7 +815,16 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jPanel_levering.add(jComboBox_year_leveringsdato, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 70, -1));
 
-        jPanel_OrdreSalg.add(jPanel_levering, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 230, 100));
+        jPanel_OrdreSalg.add(jPanel_levering, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 230, 100));
+        jPanel_OrdreSalg.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 172, 470, 0));
+
+        jSeparator10.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel_OrdreSalg.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 10, 470));
+        jPanel_OrdreSalg.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 460, -1));
+        jPanel_OrdreSalg.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 460, -1));
+
+        jSeparator14.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel_OrdreSalg.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 10, 390));
 
         jPanel_main.add(jPanel_OrdreSalg, "card_ordreSalg");
 
@@ -815,10 +841,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel_fejlbesked_speciel_linje.setForeground(new java.awt.Color(204, 0, 0));
         jPanel_specielLinje.add(jLabel_fejlbesked_speciel_linje, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 260, 20));
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel21.setText("Speciel Linje");
-        jPanel_specielLinje.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
         jLabel22.setText("Navn");
         jPanel_specielLinje.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, -1, -1));
 
@@ -826,7 +848,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel_specielLinje.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
 
         jLabel24.setText("Antal");
-        jPanel_specielLinje.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, -1, -1));
+        jPanel_specielLinje.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
 
         jTextField_navn_specielLinje.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -834,8 +856,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             }
         });
         jPanel_specielLinje.add(jTextField_navn_specielLinje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 190, -1));
-        jPanel_specielLinje.add(jTextField_pris_specielLinje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 60, -1));
-        jPanel_specielLinje.add(jTextField_antal_speciel_linje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 60, -1));
+        jPanel_specielLinje.add(jTextField_pris_specielLinje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 70, -1));
+        jPanel_specielLinje.add(jTextField_antal_speciel_linje, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 80, -1));
 
         jButton_tilføj_specielLinje.setText("Tilføj");
         jButton_tilføj_specielLinje.addActionListener(new java.awt.event.ActionListener() {
@@ -843,17 +865,17 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jButton_tilføj_specielLinjeActionPerformed(evt);
             }
         });
-        jPanel_specielLinje.add(jButton_tilføj_specielLinje, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 80, 30));
+        jPanel_specielLinje.add(jButton_tilføj_specielLinje, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 80, 30));
 
-        jPanel_Ordre_Linje.add(jPanel_specielLinje, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 360, 140));
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel31.setText("Speciel Linje");
+        jPanel_specielLinje.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel_Ordre_Linje.add(jPanel_specielLinje, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 360, 90));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel32.setText("Vareinfo:");
-        jPanel2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         jComboBox_varegruppeListe_ordre_linje.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -876,42 +898,48 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 20));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel4.setOpaque(false);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel_vareinfo_vare.setText("jLabel39");
-        jPanel4.add(jLabel_vareinfo_vare, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
-
         jLabel_vareinfo_højde.setText("jLabel39");
-        jPanel4.add(jLabel_vareinfo_højde, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        jPanel4.add(jLabel_vareinfo_højde, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
 
         jLabel_vareinfo_bredde.setText("jLabel39");
-        jPanel4.add(jLabel_vareinfo_bredde, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        jPanel4.add(jLabel_vareinfo_bredde, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
 
         jLabel_vareinfo_varenavn.setText("jLabel39");
-        jPanel4.add(jLabel_vareinfo_varenavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        jPanel4.add(jLabel_vareinfo_varenavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         jLabel_vareinfo_pris.setText("jLabel39");
-        jPanel4.add(jLabel_vareinfo_pris, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        jPanel4.add(jLabel_vareinfo_pris, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
         jLabel_vareinfo_varegruppe.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_vareinfo_varegruppe.setText("jLabel40");
-        jPanel4.add(jLabel_vareinfo_varegruppe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel4.add(jLabel_vareinfo_varegruppe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         jLabel_vareinfo_overflade.setText("jLabel25");
         jPanel4.add(jLabel_vareinfo_overflade, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 145, -1, -1));
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 160, 110));
+        jLabel_indkøbspris.setText("jLabel15");
+        jPanel4.add(jLabel_indkøbspris, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel32.setText("Vareinfo:");
+        jPanel4.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 340, 80));
 
         jTextField_redigerPris_ordre_linje.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField_redigerPris_ordre_linjeFocusLost(evt);
             }
         });
-        jPanel2.add(jTextField_redigerPris_ordre_linje, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 110, -1));
+        jPanel2.add(jTextField_redigerPris_ordre_linje, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 110, -1));
 
         jCheckBox_redigerPris_gravsten1.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox_redigerPris_gravsten1.setText("Rediger pris");
+        jCheckBox_redigerPris_gravsten1.setOpaque(false);
         jCheckBox_redigerPris_gravsten1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox_redigerPris_gravsten1ActionPerformed(evt);
@@ -920,7 +948,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel2.add(jCheckBox_redigerPris_gravsten1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
         jLabel_pris_gravsten1.setText("Pris:");
-        jPanel2.add(jLabel_pris_gravsten1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, -1, -1));
+        jPanel2.add(jLabel_pris_gravsten1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, -1, -1));
 
         jButton_tilføj_vare_ordreSalg.setText("Tilføj");
         jButton_tilføj_vare_ordreSalg.addActionListener(new java.awt.event.ActionListener() {
@@ -928,7 +956,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jButton_tilføj_vare_ordreSalgActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton_tilføj_vare_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 80, 30));
+        jPanel2.add(jButton_tilføj_vare_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 80, 30));
 
         jPanel_Ordre_Linje.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 370, 230));
 
@@ -997,11 +1025,42 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel47.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel47.setText("Vare");
         jPanel_Ordre_Linje.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 40, -1));
-        jPanel_Ordre_Linje.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 780, 10));
+        jPanel_Ordre_Linje.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 390, 380, 10));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel_Ordre_Linje.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 20, 410));
-        jPanel_Ordre_Linje.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 360, 20));
+        jPanel_Ordre_Linje.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 20, 490));
+        jPanel_Ordre_Linje.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 270, 380, 20));
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel21.setText("Bemærkning");
+        jPanel_Ordre_Linje.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setOpaque(false);
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTextField_bemærkning_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_bemærkning_1ActionPerformed(evt);
+            }
+        });
+        jPanel9.add(jTextField_bemærkning_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 320, -1));
+        jPanel9.add(jTextField_bemærkning_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 320, -1));
+
+        jLabel57.setText("Afhentningsdato");
+        jPanel9.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, -1, -1));
+
+        jLabel58.setText("Leveringsdato");
+        jPanel9.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
+        jPanel9.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 390, -1));
+
+        jLabel15.setText("1.");
+        jPanel9.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        jLabel17.setText("2.");
+        jPanel9.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+
+        jPanel_Ordre_Linje.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 370, 110));
 
         jPanel_main.add(jPanel_Ordre_Linje, "card_Ordre_Linje");
 
@@ -1029,7 +1088,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jButton_annuller_ordresalgActionPerformed(evt);
             }
         });
-        jPanel_ordrebekræftigelse_ordreSalg.add(jButton_annuller_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, 100, 30));
+        jPanel_ordrebekræftigelse_ordreSalg.add(jButton_annuller_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 100, 30));
 
         jButton_ændre_ordreSalg.setText("<<Tilbage");
         jButton_ændre_ordreSalg.addActionListener(new java.awt.event.ActionListener() {
@@ -1037,63 +1096,24 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 jButton_ændre_ordreSalgActionPerformed(evt);
             }
         });
-        jPanel_ordrebekræftigelse_ordreSalg.add(jButton_ændre_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 100, 40));
-
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel8.setOpaque(false);
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextField_bemærkning_3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_bemærkning_3ActionPerformed(evt);
-            }
-        });
-        jPanel8.add(jTextField_bemærkning_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 260, -1));
-        jPanel8.add(jTextField_bemærkning_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 260, -1));
-
-        jLabel52.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel52.setText("2. Bemærkning");
-        jPanel8.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-
-        jLabel53.setText("Afhentningsdato");
-        jPanel8.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, -1, -1));
-
-        jLabel54.setText("Leveringsdato");
-        jPanel8.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
-
-        jLabel61.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel61.setText("1. Bemærkning");
-        jPanel8.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        jPanel8.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 390, -1));
-
-        jPanel_ordrebekræftigelse_ordreSalg.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 340, 110));
+        jPanel_ordrebekræftigelse_ordreSalg.add(jButton_ændre_ordreSalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 450, 100, 40));
 
         jLabel_købssum__bekræftelse_ordresalg.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel_købssum__bekræftelse_ordresalg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_købssum__bekræftelse_ordresalg.setText("jLabel32");
-        jPanel_ordrebekræftigelse_ordreSalg.add(jLabel_købssum__bekræftelse_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, 280, 50));
+        jPanel_ordrebekræftigelse_ordreSalg.add(jLabel_købssum__bekræftelse_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 280, 50));
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel35.setText("Samlet pris: ");
-        jPanel_ordrebekræftigelse_ordreSalg.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 80, 20));
+        jPanel_ordrebekræftigelse_ordreSalg.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 80, 20));
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel_ordrebekræftigelse_ordreSalg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 410, 420));
-
-        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel_ordrebekræftigelse_ordreSalg.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 10, 430));
+        jPanel_ordrebekræftigelse_ordreSalg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 770, 380));
         jPanel_ordrebekræftigelse_ordreSalg.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 770, 10));
-        jPanel_ordrebekræftigelse_ordreSalg.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 360, 10));
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
-
-        jPanel_ordrebekræftigelse_ordreSalg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 350, 250));
 
         jPanel_main.add(jPanel_ordrebekræftigelse_ordreSalg, "card_ordrebekræftelse_ordresalg");
 
@@ -1270,11 +1290,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private void jComboBox_vareListe_ordre_linjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_vareListe_ordre_linjeActionPerformed
         if (jComboBox_vareListe_ordre_linje.getSelectedItem() != null) {
             Vare vare = (Vare) jComboBox_vareListe_ordre_linje.getSelectedItem();
-            jLabel_vareinfo_vare.setText("vare nr.: " + vare.getVare_nr());
             jLabel_vareinfo_varegruppe.setText("" + vare.getGruppe().getNavn());
             jLabel_vareinfo_varenavn.setText("Navn: " + vare.getNavn());
             jLabel_vareinfo_højde.setText("Højde: " + vare.getBredde());
-            jLabel_vareinfo_bredde.setText("Bredde: " + vare.getHøjde());
+            jLabel_vareinfo_bredde.setText("Bredde : " + vare.getHøjde());
             jLabel_vareinfo_pris.setText("pris: " + vare.getSalgspris());
             jLabel_vareinfo_overflade.setText("Overflade: " + vare.getOverflade());
 
@@ -1312,11 +1331,11 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 ordre.setGravType(false);
             }
         }
-        if (jTextFieldValgt(jTextField_bemærkning_3)) {
-            ordre.setBemærkning(jTextField_bemærkning_3.getText());
+        if (jTextFieldValgt(jTextField_bemærkning_1)) {
+            ordre.setBemærkning(jTextField_bemærkning_1.getText());
         }
-        if (jTextFieldValgt(jTextField_bemærkning_4)) {
-            ordre.setBemærkning_ekstra(jTextField_bemærkning_4.getText());
+        if (jTextFieldValgt(jTextField_bemærkning_2)) {
+            ordre.setBemærkning_ekstra(jTextField_bemærkning_2.getText());
         }
         try {
             Timestamp levering = Utility.getNewTimestamp(jComboBox_levering_dag.getSelectedItem() + "/" + jComboBox_levering_måned.getSelectedItem() + "/" + jComboBox_year_leveringsdato.getSelectedItem());
@@ -1386,10 +1405,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jCheckBox_redigerPris_gravsten1ActionPerformed
 
-    private void jTextField_bemærkning_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_bemærkning_3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_bemærkning_3ActionPerformed
-
     private void jTextField_navn_specielLinjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_navn_specielLinjeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_navn_specielLinjeActionPerformed
@@ -1442,6 +1457,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
          }
     }//GEN-LAST:event_jTextField_nrFocusLost
 
+    private void jTextField_bemærkning_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_bemærkning_1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_bemærkning_1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -1487,7 +1506,9 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -1502,6 +1523,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
@@ -1520,12 +1542,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel76;
@@ -1560,6 +1580,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_fejlbesked_skrifttypeIkkeValgt;
     private javax.swing.JLabel jLabel_fejlbesked_speciel_linje;
     private javax.swing.JLabel jLabel_fejlbesked_tilføjelse;
+    private javax.swing.JLabel jLabel_indkøbspris;
     private javax.swing.JLabel jLabel_købssum__bekræftelse_ordresalg;
     private javax.swing.JLabel jLabel_købssum_ordresalg;
     private javax.swing.JLabel jLabel_pris_gravsten1;
@@ -1567,14 +1588,13 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_vareinfo_højde;
     private javax.swing.JLabel jLabel_vareinfo_overflade;
     private javax.swing.JLabel jLabel_vareinfo_pris;
-    private javax.swing.JLabel jLabel_vareinfo_vare;
     private javax.swing.JLabel jLabel_vareinfo_varegruppe;
     private javax.swing.JLabel jLabel_vareinfo_varenavn;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanel_Kirkegård;
     private javax.swing.JPanel jPanel_OrdreSalg;
     private javax.swing.JPanel jPanel_Ordre_Linje;
@@ -1587,16 +1607,19 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel_tilføjelse;
     private javax.swing.JPanel jPanel_valgteVare_ordresalg;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
+    private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JSeparator jSeparator13;
+    private javax.swing.JSeparator jSeparator14;
+    private javax.swing.JSeparator jSeparator15;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField_By_ordresalg;
     private javax.swing.JTextField jTextField_Inskription_linje_1;
     private javax.swing.JTextField jTextField_Inskription_linje_2;
@@ -1608,8 +1631,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField_afhentning_ordresalg;
     private javax.swing.JTextField jTextField_antal_speciel_linje;
     private javax.swing.JTextField jTextField_antal_værkstedstimer;
-    private javax.swing.JTextField jTextField_bemærkning_3;
-    private javax.swing.JTextField jTextField_bemærkning_4;
+    private javax.swing.JTextField jTextField_bemærkning_1;
+    private javax.swing.JTextField jTextField_bemærkning_2;
     private javax.swing.JTextField jTextField_efternavn_ordresalg;
     private javax.swing.JTextField jTextField_fornavn_ordresalg;
     private javax.swing.JTextField jTextField_kirkegård_ordresalg;
