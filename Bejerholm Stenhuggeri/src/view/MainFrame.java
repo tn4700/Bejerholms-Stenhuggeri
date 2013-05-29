@@ -7,10 +7,6 @@ package view;
 import control.DBConnection;
 import control.DatabaseObjectHandler;
 import java.awt.CardLayout;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.Ordre;
 import model.Vare;
 
 /**
