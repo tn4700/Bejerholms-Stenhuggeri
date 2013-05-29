@@ -33,7 +33,7 @@ public class Utility {
     }
     
     public static Timestamp getNewTimestamp(String time) throws ParseException{
-        SimpleDateFormat sdf = new SimpleDateFormat("dd. MMM yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date date = sdf.parse(time);
         long seconds = date.getTime();
         Timestamp timeStamp = new Timestamp(seconds);  
