@@ -257,10 +257,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             }
         });
         jTextField_tlf_ordresalg.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextField_tlf_ordresalgInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPanel3.add(jTextField_tlf_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 110, -1));
@@ -721,27 +721,23 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_vareinfo_højde)
-                            .addComponent(jLabel_vareinfo_pris)
-                            .addComponent(jLabel_vareinfo_bredde)
-                            .addComponent(jLabel_vareinfo_overflade)
-                            .addComponent(jLabel_vareinfo_vare)
-                            .addComponent(jLabel_vareinfo_varenavn)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jLabel_vareinfo_varegruppe)))
-                .addContainerGap(76, Short.MAX_VALUE))
+                    .addComponent(jLabel_vareinfo_varegruppe)
+                    .addComponent(jLabel_vareinfo_højde)
+                    .addComponent(jLabel_vareinfo_pris)
+                    .addComponent(jLabel_vareinfo_bredde)
+                    .addComponent(jLabel_vareinfo_overflade)
+                    .addComponent(jLabel_vareinfo_vare)
+                    .addComponent(jLabel_vareinfo_varenavn))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel_vareinfo_varegruppe)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_vareinfo_varenavn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_vareinfo_vare)
@@ -1193,6 +1189,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         ArrayList<Vare_linje> varelinjer = new ArrayList();
         for (int i = 0; i < valgteVare_ordresalg.size(); i++) {
             varelinjer.add(valgteVare_ordresalg.get(i));
+            valgteVare_ordresalg.get(i).getVare().setVareStatus(1);
         }
         Postnummer postnr = new Postnummer(Integer.parseInt(jTextField_postnr_ordresalg.getText()), jTextField_By_ordresalg.getText());
         kunde = new Kunde(jTextField_fornavn_ordresalg.getText(), jTextField_efternavn_ordresalg.getText(), jTextField_adresse_ordresalg.getText(), Integer.parseInt(jTextField_tlf_ordresalg.getText()), postnr);
