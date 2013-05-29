@@ -26,7 +26,7 @@ values
 insert into vare (grp_nr,navn,højde,bredde,indkøbspris,salgspris,typenavn,overflade,dekoration,vareStatus)
 values
 ('1','Sort Svensk','55','32','950','3300',null,'Poleret',true,'0'),
-('1','Mørk Halmstad Hjerte','54','43','850','4600',null,'Poleret',false,'0'),
+('1','Mørk Halmstad Hjerte','54','43','850','4600',null,'Poleret',false,'1'),
 ('1','Lys Halmstad','45','36','650','3200',null,'Poleret',true,'0'),
 ('1','Paradis','43','38','700','3200',null,'Poleret',false,'0'),
 ('1','Orion','54','49','800','4700',null,'Poleret',true,'0'),

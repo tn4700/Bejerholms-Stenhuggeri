@@ -5,6 +5,7 @@ import control.Utility;
 import java.awt.LayoutManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.Faktura;
 import model.Vare;
 import model.Varegruppe;
@@ -47,8 +48,8 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareLinjeScrollPane = new javax.swing.JScrollPane();
         vareLinjePanel = new javax.swing.JPanel();
         vareInfoPanel = new javax.swing.JPanel();
-        sletVareButton = new javax.swing.JButton();
         redigerVareButton = new javax.swing.JButton();
+        sletVareButton = new javax.swing.JButton();
         købVareButton = new javax.swing.JButton();
         vareNrLabel = new javax.swing.JLabel();
         vareHøjdeLabel = new javax.swing.JLabel();
@@ -121,11 +122,16 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareInfoPanel.setOpaque(false);
         vareInfoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sletVareButton.setText("Rediger vare");
-        vareInfoPanel.add(sletVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, -1, -1));
+        redigerVareButton.setText("Rediger vare");
+        vareInfoPanel.add(redigerVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, -1, -1));
 
-        redigerVareButton.setText("Slet vare");
-        vareInfoPanel.add(redigerVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
+        sletVareButton.setText("Slet vare");
+        sletVareButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sletVareButtonActionPerformed(evt);
+            }
+        });
+        vareInfoPanel.add(sletVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
 
         købVareButton.setText("Køb vare");
         vareInfoPanel.add(købVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, -1, -1));
@@ -304,6 +310,24 @@ public class Panel_Lager extends javax.swing.JPanel {
         getFiltreretVareListe();
         opdaterPanel();
     }//GEN-LAST:event_filtrerVarelistButtonActionPerformed
+
+    private void sletVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sletVareButtonActionPerformed
+        if (!vareNrTextField.getText().equals("")) {
+            try {
+                Vare vare = dbhandler.getVare(Integer.parseInt(vareNrTextField.getText()));
+                String message = "Er du sikker på at du vil slette varen " + vare.getNavn() + "?";
+                String title = "Bekræft sletning";
+                if (confirmDialog(message, title)) {
+                    dbhandler.deleteVare(dbhandler.getVare(Integer.parseInt(vareNrTextField.getText())));
+                    resetInfo();
+                    getFiltreretVareListe();
+                    opdaterPanel();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_sletVareButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dekorationLabel;
     private javax.swing.JTextField dekorationTextField;
@@ -358,6 +382,19 @@ public class Panel_Lager extends javax.swing.JPanel {
     private javax.swing.JComboBox vælgVareGruppeComboBox;
     // End of variables declaration//GEN-END:variables
 
+    public boolean confirmDialog(String message, String title) {
+        boolean accept = false;
+
+        String[] options = new String[]{"Ja", "Nej"};
+        int reply = JOptionPane.showOptionDialog(null, message, title, JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        if (reply == JOptionPane.YES_OPTION) {
+            accept = true;
+        }
+
+        return accept;
+    }
+
     public final void opdaterPanel() {
 
         vareLinjePanel.removeAll();
@@ -385,6 +422,20 @@ public class Panel_Lager extends javax.swing.JPanel {
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void resetInfo() {
+        vareNrTextField.setText("");
+        vareNavnTextField.setText("");
+        vareBreddeTextField.setText("");
+        vareHøjdeTextField.setText("");
+        indkøbsPrisTextField.setText("");
+        salgsPrisTextField.setText("");
+        overfladeTextField.setText("");
+        typeNavnTextField.setText("");
+        vareStatusTextField.setText("");
+        dekorationTextField.setText("");
+        vareGruppeTextField.setText("");
     }
 
     public void enterInfo(Vare vare) {
