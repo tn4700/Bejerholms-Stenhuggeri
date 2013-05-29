@@ -161,7 +161,7 @@ User valgtebruger;
 
     private void jButton_sletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_sletActionPerformed
        try {
-            if(valgtebruger.getUsername().equals("Bejerholm")){
+            if(valgtebruger.getUsername().equals("Mahias BejerHolm")){
                 System.out.println("Admin kan ikke slettes fra systemmet");
             }else{
             dbhandler.deleteUser(valgtebruger);

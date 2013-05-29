@@ -28,7 +28,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "2335");
 
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
@@ -42,6 +42,7 @@ public class MainFrame extends javax.swing.JFrame {
             Panel_Lager lager = new Panel_Lager(dbhandler);
             Panel_Søg søg = new Panel_Søg(dbhandler, this);
             Panel_CSVFiler csv = new Panel_CSVFiler(db);
+            Panel_Bruger bruger = new Panel_Bruger(db);
 
 
             // tilføj det til vores jpanel der skal fremvise det
@@ -50,12 +51,14 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel1.add(lager);
             jPanel1.add(søg);
             jPanel1.add(csv);
+            jPanel1.add(bruger);
             // Typecast panelet til cardlayout kald metoden addlayout med det panel der skal tilføjes samt en string der navngiver det. 
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(ordresalg, "OrdreSalg");
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg, "LynSalg");
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lager, "Lager");
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(søg, "Søg");
             ((CardLayout) jPanel1.getLayout()).addLayoutComponent(csv, "Csv");
+            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(bruger, "Bruger");
             //   Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
             ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
 
@@ -247,7 +250,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton_BrugerAdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BrugerAdministrationActionPerformed
-        // TODO add your handling code here:
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Bruger");
     }//GEN-LAST:event_jButton_BrugerAdministrationActionPerformed
 
     private void jButton_EksporterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EksporterActionPerformed
