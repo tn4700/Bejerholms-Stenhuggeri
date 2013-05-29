@@ -30,6 +30,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="componentRemoved" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="jComboBox_BrugereComponentRemoved"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox_BrugereActionPerformed"/>
       </Events>
       <Constraints>
@@ -76,7 +77,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton_Rediger">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ret Kode!"/>
+        <Property name="text" type="java.lang.String" value="Ret!"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_RedigerActionPerformed"/>

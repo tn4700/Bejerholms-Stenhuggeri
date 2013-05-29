@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.User;
 
 /**
@@ -85,6 +86,11 @@ public class Panel_Bruger extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jComboBox_Brugere.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                jComboBox_BrugereComponentRemoved(evt);
+            }
+        });
         jComboBox_Brugere.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_BrugereActionPerformed(evt);
@@ -111,7 +117,7 @@ public class Panel_Bruger extends javax.swing.JPanel {
         });
         add(jButton_Hent, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 100, -1));
 
-        jButton_Rediger.setText("Ret Kode!");
+        jButton_Rediger.setText("Ret!");
         jButton_Rediger.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_RedigerActionPerformed(evt);
@@ -182,13 +188,17 @@ public class Panel_Bruger extends javax.swing.JPanel {
     private void jButton_SletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SletActionPerformed
         try {
             if (valgtebruger.getUsername().equals("Mahias BejerHolm")) {
-                System.out.println("Admin kan ikke slettes fra systemmet");
+                jLabel_brugerinfo.setText("<html><div style=\"text-align: center;\"> <font color='red'>Advarsel!</front><br>Brugernavnet på admin kan ikke rettes på systemmet.</html>");
             } else {
                 dbhandler.deleteUser(valgtebruger);
-                System.out.println("jeg har sleet det her");
+                jLabel_brugerinfo.setText("<html><div style=\"text-align: center;\"> <font color='green'>Success!</font> <br>Brugeren er slettet fra systemmet. </html>" + jTextField_brugerNavn.getText());
             }
         } catch (Exception e) {
-            System.out.println("feg" + e);
+            System.out.println("fejl ved seltbutton" + e);
+            JOptionPane.showMessageDialog(null,
+                    "Der opstod en fejl ved sletning af en bruger\nHusk at 'Hent Bruger' før du sletter/retter.",
+                    "Hov! Beklager fejlen",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButton_SletActionPerformed
@@ -197,14 +207,18 @@ public class Panel_Bruger extends javax.swing.JPanel {
         try {
             if (valgtebruger.getUsername().equals("Bejerholm")) {
                 jLabel_brugerinfo.setText("<html><div style=\"text-align: center;\"> <font color='red'>Advarsel!</front><br>Brugernavnet på admin kan ikke rettes på systemmet.</html>");
-                
+
             } else {
                 valgtebruger.setPassword(jTextField_brugerKode.getText());
                 dbhandler.editUser(valgtebruger);
                 jLabel_brugerinfo.setText("<html><div style=\"text-align: center;\"> <font color='green'>Godkendt!</font> <br>Koderen er nu ændret.</html>");
             }
         } catch (Exception e) {
-            System.out.println("feg" + e);
+            System.out.println("fejl ved retbuttonadmin" + e);
+            JOptionPane.showMessageDialog(null,
+                    "Der opstod en fejl ved redigering af en bruger\nHusk at 'Hent Bruger' før du sletter/retter.",
+                    "Hov! Beklager fejlen",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButton_RedigerActionPerformed
@@ -218,7 +232,7 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jLabel_brugerinfo.setText("<html><div style=\"text-align: center;\"> <font color='green'>Success!</font> <br>Koderen er nu ændret.</html>");
             } else {
                 jLabel_brugerinfo.setText("<html><div style=\"text-align: center;\"> <font color='red'>Mislykkedes!</font> <br>Der opstod en fejl ved ændring af kode.<br>Kontroller evt. nuværende kode og sørg for du ikke ændre til din gamle kode.</html>");
-                
+
             }
         } catch (Exception e) {
             System.out.println("feg" + e);
@@ -235,6 +249,10 @@ public class Panel_Bruger extends javax.swing.JPanel {
     private void jTextField_brugerKode2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_brugerKode2MousePressed
         jTextField_brugerKode2.setText("");
     }//GEN-LAST:event_jTextField_brugerKode2MousePressed
+
+    private void jComboBox_BrugereComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jComboBox_BrugereComponentRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_BrugereComponentRemoved
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Hent;
     private javax.swing.JButton jButton_Rediger;
