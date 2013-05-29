@@ -35,7 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
             //Opret det panel som skal vises i framen
             Panel_OrdreSalg ordresalg = new Panel_OrdreSalg(dbhandler, this);
             Panel_LynSalg lynsalg = new Panel_LynSalg(dbhandler, this);
-            Panel_Lager lager = new Panel_Lager(dbhandler);
+            Panel_Lager lager = new Panel_Lager(dbhandler, this);
             Panel_Søg søg = new Panel_Søg(dbhandler, this);
             Panel_CSVFiler csv = new Panel_CSVFiler(db);
             Panel_Bruger bruger = new Panel_Bruger(db);

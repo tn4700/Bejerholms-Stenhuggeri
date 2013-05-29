@@ -6,7 +6,6 @@ import java.awt.LayoutManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import model.Faktura;
 import model.Vare;
 import model.Varegruppe;
 
@@ -15,15 +14,15 @@ public class Panel_Lager extends javax.swing.JPanel {
     private DatabaseObjectHandler dbhandler;
     private ArrayList<Vare> vareListe;
     private ArrayList<Varegruppe> vareGruppeListe;
+    private MainFrame main;
 
-    public Panel_Lager(DatabaseObjectHandler dbhandler) {
+    public Panel_Lager(DatabaseObjectHandler dbhandler, MainFrame mf) {
         initComponents();
+        main = mf;
         vareListe = new ArrayList();
         this.dbhandler = dbhandler;
         vareLinjePanel.setLayout((LayoutManager) new WrapLayout());
         try {
-            ArrayList<Faktura> fl = dbhandler.getFakturaListe();
-            System.out.println(fl);
             vareGruppeListe = dbhandler.getVaregruppeListe();
             vareGruppeComboBox.addItem(new Varegruppe(0, "Alle varegrupper"));
             for (int i = 0; i < vareGruppeListe.size(); i++) {
@@ -73,10 +72,9 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareStatusTextField = new javax.swing.JTextField();
         dekorationTextField = new javax.swing.JTextField();
         vareGruppeTextField = new javax.swing.JTextField();
-        vælgVareGruppeComboBox = new javax.swing.JComboBox();
+        opretNyVareButton = new javax.swing.JButton();
         vareInfoOverskriftLabel = new javax.swing.JLabel();
         vareFilterPanel = new javax.swing.JPanel();
-        opretNyVareButton = new javax.swing.JButton();
         filtrerVarelistButton = new javax.swing.JButton();
         vareFilterGruppeLabel = new javax.swing.JLabel();
         maxBreddeLabel = new javax.swing.JLabel();
@@ -123,6 +121,11 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareInfoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         redigerVareButton.setText("Rediger vare");
+        redigerVareButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                redigerVareButtonActionPerformed(evt);
+            }
+        });
         vareInfoPanel.add(redigerVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, -1, -1));
 
         sletVareButton.setText("Slet vare");
@@ -213,8 +216,13 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareGruppeTextField.setEditable(false);
         vareInfoPanel.add(vareGruppeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 168, 141, -1));
 
-        vælgVareGruppeComboBox.setEnabled(false);
-        vareInfoPanel.add(vælgVareGruppeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 168, 186, -1));
+        opretNyVareButton.setText("Opret ny vare");
+        opretNyVareButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opretNyVareButtonActionPerformed(evt);
+            }
+        });
+        vareInfoPanel.add(opretNyVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 210, -1, -1));
 
         add(vareInfoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 450, 250));
 
@@ -227,16 +235,13 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareFilterPanel.setOpaque(false);
         vareFilterPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        opretNyVareButton.setText("Opret ny vare");
-        vareFilterPanel.add(opretNyVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 122, -1, -1));
-
         filtrerVarelistButton.setText("Filtrer");
         filtrerVarelistButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtrerVarelistButtonActionPerformed(evt);
             }
         });
-        vareFilterPanel.add(filtrerVarelistButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 122, -1, -1));
+        vareFilterPanel.add(filtrerVarelistButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 122, -1, -1));
 
         vareFilterGruppeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         vareFilterGruppeLabel.setText("Vælg varegruppe");
@@ -288,7 +293,7 @@ public class Panel_Lager extends javax.swing.JPanel {
 
         vareStatusFilterLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         vareStatusFilterLabel.setText("Varestatus");
-        vareFilterPanel.add(vareStatusFilterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 126, -1, -1));
+        vareFilterPanel.add(vareStatusFilterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 125, -1, -1));
 
         vareStatusComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "På lager", "Reserveret", "Solgt", "Alle varer" }));
         vareFilterPanel.add(vareStatusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 123, 100, -1));
@@ -329,6 +334,39 @@ public class Panel_Lager extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_sletVareButtonActionPerformed
+
+    private void redigerVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigerVareButtonActionPerformed
+        if (!vareNrTextField.getText().equals("")) {
+            try {
+                int vare_nr = Integer.parseInt(vareNrTextField.getText());
+                Vare vare = dbhandler.getVare(vare_nr);
+                JDialog_OpretVare jDialog = new JDialog_OpretVare(main, true, dbhandler, vare);
+                jDialog.setVisible(true);
+                enterInfo(dbhandler.getVare(vare_nr));
+                getFiltreretVareListe();
+                opdaterPanel();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_redigerVareButtonActionPerformed
+
+    private void opretNyVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opretNyVareButtonActionPerformed
+        try {
+            int max = dbhandler.getMaxVareNr();
+            JDialog_OpretVare jDialog = new JDialog_OpretVare(main, true, dbhandler);
+            jDialog.setVisible(true);
+            resetInfo();
+            int newMax = dbhandler.getMaxVareNr();
+            if (newMax != max) {
+                enterInfo(dbhandler.getVare(newMax));
+                getFiltreretVareListe();
+                opdaterPanel();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_opretNyVareButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dekorationLabel;
     private javax.swing.JTextField dekorationTextField;
@@ -380,30 +418,25 @@ public class Panel_Lager extends javax.swing.JPanel {
     private javax.swing.JLabel vareStatusFilterLabel;
     private javax.swing.JLabel vareStatusLabel;
     private javax.swing.JTextField vareStatusTextField;
-    private javax.swing.JComboBox vælgVareGruppeComboBox;
     // End of variables declaration//GEN-END:variables
 
     public boolean confirmDialog(String message, String title) {
         boolean accept = false;
-
         String[] options = new String[]{"Ja", "Nej"};
         int reply = JOptionPane.showOptionDialog(null, message, title, JOptionPane.DEFAULT_OPTION,
                 JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         if (reply == JOptionPane.YES_OPTION) {
             accept = true;
         }
-
         return accept;
     }
 
     public final void opdaterPanel() {
-
         vareLinjePanel.removeAll();
         vareLinjePanel.updateUI();
         for (int i = 0; i < vareListe.size(); i++) {
             vareLinjePanel.add(new Panel_LagerLinje(vareListe.get(i), this));
         }
-
     }
 
     public final void getFiltreretVareListe() {
@@ -450,6 +483,6 @@ public class Panel_Lager extends javax.swing.JPanel {
         typeNavnTextField.setText(vare.getTypenavn());
         vareStatusTextField.setText(vare.getVareStatusToString());
         dekorationTextField.setText(vare.getDekorationToString());
-        vareGruppeTextField.setText(vare.getGruppe().getNavn());
+        vareGruppeTextField.setText(vare.getGruppe().toString());
     }
 }

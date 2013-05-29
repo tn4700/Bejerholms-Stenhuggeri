@@ -524,7 +524,8 @@ public class DatabaseObjectHandler {
                 + "', salgspris = '" + vare.getSalgspris() + "', typenavn = '" + vare.getTypenavn()
                 + "', overflade = '" + vare.getOverflade() + "', dekoration = '"
                 + boolToInt(vare.getDekoration()) + "', vareStatus = '" + vare.getVareStatus()
-                + "' where vare_nr = '" + vare.getVare_nr() + "';");
+                + "', grp_nr = '" + vare.getGruppe().getGrp_nr() + "' where vare_nr = '"
+                + vare.getVare_nr() + "';");
     }
 
     public ArrayList<Vare> getFiltreretVareListe(int grp_nr, int minHøjde, int maxHøjde, int minBredde, int maxBredde, double minPris, double maxPris, int vareStatus) throws SQLException {
