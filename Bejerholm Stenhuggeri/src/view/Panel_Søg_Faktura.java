@@ -20,7 +20,7 @@ private Faktura faktura;
     public Panel_Søg_Faktura(Faktura faktura) {
         this.faktura = faktura;
          initComponents();
-      jLabel_fakturanr.setText("Faktura nr : " + faktura.getFaktura_nr());
+        jLabel_fakturanr.setText("Faktura nr : " + faktura.getFaktura_nr());
         jLabel_kundenavn.setText(faktura.getOrdre().getKunde().getFornavn() + " " + faktura.getOrdre().getKunde().getEfternavn());
         jLabel_visFakDato.setText(Utility.formatTimestampToString(faktura.getFaktureringsdato()));
         jLabel_VisSendtDato.setText(Utility.formatTimestampToString(faktura.getSendt_dato()));

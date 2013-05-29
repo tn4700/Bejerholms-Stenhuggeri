@@ -500,11 +500,42 @@ public class DatabaseObjectHandler {
             vare.getGruppe().setGrp_nr(getMaxGrpNr());
         }
         db.setData("update vare set navn = '" + vare.getNavn() + "', højde = '" + vare.getHøjde()
-                + "', bredde = '" + vare.getBredde() + "', indkøbspris = " + vare.getIndkøbspris()
+                + "', bredde = '" + vare.getBredde() + "', indkøbspris = '" + vare.getIndkøbspris()
                 + "', salgspris = '" + vare.getSalgspris() + "', typenavn = '" + vare.getTypenavn()
-                + "', overflade = " + vare.getOverflade() + "', dekoration = "
+                + "', overflade = '" + vare.getOverflade() + "', dekoration = '"
                 + boolToInt(vare.getDekoration()) + "', vareStatus = '" + vare.getVareStatus()
                 + "' where vare_nr = '" + vare.getVare_nr() + "';");
+    }
+    
+    public ArrayList<Vare> getFiltreretVareListe(int grp_nr, int maxHøjde, int maxBredde, double maxPris, double minPris) throws SQLException{
+        ArrayList<Vare> vareListe = new ArrayList();
+        String sql;
+        Varegruppe varegruppe = getVareGruppe(grp_nr);
+                ResultSet rs;
+                if(varegruppe != null) {
+                sql = "select * from vare where grp_nr = '" + varegruppe.getGrp_nr() + "' and ";
+                } else {
+                sql = "";
+                }
+                rs = db.getData(sql);
+        while (rs.next()) {
+            Vare vare = new Vare(
+                    rs.getInt("vare_nr"),
+                    rs.getString("navn"),
+                    rs.getInt("højde"),
+                    rs.getInt("bredde"),
+                    rs.getDouble("indkøbspris"),
+                    rs.getDouble("salgspris"),
+                    rs.getString("typenavn"),
+                    rs.getString("overflade"),
+                    rs.getBoolean("dekoration"),
+                    rs.getInt("vareStatus"),
+                    varegruppe);
+            vareListe.add(vare);
+        }
+        rs.close();
+        
+        return vareListe;
     }
 
     public void updateVareStatus(Vare vare) throws SQLException {
@@ -872,8 +903,8 @@ public class DatabaseObjectHandler {
             provisionsseddel = new Provisionsseddel(rs.getString("provisions_nr"),
                     rs.getTimestamp("dato"),
                     null);
-            rs.close();
             String kontoudtog_nr = rs.getString("kontoudtog_nr");
+            rs.close();
             Kontoudtog kontoudtog = getKontoudtog(kontoudtog_nr);
             provisionsseddel.setKontoudtog(kontoudtog);
         }
