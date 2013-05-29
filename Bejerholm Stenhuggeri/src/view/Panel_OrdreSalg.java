@@ -1186,10 +1186,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton_godkend_ordresalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_godkend_ordresalgActionPerformed
+        //opretter ny ArrayList til 
         ArrayList<Vare_linje> varelinjer = new ArrayList();
         for (int i = 0; i < valgteVare_ordresalg.size(); i++) {
             varelinjer.add(valgteVare_ordresalg.get(i));
-            valgteVare_ordresalg.get(i).getVare().setVareStatus(1);
         }
         Postnummer postnr = new Postnummer(Integer.parseInt(jTextField_postnr_ordresalg.getText()), jTextField_By_ordresalg.getText());
         kunde = new Kunde(jTextField_fornavn_ordresalg.getText(), jTextField_efternavn_ordresalg.getText(), jTextField_adresse_ordresalg.getText(), Integer.parseInt(jTextField_tlf_ordresalg.getText()), postnr);
@@ -1220,6 +1220,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         if (jTextFieldValgt(jTextField_bemærkning_4)) {
             ordre.setBemærkning_ekstra(jTextField_bemærkning_4.getText());
         }
+         
+
         try {
             String ordrenr = dbhandler.createOrdre(ordre);
             try {
@@ -1244,6 +1246,19 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println("fejl " + e);
         }
+         
+        
+        //ændrer varestatus til 1 (reserveret), i de valgte vare i ordren.
+        try {
+            for (int i = 0; i < valgteVare_ordresalg.size(); i++) {
+            valgteVare_ordresalg.get(i).getVare().setVareStatus(1);
+            dbhandler.editVare(valgteVare_ordresalg.get(i).getVare());
+            }
+            
+            
+        } catch (Exception e) {
+        }
+    
     }//GEN-LAST:event_jButton_godkend_ordresalgActionPerformed
 
     private void jButton_annuller_ordresalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_annuller_ordresalgActionPerformed
@@ -1483,7 +1498,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             }
 
             for (int i = 0; i < vareListe.size(); i++) {
-                if (vareListe.get(i).getVareStatus() != 3) {
+                if (vareListe.get(i).getVareStatus() == 0) {
                     jComboBox_vareListe_ordre_linje.addItem(vareListe.get(i));
                 }
             }
@@ -1583,7 +1598,9 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             } else if (jCheckBox_tilføjelse.isSelected()) {
                 opretTilføjelselinje();
                 if (jCheckBox_gravsten.isSelected()) {
+                    
                     opretInskription_linje();
+                    
                 } else {
                     layout.show(jPanel_main, "card_Ordre_Linje");
                 }
