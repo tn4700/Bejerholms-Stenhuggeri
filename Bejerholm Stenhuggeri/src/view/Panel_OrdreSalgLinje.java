@@ -31,8 +31,8 @@ public class Panel_OrdreSalgLinje extends javax.swing.JPanel {
             jLabel2.setText(varelinje.getTom_linje().getNavn()); 
             jLabel3.setText("Pris: "+varelinje.getTom_linje().getSamletPris());
         } else if(varelinje.getInskription()!=null){
-            String newDescription = varelinje.getInskription().getTegntype().getNavn().substring(0, 10) + "...";
-            jLabel2.setText(newDescription);
+            
+            jLabel2.setText(varelinje.getInskription().getTegntype().getNavn());
             jLabel3.setText("Pris: " + varelinje.getInskription().getPris());
         } 
         
@@ -58,11 +58,14 @@ public class Panel_OrdreSalgLinje extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setPreferredSize(new java.awt.Dimension(300, 38));
+        setPreferredSize(new java.awt.Dimension(400, 38));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Vare navn");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel2.setMaximumSize(new java.awt.Dimension(250, 14));
+        jLabel2.setMinimumSize(new java.awt.Dimension(200, 14));
+        jLabel2.setPreferredSize(new java.awt.Dimension(200, 14));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -80,12 +83,12 @@ public class Panel_OrdreSalgLinje extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
