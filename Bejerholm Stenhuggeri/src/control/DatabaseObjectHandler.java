@@ -252,7 +252,7 @@ public class DatabaseObjectHandler {
     public void createInskriptionLinje(ArrayList<Inskription_linje> inskription_linje_liste, int inskription_id) throws SQLException {
         for (int i = 0; i < inskription_linje_liste.size(); i++) {
             db.setData("insert into inskription_linje(linje_nr, inskription_id, linje_type, "
-                    + "inskription)values('" + i+1 + "','"
+                    + "inskription)values('" + i + 1 + "','"
                     + inskription_id + "','" + inskription_linje_liste.get(i).getLinje_type()
                     + "','" + inskription_linje_liste.get(i).getInskription() + "');");
         }
@@ -442,16 +442,36 @@ public class DatabaseObjectHandler {
 
         return vare;
     }
-    
-    public ArrayList<Vare> getAlleVarer() throws SQLException{
+
+    public ArrayList<Vare> getAlleVarer() throws SQLException {
         ArrayList<Vare> vareListe = new ArrayList();
-        ArrayList<Varegruppe> vareGruppeListe = getVaregruppeListe();
-        for (int i = 0; i < vareGruppeListe.size(); i++) {
-            ArrayList<Vare> tmpVareListe = getVareListe(vareGruppeListe.get(i).getGrp_nr());
-            for (int j = 0; j < tmpVareListe.size(); j++) {
-                vareListe.add(tmpVareListe.get(j));
+        ArrayList<Integer> grpList = new ArrayList();
+
+        String sql = "select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade, "
+                + "dekoration, vareStatus, grp_nr from vare;";
+        ResultSet rs;
+        rs = db.getData(sql);
+                    while (rs.next()) {
+                Vare vare = new Vare(
+                        rs.getInt("vare_nr"),
+                        rs.getString("navn"),
+                        rs.getInt("højde"),
+                        rs.getInt("bredde"),
+                        rs.getDouble("indkøbspris"),
+                        rs.getDouble("salgspris"),
+                        rs.getString("typenavn"),
+                        rs.getString("overflade"),
+                        rs.getBoolean("dekoration"),
+                        rs.getInt("vareStatus"),
+                        null);
+                grpList.add(rs.getInt("grp_nr"));
+                vareListe.add(vare);
             }
-        }
+            rs.close();
+            for (int i = 0; i < vareListe.size(); i++) {
+                vareListe.get(i).setGruppe(getVareGruppe(grpList.get(i)));
+            }
+        
         return vareListe;
     }
 
@@ -506,35 +526,111 @@ public class DatabaseObjectHandler {
                 + boolToInt(vare.getDekoration()) + "', vareStatus = '" + vare.getVareStatus()
                 + "' where vare_nr = '" + vare.getVare_nr() + "';");
     }
-    
-    public ArrayList<Vare> getFiltreretVareListe(int grp_nr, int maxHøjde, int maxBredde, double maxPris, double minPris) throws SQLException{
+
+    public ArrayList<Vare> getFiltreretVareListe(int grp_nr, int minHøjde, int maxHøjde, int minBredde, int maxBredde, double minPris, double maxPris) throws SQLException {
         ArrayList<Vare> vareListe = new ArrayList();
-        String sql;
+        ArrayList<Integer> grpList = new ArrayList();
+        boolean firstUsed = false;
         Varegruppe varegruppe = getVareGruppe(grp_nr);
-                ResultSet rs;
-                if(varegruppe != null) {
-                sql = "select * from vare where grp_nr = '" + varegruppe.getGrp_nr() + "' and ";
-                } else {
-                sql = "";
+
+        String sql = "select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade, "
+                + "dekoration, vareStatus, grp_nr from vare";
+
+        if (varegruppe == null && minHøjde == 0 && maxHøjde == 0 && minBredde == 0 && maxBredde == 0 && minPris == 0 && maxPris == 0) {
+            sql += ";";
+        } else {
+            sql += " where ";
+            if (varegruppe != null) {
+                sql += "grp_nr = '" + varegruppe.getGrp_nr() + "'";
+                firstUsed = true;
+            }
+            if (minHøjde != 0) {
+                if (firstUsed) {
+                    sql += " and ";
                 }
-                rs = db.getData(sql);
-        while (rs.next()) {
-            Vare vare = new Vare(
-                    rs.getInt("vare_nr"),
-                    rs.getString("navn"),
-                    rs.getInt("højde"),
-                    rs.getInt("bredde"),
-                    rs.getDouble("indkøbspris"),
-                    rs.getDouble("salgspris"),
-                    rs.getString("typenavn"),
-                    rs.getString("overflade"),
-                    rs.getBoolean("dekoration"),
-                    rs.getInt("vareStatus"),
-                    varegruppe);
-            vareListe.add(vare);
+                sql += "højde >= '" + minHøjde + "'";
+                firstUsed = true;
+            }
+            if (maxHøjde != 0) {
+                if (firstUsed) {
+                    sql += " and ";
+                }
+                sql += "højde <= '" + maxHøjde + "'";
+                firstUsed = true;
+            }
+            if (minBredde != 0) {
+                if (firstUsed) {
+                    sql += " and ";
+                }
+                sql += "bredde >= '" + minBredde + "'";
+                firstUsed = true;
+            }
+            if (maxBredde != 0) {
+                if (firstUsed) {
+                    sql += " and ";
+                }
+                sql += "bredde <= '" + maxBredde + "'";
+                firstUsed = true;
+            }
+            if (minPris != 0) {
+                if (firstUsed) {
+                    sql += " and ";
+                }
+                sql += "salgspris >= '" + minPris + "'";
+                firstUsed = true;
+            }
+            if (maxPris != 0) {
+                if (firstUsed) {
+                    sql += " and ";
+                }
+                sql += "salgspris <= '" + maxPris + "'";
+            }
+            sql += ";";
         }
-        rs.close();
-        
+
+        ResultSet rs;
+        rs = db.getData(sql);
+
+        if (varegruppe != null) {
+            while (rs.next()) {
+                Vare vare = new Vare(
+                        rs.getInt("vare_nr"),
+                        rs.getString("navn"),
+                        rs.getInt("højde"),
+                        rs.getInt("bredde"),
+                        rs.getDouble("indkøbspris"),
+                        rs.getDouble("salgspris"),
+                        rs.getString("typenavn"),
+                        rs.getString("overflade"),
+                        rs.getBoolean("dekoration"),
+                        rs.getInt("vareStatus"),
+                        varegruppe);
+                vareListe.add(vare);
+            }
+            rs.close();
+        } else {
+            while (rs.next()) {
+                Vare vare = new Vare(
+                        rs.getInt("vare_nr"),
+                        rs.getString("navn"),
+                        rs.getInt("højde"),
+                        rs.getInt("bredde"),
+                        rs.getDouble("indkøbspris"),
+                        rs.getDouble("salgspris"),
+                        rs.getString("typenavn"),
+                        rs.getString("overflade"),
+                        rs.getBoolean("dekoration"),
+                        rs.getInt("vareStatus"),
+                        null);
+                grpList.add(rs.getInt("grp_nr"));
+                vareListe.add(vare);
+            }
+            rs.close();
+            for (int i = 0; i < vareListe.size(); i++) {
+                vareListe.get(i).setGruppe(getVareGruppe(grpList.get(i)));
+            }
+        }
+
         return vareListe;
     }
 
@@ -632,9 +728,9 @@ public class DatabaseObjectHandler {
         for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
             createVareLinje(ordre.getVare_linjeListe().get(i), ordre_nr);
         }
-        
-        
-        
+
+
+
         return ordre_nr;
     }
 
@@ -643,7 +739,7 @@ public class DatabaseObjectHandler {
             deleteVareLinje(ordre.getVare_linjeListe().get(i), ordre.getOrdre_nr());
         }
         db.setData("delete from ordre where ordre_nr = '" + ordre.getOrdre_nr() + "';");
-        
+
     }
 
     public void editOrdre(Ordre ordre) throws SQLException, ControlException {
@@ -791,9 +887,9 @@ public class DatabaseObjectHandler {
 
         faktura.setOrdre(getOrdre(ordre_nr));
         if (faktura.getFakturatype()) {
-            if(tlf!=0 || provisions_nr!=null){
-            faktura.setBedemand(getSamarbejdspartner(tlf));
-            faktura.setProvisionsseddel(getProvisionsseddel(provisions_nr));
+            if (tlf != 0 || provisions_nr != null) {
+                faktura.setBedemand(getSamarbejdspartner(tlf));
+                faktura.setProvisionsseddel(getProvisionsseddel(provisions_nr));
             } else {
                 throw new ControlException("Ugyldige fakturaoplysninger. Fakturatype bedemand men ingen bedemand og/eller provisionsseddel findes.");
             }
@@ -962,7 +1058,7 @@ public class DatabaseObjectHandler {
         }
         return user;
     }
-    
+
     public ArrayList<User> getUserList() throws SQLException {
         ResultSet rs;
         ArrayList<User> userList = new ArrayList();
@@ -991,7 +1087,7 @@ public class DatabaseObjectHandler {
     }
 
     public void editUser(User user) throws SQLException {
-        System.out.println("DEn her bruger prøver jeg at opdatere " + user.getUsername()+ " Kode: " +user.getPassword() );
+        System.out.println("DEn her bruger prøver jeg at opdatere " + user.getUsername() + " Kode: " + user.getPassword());
         db.setData("update user set pw = '" + user.getPassword() + "' where brugernavn = '" + user.getUsername() + "';");
     }
 

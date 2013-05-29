@@ -3,24 +3,32 @@ package view;
 import control.DatabaseObjectHandler;
 import control.Utility;
 import java.awt.LayoutManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Vare;
+import model.Varegruppe;
 
 public class Panel_Lager extends javax.swing.JPanel {
-
+    
     private DatabaseObjectHandler dbhandler;
     private ArrayList<Vare> vareListe;
-
+    private ArrayList<Varegruppe> vareGruppeListe;
+    
     public Panel_Lager(DatabaseObjectHandler dbhandler) {
         initComponents();
         this.dbhandler = dbhandler;
-         vareLinjePanel.setLayout((LayoutManager) new WrapLayout());
+        vareLinjePanel.setLayout((LayoutManager) new WrapLayout());
         try {
+            vareGruppeListe = dbhandler.getVaregruppeListe();
+            vareGruppeComboBox.addItem(new Varegruppe(0,"Alle varegrupper"));
+            for (int i = 0; i < vareGruppeListe.size(); i++) {
+                vareGruppeComboBox.addItem(vareGruppeListe.get(i));
+            }
             vareListe = dbhandler.getAlleVarer();
             for (int i = 0; i < vareListe.size(); i++) {
                 vareLinjePanel.add(new Panel_LagerLinje(vareListe.get(i), this));
             }
-       
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -73,7 +81,7 @@ public class Panel_Lager extends javax.swing.JPanel {
         maxHøjdeLabel = new javax.swing.JLabel();
         minimumPrisLabel = new javax.swing.JLabel();
         maxPrisLabel = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        vareGruppeComboBox = new javax.swing.JComboBox();
         maxBreddeTextField = new javax.swing.JTextField();
         maxHøjdeTextField = new javax.swing.JTextField();
         minPrisTextField = new javax.swing.JTextField();
@@ -208,102 +216,66 @@ public class Panel_Lager extends javax.swing.JPanel {
 
         vareFilterPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         vareFilterPanel.setOpaque(false);
+        vareFilterPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         opretNyVareButton.setText("Opret ny vare");
+        vareFilterPanel.add(opretNyVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 126, -1, -1));
 
         filtrerVarelistButton.setText("Filtrer");
+        filtrerVarelistButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtrerVarelistButtonActionPerformed(evt);
+            }
+        });
+        vareFilterPanel.add(filtrerVarelistButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 126, -1, -1));
 
         vareFilterGruppeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         vareFilterGruppeLabel.setText("Vælg varegruppe");
+        vareFilterPanel.add(vareFilterGruppeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 16, -1, -1));
 
         maxBreddeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         maxBreddeLabel.setText("Max bredde");
+        vareFilterPanel.add(maxBreddeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 91, -1, -1));
 
         maxHøjdeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         maxHøjdeLabel.setText("Max højde");
+        vareFilterPanel.add(maxHøjdeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 66, -1, -1));
 
         minimumPrisLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         minimumPrisLabel.setText("Min. pris");
+        vareFilterPanel.add(minimumPrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 40, -1, -1));
 
         maxPrisLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         maxPrisLabel.setText("Max pris");
+        vareFilterPanel.add(maxPrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
+
+        vareFilterPanel.add(vareGruppeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 13, 315, -1));
+
+        maxBreddeTextField.setText("0");
+        vareFilterPanel.add(maxBreddeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 88, 100, -1));
+
+        maxHøjdeTextField.setText("0");
+        vareFilterPanel.add(maxHøjdeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 63, 100, -1));
+
+        minPrisTextField.setText("0");
+        vareFilterPanel.add(minPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 37, 100, -1));
+
+        maxPrisTextField.setText("0");
+        vareFilterPanel.add(maxPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 37, 100, -1));
+
+        minHøjdeTextField.setText("0");
+        vareFilterPanel.add(minHøjdeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 63, 100, -1));
+
+        minBreddeTextField.setText("0");
+        vareFilterPanel.add(minBreddeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 88, 100, -1));
 
         minimumHøjdeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         minimumHøjdeLabel.setText("Min. højde");
+        vareFilterPanel.add(minimumHøjdeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 66, -1, -1));
 
         minimumBreddeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         minimumBreddeLabel.setText("Min. bredde");
-
-        javax.swing.GroupLayout vareFilterPanelLayout = new javax.swing.GroupLayout(vareFilterPanel);
-        vareFilterPanel.setLayout(vareFilterPanelLayout);
-        vareFilterPanelLayout.setHorizontalGroup(
-            vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vareFilterPanelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(vareFilterPanelLayout.createSequentialGroup()
-                        .addComponent(filtrerVarelistButton)
-                        .addGap(9, 9, 9)
-                        .addComponent(opretNyVareButton))
-                    .addGroup(vareFilterPanelLayout.createSequentialGroup()
-                        .addGroup(vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(vareFilterGruppeLabel)
-                            .addComponent(minimumPrisLabel)
-                            .addComponent(minimumHøjdeLabel)
-                            .addComponent(minimumBreddeLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vareFilterPanelLayout.createSequentialGroup()
-                                .addGroup(vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(minHøjdeTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                    .addComponent(minPrisTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(minBreddeTextField))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(maxHøjdeLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(maxPrisLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(maxBreddeLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(maxHøjdeTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                    .addComponent(maxPrisTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(maxBreddeTextField))))))
-                .addContainerGap())
-        );
-        vareFilterPanelLayout.setVerticalGroup(
-            vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vareFilterPanelLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(vareFilterPanelLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(vareFilterGruppeLabel))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(minimumPrisLabel)
-                    .addComponent(minPrisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(maxPrisLabel)
-                    .addComponent(maxPrisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(maxHøjdeLabel)
-                    .addComponent(maxHøjdeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(minHøjdeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(minimumHøjdeLabel))
-                .addGap(5, 5, 5)
-                .addGroup(vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(maxBreddeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(maxBreddeLabel)
-                    .addComponent(minBreddeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(minimumBreddeLabel))
-                .addGap(18, 18, 18)
-                .addGroup(vareFilterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filtrerVarelistButton)
-                    .addComponent(opretNyVareButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        vareFilterPanel.add(minimumBreddeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 91, -1, -1));
 
         add(vareFilterPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 450, 160));
 
@@ -318,13 +290,30 @@ public class Panel_Lager extends javax.swing.JPanel {
         add(vareInfoOverskriftLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void filtrerVarelistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrerVarelistButtonActionPerformed
+        try {
+            Varegruppe varegruppe = (Varegruppe) vareGruppeComboBox.getSelectedItem();
+            vareListe = dbhandler.getFiltreretVareListe(
+                    varegruppe.getGrp_nr(),
+                    Integer.parseInt(minHøjdeTextField.getText()),
+                    Integer.parseInt(maxHøjdeTextField.getText()),
+                    Integer.parseInt(minBreddeTextField.getText()),
+                    Integer.parseInt(maxBreddeTextField.getText()),
+                    Double.parseDouble(minPrisTextField.getText()),
+                    Double.parseDouble(maxPrisTextField.getText()));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (NumberFormatException ex){
+            ex.printStackTrace();
+        }
+        opdaterPanel();
+    }//GEN-LAST:event_filtrerVarelistButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dekorationLabel;
     private javax.swing.JTextField dekorationTextField;
     private javax.swing.JButton filtrerVarelistButton;
     private javax.swing.JLabel indkøbsPrisLabel;
     private javax.swing.JTextField indkøbsPrisTextField;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JButton købVareButton;
     private javax.swing.JLabel maxBreddeLabel;
     private javax.swing.JTextField maxBreddeTextField;
@@ -351,6 +340,7 @@ public class Panel_Lager extends javax.swing.JPanel {
     private javax.swing.JTextField vareBreddeTextField;
     private javax.swing.JLabel vareFilterGruppeLabel;
     private javax.swing.JPanel vareFilterPanel;
+    private javax.swing.JComboBox vareGruppeComboBox;
     private javax.swing.JLabel vareGruppeLabel;
     private javax.swing.JTextField vareGruppeTextField;
     private javax.swing.JLabel vareHøjdeLabel;
@@ -370,11 +360,21 @@ public class Panel_Lager extends javax.swing.JPanel {
     private javax.swing.JComboBox vælgVareGruppeComboBox;
     // End of variables declaration//GEN-END:variables
 
-    public void enterInfo(Vare vare){
-        vareNrTextField.setText(vare.getVare_nr()+"");
+    public void opdaterPanel() {
+        
+        vareLinjePanel.removeAll();
+        vareLinjePanel.updateUI();
+        for (int i = 0; i < vareListe.size(); i++) {
+            vareLinjePanel.add(new Panel_LagerLinje(vareListe.get(i), this));
+        }
+        
+    }
+    
+    public void enterInfo(Vare vare) {
+        vareNrTextField.setText(vare.getVare_nr() + "");
         vareNavnTextField.setText(vare.getNavn());
-        vareBreddeTextField.setText(vare.getBredde()+" cm");
-        vareHøjdeTextField.setText(vare.getHøjde()+" cm");
+        vareBreddeTextField.setText(vare.getBredde() + " cm");
+        vareHøjdeTextField.setText(vare.getHøjde() + " cm");
         indkøbsPrisTextField.setText(Utility.formatDoubleToKr(vare.getIndkøbspris()));
         salgsPrisTextField.setText(Utility.formatDoubleToKr(vare.getSalgspris()));
         overfladeTextField.setText(vare.getOverflade());
