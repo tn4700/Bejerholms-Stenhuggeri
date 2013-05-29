@@ -166,7 +166,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel_Administraion.add(jButton_BrugerAdministration);
-        jButton_BrugerAdministration.setBounds(270, 170, 130, 50);
+        jButton_BrugerAdministration.setBounds(250, 170, 150, 50);
 
         jButton_Eksporter.setText("Eksporter");
         jButton_Eksporter.addActionListener(new java.awt.event.ActionListener() {

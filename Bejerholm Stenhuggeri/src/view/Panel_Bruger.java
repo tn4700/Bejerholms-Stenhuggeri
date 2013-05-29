@@ -14,18 +14,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
 
-
 /**
  *
  * @author T
  */
-
 public class Panel_Bruger extends javax.swing.JPanel {
-private DatabaseObjectHandler dbhandler;
-private DBConnection db;
-private User user;
-private ArrayList<User> userlist;
-User valgtebruger;
+
+    private DatabaseObjectHandler dbhandler;
+    private DBConnection db;
+    private User user;
+    private ArrayList<User> userlist;
+    User valgtebruger;
+
     /**
      * Creates new form Panel_Bruger
      */
@@ -34,19 +34,31 @@ User valgtebruger;
         dbhandler = new DatabaseObjectHandler(db);
         initComponents();
         // fiktiv ham der er logget ind
-        user = new User("martin", "123");
-    try {
-        //      
-              userlist = dbhandler.getUserList();
-    } catch (SQLException ex) {
-        System.out.println("DEr kunne ikke henstes brugere" + ex);
-    }
+        user = new User("Mathias Bejerholm", "123");
+        try {
+            //      
+            userlist = dbhandler.getUserList();
+        } catch (SQLException ex) {
+            System.out.println("Der kunne ikke henstes brugere" + ex);
+        }
 
         for (int i = 0; i < userlist.size(); i++) {
-            jComboBox1.addItem(userlist.get(i));
+            jComboBox_Brugere.addItem(userlist.get(i));
         }
-  
-        
+        if (user.getUsername().equals("Mathias Bejerholm")) {
+            jTextField_brugerKode2.setVisible(false);
+            jTextField_brugerKodeNu.setVisible(false);
+            jButton_Rediger2.setVisible(false);
+        } else {
+            jComboBox_Brugere.setVisible(false);
+            jButton_Hent.setVisible(false);
+            jButton_Rediger.setVisible(false);
+            jButton_Slet.setVisible(false);
+            jTextField_brugerKode.setVisible(false);
+            jTextField_brugerNavn.setVisible(false);
+        }
+        jLabel_brugerNavn.setText("Goddag " + user);
+
     }
 
     /**
@@ -58,20 +70,27 @@ User valgtebruger;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox_Brugere = new javax.swing.JComboBox();
         jTextField_brugerNavn = new javax.swing.JTextField();
         jTextField_brugerKode = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton_slet = new javax.swing.JButton();
+        jButton_Hent = new javax.swing.JButton();
+        jButton_Rediger = new javax.swing.JButton();
+        jButton_Slet = new javax.swing.JButton();
+        jLabel_brugerNavn = new javax.swing.JLabel();
+        jTextField_brugerKode2 = new javax.swing.JTextField();
+        jButton_Rediger2 = new javax.swing.JButton();
+        jTextField_brugerKodeNu = new javax.swing.JTextField();
+        jLabel_brugerinfo = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(800, 500));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox_Brugere.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jComboBox_BrugereActionPerformed(evt);
             }
         });
+        add(jComboBox_Brugere, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 160, -1));
 
         jTextField_brugerNavn.setText("Bruger Navn");
         jTextField_brugerNavn.addActionListener(new java.awt.event.ActionListener() {
@@ -79,122 +98,154 @@ User valgtebruger;
                 jTextField_brugerNavnActionPerformed(evt);
             }
         });
+        add(jTextField_brugerNavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 92, 135, -1));
 
         jTextField_brugerKode.setText("Kode");
+        add(jTextField_brugerKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 126, 135, -1));
 
-        jButton1.setText("Hent");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Hent.setText("Hent Bruger");
+        jButton_Hent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_HentActionPerformed(evt);
             }
         });
+        add(jButton_Hent, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 100, -1));
 
-        jButton2.setText("Rediger");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Rediger.setText("Ret Kode!");
+        jButton_Rediger.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton_RedigerActionPerformed(evt);
             }
         });
+        add(jButton_Rediger, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 110, -1));
 
-        jButton_slet.setText("Slet");
-        jButton_slet.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Slet.setText("Slet Bruger");
+        jButton_Slet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_sletActionPerformed(evt);
+                jButton_SletActionPerformed(evt);
             }
         });
+        add(jButton_Slet, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 220, 100, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(583, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField_brugerKode, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_brugerNavn, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(43, 43, 43)
-                                .addComponent(jButton_slet))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))
-                        .addGap(31, 31, 31))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jTextField_brugerNavn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_brugerKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton_slet))
-                .addContainerGap(260, Short.MAX_VALUE))
-        );
+        jLabel_brugerNavn.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel_brugerNavn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_brugerNavn.setText("[Navn]");
+        add(jLabel_brugerNavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 360, 60));
+
+        jTextField_brugerKode2.setText("[Ny kode]");
+        jTextField_brugerKode2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextField_brugerKode2MousePressed(evt);
+            }
+        });
+        jTextField_brugerKode2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_brugerKode2ActionPerformed(evt);
+            }
+        });
+        add(jTextField_brugerKode2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 150, -1));
+
+        jButton_Rediger2.setText("Ret Kode!");
+        jButton_Rediger2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Rediger2ActionPerformed(evt);
+            }
+        });
+        add(jButton_Rediger2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 110, 30));
+
+        jTextField_brugerKodeNu.setText("[Nuværende Kode]");
+        jTextField_brugerKodeNu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextField_brugerKodeNuMousePressed(evt);
+            }
+        });
+        add(jTextField_brugerKodeNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 150, -1));
+
+        jLabel_brugerinfo.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel_brugerinfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_brugerinfo.setText("test");
+        add(jLabel_brugerinfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 490, 110));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-       
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void jComboBox_BrugereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_BrugereActionPerformed
+    }//GEN-LAST:event_jComboBox_BrugereActionPerformed
 
     private void jTextField_brugerNavnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_brugerNavnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_brugerNavnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       valgtebruger = (User) jComboBox1.getSelectedItem();
+    private void jButton_HentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_HentActionPerformed
+        valgtebruger = (User) jComboBox_Brugere.getSelectedItem();
         jTextField_brugerNavn.setText(valgtebruger.getUsername());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton_HentActionPerformed
 
-    private void jButton_sletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_sletActionPerformed
-       try {
-            if(valgtebruger.getUsername().equals("Mahias BejerHolm")){
+    private void jButton_SletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SletActionPerformed
+        try {
+            if (valgtebruger.getUsername().equals("Mahias BejerHolm")) {
                 System.out.println("Admin kan ikke slettes fra systemmet");
-            }else{
-            dbhandler.deleteUser(valgtebruger);
+            } else {
+                dbhandler.deleteUser(valgtebruger);
                 System.out.println("jeg har sleet det her");
             }
         } catch (Exception e) {
-            System.out.println("feg" +e);
+            System.out.println("feg" + e);
         }
 
-    }//GEN-LAST:event_jButton_sletActionPerformed
+    }//GEN-LAST:event_jButton_SletActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      try {
-            if(valgtebruger.getUsername().equals("Bejerholm")){
-                System.out.println("Admin navnet kan ikke rettes på systemmet");
-            }else{
+    private void jButton_RedigerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RedigerActionPerformed
+        try {
+            if (valgtebruger.getUsername().equals("Bejerholm")) {
+                jLabel_brugerinfo.setText("<html><div style=\"text-align: center;\"> <font color='red'>Advarsel!</front><br>Brugernavnet på admin kan ikke rettes på systemmet.</html>");
+                
+            } else {
                 valgtebruger.setPassword(jTextField_brugerKode.getText());
-            dbhandler.editUser(valgtebruger);
-                System.out.println("jeg har rette det her");
+                dbhandler.editUser(valgtebruger);
+                jLabel_brugerinfo.setText("<html><div style=\"text-align: center;\"> <font color='green'>Godkendt!</font> <br>Koderen er nu ændret.</html>");
             }
         } catch (Exception e) {
-            System.out.println("feg" +e);
+            System.out.println("feg" + e);
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton_RedigerActionPerformed
 
+    private void jButton_Rediger2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Rediger2ActionPerformed
+        try {
+            if (user.getPassword().equals(jTextField_brugerKodeNu.getText()) && !user.getPassword().equals(jTextField_brugerKode2.getText())) {
+                user.setPassword(jTextField_brugerKode2.getText());
+                dbhandler.editUser(user);
+                System.out.println("jeg har rettet kodefelt 2");
+                jLabel_brugerinfo.setText("<html><div style=\"text-align: center;\"> <font color='green'>Success!</font> <br>Koderen er nu ændret.</html>");
+            } else {
+                jLabel_brugerinfo.setText("<html><div style=\"text-align: center;\"> <font color='red'>Mislykkedes!</font> <br>Der opstod en fejl ved ændring af kode.<br>Kontroller evt. nuværende kode og sørg for du ikke ændre til din gamle kode.</html>");
+                
+            }
+        } catch (Exception e) {
+            System.out.println("feg" + e);
+        }
+    }//GEN-LAST:event_jButton_Rediger2ActionPerformed
+
+    private void jTextField_brugerKode2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_brugerKode2ActionPerformed
+    }//GEN-LAST:event_jTextField_brugerKode2ActionPerformed
+
+    private void jTextField_brugerKodeNuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_brugerKodeNuMousePressed
+        jTextField_brugerKodeNu.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_brugerKodeNuMousePressed
+
+    private void jTextField_brugerKode2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_brugerKode2MousePressed
+        jTextField_brugerKode2.setText("");
+    }//GEN-LAST:event_jTextField_brugerKode2MousePressed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton_slet;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton jButton_Hent;
+    private javax.swing.JButton jButton_Rediger;
+    private javax.swing.JButton jButton_Rediger2;
+    private javax.swing.JButton jButton_Slet;
+    private javax.swing.JComboBox jComboBox_Brugere;
+    private javax.swing.JLabel jLabel_brugerNavn;
+    private javax.swing.JLabel jLabel_brugerinfo;
     private javax.swing.JTextField jTextField_brugerKode;
+    private javax.swing.JTextField jTextField_brugerKode2;
+    private javax.swing.JTextField jTextField_brugerKodeNu;
     private javax.swing.JTextField jTextField_brugerNavn;
     // End of variables declaration//GEN-END:variables
-
 }
