@@ -24,7 +24,7 @@ public class DatabaseObjectHandler {
 
     public Postnummer getPostnummer(int post_nr) throws SQLException {
         Postnummer postnr = null;
-        String sql = "select post_nr, bynavn from postnummer where post_nr = " + post_nr + ";";
+        String sql = "select post_nr, bynavn from postnummer where post_nr = '" + post_nr + "';";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -52,7 +52,7 @@ public class DatabaseObjectHandler {
     public Kunde getKunde(int tlf) throws SQLException {
         Kunde kunde = null;
         int post_nr = 0;
-        String sql = "select fornavn, efternavn, adresse, tlf, post_nr from kunde where tlf = " + tlf + ";";
+        String sql = "select fornavn, efternavn, adresse, tlf, post_nr from kunde where tlf = '" + tlf + "';";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -96,7 +96,7 @@ public class DatabaseObjectHandler {
         ResultSet rs;
         int post_nr = 0;
         String sql = "select firmanavn, adresse, tlf, cvr_nr, registrerings_nr, konto_nr, bank, post_nr"
-                + " from samarbejdspartner where samarbejdspartner.tlf = " + tlf + ";";
+                + " from samarbejdspartner where samarbejdspartner.tlf = '" + tlf + "';";
         rs = db.getData(sql);
 
         if (rs.next()) {
@@ -143,7 +143,7 @@ public class DatabaseObjectHandler {
 
     public Tom_linje getTomLinje(int id) throws SQLException {
         Tom_linje tomlinje = null;
-        String sql = "select navn, pris, antal, id from tom_linje where id =" + id + ";";
+        String sql = "select navn, pris, antal, id from tom_linje where id ='" + id + "';";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -188,7 +188,7 @@ public class DatabaseObjectHandler {
 
     public Tegntype getTegntype(int id) throws SQLException {
         Tegntype tegntype = null;
-        String sql = "select navn, pris_pr_tegn, id from tegntype where id=" + id;
+        String sql = "select navn, pris_pr_tegn, id from tegntype where id='" + id + "';";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -232,7 +232,7 @@ public class DatabaseObjectHandler {
     public Inskription_linje getInskriptionLinje(int linje_nr, int inskription_id) throws SQLException {
         Inskription_linje inskription_linje = null;
         String sql = "select linje_nr, inskription_id, linje_type, inskription from inskription_linje "
-                + "where linje_nr = " + linje_nr + " and inskription_id = " + inskription_id + ";";
+                + "where linje_nr = " + linje_nr + " and inskription_id = '" + inskription_id + "';";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -274,7 +274,7 @@ public class DatabaseObjectHandler {
 
     public int getMaxInskriptionLinje(int inskription_id) throws SQLException {
         int max = 0;
-        String sql = "select max(linje_nr) from inskription_linje where inskription_id =" + inskription_id + ";";
+        String sql = "select max(linje_nr) from inskription_linje where inskription_id ='" + inskription_id + "';";
         ResultSet rs;
         rs = db.getData(sql);
         if (rs.next()) {
@@ -287,7 +287,7 @@ public class DatabaseObjectHandler {
         Inskription inskription = null;
         int tegn_id = 0;
         Inskription_linje inskription_linje;
-        String sql = "select id, skrifttype, tegn_id from inskription where id=" + id + ";";
+        String sql = "select id, skrifttype, tegn_id from inskription where id = '" + id + "';";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -364,7 +364,7 @@ public class DatabaseObjectHandler {
 
     public Varegruppe getVareGruppe(int grp_nr) throws SQLException {
         Varegruppe varegruppe = null;
-        String sql = "select grp_nr, navn from varegruppe where grp_nr=" + grp_nr + ";";
+        String sql = "select grp_nr, navn from varegruppe where grp_nr = '" + grp_nr + "';";
         ResultSet rs;
 
         rs = db.getData(sql);
@@ -417,7 +417,7 @@ public class DatabaseObjectHandler {
         Vare vare = null;
         int grp_nr = 0;
         String sql = "select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, "
-                + "overflade, dekoration, vareStatus, grp_nr from vare where vare_nr=" + vare_nr + ";";
+                + "overflade, dekoration, vareStatus, grp_nr from vare where vare_nr = '" + vare_nr + "';";
         ResultSet rs;
         rs = db.getData(sql);
 
@@ -451,34 +451,34 @@ public class DatabaseObjectHandler {
                 + "dekoration, vareStatus, grp_nr from vare;";
         ResultSet rs;
         rs = db.getData(sql);
-                    while (rs.next()) {
-                Vare vare = new Vare(
-                        rs.getInt("vare_nr"),
-                        rs.getString("navn"),
-                        rs.getInt("højde"),
-                        rs.getInt("bredde"),
-                        rs.getDouble("indkøbspris"),
-                        rs.getDouble("salgspris"),
-                        rs.getString("typenavn"),
-                        rs.getString("overflade"),
-                        rs.getBoolean("dekoration"),
-                        rs.getInt("vareStatus"),
-                        null);
-                grpList.add(rs.getInt("grp_nr"));
-                vareListe.add(vare);
-            }
-            rs.close();
-            for (int i = 0; i < vareListe.size(); i++) {
-                vareListe.get(i).setGruppe(getVareGruppe(grpList.get(i)));
-            }
-        
+        while (rs.next()) {
+            Vare vare = new Vare(
+                    rs.getInt("vare_nr"),
+                    rs.getString("navn"),
+                    rs.getInt("højde"),
+                    rs.getInt("bredde"),
+                    rs.getDouble("indkøbspris"),
+                    rs.getDouble("salgspris"),
+                    rs.getString("typenavn"),
+                    rs.getString("overflade"),
+                    rs.getBoolean("dekoration"),
+                    rs.getInt("vareStatus"),
+                    null);
+            grpList.add(rs.getInt("grp_nr"));
+            vareListe.add(vare);
+        }
+        rs.close();
+        for (int i = 0; i < vareListe.size(); i++) {
+            vareListe.get(i).setGruppe(getVareGruppe(grpList.get(i)));
+        }
+
         return vareListe;
     }
 
     public ArrayList getVareListe(int grp_nr) throws SQLException {
         ArrayList<Vare> vareListe = new ArrayList();
         String sql = "select vare_nr, navn, højde, bredde, indkøbspris, salgspris, typenavn, overflade, "
-                + "dekoration, vareStatus, grp_nr from vare where grp_nr=" + grp_nr + ";";
+                + "dekoration, vareStatus, grp_nr from vare where grp_nr = '" + grp_nr + "';";
         ResultSet rs;
         Varegruppe varegrp = getVareGruppe(grp_nr);
         rs = db.getData(sql);
@@ -643,8 +643,8 @@ public class DatabaseObjectHandler {
     }
 
     public void updateVareStatus(Vare vare) throws SQLException {
-        db.setData("update Vare set vareStatus = " + vare.getVareStatus() + " where vare_nr = "
-                + vare.getVare_nr() + ";");
+        db.setData("update Vare set vareStatus = '" + vare.getVareStatus() + "' where vare_nr = '"
+                + vare.getVare_nr() + "';");
     }
 
     public int getMaxVareLinje(String ordre_nr) throws SQLException {
@@ -663,7 +663,7 @@ public class DatabaseObjectHandler {
         Vare_linje vare_linje = null;
         int tlf = 0;
         String sql = "select tlf, ordre_nr,ordretype,ordredato,leveringdato,afhentningsdato,bemærkning,bemærkning_ekstra,"
-                + "kirkegård,afdeling,afdødnavn,række,nummer,gravType from ordre where ordre_nr =" + ordre_nr + ";";
+                + "kirkegård,afdeling,afdødnavn,række,nummer,gravType from ordre where ordre_nr = '" + ordre_nr + "';";
         ResultSet rs;
         rs = db.getData(sql);
         if (rs.next()) {
@@ -781,7 +781,7 @@ public class DatabaseObjectHandler {
         int id = 0;
 
         String sql = "select linje_nr, ordre_nr, vare_nr, inskription_id, tom_linje_id "
-                + "from vare_linje where linje_nr = " + linje_nr + " and ordre_nr = " + ordre_nr + ";";
+                + "from vare_linje where linje_nr = '" + linje_nr + "' and ordre_nr = '" + ordre_nr + "';";
         ResultSet rs = db.getData(sql);
 
         if (rs.next()) {
@@ -864,19 +864,19 @@ public class DatabaseObjectHandler {
         //Umulig at lave, brug i stedet deleteVareLinje på alle varelinjer tilhørende
         //ordrenummeret og opret derefter dem igen med createVareLinje
     }
-    
-    public ArrayList<String> getFakturaNumre() throws SQLException{
+
+    public ArrayList<String> getFakturaNumre() throws SQLException {
         ArrayList<String> nrListe = new ArrayList();
         ResultSet rs;
-        rs = db.getData("select faktura_nr from faktura");
-        while(rs.next()){
+        rs = db.getData("select faktura_nr from faktura;");
+        while (rs.next()) {
             nrListe.add(rs.getString("faktura_nr"));
         }
         rs.close();
         return nrListe;
     }
-    
-    public ArrayList<Faktura> getFakturaListe() throws SQLException, ControlException{
+
+    public ArrayList<Faktura> getFakturaListe() throws SQLException, ControlException {
         ArrayList<Faktura> fakturaListe = new ArrayList();
         ArrayList<String> nrListe = getFakturaNumre();
         for (int i = 0; i < nrListe.size(); i++) {
@@ -955,12 +955,12 @@ public class DatabaseObjectHandler {
     }
 
     public void deleteFaktura(Faktura faktura) throws SQLException {
+        db.setData("delete from faktura where faktura_nr = '" + faktura.getFaktura_nr() + "';");
         if (faktura.getFakturatype()) {
             if (getProvisionsseddel(faktura.getProvisionsseddel().getProvisions_nr()) != null) {
                 deleteProvisionsseddel(faktura.getProvisionsseddel());
             }
         }
-        db.setData("delete from faktura where faktura_nr = '" + faktura.getFaktura_nr() + "';");
     }
 
     public void editFaktura(Faktura faktura) throws SQLException, ControlException {

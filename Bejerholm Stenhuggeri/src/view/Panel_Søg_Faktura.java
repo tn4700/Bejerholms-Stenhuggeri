@@ -4,9 +4,11 @@
  */
 package view;
 
+import control.DatabaseObjectHandler;
 import model.Faktura;
 import control.Utility;
 import java.text.NumberFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,11 +16,16 @@ import java.text.NumberFormat;
  */
 public class Panel_Søg_Faktura extends javax.swing.JPanel {
 private Faktura faktura;
+private DatabaseObjectHandler dbhandler;
+private Panel_Søg panel;
+
     /**
      * Creates new form Panel_Søg_Faktura
      */
-    public Panel_Søg_Faktura(Faktura faktura) {
+    public Panel_Søg_Faktura(Faktura faktura, DatabaseObjectHandler dbhandler, Panel_Søg panel) {
+        this.dbhandler = dbhandler;
         this.faktura = faktura;
+        this.panel = panel;
          initComponents();
         jLabel_fakturanr.setText("Faktura nr : " + faktura.getFaktura_nr());
         jLabel_kundenavn.setText(faktura.getOrdre().getKunde().getFornavn() + " " + faktura.getOrdre().getKunde().getEfternavn());
@@ -42,7 +49,6 @@ private Faktura faktura;
         jLabel_fakturanr = new javax.swing.JLabel();
         jLabel_faktdag = new javax.swing.JLabel();
         jLabel_sendtdato = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel_kundenavn = new javax.swing.JLabel();
         jLabel_tlf = new javax.swing.JLabel();
@@ -51,9 +57,12 @@ private Faktura faktura;
         jLabel_visFakDato = new javax.swing.JLabel();
         jLabel_VisSendtDato = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 230, 230));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        setBackground(new java.awt.Color(255, 240, 240));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        setMinimumSize(new java.awt.Dimension(417, 165));
+        setPreferredSize(new java.awt.Dimension(416, 165));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_fakturanr.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -61,17 +70,18 @@ private Faktura faktura;
         add(jLabel_fakturanr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, -1));
 
         jLabel_faktdag.setText("Fakturerings dato:");
-        add(jLabel_faktdag, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 110, -1));
+        add(jLabel_faktdag, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 110, -1));
 
         jLabel_sendtdato.setText("Sendt Dato:");
-        add(jLabel_sendtdato, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 100, -1));
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"))); // NOI18N
-        jButton1.setContentAreaFilled(false);
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 3, 40, 30));
+        add(jLabel_sendtdato, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, -1));
 
         jButton2.setText("Betalt");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 130, 90, -1));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 90, -1));
 
         jLabel_kundenavn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel_kundenavn.setText("Kundenavn");
@@ -81,7 +91,7 @@ private Faktura faktura;
         add(jLabel_tlf, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 140, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(255, 255, 255), new java.awt.Color(204, 204, 204)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         jPanel1.setPreferredSize(new java.awt.Dimension(134, 200));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -94,19 +104,52 @@ private Faktura faktura;
 
         jLabel_visFakDato.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_visFakDato.setText("jLabel1");
-        add(jLabel_visFakDato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 80, -1));
+        add(jLabel_visFakDato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 80, -1));
 
         jLabel_VisSendtDato.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_VisSendtDato.setText("jLabel2");
-        add(jLabel_VisSendtDato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 80, -1));
+        add(jLabel_VisSendtDato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 80, -1));
 
-        jButton3.setText("Se Faktura");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 100, 90, -1));
+        jButton3.setText("Se faktura");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 90, -1));
+
+        jButton4.setText("Rykker");
+        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 90, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    this.setSize(417, 150);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+           int status = JOptionPane.showConfirmDialog(this, "Ændre betalingsstatus til betalt?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+if(status == 1){
+    try {
+             faktura.setBetalingsstatus(true);
+             dbhandler.editFaktura(faktura);
+             panel.hentfakturaer();
+    } catch (Exception e) {
+        System.out.println("Der skete en fejl");
+    }
+
+     
+     
+     
+}
+       
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel_VisSendtDato;
     private javax.swing.JLabel jLabel_bekøb;
     private javax.swing.JLabel jLabel_faktdag;
