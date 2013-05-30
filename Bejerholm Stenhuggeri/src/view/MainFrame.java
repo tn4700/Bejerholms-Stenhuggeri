@@ -18,21 +18,24 @@ public class MainFrame extends javax.swing.JFrame {
 
     private DBConnection db;
     private DatabaseObjectHandler dbhandler;
+    private Panel_OrdreSalg ordresalg;
+    private Panel_LynSalg lynsalg;
+    private Panel_Lager lager;
+    private Panel_Søg søg;
+    private Panel_CSVFiler csv;
+    private Panel_Bruger bruger;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
-                try {
+        try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (Exception e) {
             e.printStackTrace();
         }
         initComponents();
-        this.setLocationRelativeTo(null); 
-
-        
-        
+        this.setLocationRelativeTo(null);
         try {
             db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
 
@@ -43,35 +46,10 @@ public class MainFrame extends javax.swing.JFrame {
 
             dbhandler = new DatabaseObjectHandler(db);
             //Opret det panel som skal vises i framen
-            Panel_OrdreSalg ordresalg = new Panel_OrdreSalg(dbhandler, this);
-            Panel_LynSalg lynsalg = new Panel_LynSalg(dbhandler, this);
-            Panel_Lager lager = new Panel_Lager(dbhandler, this);
-            Panel_Søg søg = new Panel_Søg(dbhandler, this);
-            Panel_CSVFiler csv = new Panel_CSVFiler(db);
-            Panel_Bruger bruger = new Panel_Bruger(db);
+            opretPaneler();
 
-
-            // tilføj det til vores jpanel der skal fremvise det
-            jPanel1.add(ordresalg);
-            jPanel1.add(lynsalg);
-            jPanel1.add(lager);
-            jPanel1.add(søg);
-            jPanel1.add(csv);
-            jPanel1.add(bruger);
-            // Typecast panelet til cardlayout kald metoden addlayout med det panel der skal tilføjes samt en string der navngiver det. 
-            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(ordresalg, "OrdreSalg");
-            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg, "LynSalg");
-            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lager, "Lager");
-            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(søg, "Søg");
-            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(csv, "Csv");
-            ((CardLayout) jPanel1.getLayout()).addLayoutComponent(bruger, "Bruger");
             //   Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
             ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
-
-
-
-
-
 
         } else {
             System.out.println("2");
@@ -251,8 +229,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
-        // TODO add your handling code here:
+        vishovedmenu();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton_BrugerAdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BrugerAdministrationActionPerformed
@@ -340,7 +317,30 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void vishovedmenu() {
         ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
+        opretPaneler();
     }
-    
-    
+
+    public final void opretPaneler() {
+        // opret paneler
+        ordresalg = new Panel_OrdreSalg(dbhandler, this);
+        lynsalg = new Panel_LynSalg(dbhandler, this);
+        lager = new Panel_Lager(dbhandler, this);
+        søg = new Panel_Søg(dbhandler, this);
+        csv = new Panel_CSVFiler(db);
+        bruger = new Panel_Bruger(db);
+        // tilføj det til vores jpanel der skal fremvise det
+        jPanel1.add(ordresalg);
+        jPanel1.add(lynsalg);
+        jPanel1.add(lager);
+        jPanel1.add(søg);
+        jPanel1.add(csv);
+        jPanel1.add(bruger);
+        // Typecast panelet til cardlayout kald metoden addlayout med det panel der skal tilføjes samt en string der navngiver det. 
+        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(ordresalg, "OrdreSalg");
+        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg, "LynSalg");
+        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lager, "Lager");
+        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(søg, "Søg");
+        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(csv, "Csv");
+        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(bruger, "Bruger");
+    }
 }
