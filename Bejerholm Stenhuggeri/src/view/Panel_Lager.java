@@ -2,6 +2,7 @@ package view;
 
 import control.DatabaseObjectHandler;
 import control.Utility;
+import java.awt.Color;
 import java.awt.LayoutManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -31,7 +32,8 @@ public class Panel_Lager extends javax.swing.JPanel {
             getFiltreretVareListe();
             opdaterPanel();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+            vareInfoErrorLabel.setToolTipText(ex.getLocalizedMessage());
         }
     }
 
@@ -322,15 +324,20 @@ public class Panel_Lager extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void filtrerVarelistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrerVarelistButtonActionPerformed
+        if(validerInput()){
+        resetErrorLabels();
         resetInfo();
         getFiltreretVareListe();
         opdaterPanel();
+        }
     }//GEN-LAST:event_filtrerVarelistButtonActionPerformed
 
     private void sletVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sletVareButtonActionPerformed
+        resetErrorLabels();
+        Vare vare = null;
         if (!vareNrTextField.getText().equals("")) {
             try {
-                Vare vare = dbhandler.getVare(Integer.parseInt(vareNrTextField.getText()));
+                vare = dbhandler.getVare(Integer.parseInt(vareNrTextField.getText()));
                 String message = "Er du sikker på at du vil slette varen " + vare.getNavn() + "?";
                 String title = "Bekræft sletning";
                 if (confirmDialog(message, title)) {
@@ -340,12 +347,18 @@ public class Panel_Lager extends javax.swing.JPanel {
                     opdaterPanel();
                 }
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                if (vare == null) {
+                    vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+                    vareInfoErrorLabel.setToolTipText(ex.getLocalizedMessage());
+                } else {
+                    vareInfoErrorLabel.setText("Vare kan ikke slettes, da den bruges i en ordre/faktura.");
+                }
             }
         }
     }//GEN-LAST:event_sletVareButtonActionPerformed
 
     private void redigerVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigerVareButtonActionPerformed
+        resetErrorLabels();
         if (!vareNrTextField.getText().equals("")) {
             try {
                 int vare_nr = Integer.parseInt(vareNrTextField.getText());
@@ -356,12 +369,14 @@ public class Panel_Lager extends javax.swing.JPanel {
                 getFiltreretVareListe();
                 opdaterPanel();
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+                vareInfoErrorLabel.setToolTipText(ex.getMessage());
             }
         }
     }//GEN-LAST:event_redigerVareButtonActionPerformed
 
     private void opretNyVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opretNyVareButtonActionPerformed
+        resetErrorLabels();
         try {
             int max = dbhandler.getMaxVareNr();
             JDialog_OpretVare jDialog = new JDialog_OpretVare(main, true, dbhandler);
@@ -374,7 +389,8 @@ public class Panel_Lager extends javax.swing.JPanel {
                 opdaterPanel();
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+            vareInfoErrorLabel.setToolTipText(ex.getLocalizedMessage());
         }
     }//GEN-LAST:event_opretNyVareButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -464,9 +480,8 @@ public class Panel_Lager extends javax.swing.JPanel {
                     Double.parseDouble(maxPrisTextField.getText()),
                     vareStatusComboBox.getSelectedIndex());
         } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (NumberFormatException ex) {
-            ex.printStackTrace();
+            vareFilterErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+            vareFilterErrorLabel.setToolTipText(ex.getLocalizedMessage());
         }
     }
 
@@ -496,5 +511,98 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareStatusTextField.setText(vare.getVareStatusToString());
         dekorationTextField.setText(vare.getDekorationToString());
         vareGruppeTextField.setText(vare.getGruppe().toString());
+    }
+
+    public void resetErrorLabels() {
+        vareInfoErrorLabel.setText("");
+        vareInfoErrorLabel.setToolTipText("");
+        vareFilterErrorLabel.setText("");
+        vareFilterErrorLabel.setToolTipText("");
+    }
+
+    public void resetLabels() {
+        minimumPrisLabel.setForeground(Color.black);
+        minimumBreddeLabel.setForeground(Color.black);
+        minimumHøjdeLabel.setForeground(Color.black);
+        maxPrisLabel.setForeground(Color.black);
+        maxBreddeLabel.setForeground(Color.black);
+        maxHøjdeLabel.setForeground(Color.black);
+    }
+
+    public boolean validerInput() {
+        boolean valid = true;
+        resetLabels();
+        String error = "Fejl på følgende input: ";
+        boolean isFirst = false;
+
+        try {
+            Integer.parseInt(minHøjdeTextField.getText());
+        } catch (NumberFormatException ex) {
+            minimumHøjdeLabel.setForeground(Color.red);
+            error += minimumHøjdeLabel.getText();
+            isFirst = true;
+            valid = false;
+        }
+        try {
+            Integer.parseInt(maxHøjdeTextField.getText());
+        } catch (NumberFormatException ex) {
+            maxHøjdeLabel.setForeground(Color.red);
+            if (isFirst) {
+                error += ", ";
+            }
+            error += maxHøjdeLabel.getText();
+            isFirst = true;
+            valid = false;
+        }
+        try {
+            Integer.parseInt(minBreddeTextField.getText());
+        } catch (NumberFormatException ex) {
+            minimumBreddeLabel.setForeground(Color.red);
+            if (isFirst) {
+                error += ", ";
+            }
+            error += minimumBreddeLabel.getText();
+            isFirst = true;
+            valid = false;
+        }
+        try {
+            Integer.parseInt(maxBreddeTextField.getText());
+        } catch (NumberFormatException ex) {
+            maxBreddeLabel.setForeground(Color.red);
+            if (isFirst) {
+                error += ", ";
+            }
+            error += maxBreddeLabel.getText();
+            isFirst = true;
+            valid = false;
+        }
+        try {
+            Double.parseDouble(minPrisTextField.getText());
+        } catch (NumberFormatException ex) {
+            minimumPrisLabel.setForeground(Color.red);
+            if (isFirst) {
+                error += ", ";
+            }
+            error += minimumPrisLabel.getText();
+            isFirst = true;
+            valid = false;
+        }
+        try {
+            Double.parseDouble(maxPrisTextField.getText());
+        } catch (NumberFormatException ex) {
+            maxPrisLabel.setForeground(Color.red);
+            if (isFirst) {
+                error += ", ";
+            }
+            error += maxPrisLabel.getText();
+            valid = false;
+        }
+
+        if (!valid) {
+            vareFilterErrorLabel.setText("Fejl i input, hold over denne besked for detaljer.");
+            vareFilterErrorLabel.setToolTipText(error);
+        }
+
+        return valid;
     }
 }

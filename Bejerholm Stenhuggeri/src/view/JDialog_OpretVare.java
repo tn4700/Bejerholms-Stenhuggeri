@@ -308,8 +308,8 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
                         this.dispose();
                     }
                 } catch (SQLException ex) {
-                    ex.printStackTrace();
-
+                    errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+                    errorLabel.setToolTipText(ex.getLocalizedMessage());
                 }
             } else {
                 String message = "Er du sikker på at du vil redigere varen '" + vare.getNavn().replace("\\", "") + "'?";
@@ -320,7 +320,8 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
                         dbhandler.editVare(vare);
                         this.dispose();
                     } catch (SQLException ex) {
-                        ex.printStackTrace();
+                        errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+                        errorLabel.setToolTipText(ex.getLocalizedMessage());
                     }
                 }
             }
@@ -373,7 +374,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         salgsPrisTextField.setText(vare.getSalgspris() + "");
         //Vi kunne ikke nå at lave overflade om til boolean og vores input er kontrolleret 
         //så der er kun Ru og Poleret overflade med mindre der er nogle der laver om i databasen
-        if (vare.getOverflade() == null) {
+        if (vare.getOverflade() == null || vare.getOverflade().equals("")) {
             overFladeComboBox.setSelectedIndex(0);
         } else if (vare.getOverflade().startsWith("R")) {
             overFladeComboBox.setSelectedIndex(1);
@@ -423,7 +424,8 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
                 vælgVareGruppeComboBox.addItem(vareGruppeListe.get(i));
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+            errorLabel.setToolTipText(ex.getLocalizedMessage());
         }
     }
 
@@ -518,11 +520,11 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
                 valid = false;
             }
         }
-            if (!valid) {
-                errorLabel.setText("Fejl i input, hold over denne besked for detaljer.");
-                errorLabel.setToolTipText(error);
-            }
-
-            return valid;
+        if (!valid) {
+            errorLabel.setText("Fejl i input, hold over denne besked for detaljer.");
+            errorLabel.setToolTipText(error);
         }
+
+        return valid;
     }
+}
