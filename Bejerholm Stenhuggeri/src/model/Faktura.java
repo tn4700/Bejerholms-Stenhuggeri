@@ -125,6 +125,11 @@ public class Faktura {
     public void setBetalingsstatus(boolean betalingsstatus) {
         this.betalingsstatus = betalingsstatus;
     }
+
+    @Override
+    public String toString() {
+        return "Faktura{" + "faktura_nr=" + faktura_nr + ", faktureringsdato=" + faktureringsdato + ", vedr\u00f8rende=" + vedrørende + ", sendt_dato=" + sendt_dato + ", faktureringsadresse=" + faktureringsadresse + ", fakturatype=" + fakturatype + ", betalingsstatus=" + betalingsstatus + ", ordre=" + ordre + ", bedemand=" + bedemand + ", provisionsseddel=" + provisionsseddel + '}';
+    }
 /**
  * Denne metode opretter et kontoudtog ud fra en faktura og returner derefter 
  * kontoudtog objektet
@@ -139,9 +144,6 @@ public class Faktura {
        //return kontoudtog;
     //}
 
-    @Override
-    public String toString() {
-        return "Faktura{" + "faktura_nr=" + faktura_nr + ", faktureringsdato=" + faktureringsdato + ", vedr\u00f8rende=" + vedrørende + ", sendt_dato=" + sendt_dato + ", faktureringsadresse=" + faktureringsadresse + ", fakturatype=" + fakturatype + ", betalingsstatus=" + betalingsstatus + ", ordre=" + ordre + ", bedemand=" + bedemand + '}';
-    }
+
     
 }

@@ -69,10 +69,36 @@ public class ObjectHandlerTEST {
             //Opret ordre i databasen
             String ordre_nr = dbhandler.getNextOrdreNr();
             dbhandler.createOrdre(ordre);
+            ordre = dbhandler.getOrdre(ordre_nr);
+            System.out.println(ordre);
+            
+            //Opret bedemand
+            Samarbejdspartner bedemand = new Samarbejdspartner("Firma", "adresse", 12345678, 43534545, 2345, "2342342344", "Bank", pn);
+            
+            //Opret kontoudtog
+            Kontoudtog kontoudtog = new Kontoudtog(null, Utility.getCurrentTime(), Utility.getCurrentTime());
+            
+            //Opret provisionsseddel
+            Provisionsseddel provisionsseddel = new Provisionsseddel(null, Utility.getCurrentTime(), kontoudtog);
+            
+            //Opret faktura
+            Faktura faktura = new Faktura(null,
+            Utility.getCurrentTime(),
+            "ok",
+            Utility.getCurrentTime(),
+            "Lolvej 7",
+            true,
+            false,
+            ordre,
+            bedemand,
+            provisionsseddel);
+            dbhandler.createFaktura(faktura);
+            System.out.println(faktura);
             
             //Opretter ordre pdf
             OpretOrdre opretOrdre = new OpretOrdre(dbhandler.getOrdre(ordre_nr));
             opretOrdre.genererOrdre("OrdreTest.pdf");
+            
             
             //Åbner ordre pdf
             Desktop desktop = Desktop.getDesktop();

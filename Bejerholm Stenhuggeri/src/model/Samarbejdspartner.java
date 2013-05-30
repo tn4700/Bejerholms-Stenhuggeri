@@ -15,11 +15,11 @@ public class Samarbejdspartner {
     private int tlf;
     private int cvr_nr;
     private int registrerings_nr;
-    private int konto_nr;
+    private String konto_nr;
     private String bank;
     private Postnummer post_nr;
 
-    public Samarbejdspartner(String firmanavn,String adresse,int tlf,int cvr_nr,int registrerings_nr,int konto_nr,String bank,Postnummer post_nr) {
+    public Samarbejdspartner(String firmanavn,String adresse,int tlf,int cvr_nr,int registrerings_nr,String konto_nr,String bank,Postnummer post_nr) {
         this.firmanavn = firmanavn;
         this.adresse = adresse;
         this.tlf = tlf;
@@ -71,11 +71,11 @@ public class Samarbejdspartner {
         this.registrerings_nr = registrerings_nr;
     }
 
-    public int getKonto_nr() {
+    public String getKonto_nr() {
         return konto_nr;
     }
 
-    public void setKonto_nr(int konto_nr) {
+    public void setKonto_nr(String konto_nr) {
         this.konto_nr = konto_nr;
     }
 

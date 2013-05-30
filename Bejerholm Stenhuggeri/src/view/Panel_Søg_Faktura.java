@@ -23,6 +23,7 @@ private Panel_Søg panel;
      * Creates new form Panel_Søg_Faktura
      */
     public Panel_Søg_Faktura(Faktura faktura, DatabaseObjectHandler dbhandler, Panel_Søg panel) {
+        
         this.dbhandler = dbhandler;
         this.faktura = faktura;
         this.panel = panel;
@@ -32,7 +33,7 @@ private Panel_Søg panel;
         jLabel_visFakDato.setText(Utility.formatTimestampToString(faktura.getFaktureringsdato()));
         jLabel_VisSendtDato.setText(Utility.formatTimestampToString(faktura.getSendt_dato()));
         jLabel_tlf.setText("Kunde Tlf: " + faktura.getOrdre().getKunde().getTlf());
-       
+        
         jLabel_bekøb.setText(NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getTotalInklMoms()));
        
     }
@@ -128,13 +129,15 @@ private Panel_Søg panel;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
            int status = JOptionPane.showConfirmDialog(this, "Ændre betalingsstatus til betalt?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-if(status == 1){
+if(status == 0){
     try {
+        System.out.println("Fakturastatus" + faktura.getBetalingsstatus());
              faktura.setBetalingsstatus(true);
+             System.out.println("faktura s" + faktura.getBetalingsstatus());
              dbhandler.editFaktura(faktura);
              panel.hentfakturaer();
     } catch (Exception e) {
-        System.out.println("Der skete en fejl");
+        System.out.println("Der skete en fejl" + e );
     }
 
      

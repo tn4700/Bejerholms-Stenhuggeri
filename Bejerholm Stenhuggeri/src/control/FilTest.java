@@ -29,7 +29,9 @@ public class FilTest {
         try {
         db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
         DatabaseObjectHandler dbhandler = new DatabaseObjectHandler(db);
-        faktura = dbhandler.getFaktura("0020332836-00001");
+        faktura = dbhandler.getFaktura("0028931093-00004");
+            System.out.println(faktura);
+            dbhandler.deleteFaktura(faktura);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
