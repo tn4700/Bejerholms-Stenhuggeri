@@ -94,6 +94,8 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareStatusComboBox = new javax.swing.JComboBox();
         vareOverskriftLabel1 = new javax.swing.JLabel();
         vareInfoOverskriftLabel1 = new javax.swing.JLabel();
+        vareFilterErrorLabel = new javax.swing.JLabel();
+        vareInfoErrorLabel = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(800, 500));
         setMinimumSize(new java.awt.Dimension(800, 500));
@@ -271,10 +273,10 @@ public class Panel_Lager extends javax.swing.JPanel {
         maxHøjdeTextField.setText("0");
         vareFilterPanel.add(maxHøjdeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 70, 100, -1));
 
-        minPrisTextField.setText("0");
+        minPrisTextField.setText("0.00");
         vareFilterPanel.add(minPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 44, 100, -1));
 
-        maxPrisTextField.setText("0");
+        maxPrisTextField.setText("0.00");
         vareFilterPanel.add(maxPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 44, 100, -1));
 
         minHøjdeTextField.setText("0");
@@ -309,6 +311,14 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareInfoOverskriftLabel1.setText("Vareinfo");
         vareInfoOverskriftLabel1.setToolTipText("lol");
         add(vareInfoOverskriftLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, -1, -1));
+
+        vareFilterErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
+        vareFilterErrorLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        add(vareFilterErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 320, 20));
+
+        vareInfoErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
+        vareInfoErrorLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        add(vareInfoErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 340, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void filtrerVarelistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrerVarelistButtonActionPerformed
@@ -397,6 +407,7 @@ public class Panel_Lager extends javax.swing.JPanel {
     private javax.swing.JTextField typeNavnTextField;
     private javax.swing.JLabel vareBreddeLabel;
     private javax.swing.JTextField vareBreddeTextField;
+    private javax.swing.JLabel vareFilterErrorLabel;
     private javax.swing.JLabel vareFilterGruppeLabel;
     private javax.swing.JPanel vareFilterPanel;
     private javax.swing.JComboBox vareGruppeComboBox;
@@ -404,6 +415,7 @@ public class Panel_Lager extends javax.swing.JPanel {
     private javax.swing.JTextField vareGruppeTextField;
     private javax.swing.JLabel vareHøjdeLabel;
     private javax.swing.JTextField vareHøjdeTextField;
+    private javax.swing.JLabel vareInfoErrorLabel;
     private javax.swing.JLabel vareInfoOverskriftLabel;
     private javax.swing.JLabel vareInfoOverskriftLabel1;
     private javax.swing.JPanel vareInfoPanel;
@@ -423,8 +435,8 @@ public class Panel_Lager extends javax.swing.JPanel {
     public boolean confirmDialog(String message, String title) {
         boolean accept = false;
         String[] options = new String[]{"Ja", "Nej"};
-        int reply = JOptionPane.showOptionDialog(null, message, title, JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        int reply = JOptionPane.showOptionDialog(this, message, title, JOptionPane.DEFAULT_OPTION,
+                JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (reply == JOptionPane.YES_OPTION) {
             accept = true;
         }
