@@ -106,20 +106,23 @@ public class DatabaseObjectHandler {
                     rs.getInt("tlf"),
                     rs.getInt("cvr_nr"),
                     rs.getInt("registrerings_nr"),
-                    rs.getInt("konto_nr"),
+                    rs.getString("konto_nr"),
                     rs.getString("bank"),
                     null);
             post_nr = rs.getInt("post_nr");
         }
         rs.close();
-        partner.setPost_nr(getPostnummer(post_nr));
+        Postnummer post = getPostnummer(post_nr);
+        if (post != null) {
+            partner.setPost_nr(post);
+        }
         return partner;
     }
 
     public void createSamarbejdspartner(Samarbejdspartner samarbejdspartner) throws SQLException {
         if (getSamarbejdspartner(samarbejdspartner.getTlf()) == null) {
             db.setData("insert into samarbejdspartner(firmanavn,adresse,tlf,cvr_nr,registrerings_nr,"
-                    + "konto_nr,bank,postnr) "
+                    + "konto_nr,bank,post_nr) "
                     + "values('" + samarbejdspartner.getFirmanavn() + "','"
                     + samarbejdspartner.getAdresse() + "','" + samarbejdspartner.getTlf() + "','"
                     + "" + samarbejdspartner.getCvr_nr() + "','" + samarbejdspartner.getRegistrerings_nr()
@@ -135,9 +138,9 @@ public class DatabaseObjectHandler {
         }
         db.setData("update samarbejdspartner set firmanavn = '" + samarbejdspartner.getFirmanavn() + "', adresse = '"
                 + samarbejdspartner.getAdresse() + "', cvr_nr = '" + samarbejdspartner.getCvr_nr()
-                + "', registrerings_nr = " + samarbejdspartner.getRegistrerings_nr() + "', konto_nr = '"
+                + "', registrerings_nr = '" + samarbejdspartner.getRegistrerings_nr() + "', konto_nr = '"
                 + samarbejdspartner.getKonto_nr() + "', bank = '" + samarbejdspartner.getBank()
-                + "', post_nr = " + samarbejdspartner.getPost_nr().getPost_nr() + "' where tlf = '"
+                + "', post_nr = '" + samarbejdspartner.getPost_nr().getPost_nr() + "' where tlf = '"
                 + samarbejdspartner.getTlf() + "';");
     }
 
@@ -736,9 +739,6 @@ public class DatabaseObjectHandler {
         for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
             createVareLinje(ordre.getVare_linjeListe().get(i), ordre_nr);
         }
-
-
-
         return ordre_nr;
     }
 
@@ -927,22 +927,25 @@ public class DatabaseObjectHandler {
 
     public void createFaktura(Faktura faktura) throws SQLException, ControlException {
         String faktura_nr = "00" + faktura.getOrdre().getKunde().getTlf() + "-" + faktura.getOrdre().getOrdre_nr();
-
         if (faktura.getFakturatype()) {
             if (faktura.getBedemand() != null && faktura.getProvisionsseddel() != null) {
-                createSamarbejdspartner(faktura.getBedemand());
-                createProvisionsseddel(faktura.getProvisionsseddel());
+                if (getSamarbejdspartner(faktura.getBedemand().getTlf()) == null) {
+                    createSamarbejdspartner(faktura.getBedemand());
+                } else {
+                    editSamarbejdspartner(faktura.getBedemand());
+                }
+                createProvisionsseddel(faktura.getProvisionsseddel(), faktura.getOrdre().getOrdre_nr());
             } else {
                 throw new ControlException("Ugylige fakturaoplysninger(bedemandsordre men ingen samarbejdspartner og/eller provisionsseddel valgt");
             }
             db.setData("insert into faktura (ordre_nr, faktura_nr, bedemand_tlf, faktureringsdato,"
-                    + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
+                    + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus, provisions_nr)values('"
                     + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
                     + faktura.getBedemand().getTlf() + "','"
                     + faktura.getFaktureringsdato() + "','" + faktura.getVedrørende() + "','"
                     + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse() + "','"
                     + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
-                    + "');");
+                    + "','" + faktura.getOrdre().getOrdre_nr() + "');");
         } else {
             db.setData("insert into faktura (ordre_nr, faktura_nr,faktureringsdato,"
                     + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
@@ -964,14 +967,10 @@ public class DatabaseObjectHandler {
     }
 
     public void editFaktura(Faktura faktura) throws SQLException, ControlException {
+        Faktura newFaktura = faktura;
         Faktura oldFaktura = getFaktura(faktura.getFaktura_nr());
         deleteFaktura(oldFaktura);
-        if (getKunde(faktura.getBedemand().getTlf()) == null) {
-            createSamarbejdspartner(faktura.getBedemand());
-        } else {
-            editSamarbejdspartner(faktura.getBedemand());
-        }
-        createFaktura(faktura);
+        createFaktura(newFaktura);
     }
 
     public String getNextKontoudtogNr() throws SQLException {
@@ -1003,14 +1002,13 @@ public class DatabaseObjectHandler {
         return kontoudtog;
     }
 
-    public void createKontoudtog(Kontoudtog kontoudtog) throws SQLException, ControlException {
-        String kontoudtog_nr = getNextKontoudtogNr();
-        if (getKontoudtog(kontoudtog_nr) == null) {
+    public void createKontoudtog(Kontoudtog kontoudtog, String provisions_nr) throws SQLException, ControlException {
+        if (getKontoudtog(provisions_nr) == null) {
             db.setData("Insert into Kontoudtog(kontoudtog_nr, dato, sendt_dato) values('"
-                    + kontoudtog_nr + "','" + kontoudtog.getDato() + "','"
+                    + provisions_nr + "','" + kontoudtog.getDato() + "','"
                     + kontoudtog.getSendt_dato() + "');");
         } else {
-            throw new ControlException("Et kontoudtog med kontoudtog_nr " + kontoudtog_nr + " findes allerede.");
+            throw new ControlException("Et kontoudtog med kontoudtog_nr " + provisions_nr + " findes allerede.");
         }
     }
 
@@ -1050,28 +1048,27 @@ public class DatabaseObjectHandler {
         return next;
     }
 
-    public void createProvisionsseddel(Provisionsseddel provisionsseddel) throws SQLException, ControlException {
-        String provisions_nr = getNextProvisionsNr();
-        if (getProvisionsseddel(provisions_nr) == null) {
+    public void createProvisionsseddel(Provisionsseddel provisionsseddel, String ordre_nr) throws SQLException, ControlException {
+        if (getProvisionsseddel(ordre_nr) == null) {
             if (provisionsseddel.getKontoudtog() != null) {
-                createKontoudtog(provisionsseddel.getKontoudtog());
+                createKontoudtog(provisionsseddel.getKontoudtog(), ordre_nr);
             } else {
                 throw new ControlException("Ugyldigt provisionsseddel objekt, intet kontoudtog er oprettet.");
             }
             db.setData("Insert into Provisionsseddel(provisions_nr, kontoudtog_nr, dato) values('"
-                    + provisions_nr + "','" + provisions_nr + "','"
+                    + ordre_nr + "','" + ordre_nr + "','"
                     + provisionsseddel.getDato() + "');");
         } else {
-            throw new ControlException("En provisionsseddel med provisions_nr " + provisions_nr + " findes allerede.");
+            throw new ControlException("En provisionsseddel med provisions_nr " + ordre_nr + " findes allerede.");
         }
     }
 
     public void deleteProvisionsseddel(Provisionsseddel provisionsseddel) throws SQLException {
+        db.setData("delete from provisionsseddel where provisions_nr = '"
+                + provisionsseddel.getProvisions_nr() + "';");
         if (getKontoudtog(provisionsseddel.getKontoudtog().getKontoudtog_nr()) != null) {
             deleteKontoudtog(provisionsseddel.getKontoudtog());
         }
-        db.setData("delete from provisionsseddel where provisions_nr = '"
-                + provisionsseddel.getProvisions_nr() + "';");
     }
 
     public User getUser(String username) throws SQLException {
