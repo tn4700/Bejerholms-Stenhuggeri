@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.User;
 
+
 /**
  *
  * @author T
@@ -28,6 +29,7 @@ public class Panel_Bruger extends javax.swing.JPanel {
     private User user;
     private ArrayList<User> userlist;
     User valgtebruger;
+
     /**
      * Creates new form Panel_Bruger
      */
@@ -51,7 +53,7 @@ public class Panel_Bruger extends javax.swing.JPanel {
             jPanel_admin.setVisible(false);
             jPanel_Opretbruger.setVisible(false);
         }
-        jLabel_brugerNavn.setText(""+user);
+        jLabel_brugerNavn.setText("" + user);
     }
 
     /**
@@ -71,16 +73,15 @@ public class Panel_Bruger extends javax.swing.JPanel {
         jTextField_opretGenskrivkode = new javax.swing.JTextField();
         jButton_opret = new javax.swing.JButton();
         jPanel_redigerbruger = new javax.swing.JPanel();
-        jButton_Rediger2 = new javax.swing.JButton();
+        jButton_Redigerret = new javax.swing.JButton();
         jTextField_redigerbrugerKode = new javax.swing.JTextField();
         jTextField_redigerbrugerKodeNu = new javax.swing.JTextField();
         jPanel_admin = new javax.swing.JPanel();
         jComboBox_Brugere = new javax.swing.JComboBox();
-        jButton_Hent = new javax.swing.JButton();
         jTextField_adminbrugerNavn = new javax.swing.JTextField();
         jTextField_adminbrugerKode = new javax.swing.JTextField();
-        jButton_Rediger = new javax.swing.JButton();
-        jButton_Slet = new javax.swing.JButton();
+        jButton_adminret = new javax.swing.JButton();
+        jButton_adminslet = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -127,20 +128,20 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jButton_opretActionPerformed(evt);
             }
         });
-        jPanel_Opretbruger.add(jButton_opret, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+        jPanel_Opretbruger.add(jButton_opret, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
 
         add(jPanel_Opretbruger, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 240, 220));
 
         jPanel_redigerbruger.setBorder(javax.swing.BorderFactory.createTitledBorder("Redigér bruger"));
         jPanel_redigerbruger.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton_Rediger2.setText("Ret Kode!");
-        jButton_Rediger2.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Redigerret.setText("Ret Kode!");
+        jButton_Redigerret.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Rediger2ActionPerformed(evt);
+                jButton_RedigerretActionPerformed(evt);
             }
         });
-        jPanel_redigerbruger.add(jButton_Rediger2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 110, 30));
+        jPanel_redigerbruger.add(jButton_Redigerret, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 90, 30));
 
         jTextField_redigerbrugerKode.setText("[Ny kode]");
         jTextField_redigerbrugerKode.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,15 +164,12 @@ public class Panel_Bruger extends javax.swing.JPanel {
         jPanel_admin.setBorder(javax.swing.BorderFactory.createTitledBorder("Admin bruger redigering"));
         jPanel_admin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel_admin.add(jComboBox_Brugere, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 130, -1));
-
-        jButton_Hent.setText("Hent Bruger");
-        jButton_Hent.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox_Brugere.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_HentActionPerformed(evt);
+                jComboBox_BrugereActionPerformed(evt);
             }
         });
-        jPanel_admin.add(jButton_Hent, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 100, 40));
+        jPanel_admin.add(jComboBox_Brugere, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 130, -1));
 
         jTextField_adminbrugerNavn.setText("Bruger Navn");
         jTextField_adminbrugerNavn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,7 +177,7 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jTextField_adminbrugerNavnMousePressed(evt);
             }
         });
-        jPanel_admin.add(jTextField_adminbrugerNavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 135, -1));
+        jPanel_admin.add(jTextField_adminbrugerNavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 135, -1));
 
         jTextField_adminbrugerKode.setText("[Ny kode]");
         jTextField_adminbrugerKode.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -187,33 +185,28 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jTextField_adminbrugerKodeMousePressed(evt);
             }
         });
-        jPanel_admin.add(jTextField_adminbrugerKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 135, -1));
+        jPanel_admin.add(jTextField_adminbrugerKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 135, -1));
 
-        jButton_Rediger.setText("Ret!");
-        jButton_Rediger.addActionListener(new java.awt.event.ActionListener() {
+        jButton_adminret.setText("Ret!");
+        jButton_adminret.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_RedigerActionPerformed(evt);
+                jButton_adminretActionPerformed(evt);
             }
         });
-        jPanel_admin.add(jButton_Rediger, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 80, -1));
+        jPanel_admin.add(jButton_adminret, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 80, -1));
 
-        jButton_Slet.setText("Slet Bruger");
-        jButton_Slet.addActionListener(new java.awt.event.ActionListener() {
+        jButton_adminslet.setText("Slet Bruger");
+        jButton_adminslet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_SletActionPerformed(evt);
+                jButton_adminsletActionPerformed(evt);
             }
         });
-        jPanel_admin.add(jButton_Slet, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 90, -1));
+        jPanel_admin.add(jButton_adminslet, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 90, -1));
 
         add(jPanel_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 240, 220));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_HentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_HentActionPerformed
-        valgtebruger = (User) jComboBox_Brugere.getSelectedItem();
-        jTextField_adminbrugerNavn.setText(valgtebruger.getUsername());
-    }//GEN-LAST:event_jButton_HentActionPerformed
-
-    private void jButton_SletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SletActionPerformed
+    private void jButton_adminsletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_adminsletActionPerformed
         try {
             if (valgtebruger.getUsername().equals("Mathias Bejerholm")) {
                 jLabel_brugerinfo.setText("<html><head><div style=\"text-align: center;\"> <font color='red'>Advarsel!</front></head><body><br>Brugernavnet på admin kan ikke rettes på systemmet,<br>eller slettes.</body></html>");
@@ -222,17 +215,23 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jComboBox_Brugere.removeItem(valgtebruger);
                 jLabel_brugerinfo.setText("<html><head><div style=\"text-align: center;\"> <font color='green'>Success!</font> </head><body><br>" + jTextField_adminbrugerNavn.getText() + " er slettet fra systemmet.</body></html>");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("fejl ved seltbutton" + e);
             JOptionPane.showMessageDialog(null,
-                    "Der opstod en fejl ved sletning af en bruger\nHusk at 'Hent Bruger' før du sletter/retter.",
-                    "Hov! Beklager fejlen",
+                    "Der opstod en fejl under sletningen af en bruger\nKontrollér evt. der er forbindelse til databasen",
+                    "Hov! Beklager",
+                    JOptionPane.ERROR_MESSAGE);
+        }catch (Exception e) {
+            System.out.println("fejl ved seltbutton" + e);
+            JOptionPane.showMessageDialog(null,
+                    "Der opstod en ukendt fejl ved sletning af en bruger.",
+                    "Hov! Beklager",
                     JOptionPane.ERROR_MESSAGE);
         }
 
-    }//GEN-LAST:event_jButton_SletActionPerformed
+    }//GEN-LAST:event_jButton_adminsletActionPerformed
 
-    private void jButton_RedigerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RedigerActionPerformed
+    private void jButton_adminretActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_adminretActionPerformed
         try {
             if (valgtebruger.getUsername().equals("Bejerholm")) {
                 jLabel_brugerinfo.setText("<html><head><div style=\"text-align: center;\"> <font color='red'>Advarsel!</front></head><body><br>Brugernavnet på admin kan ikke rettes på systemmet.</body></html>");
@@ -242,17 +241,22 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 dbhandler.editUser(valgtebruger);
                 jLabel_brugerinfo.setText("<html><div style=\"text-align: center;\"> <font color='green'>Godkendt!</font><body><br>Koderen er nu ændret.</body></html>");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("fejl ved retbuttonadmin" + e);
             JOptionPane.showMessageDialog(null,
-                    "Der opstod en fejl ved redigering af en bruger\nHusk at 'Hent Bruger' før du sletter/retter.",
-                    "Hov! Beklager fejlen",
+                    "Der opstod en fejl ved redigering af en bruger\nKontrollér evt. du har fordindelse til databasen",
+                    "Hov! Beklager",
+                    JOptionPane.ERROR_MESSAGE);
+        }catch (Exception e) {
+            System.out.println("fejl ved retbuttonadmin" + e);
+            JOptionPane.showMessageDialog(null,
+                    "Der opstod en ukendt fejl ved redigering af en bruger",
+                    "Hov! Beklager",
                     JOptionPane.ERROR_MESSAGE);
         }
+    }//GEN-LAST:event_jButton_adminretActionPerformed
 
-    }//GEN-LAST:event_jButton_RedigerActionPerformed
-
-    private void jButton_Rediger2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Rediger2ActionPerformed
+    private void jButton_RedigerretActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RedigerretActionPerformed
         try {
             if (user.getPassword().equals(jTextField_redigerbrugerKodeNu.getText()) && !user.getPassword().equals(jTextField_redigerbrugerKode.getText())) {
                 user.setPassword(jTextField_redigerbrugerKode.getText());
@@ -263,10 +267,20 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jLabel_brugerinfo.setText("<html><head><div style=\"text-align: center;\"><font color='red'>Mislykkedes!</font></head><body><br>Der opstod en fejl ved ændring af kode.<br>Kontroller evt. nuværende kode og sørg for du ikke ændre til din gamle kode.</body></html>");
 
             }
+        } catch (SQLException e) {
+            System.out.println("fejl sqlexception ved redigerbutton2" + e);
+            JOptionPane.showMessageDialog(null,
+                    "Der opstod en fejl under kommunikationen med databasen\nKontrollér evt. der er forbindelse til Databasen.",
+                    "Hov! Beklager.",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            System.out.println("feg" + e);
+            System.out.println("fejl exception ukendt ved regiderbutton2" + e);
+            JOptionPane.showMessageDialog(null,
+                    "Der opstod en ukendt fejl",
+                    "Hov! Beklager.",
+                    JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton_Rediger2ActionPerformed
+    }//GEN-LAST:event_jButton_RedigerretActionPerformed
 
     private void jTextField_redigerbrugerKodeNuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_redigerbrugerKodeNuMousePressed
         jTextField_redigerbrugerKodeNu.setText("");        // TODO add your handling code here:
@@ -314,18 +328,22 @@ public class Panel_Bruger extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField_opretGenskrivkodeMousePressed
 
     private void jTextField_adminbrugerNavnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_adminbrugerNavnMousePressed
-       jTextField_adminbrugerNavn.setText(""); // TODO add your handling code here:
+        jTextField_adminbrugerNavn.setText(""); // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_adminbrugerNavnMousePressed
 
     private void jTextField_adminbrugerKodeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_adminbrugerKodeMousePressed
         jTextField_adminbrugerKode.setText("");
     }//GEN-LAST:event_jTextField_adminbrugerKodeMousePressed
 
+    private void jComboBox_BrugereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_BrugereActionPerformed
+        valgtebruger = (User) jComboBox_Brugere.getSelectedItem();
+        jTextField_adminbrugerNavn.setText(valgtebruger.getUsername());
+    }//GEN-LAST:event_jComboBox_BrugereActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_Hent;
-    private javax.swing.JButton jButton_Rediger;
-    private javax.swing.JButton jButton_Rediger2;
-    private javax.swing.JButton jButton_Slet;
+    private javax.swing.JButton jButton_Redigerret;
+    private javax.swing.JButton jButton_adminret;
+    private javax.swing.JButton jButton_adminslet;
     private javax.swing.JButton jButton_opret;
     private javax.swing.JComboBox jComboBox_Brugere;
     private javax.swing.JLabel jLabel_brugerNavn;
