@@ -76,7 +76,9 @@ public class MainFrame extends javax.swing.JFrame {
         } else {
             System.out.println("2");
             Panel_DBConnect dbConnect = new Panel_DBConnect();
+            ((CardLayout) jPanel1.getLayout()).show(jPanel1, "DBConn");
             jPanel1.add(dbConnect);
+            ((CardLayout) jPanel1.getLayout()).show(jPanel1, "DBConn");
         }
     }
 
