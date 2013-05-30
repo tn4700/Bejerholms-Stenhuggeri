@@ -29,6 +29,7 @@ public class MainFrame extends javax.swing.JFrame {
             e.printStackTrace();
         }
         initComponents();
+        this.setLocationRelativeTo(null); 
 
         
         
@@ -340,4 +341,6 @@ public class MainFrame extends javax.swing.JFrame {
     public void vishovedmenu() {
         ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
     }
+    
+    
 }
