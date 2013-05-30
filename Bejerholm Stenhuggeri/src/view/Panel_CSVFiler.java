@@ -9,6 +9,7 @@ import control.DatabaseObjectHandler;
 import control.ExportToCSV;
 import java.awt.Desktop;
 import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -77,13 +78,22 @@ public class Panel_CSVFiler extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            ExportToCSV.export(db);
-            jLabel1.setText("<html><div style=\"text-align: center;\"> <font color='green'>Exporteret korrekt</font> <br>Filerne kan ses på localstien '\\CSVFiler'</html>");
-            File myfile = new File("/tmp/");
-            String path = myfile.getAbsolutePath();
-            File dir = new File(path.substring(0, path.lastIndexOf(File.separator)));
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().open(dir);
+            int status;
+            status = JOptionPane.showConfirmDialog(null,
+                    "Vil du åbne mappen til CSVFilerne nu?", "CSV", JOptionPane.YES_NO_OPTION);
+            if (status != JOptionPane.YES_OPTION) {
+                ExportToCSV.export(db);
+                jLabel1.setText("<html><head><div style=\"text-align: center;\"> <font color='green'>Exporteret korrekt</font> </head><body><br>Filerne kan ses på localstien '\\CSVFiler'</body></html>");
+            } else {
+                ExportToCSV.export(db);
+                jLabel1.setText("<html><head><div style=\"text-align: center;\"> <font color='green'>Exporteret korrekt</font></head><body><br>Filerne ligger i mappen'CSVfiler'</body></html>");
+                File myfile = new File("/tmp/");
+                String path = myfile.getAbsolutePath();
+                File dir = new File(path.substring(0, path.lastIndexOf(File.separator)));
+                System.out.println(dir);
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(dir);
+                }
             }
         } catch (Exception e) {
             jLabel1.setText("<html><div style=\"text-align: center;\"><font color='red'>Fejl ved exportering</font> <br>Undersøg evt. om filen '\\CSVFiler' har funktionen skrivebeskyttelse slået fra i instillinger.</html>");
