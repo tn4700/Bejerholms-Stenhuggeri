@@ -39,7 +39,7 @@ private DatabaseObjectHandler dbhandler;
         setPreferredSize(new java.awt.Dimension(800, 500));
 
         jButton2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButton2.setText("Export");
+        jButton2.setText("Tryk for Exportér filer");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
