@@ -32,7 +32,7 @@ public class ExportToCSV {
                 tableNameList.add(res.getString(1));
             }
             //Stien hvor man gemmer filerne hen til
-            String filename = "C:/CSVfiler/";
+            String filename = "CSVfiler/";
             File file = new File(filename);
             if (!file.exists()) {
                 file.mkdir();

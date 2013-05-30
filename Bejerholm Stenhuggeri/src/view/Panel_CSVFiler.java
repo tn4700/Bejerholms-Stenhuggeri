@@ -7,14 +7,18 @@ package view;
 import control.DBConnection;
 import control.DatabaseObjectHandler;
 import control.ExportToCSV;
+import java.awt.Desktop;
+import java.io.File;
 
 /**
  *
  * @author T
  */
 public class Panel_CSVFiler extends javax.swing.JPanel {
-private DBConnection db;
-private DatabaseObjectHandler dbhandler;
+
+    private DBConnection db;
+    private DatabaseObjectHandler dbhandler;
+
     /**
      * Creates new form Panel_CSVFiler
      */
@@ -74,14 +78,19 @@ private DatabaseObjectHandler dbhandler;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             ExportToCSV.export(db);
-            jLabel1.setText("<html><div style=\"text-align: center;\"> <font color='green'>Exporteret korrekt</font> <br>Filerne kan ses på stien 'C:\\CSVFiler'</html>");
+            jLabel1.setText("<html><div style=\"text-align: center;\"> <font color='green'>Exporteret korrekt</font> <br>Filerne kan ses på localstien '\\CSVFiler'</html>");
+            File myfile = new File("/tmp/");
+            String path = myfile.getAbsolutePath();
+            File dir = new File(path.substring(0, path.lastIndexOf(File.separator)));
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(dir);
+            }
         } catch (Exception e) {
-            jLabel1.setText("<html><div style=\"text-align: center;\"><font color='red'>Fejl ved exportering</font> <br>Undersøg evt. om filen 'C:\\CSVFiler' har funktionen skrivebeskyttelse slået fra i instillinger.</html>");
-            System.out.println("Fejl ved csvfiler button export" +e);
+            jLabel1.setText("<html><div style=\"text-align: center;\"><font color='red'>Fejl ved exportering</font> <br>Undersøg evt. om filen '\\CSVFiler' har funktionen skrivebeskyttelse slået fra i instillinger.</html>");
+            System.out.println("Fejl ved csvfiler button export" + e);
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
