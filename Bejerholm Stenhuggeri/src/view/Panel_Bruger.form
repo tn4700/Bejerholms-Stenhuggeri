@@ -26,7 +26,7 @@
     <Component class="javax.swing.JLabel" name="jLabel_brugerNavn">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="sansserif" size="18" style="0"/>
+          <Font name="Verdana" size="18" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="[Navn]"/>
@@ -73,7 +73,6 @@
             <Property name="text" type="java.lang.String" value="[V&#xe6;lg bruger navn]"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_opretV&#xe6;lgbrugernavnMouseClicked"/>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_opretV&#xe6;lgbrugernavnMousePressed"/>
           </Events>
           <Constraints>
@@ -87,7 +86,6 @@
             <Property name="text" type="java.lang.String" value="[Kode]"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_opretKodeMouseClicked"/>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_opretKodeMousePressed"/>
           </Events>
           <Constraints>
@@ -101,7 +99,6 @@
             <Property name="text" type="java.lang.String" value="[genskriv kode]"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_opretGenskrivkodeMouseClicked"/>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_opretGenskrivkodeMousePressed"/>
           </Events>
           <Constraints>
@@ -156,13 +153,12 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField_brugerKode2">
+        <Component class="javax.swing.JTextField" name="jTextField_redigerbrugerKode">
           <Properties>
             <Property name="text" type="java.lang.String" value="[Ny kode]"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_brugerKode2MousePressed"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_brugerKode2ActionPerformed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_redigerbrugerKodeMousePressed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -170,12 +166,12 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField_brugerKodeNu">
+        <Component class="javax.swing.JTextField" name="jTextField_redigerbrugerKodeNu">
           <Properties>
             <Property name="text" type="java.lang.String" value="[Nuv&#xe6;rende Kode]"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_brugerKodeNuMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_redigerbrugerKodeNuMousePressed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -209,10 +205,6 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="componentRemoved" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="jComboBox_BrugereComponentRemoved"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox_BrugereActionPerformed"/>
-          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="60" y="20" width="130" height="-1"/>
@@ -232,12 +224,12 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField_brugerNavn">
+        <Component class="javax.swing.JTextField" name="jTextField_adminbrugerNavn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Bruger Navn"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_brugerNavnActionPerformed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_adminbrugerNavnMousePressed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -245,10 +237,13 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField_brugerKode">
+        <Component class="javax.swing.JTextField" name="jTextField_adminbrugerKode">
           <Properties>
             <Property name="text" type="java.lang.String" value="[Ny kode]"/>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextField_adminbrugerKodeMousePressed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="50" y="140" width="135" height="-1"/>
