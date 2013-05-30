@@ -7,6 +7,7 @@ package view;
 import control.DBConnection;
 import control.DatabaseObjectHandler;
 import java.awt.CardLayout;
+import javax.swing.UIManager;
 import model.Vare;
 
 /**
@@ -22,7 +23,15 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
+                try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         initComponents();
+
+        
+        
         try {
             db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
 
@@ -227,7 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton_AdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministrationActionPerformed
-            ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Administration");
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Administration");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_AdministrationActionPerformed
 
@@ -320,6 +329,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Hovedmenu;
     private javax.swing.JPanel jPanel_Salg;
     // End of variables declaration//GEN-END:variables
+
     public void skiftcard(Vare vare) {
         Panel_LynSalg lynsalg_ordre = new Panel_LynSalg(dbhandler, vare);
         jPanel1.add(lynsalg_ordre);
