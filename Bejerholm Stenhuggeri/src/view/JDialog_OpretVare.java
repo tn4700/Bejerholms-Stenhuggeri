@@ -5,6 +5,7 @@
 package view;
 
 import control.DatabaseObjectHandler;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -29,68 +30,23 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         super(parent, modal);
         dialogType = true;
         this.dbhandler = dbhandler;
-        this.setLocationRelativeTo(parent);
         this.setTitle("Opret vare");
         initComponents();
         fyldGruppeListe();
-        /* Set the Nimbus look and feel */ //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-                /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialog_OpretVare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialog_OpretVare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialog_OpretVare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialog_OpretVare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        this.setLocationRelativeTo(parent);
     }
 
     public JDialog_OpretVare(java.awt.Frame parent, boolean modal, DatabaseObjectHandler dbhandler, Vare vare) {
         super(parent, modal);
         dialogType = false;
-        this.setLocationRelativeTo(parent);
         this.setTitle("Rediger vare");
         this.dbhandler = dbhandler;
         this.vare = vare;
         initComponents();
+        this.setLocationRelativeTo(parent);
         enterInfo(vare);
         fyldGruppeListe();
         vælgVareGruppeComboBox.setSelectedIndex(vare.getGruppe().getGrp_nr() - 1);
-
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialog_OpretVare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialog_OpretVare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialog_OpretVare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialog_OpretVare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
     }
 
     /**
@@ -126,6 +82,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         overFladeComboBox = new javax.swing.JComboBox();
         dekorationComboBox = new javax.swing.JComboBox();
         vareStatusComboBox = new javax.swing.JComboBox();
+        errorLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -298,24 +255,31 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        errorLabel.setForeground(new java.awt.Color(255, 0, 0));
+        errorLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(vareInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
-                        .addComponent(vareInfoOverskriftLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(vareInfoOverskriftLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(vareInfoOverskriftLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(vareInfoOverskriftLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(vareInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -332,30 +296,33 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
     }//GEN-LAST:event_annullerButtonActionPerformed
 
     private void opretVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opretVareButtonActionPerformed
-        if (dialogType) {
-            try {
-                vare = new Vare(0, null, 0, 0, 0, 0, null, null, false, 0, null);
-                setVare();
-                String message = "Er du sikker på at du vil oprette varen '" + vare.getNavn() + "'?";
-                boolean accept = confirmDialog(message, "Bekræft oprettelse");
-                if (accept) {
-                    dbhandler.createVare(vare);
-                    this.dispose();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-
-            }
-        } else {
-            String message = "Er du sikker på at du vil redigere varen '" + vare.getNavn() + "'?";
-            boolean accept = confirmDialog(message, "Bekræft redigering");
-            if (accept) {
-                setVare();
+        if (validerInput()) {
+            if (dialogType) {
                 try {
-                    dbhandler.editVare(vare);
-                    this.dispose();
+                    vare = new Vare(0, null, 0, 0, 0, 0, null, null, false, 0, null);
+                    setVare();
+                    String message = "Er du sikker på at du vil oprette varen '" + vare.getNavn().replace("\\", "") + "'?";
+                    boolean accept = confirmDialog(message, "Bekræft oprettelse");
+                    if (accept) {
+                        dbhandler.createVare(vare);
+                        this.dispose();
+                    }
                 } catch (SQLException ex) {
-                    ex.printStackTrace();
+                    errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+                    errorLabel.setToolTipText(ex.getLocalizedMessage());
+                }
+            } else {
+                String message = "Er du sikker på at du vil redigere varen '" + vare.getNavn().replace("\\", "") + "'?";
+                boolean accept = confirmDialog(message, "Bekræft redigering");
+                if (accept) {
+                    setVare();
+                    try {
+                        dbhandler.editVare(vare);
+                        this.dispose();
+                    } catch (SQLException ex) {
+                        errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+                        errorLabel.setToolTipText(ex.getLocalizedMessage());
+                    }
                 }
             }
         }
@@ -364,6 +331,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
     private javax.swing.JButton annullerButton;
     private javax.swing.JComboBox dekorationComboBox;
     private javax.swing.JLabel dekorationLabel;
+    private javax.swing.JLabel errorLabel;
     private javax.swing.JLabel indkøbsPrisLabel;
     private javax.swing.JTextField indkøbsPrisTextField;
     private javax.swing.JButton opretVareButton;
@@ -390,8 +358,8 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
     public boolean confirmDialog(String message, String title) {
         boolean accept = false;
         String[] options = new String[]{"Ja", "Nej"};
-        int reply = JOptionPane.showOptionDialog(null, message, title, JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        int reply = JOptionPane.showOptionDialog(this, message, title, JOptionPane.DEFAULT_OPTION,
+                JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (reply == JOptionPane.YES_OPTION) {
             accept = true;
         }
@@ -406,7 +374,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         salgsPrisTextField.setText(vare.getSalgspris() + "");
         //Vi kunne ikke nå at lave overflade om til boolean og vores input er kontrolleret 
         //så der er kun Ru og Poleret overflade med mindre der er nogle der laver om i databasen
-        if (vare.getOverflade() == null) {
+        if (vare.getOverflade() == null || vare.getOverflade().equals("")) {
             overFladeComboBox.setSelectedIndex(0);
         } else if (vare.getOverflade().startsWith("R")) {
             overFladeComboBox.setSelectedIndex(1);
@@ -423,7 +391,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
     }
 
     public void setVare() {
-        vare.setNavn(vareNavnTextField.getText().trim());
+        vare.setNavn(vareNavnTextField.getText().trim().replace("'", "\\'"));
         vare.setIndkøbspris(Double.parseDouble(indkøbsPrisTextField.getText()));
         vare.setSalgspris(Double.parseDouble(salgsPrisTextField.getText()));
         vare.setBredde(Integer.parseInt(vareBreddeTextField.getText()));
@@ -431,7 +399,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         if (typeNavnTextField.getText().equals("")) {
             vare.setTypenavn("");
         } else {
-            vare.setTypenavn(typeNavnTextField.getText().trim());
+            vare.setTypenavn(typeNavnTextField.getText().trim().replace("'", "\\'"));
         }
         vare.setVareStatus(vareStatusComboBox.getSelectedIndex());
         if (dekorationComboBox.getSelectedIndex() == 0) {
@@ -456,7 +424,110 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
                 vælgVareGruppeComboBox.addItem(vareGruppeListe.get(i));
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+            errorLabel.setToolTipText(ex.getLocalizedMessage());
         }
+    }
+
+    public void resetLabels() {
+        vareNavnLabel.setForeground(Color.black);
+        vareBreddeLabel.setForeground(Color.black);
+        vareHøjdeLabel.setForeground(Color.black);
+        indkøbsPrisLabel.setForeground(Color.black);
+        salgsPrisLabel.setForeground(Color.black);
+        typeNavnLabel.setForeground(Color.black);
+        errorLabel.setText("");
+    }
+
+    public String validerString(String string) {
+        String newString = string.replace("\\", "");
+        return newString;
+    }
+
+    public boolean validerInput() {
+        boolean valid = true;
+        resetLabels();
+        String error = "Fejl på følgende input: ";
+        boolean isFirst = false;
+
+        if (vareNavnTextField.getText().equals("")) {
+            vareNavnLabel.setForeground(Color.red);
+            error += vareNavnLabel.getText();
+            valid = false;
+            isFirst = true;
+        } else {
+            String old = vareNavnTextField.getText();
+            String news = validerString(vareNavnTextField.getText().trim());
+            if (!old.equals(news)) {
+                vareNavnTextField.setText(validerString(vareNavnTextField.getText().trim()));
+                vareNavnLabel.setForeground(Color.red);
+                error += vareNavnLabel.getText() + "(Fjernet specialtegn)";
+                valid = false;
+                isFirst = true;
+            }
+        }
+        try {
+            Integer.parseInt(vareBreddeTextField.getText());
+        } catch (NumberFormatException ex) {
+            vareBreddeLabel.setForeground(Color.red);
+            if (isFirst) {
+                error += ", ";
+            }
+            error += vareBreddeLabel.getText();
+            isFirst = true;
+            valid = false;
+        }
+        try {
+            Integer.parseInt(vareHøjdeTextField.getText());
+        } catch (NumberFormatException ex) {
+            vareHøjdeLabel.setForeground(Color.red);
+            if (isFirst) {
+                error += ", ";
+            }
+            error += vareHøjdeLabel.getText();
+            isFirst = true;
+            valid = false;
+        }
+        try {
+            Double.parseDouble(indkøbsPrisTextField.getText());
+        } catch (NumberFormatException ex) {
+            indkøbsPrisLabel.setForeground(Color.red);
+            if (isFirst) {
+                error += ", ";
+            }
+            error += indkøbsPrisLabel.getText();
+            isFirst = true;
+            valid = false;
+        }
+        try {
+            Double.parseDouble(salgsPrisTextField.getText());
+        } catch (NumberFormatException ex) {
+            salgsPrisLabel.setForeground(Color.red);
+            if (isFirst) {
+                error += ", ";
+            }
+            error += salgsPrisLabel.getText();
+            valid = false;
+            isFirst = true;
+        }
+        if (!typeNavnTextField.getText().equals("")) {
+            String old = typeNavnTextField.getText();
+            String news = validerString(typeNavnTextField.getText().trim());
+            if (!old.equals(news)) {
+                typeNavnTextField.setText(validerString(typeNavnTextField.getText().trim()));
+                if (isFirst) {
+                    error += ", ";
+                }
+                typeNavnLabel.setForeground(Color.red);
+                error += typeNavnLabel.getText() + "(Fjernet specialtegn)";
+                valid = false;
+            }
+        }
+        if (!valid) {
+            errorLabel.setText("Fejl i input, hold over denne besked for detaljer.");
+            errorLabel.setToolTipText(error);
+        }
+
+        return valid;
     }
 }
