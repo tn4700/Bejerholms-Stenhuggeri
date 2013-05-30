@@ -30,20 +30,20 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         super(parent, modal);
         dialogType = true;
         this.dbhandler = dbhandler;
-        this.setLocationRelativeTo(parent);
         this.setTitle("Opret vare");
         initComponents();
         fyldGruppeListe();
+        this.setLocationRelativeTo(parent);
     }
 
     public JDialog_OpretVare(java.awt.Frame parent, boolean modal, DatabaseObjectHandler dbhandler, Vare vare) {
         super(parent, modal);
         dialogType = false;
-        this.setLocationRelativeTo(parent);
         this.setTitle("Rediger vare");
         this.dbhandler = dbhandler;
         this.vare = vare;
         initComponents();
+        this.setLocationRelativeTo(parent);
         enterInfo(vare);
         fyldGruppeListe();
         vælgVareGruppeComboBox.setSelectedIndex(vare.getGruppe().getGrp_nr() - 1);
@@ -435,6 +435,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         vareHøjdeLabel.setForeground(Color.black);
         indkøbsPrisLabel.setForeground(Color.black);
         salgsPrisLabel.setForeground(Color.black);
+        typeNavnLabel.setForeground(Color.black);
         errorLabel.setText("");
     }
 
@@ -459,6 +460,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
             String news = validerString(vareNavnTextField.getText().trim());
             if (!old.equals(news)) {
                 vareNavnTextField.setText(validerString(vareNavnTextField.getText().trim()));
+                vareNavnLabel.setForeground(Color.red);
                 error += vareNavnLabel.getText() + "(Fjernet specialtegn)";
                 valid = false;
                 isFirst = true;
@@ -516,6 +518,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
                 if (isFirst) {
                     error += ", ";
                 }
+                typeNavnLabel.setForeground(Color.red);
                 error += typeNavnLabel.getText() + "(Fjernet specialtegn)";
                 valid = false;
             }
