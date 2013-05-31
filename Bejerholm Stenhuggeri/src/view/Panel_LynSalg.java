@@ -551,13 +551,17 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_godkendActionPerformed
 
     private void jButton_AnnullerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AnnullerActionPerformed
-        vare_list = new ArrayList();
+               int status = JOptionPane.showConfirmDialog(this, "Ønsker du at annullere ordren?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+if(status ==0 ){
+      vare_list = new ArrayList();
         valgteVare_lynsalg = new ArrayList();
         panel = new ArrayList();
        jPanel_OversigtVarer.removeAll();
        jPanel_VareLinjer.removeAll();
        udregnpris();
        frame.vishovedmenu();
+}
+      
 
 
 
