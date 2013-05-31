@@ -16,7 +16,7 @@ import model.Varegruppe;
  *
  * @author NiklasRenner
  */
-public class JDialog_OpretVare extends javax.swing.JDialog {
+public class JDialog_LagerVare extends javax.swing.JDialog {
 
     private Boolean dialogType;
     private ArrayList<Varegruppe> vareGruppeListe;
@@ -26,7 +26,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
     /**
      * Creates new form JDialog_OpretVare
      */
-    public JDialog_OpretVare(java.awt.Frame parent, boolean modal, DatabaseObjectHandler dbhandler) {
+    public JDialog_LagerVare(java.awt.Frame parent, boolean modal, DatabaseObjectHandler dbhandler) {
         super(parent, modal);
         dialogType = true;
         this.dbhandler = dbhandler;
@@ -36,7 +36,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         this.setLocationRelativeTo(parent);
     }
 
-    public JDialog_OpretVare(java.awt.Frame parent, boolean modal, DatabaseObjectHandler dbhandler, Vare vare) {
+    public JDialog_LagerVare(java.awt.Frame parent, boolean modal, DatabaseObjectHandler dbhandler, Vare vare) {
         super(parent, modal);
         dialogType = false;
         this.setTitle("Rediger vare");
@@ -44,7 +44,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         this.vare = vare;
         initComponents();
         this.setLocationRelativeTo(parent);
-        enterInfo(vare);
+        enterVareInfo(vare);
         fyldGruppeListe();
         vælgVareGruppeComboBox.setSelectedIndex(vare.getGruppe().getGrp_nr() - 1);
     }
@@ -289,20 +289,20 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void annullerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annullerButtonActionPerformed
-        boolean accept = confirmDialog("Er du sikker på at du vil annullere?", "Annuller ændring");
+        boolean accept = visAcceptDialog("Er du sikker på at du vil annullere?", "Annuller ændring");
         if (accept) {
             this.dispose();
         }
     }//GEN-LAST:event_annullerButtonActionPerformed
 
     private void opretVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opretVareButtonActionPerformed
-        if (validerInput()) {
+        if (validerVareInput()) {
             if (dialogType) {
                 try {
                     vare = new Vare(0, null, 0, 0, 0, 0, null, null, false, 0, null);
                     setVare();
                     String message = "Er du sikker på at du vil oprette varen '" + vare.getNavn().replace("\\", "") + "'?";
-                    boolean accept = confirmDialog(message, "Bekræft oprettelse");
+                    boolean accept = visAcceptDialog(message, "Bekræft oprettelse");
                     if (accept) {
                         dbhandler.createVare(vare);
                         this.dispose();
@@ -313,7 +313,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
                 }
             } else {
                 String message = "Er du sikker på at du vil redigere varen '" + vare.getNavn().replace("\\", "") + "'?";
-                boolean accept = confirmDialog(message, "Bekræft redigering");
+                boolean accept = visAcceptDialog(message, "Bekræft redigering");
                 if (accept) {
                     setVare();
                     try {
@@ -355,7 +355,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
     private javax.swing.JComboBox vælgVareGruppeComboBox;
     // End of variables declaration//GEN-END:variables
 
-    public boolean confirmDialog(String message, String title) {
+    public boolean visAcceptDialog(String message, String title) {
         boolean accept = false;
         String[] options = new String[]{"Ja", "Nej"};
         int reply = JOptionPane.showOptionDialog(this, message, title, JOptionPane.DEFAULT_OPTION,
@@ -366,7 +366,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         return accept;
     }
 
-    public final void enterInfo(Vare vare) {
+    public final void enterVareInfo(Vare vare) {
         vareNavnTextField.setText(vare.getNavn());
         vareBreddeTextField.setText(vare.getBredde() + "");
         vareHøjdeTextField.setText(vare.getHøjde() + "");
@@ -429,7 +429,7 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         }
     }
 
-    public void resetLabels() {
+    public void resetErrors() {
         vareNavnLabel.setForeground(Color.black);
         vareBreddeLabel.setForeground(Color.black);
         vareHøjdeLabel.setForeground(Color.black);
@@ -444,9 +444,9 @@ public class JDialog_OpretVare extends javax.swing.JDialog {
         return newString;
     }
 
-    public boolean validerInput() {
+    public boolean validerVareInput() {
         boolean valid = true;
-        resetLabels();
+        resetErrors();
         String error = "Fejl på følgende input: ";
         boolean isFirst = false;
 

@@ -42,7 +42,7 @@ public class OpretProvisionsseddelPDF {
         //Faktura oprettes
         
         //Faktura faktura = new Faktura(faktura_nr, currentTime, "Torsten vedrørendesen", currentTime, "Faktureringsvej 15", true, false, ordre, null);
-        Samarbejdspartner bedemand = new Samarbejdspartner("Bedemand Jensen", "Bellisvej 1", 12345678, 123456, 6070, 4825318, "Danske Bank", postnummer);
+        Samarbejdspartner bedemand = new Samarbejdspartner("Bedemand Jensen", "Bellisvej 1", 12345678, 123456, 6070, "4825318", "Danske Bank", postnummer);
         //faktura.setBedemand(bedemand);
         
         //Provisionsseddel provisionsseddel = new Provisionsseddel(11, currentTime, faktura_nr, "Dags Dato", faktura);

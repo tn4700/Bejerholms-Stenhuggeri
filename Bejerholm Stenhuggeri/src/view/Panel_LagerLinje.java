@@ -40,53 +40,53 @@ public class Panel_LagerLinje extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        varePanel = new javax.swing.JPanel();
         vareNavnLabel = new javax.swing.JLabel();
         vareDimensionLabel = new javax.swing.JLabel();
         varePrisLabel = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(245, 245, 245));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153)));
-        jPanel1.setMaximumSize(new java.awt.Dimension(300, 50));
-        jPanel1.setMinimumSize(new java.awt.Dimension(300, 50));
-        jPanel1.setPreferredSize(new java.awt.Dimension(300, 50));
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        varePanel.setBackground(new java.awt.Color(245, 245, 245));
+        varePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153)));
+        varePanel.setMaximumSize(new java.awt.Dimension(300, 50));
+        varePanel.setMinimumSize(new java.awt.Dimension(300, 50));
+        varePanel.setPreferredSize(new java.awt.Dimension(300, 50));
+        varePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jPanel1MouseReleased(evt);
+                varePanelMouseReleased(evt);
             }
         });
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        varePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         vareNavnLabel.setText("navn");
-        jPanel1.add(vareNavnLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, -1));
+        varePanel.add(vareNavnLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, -1));
 
         vareDimensionLabel.setText("dimensioner");
-        jPanel1.add(vareDimensionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 130, -1));
+        varePanel.add(vareDimensionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 130, -1));
 
         varePrisLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         varePrisLabel.setText("pris");
-        jPanel1.add(varePrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 90, 50));
+        varePanel.add(varePrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 90, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(varePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(varePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
-        panel_lager.enterInfo(vare);
-    }//GEN-LAST:event_jPanel1MouseReleased
+    private void varePanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_varePanelMouseReleased
+        panel_lager.enterVareInfo(vare);
+    }//GEN-LAST:event_varePanelMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel vareDimensionLabel;
     private javax.swing.JLabel vareNavnLabel;
+    private javax.swing.JPanel varePanel;
     private javax.swing.JLabel varePrisLabel;
     // End of variables declaration//GEN-END:variables
 }

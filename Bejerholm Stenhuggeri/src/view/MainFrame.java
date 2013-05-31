@@ -189,6 +189,7 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "OrdreSalg", "LynSalg" }));
+        jComboBox2.setOpaque(false);
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -197,6 +198,7 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 160, -1));
 
         jButton7.setText("Hovedmenu");
+        jButton7.setOpaque(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);

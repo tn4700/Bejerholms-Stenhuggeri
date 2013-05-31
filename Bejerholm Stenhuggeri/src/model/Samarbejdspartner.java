@@ -25,7 +25,7 @@ public class Samarbejdspartner {
         this.tlf = tlf;
         this.cvr_nr = cvr_nr;
         this.registrerings_nr = registrerings_nr;
-        this.konto_nr = konto_nr;
+        this.konto_nr = get10CharKontoNr(konto_nr);
         this.bank = bank;
         this.post_nr = post_nr;
 
@@ -76,7 +76,7 @@ public class Samarbejdspartner {
     }
 
     public void setKonto_nr(String konto_nr) {
-        this.konto_nr = konto_nr;
+        this.konto_nr = get10CharKontoNr(konto_nr);
     }
 
     public String getBank() {
@@ -93,5 +93,12 @@ public class Samarbejdspartner {
 
     public void setPost_nr(Postnummer post_nr) {
         this.post_nr = post_nr;
+    }
+    
+    public String get10CharKontoNr(String konto_nr){
+        for (int i = 0; i < (10-konto_nr.length()); i++) {
+            konto_nr = "0" + konto_nr;
+        }
+        return konto_nr;
     }
 }

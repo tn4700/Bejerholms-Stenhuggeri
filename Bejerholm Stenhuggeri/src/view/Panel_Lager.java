@@ -30,7 +30,7 @@ public class Panel_Lager extends javax.swing.JPanel {
                 vareGruppeComboBox.addItem(vareGruppeListe.get(i));
             }
             getFiltreretVareListe();
-            opdaterPanel();
+            opdaterVareLinjePanel();
         } catch (Exception ex) {
             vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
             vareInfoErrorLabel.setToolTipText(ex.getLocalizedMessage());
@@ -419,27 +419,27 @@ public class Panel_Lager extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void filtrerVarelistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrerVarelistButtonActionPerformed
-        if (validerInput()) {
-            resetErrorLabels();
-            resetInfo();
+        if (validerVareFilterInput()) {
+            resetVareInfoErrors();
+            resetVareInfo();
             getFiltreretVareListe();
-            opdaterPanel();
+            opdaterVareLinjePanel();
         }
     }//GEN-LAST:event_filtrerVarelistButtonActionPerformed
 
     private void sletVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sletVareButtonActionPerformed
-        resetErrorLabels();
+        resetVareInfoErrors();
         Vare vare = null;
         if (!vareNrTextField.getText().equals("")) {
             try {
                 vare = dbhandler.getVare(Integer.parseInt(vareNrTextField.getText()));
                 String message = "Er du sikker på at du vil slette varen " + vare.getNavn() + "?";
                 String title = "Bekræft sletning";
-                if (confirmDialog(message, title)) {
+                if (visAcceptDialog(message, title)) {
                     dbhandler.deleteVare(dbhandler.getVare(Integer.parseInt(vareNrTextField.getText())));
-                    resetInfo();
+                    resetVareInfo();
                     getFiltreretVareListe();
-                    opdaterPanel();
+                    opdaterVareLinjePanel();
                 }
             } catch (SQLException ex) {
                 if (vare == null) {
@@ -453,17 +453,17 @@ public class Panel_Lager extends javax.swing.JPanel {
     }//GEN-LAST:event_sletVareButtonActionPerformed
 
     private void redigerVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigerVareButtonActionPerformed
-        resetErrorLabels();
+        resetVareInfoErrors();
         if (!vareNrTextField.getText().equals("")) {
             try {
                 int vare_nr = Integer.parseInt(vareNrTextField.getText());
                 Vare vare = dbhandler.getVare(vare_nr);
-                JDialog_OpretVare jDialog = new JDialog_OpretVare(main, true, dbhandler, vare);
+                JDialog_LagerVare jDialog = new JDialog_LagerVare(main, true, dbhandler, vare);
                 jDialog.setVisible(true);
-                enterInfo(dbhandler.getVare(vare_nr));
-                resetFilter();
+                enterVareInfo(dbhandler.getVare(vare_nr));
+                resetVareFilter();
                 getFiltreretVareListe();
-                opdaterPanel();
+                opdaterVareLinjePanel();
             } catch (SQLException ex) {
                 vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
                 vareInfoErrorLabel.setToolTipText(ex.getMessage());
@@ -474,18 +474,18 @@ public class Panel_Lager extends javax.swing.JPanel {
     }//GEN-LAST:event_redigerVareButtonActionPerformed
 
     private void opretNyVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opretNyVareButtonActionPerformed
-        resetErrorLabels();
+        resetVareInfoErrors();
         try {
             int max = dbhandler.getMaxVareNr();
-            JDialog_OpretVare jDialog = new JDialog_OpretVare(main, true, dbhandler);
+            JDialog_LagerVare jDialog = new JDialog_LagerVare(main, true, dbhandler);
             jDialog.setVisible(true);
-            resetInfo();
+            resetVareInfo();
             int newMax = dbhandler.getMaxVareNr();
             if (newMax != max) {
-                enterInfo(dbhandler.getVare(newMax));
-                resetFilter();
+                enterVareInfo(dbhandler.getVare(newMax));
+                resetVareFilter();
                 getFiltreretVareListe();
-                opdaterPanel();
+                opdaterVareLinjePanel();
             }
         } catch (SQLException ex) {
             vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
@@ -494,13 +494,13 @@ public class Panel_Lager extends javax.swing.JPanel {
     }//GEN-LAST:event_opretNyVareButtonActionPerformed
 
     private void resetFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetFilterButtonActionPerformed
-        resetFilter();
+        resetVareFilter();
         getFiltreretVareListe();
-        opdaterPanel();
+        opdaterVareLinjePanel();
     }//GEN-LAST:event_resetFilterButtonActionPerformed
 
     private void købVareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_købVareButtonActionPerformed
-        resetErrorLabels();
+        resetVareInfoErrors();
         if (!vareNrTextField.getText().equals("")) {
             try {
                 int vare_nr = Integer.parseInt(vareNrTextField.getText());
@@ -570,7 +570,7 @@ public class Panel_Lager extends javax.swing.JPanel {
     private javax.swing.JTextField vareStatusTextField;
     // End of variables declaration//GEN-END:variables
 
-    public boolean confirmDialog(String message, String title) {
+    public boolean visAcceptDialog(String message, String title) {
         boolean accept = false;
         String[] options = new String[]{"Ja", "Nej"};
         int reply = JOptionPane.showOptionDialog(this, message, title, JOptionPane.DEFAULT_OPTION,
@@ -581,7 +581,7 @@ public class Panel_Lager extends javax.swing.JPanel {
         return accept;
     }
 
-    public final void opdaterPanel() {
+    public final void opdaterVareLinjePanel() {
         vareLinjePanel.removeAll();
         vareLinjePanel.updateUI();
         for (int i = 0; i < vareListe.size(); i++) {
@@ -607,7 +607,7 @@ public class Panel_Lager extends javax.swing.JPanel {
         }
     }
 
-    public void resetInfo() {
+    public void resetVareInfo() {
         vareNrTextField.setText("");
         vareNavnTextField.setText("");
         vareBreddeTextField.setText("");
@@ -621,7 +621,7 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareGruppeTextField.setText("");
     }
 
-    public void resetFilter() {
+    public void resetVareFilter() {
         minHøjdeTextField.setText("0");
         maxHøjdeTextField.setText("0");
         minBreddeTextField.setText("0");
@@ -630,10 +630,10 @@ public class Panel_Lager extends javax.swing.JPanel {
         maxPrisTextField.setText("0.00");
         vareGruppeComboBox.setSelectedIndex(0);
         vareStatusComboBox.setSelectedIndex(0);
-        resetLabels();
+        resetVareFilterErrors();
     }
 
-    public void enterInfo(Vare vare) {
+    public void enterVareInfo(Vare vare) {
         vareNrTextField.setText(vare.getVare_nr() + "");
         vareNavnTextField.setText(vare.getNavn());
         vareBreddeTextField.setText(vare.getBredde() + " cm");
@@ -647,12 +647,12 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareGruppeTextField.setText(vare.getGruppe().toString());
     }
 
-    public void resetErrorLabels() {
+    public void resetVareInfoErrors() {
         vareInfoErrorLabel.setText("");
         vareInfoErrorLabel.setToolTipText("");
     }
 
-    public void resetLabels() {
+    public void resetVareFilterErrors() {
         vareFilterErrorLabel.setText("");
         vareFilterErrorLabel.setToolTipText("");
         minimumPrisLabel.setForeground(Color.black);
@@ -663,9 +663,9 @@ public class Panel_Lager extends javax.swing.JPanel {
         maxHøjdeLabel.setForeground(Color.black);
     }
 
-    public boolean validerInput() {
+    public boolean validerVareFilterInput() {
         boolean valid = true;
-        resetLabels();
+        resetVareFilterErrors();
         String error = "Fejl på følgende input: ";
         boolean isFirst = false;
 
