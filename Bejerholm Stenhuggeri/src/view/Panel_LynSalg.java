@@ -150,23 +150,22 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jButtonLynsalgVidere = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextAreaVareInfo = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel_VælgVareSum = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel_VareLinjer = new javax.swing.JPanel();
         jLabel_overskrift = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel_fejlbesked = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel_VælgVareSum = new javax.swing.JLabel();
         jPanel_OrdreBekræftigelse = new javax.swing.JPanel();
-        jSeparator2 = new javax.swing.JSeparator();
-        jButton_godkend = new javax.swing.JButton();
-        jButton_Ændre = new javax.swing.JButton();
-        jButton_Annuller = new javax.swing.JButton();
-        jLabel38 = new javax.swing.JLabel();
+        jLabel_Overskrift = new javax.swing.JLabel();
         jLabel_købssum_lynsalg = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel_SamletprisOverskrift = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel_OversigtVarer = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton_Ændre = new javax.swing.JButton();
+        jButton_godkend = new javax.swing.JButton();
+        jButton_Annuller = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -186,14 +185,14 @@ public class Panel_LynSalg extends javax.swing.JPanel {
                 jComboBox_LynsalgvaregruppeActionPerformed(evt);
             }
         });
-        jPanel_LynSalg.add(jComboBox_Lynsalgvaregruppe, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 200, 40));
+        jPanel_LynSalg.add(jComboBox_Lynsalgvaregruppe, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 80, 220, 40));
 
         jComboBoxLynsalgVare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxLynsalgVareActionPerformed(evt);
             }
         });
-        jPanel_LynSalg.add(jComboBoxLynsalgVare, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 270, 40));
+        jPanel_LynSalg.add(jComboBoxLynsalgVare, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 280, 40));
 
         jButtonLynsalgTilføj.setText("Tilføj");
         jButtonLynsalgTilføj.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +200,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
                 jButtonLynsalgTilføjActionPerformed(evt);
             }
         });
-        jPanel_LynSalg.add(jButtonLynsalgTilføj, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 220, 40));
+        jPanel_LynSalg.add(jButtonLynsalgTilføj, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 79, 218, 42));
 
         jLabel1.setText("Varegruppe: ");
         jPanel_LynSalg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
@@ -210,29 +209,58 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jPanel_LynSalg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
 
         jButtonLynsalgVidere.setText("Videre");
+        jButtonLynsalgVidere.setBorder(null);
+        jButtonLynsalgVidere.setBorderPainted(false);
         jButtonLynsalgVidere.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLynsalgVidereActionPerformed(evt);
             }
         });
-        jPanel_LynSalg.add(jButtonLynsalgVidere, new org.netbeans.lib.awtextra.AbsoluteConstraints(563, 453, 220, 30));
+        jPanel_LynSalg.add(jButtonLynsalgVidere, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 452, 218, 30));
 
+        jScrollPane5.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Vare Info"));
         jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane5.setOpaque(false);
 
         jTextAreaVareInfo.setEditable(false);
-        jTextAreaVareInfo.setBackground(new java.awt.Color(240, 240, 240));
+        jTextAreaVareInfo.setBackground(new java.awt.Color(102, 0, 51));
         jTextAreaVareInfo.setColumns(20);
         jTextAreaVareInfo.setRows(5);
         jTextAreaVareInfo.setAutoscrolls(false);
         jTextAreaVareInfo.setBorder(null);
         jTextAreaVareInfo.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jTextAreaVareInfo.setOpaque(false);
         jScrollPane5.setViewportView(jTextAreaVareInfo);
 
-        jPanel_LynSalg.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 220, 210));
+        jPanel_LynSalg.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, 220, 219));
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 51, 51));
-        jScrollPane1.setBorder(null);
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pris")));
+        jPanel1.setOpaque(false);
+
+        jLabel_VælgVareSum.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel_VælgVareSum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel_VælgVareSum, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel_VælgVareSum, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
+        );
+
+        jPanel_LynSalg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 375, 220, 70));
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Valgte Varer"));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
         jScrollPane1.setOpaque(false);
@@ -243,68 +271,27 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jPanel_VareLinjer.setOpaque(false);
         jScrollPane1.setViewportView(jPanel_VareLinjer);
 
-        jPanel_LynSalg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 520, 280));
+        jPanel_LynSalg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 520, 333));
 
         jLabel_overskrift.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_overskrift.setText("Lyn Salg");
-        jPanel_LynSalg.add(jLabel_overskrift, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
-
-        jLabel3.setText("Vareinfo.");
-        jPanel_LynSalg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
+        jPanel_LynSalg.add(jLabel_overskrift, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
         jPanel_LynSalg.add(jLabel_fejlbesked, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, 220, 20));
-
-        jLabel5.setText("Total pris");
-        jPanel_LynSalg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, -1, 20));
-
-        jLabel_VælgVareSum.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel_VælgVareSum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel_LynSalg.add(jLabel_VælgVareSum, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 210, 40));
 
         jPanel_MainCard.add(jPanel_LynSalg, "card_LynSalg");
 
         jPanel_OrdreBekræftigelse.setOpaque(false);
-        jPanel_OrdreBekræftigelse.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel_OrdreBekræftigelse.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, 21, 420));
-
-        jButton_godkend.setText("Godkend");
-        jButton_godkend.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_godkendActionPerformed(evt);
-            }
-        });
-        jPanel_OrdreBekræftigelse.add(jButton_godkend, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 50, 150, -1));
-
-        jButton_Ændre.setText("Ændre");
-        jButton_Ændre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_ÆndreActionPerformed(evt);
-            }
-        });
-        jPanel_OrdreBekræftigelse.add(jButton_Ændre, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 90, 150, -1));
-
-        jButton_Annuller.setText("Annuller");
-        jButton_Annuller.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_AnnullerActionPerformed(evt);
-            }
-        });
-        jPanel_OrdreBekræftigelse.add(jButton_Annuller, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 130, 150, -1));
-
-        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel38.setText("Ordre Bekræftigelse:");
-        jPanel_OrdreBekræftigelse.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jLabel_Overskrift.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel_Overskrift.setText("Ordre Bekræftigelse:");
 
         jLabel_købssum_lynsalg.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel_købssum_lynsalg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_købssum_lynsalg.setText("jLabel32");
-        jPanel_OrdreBekræftigelse.add(jLabel_købssum_lynsalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 434, 280, 40));
 
-        jLabel4.setText("Samlet pris: ");
-        jPanel_OrdreBekræftigelse.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, -1, -1));
+        jLabel_SamletprisOverskrift.setText("Samlet pris: ");
 
-        jScrollPane2.setBorder(null);
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Valgte Varer"));
         jScrollPane2.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
         jScrollPane2.setOpaque(false);
         jScrollPane2.setPreferredSize(new java.awt.Dimension(500, 100));
@@ -313,7 +300,96 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jPanel_OversigtVarer.setOpaque(false);
         jScrollPane2.setViewportView(jPanel_OversigtVarer);
 
-        jPanel_OrdreBekræftigelse.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, 240));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Valgmuligheder"));
+        jPanel2.setOpaque(false);
+
+        jButton_Ændre.setText("Ændre");
+        jButton_Ændre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ÆndreActionPerformed(evt);
+            }
+        });
+
+        jButton_godkend.setText("Godkend");
+        jButton_godkend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_godkendActionPerformed(evt);
+            }
+        });
+
+        jButton_Annuller.setText("Annuller");
+        jButton_Annuller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AnnullerActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_godkend, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Annuller, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Ændre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton_godkend)
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton_Annuller))
+                    .addComponent(jButton_Ændre))
+                .addContainerGap(165, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel_OrdreBekræftigelseLayout = new javax.swing.GroupLayout(jPanel_OrdreBekræftigelse);
+        jPanel_OrdreBekræftigelse.setLayout(jPanel_OrdreBekræftigelseLayout);
+        jPanel_OrdreBekræftigelseLayout.setHorizontalGroup(
+            jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel_Overskrift))
+                    .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_købssum_lynsalg, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                                .addGap(110, 110, 110)
+                                .addComponent(jLabel_SamletprisOverskrift)))))
+                .addGap(10, 10, 10))
+        );
+        jPanel_OrdreBekræftigelseLayout.setVerticalGroup(
+            jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel_Overskrift)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel_købssum_lynsalg, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_SamletprisOverskrift))
+                .addContainerGap())
+        );
 
         jPanel_MainCard.add(jPanel_OrdreBekræftigelse, "card_OrdreBekræftigelse");
 
@@ -496,14 +572,14 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBox_Lynsalgvaregruppe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel_Overskrift;
+    private javax.swing.JLabel jLabel_SamletprisOverskrift;
     private javax.swing.JLabel jLabel_VælgVareSum;
     private javax.swing.JLabel jLabel_fejlbesked;
     private javax.swing.JLabel jLabel_købssum_lynsalg;
     private javax.swing.JLabel jLabel_overskrift;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_LynSalg;
     private javax.swing.JPanel jPanel_MainCard;
     private javax.swing.JPanel jPanel_OrdreBekræftigelse;
@@ -512,7 +588,6 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextAreaVareInfo;
     // End of variables declaration//GEN-END:variables
 
