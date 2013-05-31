@@ -99,14 +99,14 @@ public class Vare_linje {
         }
         return enhedsPris;
     }
-    
-    public double getSamletPris(){
+
+    public double getSamletPris() {
         double samletPris = getEnhedsPris() * getAntal();
         return samletPris;
     }
 
     @Override
     public String toString() {
-        return "Vare_linje{" + "linje_nr=" + linje_nr + ", ordre_nr=" + ordre_nr + ", vare=" + vare + ", inskription=" + inskription + ", tom_linje=" + tom_linje + '}';
+        return getBeskrivelse();
     }
 }

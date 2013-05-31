@@ -22,11 +22,6 @@ public class Postnummer {
         return post_nr;
     }
 
-    @Override
-    public String toString() {
-        return "Postnummer{" + "post_nr=" + post_nr + ", byNavn=" + byNavn + '}';
-    }
-
     public void setPost_nr(int post_nr) {
         this.post_nr = post_nr;
     }
@@ -37,5 +32,10 @@ public class Postnummer {
 
     public void setByNavn(String byNavn) {
         this.byNavn = byNavn;
+    }
+    
+    @Override
+    public String toString() {
+        return post_nr + " " + byNavn;
     }
 }

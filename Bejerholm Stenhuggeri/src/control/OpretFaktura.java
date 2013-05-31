@@ -117,7 +117,7 @@ public class OpretFaktura {
         cb.rectangle(475, 140, 100, 20);
         cb.rectangle(475, 180, 100, 20);
         cb.fill();
-        
+
         //Tegn tabel
         cb.rectangle(25, 200, 550, 300);
         cb.moveTo(25, 480);
@@ -138,7 +138,7 @@ public class OpretFaktura {
         cb.moveTo(475, 118);
         cb.lineTo(575, 118);
         cb.stroke();
-        
+
         //Indsæt navne på tabel elementer
         createContent(cb, btFont, 12, black, 63, 484, "ANTAL", center);
         createContent(cb, btFont, 12, black, 238, 484, "BESKRIVELSE", center);
@@ -149,53 +149,43 @@ public class OpretFaktura {
         createContent(cb, tFont, 12, black, 465, 164, "MOMS", right);
         createContent(cb, tFont, 12, black, 465, 144, "SALGSMOMS", right);
         createContent(cb, btFont, 12, black, 465, 124, "I ALT", right);
-        
+
         //Indsæt data for varelinjer
         int tmpY = 464;
-        int antal = 0;
-        double enhedsPris = 0;
-        double pris = 0;
+        int antal;
+        double enhedsPris;
+        double pris;
         double total = 0;
-        String beskrivelse = "";
-        
-        for(int i=0; i<faktura.getOrdre().getVare_linjeListe().size(); i++){
+        String beskrivelse;
+
+        for (int i = 0; i < faktura.getOrdre().getVare_linjeListe().size(); i++) {
             Vare_linje vare_linje = faktura.getOrdre().getVare_linjeListe().get(i);
-            
-            if(vare_linje.getVare()!=null){
-                beskrivelse = vare_linje.getVare().getNavn();
-                antal = 1;
-                enhedsPris = vare_linje.getVare().getSalgspris();
-            } else if(vare_linje.getInskription()!=null){
-                antal = vare_linje.getInskription().getAntalTegn();
-                enhedsPris = vare_linje.getInskription().getTegntype().getPris_pr_tegn();
-                beskrivelse = vare_linje.getInskription().getTegntype().getNavn();
-            } else if(vare_linje.getTom_linje()!=null){
-                beskrivelse = vare_linje.getTom_linje().getNavn();
-                antal = vare_linje.getTom_linje().getAntal();
-                enhedsPris = vare_linje.getTom_linje().getPris();
-            }  
-            pris = antal*enhedsPris;
+
+            beskrivelse = vare_linje.getBeskrivelse();
+            antal = vare_linje.getAntal();
+            enhedsPris = vare_linje.getEnhedsPris();
+            pris = antal * enhedsPris;
             total += pris;
-            
-            createContent(cb, tFont, 12, black, 63, tmpY, ""+antal, center);
+
+            createContent(cb, tFont, 12, black, 63, tmpY, "" + antal, center);
             createContent(cb, tFont, 12, black, 110, tmpY, beskrivelse, left);
-            createContent(cb, tFont, 12, black, 465, tmpY, ""+Utility.formatDoubleToKr(enhedsPris), right);
-            createContent(cb, tFont, 12, black, 565, tmpY, ""+Utility.formatDoubleToKr(pris), right);
-            
+            createContent(cb, tFont, 12, black, 465, tmpY, "" + Utility.formatDoubleToKr(enhedsPris), right);
+            createContent(cb, tFont, 12, black, 565, tmpY, "" + Utility.formatDoubleToKr(pris), right);
+
             tmpY = tmpY - 20;
         }
-        createContent(cb, tFont, 12, black, 565, 204, ""+Utility.formatDoubleToKr(Math.floor(total*+0.025)), right);
-        total += Math.floor((total*0.025));
-        createContent(cb, tFont, 12, black, 565, 184, ""+Utility.formatDoubleToKr(total), right);
+        createContent(cb, tFont, 12, black, 565, 204, "" + Utility.formatDoubleToKr(Math.floor(total * 0.025)), right);
+        total += Math.floor((total * 0.025));
+        createContent(cb, tFont, 12, black, 565, 184, "" + Utility.formatDoubleToKr(total), right);
         createContent(cb, tFont, 12, black, 565, 164, "25,00%", right);
-        createContent(cb, tFont, 12, black, 565, 144, ""+Utility.formatDoubleToKr(total*0.25), right);
-        total += (total*0.25);
-        total = Math.floor(total+0.5);
-        createContent(cb, tFont, 12, black, 565, 124, ""+Utility.formatDoubleToKr(total), right);
-        
+        createContent(cb, tFont, 12, black, 565, 144, "" + Utility.formatDoubleToKr(total * 0.25), right);
+        total += (total * 0.25);
+        total = Math.floor(total + 0.5);
+        createContent(cb, tFont, 12, black, 565, 124, "" + Utility.formatDoubleToKr(total), right);
+
         //Indsættelse af betalingsbetingelser og kontaktinfo
         createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
-        if(faktura.getFakturatype()){
+        if (faktura.getFakturatype()) {
             createContent(cb, tFont, 12, black, 150, 104, "Netto 7 dage", left);
         } else {
             createContent(cb, tFont, 12, black, 150, 104, "Netto 14 dage", left);
@@ -203,7 +193,7 @@ public class OpretFaktura {
         createContent(cb, tFont, 12, black, 25, 84, "Sydbank: 6821  -  1021974", left);
         createContent(cb, tFont, 12, black, 25, 64, "Ordrenummer og navn bedes anført ved bankoverførsel", left);
         createContent(cb, tFont, 10, black, 25, 24, "Hvis der er spørgsmål til denne faktura, bedes De venligst kontakte os(se kontaktinfo i toppen af fakturaen)", left);
-        
+
         //Lukker dokument og skriver alt det data der er blevet indsat til PDF-filen
         doc.close();
 

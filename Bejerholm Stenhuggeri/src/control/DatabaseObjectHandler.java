@@ -12,7 +12,7 @@ import model.*;
 
 /**
  *
- * @author Anette
+ * @author Anette(haha)
  */
 public class DatabaseObjectHandler {
 
@@ -51,7 +51,7 @@ public class DatabaseObjectHandler {
 
     public Kunde getKunde(int tlf) throws SQLException {
         Kunde kunde = null;
-        int post_nr = 0;
+        int post_nr;
         String sql = "select fornavn, efternavn, adresse, tlf, post_nr from kunde where tlf = '" + tlf + "';";
         ResultSet rs;
 
@@ -311,7 +311,6 @@ public class DatabaseObjectHandler {
             if (getInskriptionLinje(i, inskription.getId()) != null) {
                 inskription_linje = getInskriptionLinje(i, inskription.getId());
                 inskription.addInskription_linje(inskription_linje);
-                inskription_linje = null;
             }
         }
 
@@ -663,8 +662,8 @@ public class DatabaseObjectHandler {
 
     public Ordre getOrdre(String ordre_nr) throws SQLException {
         Ordre ordre = null;
-        Vare_linje vare_linje = null;
-        int tlf = 0;
+        Vare_linje vare_linje;
+        int tlf;
         String sql = "select tlf, ordre_nr,ordretype,ordredato,leveringdato,afhentningsdato,bemærkning,bemærkning_ekstra,"
                 + "kirkegård,afdeling,afdødnavn,række,nummer,gravType from ordre where ordre_nr = '" + ordre_nr + "';";
         ResultSet rs;
@@ -694,7 +693,6 @@ public class DatabaseObjectHandler {
                 if (getVareLinje(i, ordre.getOrdre_nr()) != null) {
                     vare_linje = getVareLinje(i, ordre.getOrdre_nr());
                     ordre.addVare_linje(vare_linje);
-                    vare_linje = null;
                 }
             }
         }
@@ -893,8 +891,8 @@ public class DatabaseObjectHandler {
         String sql = "select bedemand_tlf, provisions_nr, ordre_nr, faktura_nr, faktureringsdato,"
                 + "vedrørende, sendt_dato, faktureringsadresse, fakturatype, betalingsstatus from "
                 + "faktura where faktura_nr = '" + faktura_nr + "';";
-
-        ResultSet rs = db.getData(sql);
+        ResultSet rs;
+        rs = db.getData(sql);
 
         if (rs.next()) {
             faktura = new Faktura(rs.getString("faktura_nr"),

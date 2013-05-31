@@ -38,7 +38,7 @@ public class DBConnection {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(connString, user, pw);
             stmt = conn.createStatement();
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             connecting = false;
         }
         connected = connecting;
@@ -52,13 +52,6 @@ public class DBConnection {
 
     public void setData(String getdata) throws SQLException {
         stmt.executeUpdate(getdata);
-    }
-
-    public void endQuery() throws SQLException {
-        try {
-            conn.close();
-        } catch (Exception ex) {
-        }
     }
 
     public String getUser() {

@@ -95,7 +95,7 @@ public class Samarbejdspartner {
         this.post_nr = post_nr;
     }
     
-    public String get10CharKontoNr(String konto_nr){
+    public final String get10CharKontoNr(String konto_nr){
         for (int i = 0; i < (10-konto_nr.length()); i++) {
             konto_nr = "0" + konto_nr;
         }
