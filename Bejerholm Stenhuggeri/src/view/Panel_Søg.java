@@ -288,7 +288,7 @@ public class Panel_Søg extends javax.swing.JPanel {
 
         for (int i = 0; i < fakturaliste.size(); i++) {
             if (!fakturaliste.get(i).getBetalingsstatus()) {
-                Panel_Søg_Faktura panel = new Panel_Søg_Faktura(fakturaliste.get(i), dbhandler, this);
+                Panel_Søg_Ingangværende panel = new Panel_Søg_Ingangværende(fakturaliste.get(i), dbhandler, this);
                 jPanel_Visfaktura.add(panel);
             }
         }
@@ -304,7 +304,7 @@ public class Panel_Søg extends javax.swing.JPanel {
         } catch (SQLException ex) {
             System.out.println("Minidiller");
         }
-        Panel_Søg_Faktura panel = new Panel_Søg_Faktura(ordre , dbhandler, this);
+        Panel_Søg_Ingangværende panel = new Panel_Søg_Ingangværende(ordre , dbhandler, this);
         jPanel_Visfaktura.add(panel);
          
     }

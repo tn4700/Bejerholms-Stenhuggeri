@@ -17,18 +17,21 @@ import model.Ordre;
  *
  * @author T
  */
-public class Panel_Søg_Faktura extends javax.swing.JPanel {
+public class Panel_Søg_Ingangværende extends javax.swing.JPanel {
 
     private Faktura faktura;
     private DatabaseObjectHandler dbhandler;
     private Panel_Søg panel;
     private Ordre ordre;
+    boolean valgttype; 
+    // true = faktura
+    //  false = ordre
 
     /**
      * Creates new form Panel_Søg_Faktura
      */
-    public Panel_Søg_Faktura(Faktura faktura, DatabaseObjectHandler dbhandler, Panel_Søg panel) {
-
+    public Panel_Søg_Ingangværende(Faktura faktura, DatabaseObjectHandler dbhandler, Panel_Søg panel) {
+        valgttype = true;
         this.dbhandler = dbhandler;
         this.faktura = faktura;
         this.panel = panel;
@@ -41,8 +44,8 @@ public class Panel_Søg_Faktura extends javax.swing.JPanel {
 
     }
 
-    public Panel_Søg_Faktura(Ordre ordre, DatabaseObjectHandler dbhandler, Panel_Søg panel) {
-     
+    public Panel_Søg_Ingangværende(Ordre ordre, DatabaseObjectHandler dbhandler, Panel_Søg panel) {
+        valgttype = false;
         this.dbhandler = dbhandler;
         this.ordre = ordre;
         this.panel = panel;
@@ -109,8 +112,14 @@ public class Panel_Søg_Faktura extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(null, true, dbhandler, faktura);// TODO add your handling code here:
-        visfaktura.setVisible(true);
+        if (valgttype) {
+             JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(null, true, dbhandler, faktura);
+             visfaktura.setVisible(true);
+        } else {
+            JDialog_SøgOrdre visordre = new JDialog_SøgOrdre(null, true, dbhandler, ordre);
+            visordre.setVisible(true);
+        }
+       
     }//GEN-LAST:event_jButton3ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
