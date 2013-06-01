@@ -48,41 +48,52 @@ public class DatabaseObjectHandler {
     public void editPostnummer(Postnummer postnummer) throws SQLException {
         db.setData("update postnummer set byNavn = '" + "' where post_nr = '" + postnummer.getPost_nr() + "';");
     }
-    
-    public Faktureringsadresse getFaktureringsadresse(int id) throws SQLException{
+
+    public int getMaxAdresseId() throws SQLException {
+        int max = 0;
+        ResultSet rs;
+        rs = db.getData("select MAX(id) from faktureringsadresse;");
+        if (rs.next()) {
+            max = rs.getInt("MAX(id)");
+        }
+        rs.close();
+        return max;
+    }
+
+    public Faktureringsadresse getFaktureringsadresse(int id) throws SQLException {
         Faktureringsadresse fakturaAdresse = null;
         ResultSet rs;
         int post_nr = 0;
         rs = db.getData("select id, adresse, post_nr from faktureringsadresse where id = '" + id + "';");
-        if(rs.next()){
+        if (rs.next()) {
             fakturaAdresse = new Faktureringsadresse(
                     rs.getInt("id"),
-                    rs.getString("adresse"), 
+                    rs.getString("adresse"),
                     null);
             post_nr = rs.getInt("post_nr");
         }
         rs.close();
-        if(post_nr != 0){
-        fakturaAdresse.setPost_nr(getPostnummer(post_nr));
+        if (post_nr != 0) {
+            fakturaAdresse.setPost_nr(getPostnummer(post_nr));
         }
         return fakturaAdresse;
     }
-    
-    public void createFaktureringsadresse(Faktureringsadresse fakturaAdresse) throws SQLException{
-            createPostnummer(fakturaAdresse.getPost_nr());
-            db.setData("insert into faktureringsadresse(adresse, post_nr) values('"
-                    + fakturaAdresse.getAdresse() + "','" + fakturaAdresse.getPost_nr().getPost_nr() + "');");
+
+    public void createFaktureringsadresse(Faktureringsadresse fakturaAdresse) throws SQLException {
+        createPostnummer(fakturaAdresse.getPost_nr());
+        db.setData("insert into faktureringsadresse(adresse, post_nr) values('"
+                + fakturaAdresse.getAdresse() + "','" + fakturaAdresse.getPost_nr().getPost_nr() + "');");
     }
-    
+
     public void editFaktureringsadresse(Faktureringsadresse fakturaAdresse) throws SQLException {
-        if(getPostnummer(fakturaAdresse.getPost_nr().getPost_nr())==null){
+        if (getPostnummer(fakturaAdresse.getPost_nr().getPost_nr()) == null) {
             createPostnummer(fakturaAdresse.getPost_nr());
         }
-        db.setData("update faktureringsadresse set adresse = '" + fakturaAdresse.getAdresse() + "', post_nr = '" 
+        db.setData("update faktureringsadresse set adresse = '" + fakturaAdresse.getAdresse() + "', post_nr = '"
                 + fakturaAdresse.getPost_nr().getPost_nr() + "' where id = '" + fakturaAdresse.getId() + "';");
     }
-    
-    public void deleteFaktureringsadresse(Faktureringsadresse fakturaAdresse) throws SQLException{
+
+    public void deleteFaktureringsadresse(Faktureringsadresse fakturaAdresse) throws SQLException {
         db.setData("delete from faktureringsadresse where id = '" + fakturaAdresse.getId() + "';");
     }
 
@@ -159,6 +170,7 @@ public class DatabaseObjectHandler {
     }
 
     public void createSamarbejdspartner(Samarbejdspartner samarbejdspartner) throws SQLException {
+        createPostnummer(samarbejdspartner.getPost_nr());
         if (getSamarbejdspartner(samarbejdspartner.getTlf()) == null) {
             db.setData("insert into samarbejdspartner(firmanavn,adresse,tlf,cvr_nr,registrerings_nr,"
                     + "konto_nr,bank,post_nr) "
@@ -167,7 +179,6 @@ public class DatabaseObjectHandler {
                     + "" + samarbejdspartner.getCvr_nr() + "','" + samarbejdspartner.getRegistrerings_nr()
                     + "','" + samarbejdspartner.getKonto_nr() + "','" + samarbejdspartner.getBank()
                     + "','" + samarbejdspartner.getPost_nr().getPost_nr() + "');");
-            createPostnummer(samarbejdspartner.getPost_nr());
         }
     }
 
@@ -622,15 +633,23 @@ public class DatabaseObjectHandler {
             createVaregruppe(vare.getGruppe());
             vare.getGruppe().setGrp_nr(getMaxGrpNr());
         }
-        if (getVaretype(vare.getVaretype().getId()) == null) {
-            createVaretype(vare.getVaretype());
-            vare.getVaretype().setId(getMaxTypeId());
+        if (vare.getVaretype() != null) {
+            if (getVaretype(vare.getVaretype().getId()) == null) {
+                createVaretype(vare.getVaretype());
+                vare.getVaretype().setId(getMaxTypeId());
+            }
+            db.setData("insert into vare(navn, højde, bredde, indkøbspris, salgspris, type_id, overflade,"
+                    + "dekoration, grp_nr, vareStatus) values ('" + vare.getNavn() + "','" + vare.getHøjde() + "','"
+                    + vare.getBredde() + "','" + vare.getIndkøbspris() + "','" + vare.getSalgspris() + "','"
+                    + vare.getVaretype().getId() + "','" + "" + vare.getOverflade() + "','" + boolToInt(vare.getDekoration())
+                    + "','" + vare.getGruppe().getGrp_nr() + "',0);");
+        } else {
+            db.setData("insert into vare(navn, højde, bredde, indkøbspris, salgspris, overflade,"
+                    + "dekoration, grp_nr, vareStatus) values ('" + vare.getNavn() + "','" + vare.getHøjde() + "','"
+                    + vare.getBredde() + "','" + vare.getIndkøbspris() + "','" + vare.getSalgspris()
+                    + "','" + vare.getOverflade() + "','" + boolToInt(vare.getDekoration())
+                    + "','" + vare.getGruppe().getGrp_nr() + "',0);");
         }
-        db.setData("insert into vare(navn, højde, bredde, indkøbspris, salgspris, type_id, overflade,"
-                + "dekoration, grp_nr, vareStatus) values ('" + vare.getNavn() + "','" + vare.getHøjde() + "','"
-                + vare.getBredde() + "','" + vare.getIndkøbspris() + "','" + vare.getSalgspris() + "','"
-                + vare.getVaretype().getId() + "','" + "" + vare.getOverflade() + "','" + boolToInt(vare.getDekoration())
-                + "','" + vare.getGruppe().getGrp_nr() + "',0);");
     }
 
     public void deleteVare(Vare vare) throws SQLException {
@@ -763,6 +782,7 @@ public class DatabaseObjectHandler {
                         rs.getInt("vareStatus"),
                         null);
                 grpList.add(rs.getInt("grp_nr"));
+                typeList.add(rs.getInt("type_id"));
                 vareListe.add(vare);
             }
             rs.close();
@@ -1114,55 +1134,72 @@ public class DatabaseObjectHandler {
         }
         rs.close();
 
-        if(adresse_id!=0){
+        if (adresse_id != 0) {
             faktura.setFaktureringsadresse(getFaktureringsadresse(adresse_id));
         }
-        faktura.setOrdre(getOrdre(ordre_nr));
-        if (faktura.getFakturatype()) {
-            if (tlf != 0 || provisions_nr != null) {
-                faktura.setBedemand(getSamarbejdspartner(tlf));
-                faktura.setProvisionsseddel(getProvisionsseddel(provisions_nr));
-            } else {
-                throw new ControlException("Ugyldige fakturaoplysninger. Fakturatype bedemand men ingen bedemand og/eller provisionsseddel findes.");
+        if (faktura != null) {
+            faktura.setOrdre(getOrdre(ordre_nr));
+            if (faktura.getFakturatype()) {
+                if (tlf != 0 || provisions_nr != null) {
+                    faktura.setBedemand(getSamarbejdspartner(tlf));
+                    faktura.setProvisionsseddel(getProvisionsseddel(provisions_nr));
+                } else {
+                    throw new ControlException("Ugyldige fakturaoplysninger. Fakturatype bedemand men ingen bedemand og/eller provisionsseddel findes.");
+                }
             }
         }
+        System.out.println("hej");
         return faktura;
     }
 
     public void createFaktura(Faktura faktura) throws SQLException, ControlException {
         String faktura_nr = faktura.getOrdre().createFakturaNr();
-        if(faktura.getFaktureringsadresse()!=null){
-            if(getFaktureringsadresse(faktura.getFaktureringsadresse().getId())==null){
-                createFaktureringsadresse(faktura.getFaktureringsadresse());
-            }
-        }
-        if (faktura.getFakturatype()) {
-            if (faktura.getBedemand() != null && faktura.getProvisionsseddel() != null) {
-                if (getSamarbejdspartner(faktura.getBedemand().getTlf()) == null) {
-                    createSamarbejdspartner(faktura.getBedemand());
-                } else {
-                    editSamarbejdspartner(faktura.getBedemand());
+        if (getFaktura(faktura_nr) == null) {
+            System.out.println("ewr");
+            if (faktura.getFaktureringsadresse() != null) {
+                if (getFaktureringsadresse(faktura.getFaktureringsadresse().getId()) == null) {
+                    System.out.println("lol");
+                    createFaktureringsadresse(faktura.getFaktureringsadresse());
+                    System.out.println("hej");
+                    int adresse_id = getMaxAdresseId();
+                    System.out.println("nu");
+                    db.setData("insert into faktura (ordre_nr, faktura_nr,faktureringsdato,"
+                            + "sendt_dato,adresse_id,fakturatype,betalingsstatus)values('"
+                            + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
+                            + faktura.getFaktureringsdato() + "','"
+                            + faktura.getSendt_dato() + "','" + adresse_id + "','"
+                            + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
+                            + "');");
+                    System.out.println("gg");
                 }
-                createProvisionsseddel(faktura.getProvisionsseddel(), faktura.getOrdre().getOrdre_nr());
+            } else if (faktura.getFakturatype()) {
+                if (faktura.getBedemand() != null && faktura.getProvisionsseddel() != null) {
+                    if (getSamarbejdspartner(faktura.getBedemand().getTlf()) == null) {
+                        createSamarbejdspartner(faktura.getBedemand());
+                    } else {
+                        editSamarbejdspartner(faktura.getBedemand());
+                    }
+                    createProvisionsseddel(faktura.getProvisionsseddel(), faktura.getOrdre().getOrdre_nr());
+                } else {
+                    throw new ControlException("Ugylige fakturaoplysninger(bedemandsordre men ingen samarbejdspartner og/eller provisionsseddel valgt");
+                }
+                db.setData("insert into faktura (ordre_nr, faktura_nr, bedemand_tlf, faktureringsdato,"
+                        + "sendt_dato,fakturatype,betalingsstatus, provisions_nr)values('"
+                        + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
+                        + faktura.getBedemand().getTlf() + "','"
+                        + faktura.getFaktureringsdato() + "','" + faktura.getSendt_dato() + "','"
+                        + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
+                        + "','" + faktura.getOrdre().getOrdre_nr() + "');");
             } else {
-                throw new ControlException("Ugylige fakturaoplysninger(bedemandsordre men ingen samarbejdspartner og/eller provisionsseddel valgt");
+                db.setData("insert into faktura (ordre_nr, faktura_nr,faktureringsdato,"
+                        + "sendt_dato,fakturatype,betalingsstatus)values('"
+                        + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
+                        + faktura.getFaktureringsdato() + "','"
+                        + faktura.getSendt_dato() + "','" + boolToInt(faktura.getFakturatype()) + "','"
+                        + boolToInt(faktura.getBetalingsstatus()) + "');");
             }
-            db.setData("insert into faktura (ordre_nr, faktura_nr, bedemand_tlf, faktureringsdato,"
-                    + "sendt_dato,adresse_id,fakturatype,betalingsstatus, provisions_nr)values('"
-                    + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
-                    + faktura.getBedemand().getTlf() + "','"
-                    + faktura.getFaktureringsdato() + "','"
-                    + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse().getId() + "','"
-                    + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
-                    + "','" + faktura.getOrdre().getOrdre_nr() + "');");
         } else {
-            db.setData("insert into faktura (ordre_nr, faktura_nr,faktureringsdato,"
-                    + "sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
-                    + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
-                    + faktura.getFaktureringsdato() + "','"
-                    + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse() + "','"
-                    + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
-                    + "');");
+            throw new ControlException("En faktura med faktura_nr " + faktura_nr + " findes allerede.");
         }
     }
 
@@ -1331,6 +1368,5 @@ public class DatabaseObjectHandler {
             result = 1;
         }
         return result;
-
     }
 }

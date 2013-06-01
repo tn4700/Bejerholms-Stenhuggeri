@@ -32,7 +32,7 @@ public class Panel_Lager extends javax.swing.JPanel {
             getFiltreretVareListe();
             opdaterVareLinjePanel();
         } catch (Exception ex) {
-            vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+            vareInfoErrorLabel.setText("Problem med databasen, hold over denne besked for detaljer");
             vareInfoErrorLabel.setToolTipText(ex.getLocalizedMessage());
         }
     }
@@ -443,7 +443,7 @@ public class Panel_Lager extends javax.swing.JPanel {
                 }
             } catch (SQLException ex) {
                 if (vare == null) {
-                    vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+                    vareInfoErrorLabel.setText("Problem med databasen, hold over denne besked for detaljer");
                     vareInfoErrorLabel.setToolTipText(ex.getLocalizedMessage());
                 } else {
                     vareInfoErrorLabel.setText("Vare kan ikke slettes, da den bruges i en ordre/faktura.");
@@ -465,7 +465,7 @@ public class Panel_Lager extends javax.swing.JPanel {
                 getFiltreretVareListe();
                 opdaterVareLinjePanel();
             } catch (SQLException ex) {
-                vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+                vareInfoErrorLabel.setText("Problem med databasen, hold over denne besked for detaljer");
                 vareInfoErrorLabel.setToolTipText(ex.getMessage());
             }
         } else {
@@ -488,7 +488,7 @@ public class Panel_Lager extends javax.swing.JPanel {
                 opdaterVareLinjePanel();
             }
         } catch (SQLException ex) {
-            vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+            vareInfoErrorLabel.setText("Problem med databasen, hold over denne besked for detaljer");
             vareInfoErrorLabel.setToolTipText(ex.getLocalizedMessage());
         }
     }//GEN-LAST:event_opretNyVareButtonActionPerformed
@@ -507,7 +507,7 @@ public class Panel_Lager extends javax.swing.JPanel {
                 Vare vare = dbhandler.getVare(vare_nr);
                 main.skiftcard(vare);
             } catch (SQLException ex) {
-                vareInfoErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+                vareInfoErrorLabel.setText("Problem med databasen, hold over denne besked for detaljer");
                 vareInfoErrorLabel.setToolTipText(ex.getMessage());
             }
         } else {
@@ -602,7 +602,7 @@ public class Panel_Lager extends javax.swing.JPanel {
                     Double.parseDouble(maxPrisTextField.getText()),
                     vareStatusComboBox.getSelectedIndex());
         } catch (SQLException ex) {
-            vareFilterErrorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+            vareFilterErrorLabel.setText("Problem med databasen, hold over denne besked for detaljer");
             vareFilterErrorLabel.setToolTipText(ex.getLocalizedMessage());
         }
     }
@@ -647,7 +647,9 @@ public class Panel_Lager extends javax.swing.JPanel {
         } else {
             overfladeTextField.setText("Poleret");
         }
+        if(vare.getVaretype()!=null){
         typeNavnTextField.setText(vare.getVaretype().getNavn());
+        }
         vareStatusTextField.setText(vare.getVareStatusToString());
         dekorationTextField.setText(vare.getDekorationToString());
         vareGruppeTextField.setText(vare.getGruppe().toString());

@@ -6,15 +6,22 @@ package view;
 
 import control.DatabaseObjectHandler;
 import control.Utility;
+import control.exceptions.ControlException;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Faktura;
+import model.Faktureringsadresse;
+import model.Kontoudtog;
 import model.Kunde;
 import model.Ordre;
+import model.Postnummer;
+import model.Provisionsseddel;
+import model.Samarbejdspartner;
 
 /**
  *
@@ -152,6 +159,8 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         textField_bedemand_cvr = new javax.swing.JTextField();
         textField_bedemand_bank = new javax.swing.JTextField();
         textField_bedemand_regnr = new javax.swing.JTextField();
+        textField_bedemand_tlf = new javax.swing.JTextField();
+        label_bedemand_telefon = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         label_info_opgrader = new javax.swing.JLabel();
         button_annuller = new javax.swing.JButton();
@@ -596,39 +605,119 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         panel_faktura_info.add(panel_faktureringsadresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 220, 120));
 
         panel_bedemandInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        panel_bedemandInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_bedemand_firma.setText("Firmanavn");
-        panel_bedemandInfo.add(label_bedemand_firma, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 16, -1, -1));
 
         label_bedemand_cvr.setText("CVR_nr");
-        panel_bedemandInfo.add(label_bedemand_cvr, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 68, -1, -1));
 
         label_bedemand_adresse.setText("Adresse");
-        panel_bedemandInfo.add(label_bedemand_adresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 42, -1, -1));
 
         label_bedemand_postnr.setText("Postnummer");
-        panel_bedemandInfo.add(label_bedemand_postnr, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 94, -1, -1));
 
         label_bedemand_by.setText("By");
-        panel_bedemandInfo.add(label_bedemand_by, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 120, -1, -1));
 
         label_bedemand_bank.setText("Bank");
-        panel_bedemandInfo.add(label_bedemand_bank, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 68, -1, -1));
 
         label_bedemand_regnr.setText("Registrerings_nr");
-        panel_bedemandInfo.add(label_bedemand_regnr, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 94, -1, -1));
 
         label_bedemand_kontonr.setText("Konto_nr");
-        panel_bedemandInfo.add(label_bedemand_kontonr, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 120, -1, -1));
-        panel_bedemandInfo.add(textField_bedemand_firma, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 13, 320, -1));
-        panel_bedemandInfo.add(textField_bedemand_adresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 39, 320, -1));
-        panel_bedemandInfo.add(textField_bedemand_post, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 91, 86, -1));
-        panel_bedemandInfo.add(textField_bedemand_by, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 117, 86, -1));
-        panel_bedemandInfo.add(textField_bedemand_kontonr, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 117, 120, -1));
-        panel_bedemandInfo.add(textField_bedemand_cvr, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 65, 86, -1));
-        panel_bedemandInfo.add(textField_bedemand_bank, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 65, 120, -1));
-        panel_bedemandInfo.add(textField_bedemand_regnr, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 91, 120, -1));
+
+        label_bedemand_telefon.setText("Telefon");
+
+        javax.swing.GroupLayout panel_bedemandInfoLayout = new javax.swing.GroupLayout(panel_bedemandInfo);
+        panel_bedemandInfo.setLayout(panel_bedemandInfoLayout);
+        panel_bedemandInfoLayout.setHorizontalGroup(
+            panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_bedemand_firma)
+                            .addComponent(label_bedemand_adresse))
+                        .addGap(33, 33, 33)
+                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textField_bedemand_adresse)
+                            .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                                .addComponent(textField_bedemand_firma, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(label_bedemand_telefon)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                                .addComponent(textField_bedemand_tlf, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                        .addComponent(label_bedemand_cvr)
+                        .addGap(47, 47, 47)
+                        .addComponent(textField_bedemand_cvr, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(label_bedemand_bank)
+                        .addGap(74, 74, 74)
+                        .addComponent(textField_bedemand_bank))
+                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                                .addComponent(label_bedemand_postnr)
+                                .addGap(24, 24, 24)
+                                .addComponent(textField_bedemand_post, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(label_bedemand_regnr))
+                            .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                                .addComponent(label_bedemand_by)
+                                .addGap(71, 71, 71)
+                                .addComponent(textField_bedemand_by, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(label_bedemand_kontonr)))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textField_bedemand_regnr)
+                            .addComponent(textField_bedemand_kontonr))))
+                .addContainerGap())
+        );
+        panel_bedemandInfoLayout.setVerticalGroup(
+            panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(label_bedemand_firma))
+                    .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(textField_bedemand_firma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textField_bedemand_tlf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label_bedemand_telefon)))
+                .addGap(6, 6, 6)
+                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(label_bedemand_adresse))
+                    .addComponent(textField_bedemand_adresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textField_bedemand_cvr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField_bedemand_bank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_bedemand_cvr)
+                            .addComponent(label_bedemand_bank))))
+                .addGap(6, 6, 6)
+                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textField_bedemand_post, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField_bedemand_regnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_bedemand_postnr)
+                            .addComponent(label_bedemand_regnr))))
+                .addGap(6, 6, 6)
+                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textField_bedemand_by, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField_bedemand_kontonr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_bedemand_by)
+                            .addComponent(label_bedemand_kontonr)))))
+        );
 
         panel_faktura_info.add(panel_bedemandInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 430, 150));
 
@@ -706,12 +795,20 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         if (validerInfo()) {
             boolean accept = visAcceptDialog("Er du sikker på at du vil opgradere til faktura?", "Bekræft opgradering");
             if (accept) {
-                if (radioButton_NormalOrdre.isSelected()) {
-                    opretNormalOrdre();
-                } else {
-                    opretBedemandOrdre();
+                try {
+                    if (radioButton_NormalOrdre.isSelected()) {
+                        opretNormalOrdre();
+                    } else {
+                        opretBedemandOrdre();
+                    }
+                    ((CardLayout) panel_card.getLayout()).show(panel_card, "visOrdre");
+                } catch (SQLException ex) {
+                    errorLabel.setText("Problem med databasen, hold over denne besked for detaljer");
+                    errorLabel.setToolTipText(ex.getMessage());
+                } catch (ControlException ex) {
+                    errorLabel.setText(ex.getMessage());
+                    errorLabel.setToolTipText(ex.getMessage());
                 }
-                ((CardLayout) panel_card.getLayout()).show(panel_card, "visOrdre");
             }
         }
     }//GEN-LAST:event_button_accepterActionPerformed
@@ -782,6 +879,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     private javax.swing.JLabel label_bedemand_kontonr;
     private javax.swing.JLabel label_bedemand_postnr;
     private javax.swing.JLabel label_bedemand_regnr;
+    private javax.swing.JLabel label_bedemand_telefon;
     private javax.swing.JLabel label_dato;
     private javax.swing.JLabel label_faktura_nr;
     private javax.swing.JLabel label_faktureringBy;
@@ -807,6 +905,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     private javax.swing.JTextField textField_bedemand_kontonr;
     private javax.swing.JTextField textField_bedemand_post;
     private javax.swing.JTextField textField_bedemand_regnr;
+    private javax.swing.JTextField textField_bedemand_tlf;
     private javax.swing.JTextField textField_dato;
     private javax.swing.JTextField textField_faktureringAdresse;
     private javax.swing.JTextField textField_faktureringBy;
@@ -847,20 +946,74 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         textField_dato.setText(Utility.getCurrentTimeToString());
     }
 
-    private void opretNormalOrdre() {
-        /*Faktura faktura = new Faktura(ordre.createFakturaNr(),
-            Utility.getCurrentTime(),
-            Utility.getCurrentTime(),
-            "",
-            false,
-            false,
-            ordre,
-            null,
-            null);*/
+    private void opretNormalOrdre() throws SQLException, ControlException {
+        Faktura faktura;
+        if (checkBox_faktureringsAdresse.isSelected()) {
+            Postnummer post_nr = new Postnummer(Integer.parseInt(
+                    textField_faktureringPostNr.getText().replace("'", "\'")),
+                    textField_faktureringBy.getText().replace("'", "\'"));
+            Faktureringsadresse adresse = new Faktureringsadresse(
+                    0,
+                    textField_faktureringAdresse.getText().replace("'", "\'"),
+                    post_nr);
+            faktura = new Faktura(ordre.createFakturaNr(),
+                    Utility.getCurrentTime(),
+                    Utility.getCurrentTime(),
+                    adresse,
+                    false,
+                    false,
+                    ordre,
+                    null,
+                    null);
+        } else {
+            faktura = new Faktura(ordre.createFakturaNr(),
+                    Utility.getCurrentTime(),
+                    Utility.getCurrentTime(),
+                    null,
+                    false,
+                    false,
+                    ordre,
+                    null,
+                    null);
+        }
+
+        dbhandler.createFaktura(faktura);
     }
 
-    private void opretBedemandOrdre() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    private void opretBedemandOrdre() throws SQLException, ControlException {
+        Faktura faktura;
+        Postnummer post_nr = new Postnummer(
+                Integer.parseInt(textField_bedemand_post.getText()),
+                textField_bedemand_by.getText().replace("'", "\'"));
+        Samarbejdspartner bedemand = new Samarbejdspartner(
+                textField_bedemand_firma.getText().replace("'", "\'"),
+                textField_bedemand_adresse.getText().replace("'", "\'"),
+                Integer.parseInt(textField_bedemand_tlf.getText()),
+                Integer.parseInt(textField_bedemand_cvr.getText()),
+                Integer.parseInt(textField_bedemand_regnr.getText()),
+                textField_bedemand_kontonr.getText().replace("'", "\'"),
+                textField_bedemand_bank.getText().replace("'", "\'"),
+                post_nr);
+        Kontoudtog kontoudtog = new Kontoudtog(
+                ordre.getOrdre_nr(),
+                Utility.getCurrentTime(),
+                Utility.getCurrentTime());
+        Provisionsseddel provisionsseddel = new Provisionsseddel(
+                ordre.getOrdre_nr(),
+                Utility.getCurrentTime(),
+                kontoudtog);
+        faktura = new Faktura(ordre.createFakturaNr(),
+                Utility.getCurrentTime(),
+                Utility.getCurrentTime(),
+                null,
+                true,
+                false,
+                ordre,
+                bedemand,
+                provisionsseddel);
+
+        dbhandler.createFaktura(faktura);
+
     }
 
     public String validerString(String string) {
@@ -1029,6 +1182,15 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                 isNotFirst = true;
                 valid = false;
             }
+            if (textField_bedemand_tlf.getText().length() != 8 || !isInteger(textField_bedemand_tlf.getText())) {
+                label_bedemand_telefon.setForeground(Color.red);
+                if (isNotFirst) {
+                    error += ", ";
+                }
+                error += label_bedemand_telefon.getText() + "(Telefonnummer skal være på 8 cifre, og kun tal)";
+                isNotFirst = true;
+                valid = false;
+            }
             //Validerer ikke om det kun er numre, skal lige have lavet en metode til det da det er på 
             //10 cifre og derfor ikke kan være i en integer
             if (textField_bedemand_kontonr.getText().length() != 10) {
@@ -1072,16 +1234,17 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         label_faktureringBy.setForeground(Color.black);
         label_faktureringPostNr.setForeground(Color.black);
         label_faktureringsadresse.setForeground(Color.black);
+        label_bedemand_telefon.setForeground(Color.black);
     }
-    
-    private void resetFaktureringsInfo(){
+
+    private void resetFaktureringsInfo() {
         checkBox_faktureringsAdresse.setSelected(false);
         label_faktureringBy.setText("");
         label_faktureringPostNr.setText("");
         label_faktureringsadresse.setText("");
     }
-    
-    private void resetBedemandInfo(){
+
+    private void resetBedemandInfo() {
         textField_bedemand_adresse.setText("");
         textField_bedemand_by.setText("");
         textField_bedemand_post.setText("");
