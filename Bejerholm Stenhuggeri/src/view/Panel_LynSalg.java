@@ -519,7 +519,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             try {
                 String ordrenr = dbhandler.createOrdre(lynordre);
                 lynordre = dbhandler.getOrdre(ordrenr);
-                Faktura nyfaktura = new Faktura(ordrenr, Utility.getCurrentTime(), "Køb i butik", Utility.getCurrentTime(), lynordre.getKunde().getAdresse(), false, false, lynordre, null, null);
+                Faktura nyfaktura = new Faktura(ordrenr, Utility.getCurrentTime(), Utility.getCurrentTime(), lynordre.getKunde().getAdresse(), false, false, lynordre, null, null);
                 System.out.println("Ordren er blevet oprettet korrekt");
                 try {
                     dbhandler.createFaktura(nyfaktura);

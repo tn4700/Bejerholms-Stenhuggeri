@@ -103,7 +103,6 @@ create table faktura
 (
 faktura_nr              char(16) not null,            # Unikt nr som står i toppen af faktura seddelen
 faktureringsdato        datetime,            # Dato for oprettelse af faktura seddelen
-vedrørende              varchar(100),
 sendt_dato              datetime,       # Dato for hvornår fakturaen er sendt
 faktureringsadresse     varchar(50), #Skal laves om          
 fakturatype             boolean not null,            # Bedemand eller almindelig - skal rettes i klassediagram

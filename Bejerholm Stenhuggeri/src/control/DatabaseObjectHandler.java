@@ -889,7 +889,7 @@ public class DatabaseObjectHandler {
         String ordre_nr = null;
         String provisions_nr = null;
         String sql = "select bedemand_tlf, provisions_nr, ordre_nr, faktura_nr, faktureringsdato,"
-                + "vedrørende, sendt_dato, faktureringsadresse, fakturatype, betalingsstatus from "
+                + "sendt_dato, faktureringsadresse, fakturatype, betalingsstatus from "
                 + "faktura where faktura_nr = '" + faktura_nr + "';";
         ResultSet rs;
         rs = db.getData(sql);
@@ -897,7 +897,6 @@ public class DatabaseObjectHandler {
         if (rs.next()) {
             faktura = new Faktura(rs.getString("faktura_nr"),
                     rs.getTimestamp("faktureringsdato"),
-                    rs.getString("vedrørende"),
                     rs.getTimestamp("sendt_dato"),
                     rs.getString("faktureringsadresse"),
                     rs.getBoolean("fakturatype"),
@@ -937,18 +936,18 @@ public class DatabaseObjectHandler {
                 throw new ControlException("Ugylige fakturaoplysninger(bedemandsordre men ingen samarbejdspartner og/eller provisionsseddel valgt");
             }
             db.setData("insert into faktura (ordre_nr, faktura_nr, bedemand_tlf, faktureringsdato,"
-                    + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus, provisions_nr)values('"
+                    + "sendt_dato,faktureringsadresse,fakturatype,betalingsstatus, provisions_nr)values('"
                     + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
                     + faktura.getBedemand().getTlf() + "','"
-                    + faktura.getFaktureringsdato() + "','" + faktura.getVedrørende() + "','"
+                    + faktura.getFaktureringsdato() + "','"
                     + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse() + "','"
                     + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
                     + "','" + faktura.getOrdre().getOrdre_nr() + "');");
         } else {
             db.setData("insert into faktura (ordre_nr, faktura_nr,faktureringsdato,"
-                    + "vedrørende,sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
+                    + "sendt_dato,faktureringsadresse,fakturatype,betalingsstatus)values('"
                     + faktura.getOrdre().getOrdre_nr() + "','" + faktura_nr + "','"
-                    + faktura.getFaktureringsdato() + "','" + faktura.getVedrørende() + "','"
+                    + faktura.getFaktureringsdato() + "','"
                     + faktura.getSendt_dato() + "','" + faktura.getFaktureringsadresse() + "','"
                     + boolToInt(faktura.getFakturatype()) + "','" + boolToInt(faktura.getBetalingsstatus())
                     + "');");

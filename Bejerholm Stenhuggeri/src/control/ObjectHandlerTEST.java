@@ -84,7 +84,6 @@ public class ObjectHandlerTEST {
             //Opret faktura
             Faktura faktura = new Faktura(null,
             Utility.getCurrentTime(),
-            "ok",
             Utility.getCurrentTime(),
             "Lolvej 7",
             true,

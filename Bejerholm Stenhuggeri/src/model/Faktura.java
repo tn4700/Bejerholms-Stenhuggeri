@@ -14,7 +14,6 @@ public class Faktura {
 
     private String faktura_nr;
     private Timestamp faktureringsdato;
-    private String vedrørende;
     private Timestamp sendt_dato;
     private String faktureringsadresse;
     private boolean fakturatype; //True = bedemand, false = normal
@@ -25,7 +24,6 @@ public class Faktura {
 
     public Faktura(String faktura_nr,
             Timestamp faktureringsdato,
-            String vedrørende,
             Timestamp sendt_dato,
             String faktureringsadresse,
             boolean fakturatype,
@@ -36,7 +34,6 @@ public class Faktura {
 
         this.faktura_nr = faktura_nr;
         this.faktureringsdato = faktureringsdato;
-        this.vedrørende = vedrørende;
         this.sendt_dato = sendt_dato;
         this.faktureringsadresse = faktureringsadresse;
         this.fakturatype = fakturatype;
@@ -86,14 +83,6 @@ public class Faktura {
         this.faktureringsdato = faktureringsdato;
     }
 
-    public String getVedrørende() {
-        return vedrørende;
-    }
-
-    public void setVedrørende(String vedrørende) {
-        this.vedrørende = vedrørende;
-    }
-
     public Timestamp getSendt_dato() {
         return sendt_dato;
     }
@@ -126,10 +115,6 @@ public class Faktura {
         this.betalingsstatus = betalingsstatus;
     }
 
-    @Override
-    public String toString() {
-        return "Faktura{" + "faktura_nr=" + faktura_nr + ", faktureringsdato=" + faktureringsdato + ", vedr\u00f8rende=" + vedrørende + ", sendt_dato=" + sendt_dato + ", faktureringsadresse=" + faktureringsadresse + ", fakturatype=" + fakturatype + ", betalingsstatus=" + betalingsstatus + ", ordre=" + ordre + ", bedemand=" + bedemand + ", provisionsseddel=" + provisionsseddel + '}';
-    }
 /**
  * Denne metode opretter et kontoudtog ud fra en faktura og returner derefter 
  * kontoudtog objektet
