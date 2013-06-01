@@ -18,7 +18,7 @@
         <Name>Vare</Name>
         <Access>Public</Access>
         <Location left="73" top="90" />
-        <Size width="162" height="230" />
+        <Size width="162" height="247" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int vare_nr</Member>
         <Member type="Field">String navn</Member>
@@ -29,12 +29,13 @@
         <Member type="Field">String type</Member>
         <Member type="Field">String overflade</Member>
         <Member type="Field">boolean dekoration</Member>
+        <Member type="Field">boolean varestatus</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Kunde</Name>
         <Access>Public</Access>
-        <Location left="1048" top="10" />
+        <Location left="1165" top="79" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">String fornavn</Member>
@@ -46,7 +47,7 @@
       <Entity type="Class">
         <Name>Ordre</Name>
         <Access>Public</Access>
-        <Location left="827" top="155" />
+        <Location left="837" top="90" />
         <Size width="162" height="332" />
         <Collapsed>False</Collapsed>
         <Member type="Field">String ordre_nr</Member>
@@ -56,6 +57,7 @@
         <Member type="Field">int leveringsdato</Member>
         <Member type="Field">int afhentningsdato</Member>
         <Member type="Field">String bemærkning</Member>
+        <Member type="Field">String Bemærkning_ekstra</Member>
         <Member type="Field">String leveringsadresse</Member>
         <Member type="Field">String kirkegård</Member>
         <Member type="Field">int afdeling</Member>
@@ -68,12 +70,11 @@
       <Entity type="Class">
         <Name>Faktura</Name>
         <Access>Public</Access>
-        <Location left="1296" top="422" />
+        <Location left="1165" top="364" />
         <Size width="162" height="247" />
         <Collapsed>False</Collapsed>
         <Member type="Field">String faktura_nr</Member>
         <Member type="Field">Timestamp faktureringsdato</Member>
-        <Member type="Field">String vedrørende</Member>
         <Member type="Field">int sendt_dato</Member>
         <Member type="Field">String faktureringsadresse</Member>
         <Member type="Field">boolean fakturatype</Member>
@@ -83,7 +84,7 @@
       <Entity type="Class">
         <Name>Provisionsseddel</Name>
         <Access>Public</Access>
-        <Location left="1296" top="752" />
+        <Location left="1165" top="672" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">String provisions_nr</Member>
@@ -93,7 +94,7 @@
       <Entity type="Class">
         <Name>Samarbejdspartner</Name>
         <Access>Public</Access>
-        <Location left="1684" top="452" />
+        <Location left="1493" top="364" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">String firmanavn</Member>
@@ -121,12 +122,13 @@
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">String skrifttype</Member>
+        <Member type="Field">int id</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Kontoudtog</Name>
         <Access>Public</Access>
-        <Location left="1556" top="752" />
+        <Location left="1493" top="660" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">String kontoudtog_nr</Member>
@@ -136,7 +138,7 @@
       </Entity>
       <Entity type="Comment">
         <Text>Ordretype = ny sten/ tilføjelse</Text>
-        <Location left="706" top="29" />
+        <Location left="723" top="79" />
         <Size width="96" height="50" />
       </Entity>
       <Entity type="Class">
@@ -149,12 +151,13 @@
         <Member type="Field">double pris</Member>
         <Member type="Field">int antal</Member>
         <Member type="Field">String kommentar</Member>
+        <Member type="Field">int id</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>User</Name>
         <Access>Public</Access>
-        <Location left="90" top="920" />
+        <Location left="73" top="645" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">String brugernavn</Member>
@@ -164,22 +167,11 @@
       <Entity type="Class">
         <Name>Postnummer</Name>
         <Access>Public</Access>
-        <Location left="1316" top="10" />
+        <Location left="1472" top="90" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int post_nr</Member>
         <Member type="Field">String byNavn</Member>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>Konstant</Name>
-        <Access>Public</Access>
-        <Location left="320" top="920" />
-        <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
-        <Member type="Field">int nr</Member>
-        <Member type="Field">String navn</Member>
-        <Member type="Field">double nummer</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -195,22 +187,36 @@
       <Entity type="Class">
         <Name>Inskription_linje</Name>
         <Access>Public</Access>
-        <Location left="752" top="544" />
+        <Location left="760" top="645" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int linje_nr</Member>
         <Member type="Field">int linje_type</Member>
         <Member type="Field">int inskription</Member>
+        <Member type="Field">int inskription_id</Member>
         <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>Fakturatype:
+true = bedemand 
+false = normal</Text>
+        <Location left="997" top="511" />
+        <Size width="160" height="75" />
       </Entity>
     </Entities>
     <Relationships>
       <Relationship type="Association" first="3" second="7">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>775</X>
-          <Y>179</Y>
+          <X>800</X>
+          <Y>199</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>596</X>
+          <Y>199</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -218,15 +224,17 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="2" second="3">
-        <StartOrientation>Vertical</StartOrientation>
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1126</X>
-          <Y>262</Y>
+          <X>1140</X>
+          <Y>204</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1017</X>
-          <Y>289</Y>
+          <X>1029</X>
+          <Y>204</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -234,6 +242,8 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="6" second="4">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Bidirectional</Direction>
@@ -242,6 +252,8 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="4" second="5">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Bidirectional</Direction>
@@ -250,11 +262,13 @@
         <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="3" second="4">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1014</X>
-          <Y>415</Y>
+          <X>1024</X>
+          <Y>350</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -262,6 +276,8 @@
         <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="0" second="1">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Bidirectional</Direction>
@@ -270,6 +286,8 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="7" second="1">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Bidirectional</Direction>
@@ -278,6 +296,8 @@
         <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="7" second="8">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -294,6 +314,8 @@
         <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="7" second="11">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -306,16 +328,20 @@
         <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="2" second="13">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1352</X>
+          <Y>201</Y>
+        </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
         <StartMultiplicity>*</StartMultiplicity>
         <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="6" second="13">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Bidirectional</Direction>
@@ -323,7 +349,9 @@
         <StartMultiplicity>*</StartMultiplicity>
         <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
-      <Relationship type="Association" first="8" second="15">
+      <Relationship type="Association" first="8" second="14">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="False">
@@ -335,7 +363,9 @@
         <StartMultiplicity>*</StartMultiplicity>
         <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
-      <Relationship type="Association" first="8" second="16">
+      <Relationship type="Association" first="8" second="15">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Bidirectional</Direction>
@@ -344,11 +374,13 @@
         <EndMultiplicity>*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="9" second="5">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1512</X>
-          <Y>867</Y>
+          <X>1449</X>
+          <Y>775</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
