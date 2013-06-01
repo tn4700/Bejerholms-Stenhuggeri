@@ -78,6 +78,8 @@ public class DatabaseObjectHandler {
                     + kunde.getFornavn() + "','" + kunde.getEfternavn() + "','"
                     + kunde.getAdresse() + "','" + kunde.getTlf() + "','"
                     + kunde.getPost_nr().getPost_nr() + "');");
+        } else {
+            editKunde(kunde);
         }
     }
 
@@ -923,7 +925,7 @@ public class DatabaseObjectHandler {
     }
 
     public void createFaktura(Faktura faktura) throws SQLException, ControlException {
-        String faktura_nr = "00" + faktura.getOrdre().getKunde().getTlf() + "-" + faktura.getOrdre().getOrdre_nr();
+        String faktura_nr = faktura.getOrdre().createFakturaNr();
         if (faktura.getFakturatype()) {
             if (faktura.getBedemand() != null && faktura.getProvisionsseddel() != null) {
                 if (getSamarbejdspartner(faktura.getBedemand().getTlf()) == null) {

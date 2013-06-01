@@ -4,24 +4,20 @@
  */
 package view;
 
-import com.itextpdf.text.DocumentException;
 import control.DatabaseObjectHandler;
-import control.OpretFaktura;
-import control.OpretKontoudtog;
-import control.OpretOrdre;
-import javax.swing.JOptionPane;
-import model.Faktura;
 import control.Utility;
-import java.awt.Desktop;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLException;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.sql.Timestamp;
 import java.text.NumberFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.Faktura;
 import model.Kunde;
 import model.Ordre;
+import model.Provisionsseddel;
+import model.Samarbejdspartner;
 
 /**
  *
@@ -44,29 +40,28 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         kunde = ordre.getKunde();
         initComponents();
         jLabel_VisOprettet.setText(Utility.formatTimestampToString(ordre.getOrdredato()));
-        jLabel_VisTlf.setText(""+ kunde.getTlf());
+        jLabel_VisTlf.setText("" + kunde.getTlf());
         jLabel_VisAdresse.setText(kunde.getAdresse());
         jLabel_VisPostnrBy.setText(kunde.getPost_nr().getPost_nr() + " " + kunde.getPost_nr().getByNavn());
         jLabel_VisNavn.setText(kunde.getFornavn() + " " + kunde.getEfternavn());
         //jLabel_VisSendtDato.setText(Utility.formatTimestampToString();
         jLabel_VisPris.setText(NumberFormat.getCurrencyInstance().format(ordre.getTotal()));
-        
-        if(ordre.getOrdretype()){
+
+        if (ordre.getOrdretype()) {
             jLabel_VisAfDødNavn.setText(ordre.getAfdødnavn());
-            jLabel_VisAfdeling.setText("" +ordre.getAfdeling());
+            jLabel_VisAfdeling.setText("" + ordre.getAfdeling());
             jLabel_VisNR.setText("" + ordre.getNummer());
             jLabel_VisRække.setText("" + ordre.getRække());
             jLabel_VisKirkegård.setText(ordre.getKirkegård());
             jTextArea_Bemærkning.setText(ordre.getBemærkning());
             jTextArea_Bemærkning.append("\n Ekstra bemærkning: \n");
-            if(!ordre.getBemærkning_ekstra().isEmpty()){
+            if (!ordre.getBemærkning_ekstra().isEmpty()) {
                 jTextArea_Bemærkning.append(ordre.getBemærkning_ekstra());
-            }
-            else{
+            } else {
                 jTextArea_Bemærkning.append("Ingen ekstra bemærkning indtastet");
             }
         }
-       
+
     }
 
     /**
@@ -78,6 +73,8 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panel_card = new javax.swing.JPanel();
+        panel_visOrdre = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -106,7 +103,6 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jLabel_brugerbesked = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel_Afdødnavn = new javax.swing.JLabel();
         jLabel_Kirkegård = new javax.swing.JLabel();
@@ -121,12 +117,66 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jLabel_VisRække = new javax.swing.JLabel();
         jLabel_VisNR = new javax.swing.JLabel();
         jLabel_VisAfdeling = new javax.swing.JLabel();
+        panel_Opgrader = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        panel_faktura_info = new javax.swing.JPanel();
+        button_accepter = new javax.swing.JButton();
+        panel_fakturaInfo = new javax.swing.JPanel();
+        radioButton_NormalOrdre = new javax.swing.JRadioButton();
+        radioButton_Bedemand = new javax.swing.JRadioButton();
+        textField_Faktura_nr = new javax.swing.JTextField();
+        textField_ordreNr = new javax.swing.JTextField();
+        label_ordre_nr = new javax.swing.JLabel();
+        label_faktura_nr = new javax.swing.JLabel();
+        textField_dato = new javax.swing.JTextField();
+        label_dato = new javax.swing.JLabel();
+        panel_faktureringsadresse = new javax.swing.JPanel();
+        label_faktureringBy = new javax.swing.JLabel();
+        label_faktureringPostNr = new javax.swing.JLabel();
+        label_faktureringsadresse = new javax.swing.JLabel();
+        textField_faktureringAdresse = new javax.swing.JTextField();
+        checkBox_faktureringsAdresse = new javax.swing.JCheckBox();
+        textField_faktureringPostNr = new javax.swing.JTextField();
+        textField_faktureringBy = new javax.swing.JTextField();
+        panel_bedemandInfo = new javax.swing.JPanel();
+        label_bedemand_firma = new javax.swing.JLabel();
+        label_bedemand_cvr = new javax.swing.JLabel();
+        label_bedemand_adresse = new javax.swing.JLabel();
+        label_bedemand_postnr = new javax.swing.JLabel();
+        label_bedemand_by = new javax.swing.JLabel();
+        label_bedemand_bank = new javax.swing.JLabel();
+        label_bedemand_regnr = new javax.swing.JLabel();
+        label_bedemand_kontonr = new javax.swing.JLabel();
+        textField_bedemand_firma = new javax.swing.JTextField();
+        textField_bedemand_adresse = new javax.swing.JTextField();
+        textField_bedemand_post = new javax.swing.JTextField();
+        textField_bedemand_by = new javax.swing.JTextField();
+        textField_bedemand_kontonr = new javax.swing.JTextField();
+        textField_bedemand_cvr = new javax.swing.JTextField();
+        textField_bedemand_bank = new javax.swing.JTextField();
+        textField_bedemand_regnr = new javax.swing.JTextField();
+        jPanel10 = new javax.swing.JPanel();
+        label_info_opgrader = new javax.swing.JLabel();
+        button_annuller = new javax.swing.JButton();
+        errorLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Faktura");
-        setMinimumSize(new java.awt.Dimension(500, 450));
-        setPreferredSize(new java.awt.Dimension(500, 450));
+        setMinimumSize(new java.awt.Dimension(470, 430));
+        setPreferredSize(new java.awt.Dimension(475, 455));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panel_card.setMaximumSize(new java.awt.Dimension(470, 430));
+        panel_card.setMinimumSize(new java.awt.Dimension(470, 430));
+        panel_card.setPreferredSize(new java.awt.Dimension(470, 430));
+        panel_card.setLayout(new java.awt.CardLayout());
+
+        panel_visOrdre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel_visOrdre.setMaximumSize(new java.awt.Dimension(470, 430));
+        panel_visOrdre.setMinimumSize(new java.awt.Dimension(470, 430));
+        panel_visOrdre.setPreferredSize(new java.awt.Dimension(470, 430));
+        panel_visOrdre.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Kunde info"));
 
@@ -192,11 +242,11 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 47, 210, -1));
+        panel_visOrdre.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 210, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel9.setText("Vis Ordre");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        panel_visOrdre.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Ordre info"));
 
@@ -292,7 +342,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 47, -1, 160));
+        panel_visOrdre.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Valgmuligheder"));
 
@@ -342,8 +392,8 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(76, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,12 +407,12 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGap(63, 63, 63))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton7)
@@ -375,8 +425,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, 110));
-        getContentPane().add(jLabel_brugerbesked, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 310, -1));
+        panel_visOrdre.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 303, -1, 120));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Ekstra Info")));
 
@@ -465,14 +514,158 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                 .addGap(50, 50, 50))
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 440, 90));
+        panel_visOrdre.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 213, 440, 90));
+
+        panel_card.add(panel_visOrdre, "visOrdre");
+
+        panel_Opgrader.setMaximumSize(new java.awt.Dimension(470, 430));
+        panel_Opgrader.setMinimumSize(new java.awt.Dimension(470, 430));
+        panel_Opgrader.setPreferredSize(new java.awt.Dimension(470, 430));
+        panel_Opgrader.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel12.setText("Opgrader Faktura");
+        panel_Opgrader.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+
+        panel_faktura_info.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel_faktura_info.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        button_accepter.setText("Opgrader");
+        button_accepter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_accepterActionPerformed(evt);
+            }
+        });
+        panel_faktura_info.add(button_accepter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
+
+        panel_fakturaInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel_fakturaInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        radioButton_NormalOrdre.setSelected(true);
+        radioButton_NormalOrdre.setText("Privatperson");
+        radioButton_NormalOrdre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButton_NormalOrdreActionPerformed(evt);
+            }
+        });
+        panel_fakturaInfo.add(radioButton_NormalOrdre, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 9, -1, -1));
+
+        radioButton_Bedemand.setText("Bedemand");
+        radioButton_Bedemand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButton_BedemandActionPerformed(evt);
+            }
+        });
+        panel_fakturaInfo.add(radioButton_Bedemand, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 9, -1, -1));
+
+        textField_Faktura_nr.setEditable(false);
+        panel_fakturaInfo.add(textField_Faktura_nr, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 32, 111, -1));
+
+        textField_ordreNr.setEditable(false);
+        panel_fakturaInfo.add(textField_ordreNr, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 58, 112, -1));
+
+        label_ordre_nr.setText("Ordre_nr");
+        panel_fakturaInfo.add(label_ordre_nr, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 61, -1, -1));
+
+        label_faktura_nr.setText("Faktura_nr");
+        panel_fakturaInfo.add(label_faktura_nr, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 35, -1, -1));
+
+        textField_dato.setEditable(false);
+        panel_fakturaInfo.add(textField_dato, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 84, 112, -1));
+
+        label_dato.setText("Dato");
+        panel_fakturaInfo.add(label_dato, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 87, -1, -1));
+
+        panel_faktura_info.add(panel_fakturaInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 120));
+
+        panel_faktureringsadresse.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel_faktureringsadresse.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_faktureringBy.setText("By");
+        panel_faktureringsadresse.add(label_faktureringBy, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 89, -1, -1));
+
+        label_faktureringPostNr.setText("Postnummer");
+        panel_faktureringsadresse.add(label_faktureringPostNr, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 63, -1, -1));
+
+        label_faktureringsadresse.setText("Adresse");
+        panel_faktureringsadresse.add(label_faktureringsadresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 37, -1, -1));
+        panel_faktureringsadresse.add(textField_faktureringAdresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 34, 114, -1));
+
+        checkBox_faktureringsAdresse.setText("Anden faktureringsadresse");
+        panel_faktureringsadresse.add(checkBox_faktureringsAdresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 9, -1, -1));
+        panel_faktureringsadresse.add(textField_faktureringPostNr, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 60, 114, -1));
+        panel_faktureringsadresse.add(textField_faktureringBy, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 86, 114, -1));
+
+        panel_faktura_info.add(panel_faktureringsadresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 220, 120));
+
+        panel_bedemandInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel_bedemandInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_bedemand_firma.setText("Firmanavn");
+        panel_bedemandInfo.add(label_bedemand_firma, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 16, -1, -1));
+
+        label_bedemand_cvr.setText("CVR_nr");
+        panel_bedemandInfo.add(label_bedemand_cvr, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 68, -1, -1));
+
+        label_bedemand_adresse.setText("Adresse");
+        panel_bedemandInfo.add(label_bedemand_adresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 42, -1, -1));
+
+        label_bedemand_postnr.setText("Postnummer");
+        panel_bedemandInfo.add(label_bedemand_postnr, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 94, -1, -1));
+
+        label_bedemand_by.setText("By");
+        panel_bedemandInfo.add(label_bedemand_by, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 120, -1, -1));
+
+        label_bedemand_bank.setText("Bank");
+        panel_bedemandInfo.add(label_bedemand_bank, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 68, -1, -1));
+
+        label_bedemand_regnr.setText("Registrerings_nr");
+        panel_bedemandInfo.add(label_bedemand_regnr, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 94, -1, -1));
+
+        label_bedemand_kontonr.setText("Konto_nr");
+        panel_bedemandInfo.add(label_bedemand_kontonr, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 120, -1, -1));
+        panel_bedemandInfo.add(textField_bedemand_firma, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 13, 320, -1));
+        panel_bedemandInfo.add(textField_bedemand_adresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 39, 320, -1));
+        panel_bedemandInfo.add(textField_bedemand_post, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 91, 86, -1));
+        panel_bedemandInfo.add(textField_bedemand_by, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 117, 86, -1));
+        panel_bedemandInfo.add(textField_bedemand_kontonr, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 117, 120, -1));
+        panel_bedemandInfo.add(textField_bedemand_cvr, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 65, 86, -1));
+        panel_bedemandInfo.add(textField_bedemand_bank, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 65, 120, -1));
+        panel_bedemandInfo.add(textField_bedemand_regnr, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 91, 120, -1));
+
+        panel_faktura_info.add(panel_bedemandInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 430, 150));
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_info_opgrader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_info_opgrader.setText("Kontoudtog og Provisionsseddel med numrene <Ordre_nr> vil også blive oprettet.");
+        jPanel10.add(label_info_opgrader, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 397, 32));
+
+        panel_faktura_info.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 430, -1));
+
+        button_annuller.setText("Annuller");
+        button_annuller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_annullerActionPerformed(evt);
+            }
+        });
+        panel_faktura_info.add(button_annuller, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, -1, -1));
+
+        panel_Opgrader.add(panel_faktura_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 450, 370));
+
+        errorLabel.setForeground(new java.awt.Color(255, 0, 0));
+        errorLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        panel_Opgrader.add(errorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 0, 240, 50));
+
+        panel_card.add(panel_Opgrader, "Opgrader");
+
+        getContentPane().add(panel_card, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 430));
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -484,22 +677,62 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-  
+        ((CardLayout) panel_card.getLayout()).show(panel_card, "Opgrader");
+        startOpgradering();
     }//GEN-LAST:event_jButton5ActionPerformed
-    
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
-      
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        
-       
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void radioButton_NormalOrdreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButton_NormalOrdreActionPerformed
+        radioButton_NormalOrdre.setSelected(true);
+        radioButton_Bedemand.setSelected(false);
+        enableView(panel_faktureringsadresse);
+        disableView(panel_bedemandInfo);
+        resetBedemandInfo();
+        resetErrors();
+    }//GEN-LAST:event_radioButton_NormalOrdreActionPerformed
+
+    private void radioButton_BedemandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButton_BedemandActionPerformed
+        radioButton_NormalOrdre.setSelected(false);
+        radioButton_Bedemand.setSelected(true);
+        enableView(panel_bedemandInfo);
+        disableView(panel_faktureringsadresse);
+        resetFaktureringsInfo();
+        resetErrors();
+    }//GEN-LAST:event_radioButton_BedemandActionPerformed
+
+    private void button_accepterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_accepterActionPerformed
+        if (validerInfo()) {
+            boolean accept = visAcceptDialog("Er du sikker på at du vil opgradere til faktura?", "Bekræft opgradering");
+            if (accept) {
+                if (radioButton_NormalOrdre.isSelected()) {
+                    opretNormalOrdre();
+                } else {
+                    opretBedemandOrdre();
+                }
+                ((CardLayout) panel_card.getLayout()).show(panel_card, "visOrdre");
+            }
+        }
+    }//GEN-LAST:event_button_accepterActionPerformed
+
+    private void button_annullerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_annullerActionPerformed
+        boolean accept = visAcceptDialog("Er du sikker på at du vil annullere opgradering af ordren?", "Annuller opgradering");
+        if (accept) {
+            ((CardLayout) panel_card.getLayout()).show(panel_card, "visOrdre");
+        }
+    }//GEN-LAST:event_button_annullerActionPerformed
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_accepter;
+    private javax.swing.JButton button_annuller;
+    private javax.swing.JCheckBox checkBox_faktureringsAdresse;
+    private javax.swing.JLabel errorLabel;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -509,6 +742,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -535,13 +769,329 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel_VisRække;
     private javax.swing.JLabel jLabel_VisSendtDato;
     private javax.swing.JLabel jLabel_VisTlf;
-    private javax.swing.JLabel jLabel_brugerbesked;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea_Bemærkning;
+    private javax.swing.JLabel label_bedemand_adresse;
+    private javax.swing.JLabel label_bedemand_bank;
+    private javax.swing.JLabel label_bedemand_by;
+    private javax.swing.JLabel label_bedemand_cvr;
+    private javax.swing.JLabel label_bedemand_firma;
+    private javax.swing.JLabel label_bedemand_kontonr;
+    private javax.swing.JLabel label_bedemand_postnr;
+    private javax.swing.JLabel label_bedemand_regnr;
+    private javax.swing.JLabel label_dato;
+    private javax.swing.JLabel label_faktura_nr;
+    private javax.swing.JLabel label_faktureringBy;
+    private javax.swing.JLabel label_faktureringPostNr;
+    private javax.swing.JLabel label_faktureringsadresse;
+    private javax.swing.JLabel label_info_opgrader;
+    private javax.swing.JLabel label_ordre_nr;
+    private javax.swing.JPanel panel_Opgrader;
+    private javax.swing.JPanel panel_bedemandInfo;
+    private javax.swing.JPanel panel_card;
+    private javax.swing.JPanel panel_fakturaInfo;
+    private javax.swing.JPanel panel_faktura_info;
+    private javax.swing.JPanel panel_faktureringsadresse;
+    private javax.swing.JPanel panel_visOrdre;
+    private javax.swing.JRadioButton radioButton_Bedemand;
+    private javax.swing.JRadioButton radioButton_NormalOrdre;
+    private javax.swing.JTextField textField_Faktura_nr;
+    private javax.swing.JTextField textField_bedemand_adresse;
+    private javax.swing.JTextField textField_bedemand_bank;
+    private javax.swing.JTextField textField_bedemand_by;
+    private javax.swing.JTextField textField_bedemand_cvr;
+    private javax.swing.JTextField textField_bedemand_firma;
+    private javax.swing.JTextField textField_bedemand_kontonr;
+    private javax.swing.JTextField textField_bedemand_post;
+    private javax.swing.JTextField textField_bedemand_regnr;
+    private javax.swing.JTextField textField_dato;
+    private javax.swing.JTextField textField_faktureringAdresse;
+    private javax.swing.JTextField textField_faktureringBy;
+    private javax.swing.JTextField textField_faktureringPostNr;
+    private javax.swing.JTextField textField_ordreNr;
     // End of variables declaration//GEN-END:variables
+
+    public boolean visAcceptDialog(String message, String title) {
+        boolean accept = false;
+        String[] options = new String[]{"Ja", "Nej"};
+        int reply = JOptionPane.showOptionDialog(this, message, title, JOptionPane.DEFAULT_OPTION,
+                JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+        if (reply == JOptionPane.YES_OPTION) {
+            accept = true;
+        }
+        return accept;
+    }
+
+    public final void disableView(JPanel panel) {
+        Component[] com = panel.getComponents();
+        for (int a = 0; a < com.length; a++) {
+            com[a].setEnabled(false);
+        }
+    }
+
+    public final void enableView(JPanel panel) {
+        Component[] com = panel.getComponents();
+        for (int a = 0; a < com.length; a++) {
+            com[a].setEnabled(true);
+        }
+    }
+
+    private void startOpgradering() {
+        enableView(panel_faktureringsadresse);
+        disableView(panel_bedemandInfo);
+        textField_Faktura_nr.setText(ordre.createFakturaNr());
+        textField_ordreNr.setText(ordre.getOrdre_nr());
+        textField_dato.setText(Utility.getCurrentTimeToString());
+    }
+
+    private void opretNormalOrdre() {
+        Faktura faktura = new Faktura(ordre.createFakturaNr(),
+            Utility.getCurrentTime(),
+            Utility.getCurrentTime(),
+            "",
+            false,
+            false,
+            ordre,
+            null,
+            null);
+    }
+
+    private void opretBedemandOrdre() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public String validerString(String string) {
+        String newString = string.replace("\\", "");
+        return newString;
+    }
+
+    private boolean validerInfo() {
+        boolean valid = true;
+        resetErrors();
+        String error = "Fejl på følgende input: ";
+        boolean isNotFirst = false;
+
+        if (radioButton_NormalOrdre.isSelected()) {
+            if (checkBox_faktureringsAdresse.isSelected()) {
+                if (textField_faktureringAdresse.getText().equals("")) {
+                    label_faktureringsadresse.setForeground(Color.red);
+                    error += label_faktureringsadresse.getText();
+                    isNotFirst = true;
+                    valid = false;
+                } else {
+                    String old = textField_faktureringAdresse.getText().trim();
+                    String news = validerString(textField_faktureringAdresse.getText().trim());
+                    if (!old.equals(news)) {
+                        textField_faktureringAdresse.setText(validerString(textField_faktureringAdresse.getText().trim()));
+                        label_faktureringsadresse.setForeground(Color.red);
+                        error += label_faktureringsadresse.getText() + "(Fjernet specialtegn)";
+                        valid = false;
+                        isNotFirst = true;
+                    }
+                }
+                if (textField_faktureringPostNr.getText().length() != 4 || !isInteger(textField_faktureringPostNr.getText())) {
+                    label_faktureringPostNr.setForeground(Color.red);
+                    if (isNotFirst) {
+                        error += ", ";
+                    }
+                    error += label_faktureringPostNr.getText() + "(ikke et postnummer)";
+                    isNotFirst = true;
+                    valid = false;
+                }
+                if (textField_faktureringBy.getText().equals("")) {
+                    label_faktureringBy.setForeground(Color.red);
+                    if (isNotFirst) {
+                        error += ", ";
+                    }
+                    error += label_faktureringBy.getText();
+                    valid = false;
+                } else {
+                    String old = textField_faktureringBy.getText();
+                    String news = validerString(textField_faktureringBy.getText().trim());
+                    if (!old.equals(news)) {
+                        textField_faktureringBy.setText(validerString(textField_faktureringBy.getText().trim()));
+                        label_faktureringBy.setForeground(Color.red);
+                        error += label_faktureringBy.getText() + "(Fjernet specialtegn)";
+                        valid = false;
+                    }
+                }
+            }
+        } else {
+            if (textField_bedemand_firma.getText().equals("")) {
+                label_bedemand_firma.setForeground(Color.red);
+                error += label_bedemand_firma.getText();
+                isNotFirst = true;
+                valid = false;
+            } else {
+                String old = textField_bedemand_firma.getText();
+                String news = validerString(textField_bedemand_firma.getText().trim());
+                if (!old.equals(news)) {
+                    textField_bedemand_firma.setText(validerString(textField_bedemand_firma.getText().trim()));
+                    label_bedemand_firma.setForeground(Color.red);
+                    error += label_bedemand_firma.getText() + "(Fjernet specialtegn)";
+                    isNotFirst = true;
+                    valid = false;
+                }
+            }
+            if (textField_bedemand_adresse.getText().equals("")) {
+                label_bedemand_adresse.setForeground(Color.red);
+                if (isNotFirst) {
+                    error += ", ";
+                }
+                error += label_bedemand_adresse.getText();
+                isNotFirst = true;
+                valid = false;
+            } else {
+                String old = textField_bedemand_adresse.getText();
+                String news = validerString(textField_bedemand_adresse.getText().trim());
+                if (!old.equals(news)) {
+                    textField_bedemand_adresse.setText(validerString(textField_bedemand_adresse.getText().trim()));
+                    label_bedemand_adresse.setForeground(Color.red);
+                    if (isNotFirst) {
+                        error += ", ";
+                    }
+                    error += label_bedemand_adresse.getText() + "(Fjernet specialtegn)";
+                    isNotFirst = true;
+                    valid = false;
+                }
+            }
+            if (textField_bedemand_bank.getText().equals("")) {
+                label_bedemand_bank.setForeground(Color.red);
+                if (isNotFirst) {
+                    error += ", ";
+                }
+                error += label_bedemand_bank.getText();
+                isNotFirst = true;
+                valid = false;
+            } else {
+                String old = textField_bedemand_bank.getText();
+                String news = validerString(textField_bedemand_bank.getText().trim());
+                if (!old.equals(news)) {
+                    textField_bedemand_bank.setText(validerString(textField_bedemand_bank.getText().trim()));
+                    label_bedemand_bank.setForeground(Color.red);
+                    if (isNotFirst) {
+                        error += ", ";
+                    }
+                    error += label_bedemand_bank.getText() + "(Fjernet specialtegn)";
+                    isNotFirst = true;
+                    valid = false;
+                }
+            }
+            if (textField_bedemand_by.getText().equals("")) {
+                label_bedemand_by.setForeground(Color.red);
+                if (isNotFirst) {
+                    error += ", ";
+                }
+                error += label_bedemand_by.getText();
+                isNotFirst = true;
+                valid = false;
+            } else {
+                String old = textField_bedemand_by.getText();
+                String news = validerString(textField_bedemand_by.getText().trim());
+                if (!old.equals(news)) {
+                    textField_bedemand_by.setText(validerString(textField_bedemand_by.getText().trim()));
+                    label_bedemand_by.setForeground(Color.red);
+                    if (isNotFirst) {
+                        error += ", ";
+                    }
+                    error += label_bedemand_by.getText() + "(Fjernet specialtegn)";
+                    isNotFirst = true;
+                    valid = false;
+                }
+            }
+            if (textField_bedemand_cvr.getText().length() != 8 || !isInteger(textField_bedemand_cvr.getText())) {
+                label_bedemand_cvr.setForeground(Color.red);
+                if (isNotFirst) {
+                    error += ", ";
+                }
+                error += label_bedemand_cvr.getText() + "(CVR skal være på 8 cifre, og kun tal)";
+                isNotFirst = true;
+                valid = false;
+            }
+            if (textField_bedemand_post.getText().length() != 4 || !isInteger(textField_bedemand_post.getText())) {
+                label_bedemand_postnr.setForeground(Color.red);
+                if (isNotFirst) {
+                    error += ", ";
+                }
+                error += label_bedemand_postnr.getText() + "(post_nr skal være på 4 cifre, og kun tal)";
+                isNotFirst = true;
+                valid = false;
+            }
+            if (textField_bedemand_regnr.getText().length() != 4 || !isInteger(textField_bedemand_regnr.getText())) {
+                label_bedemand_regnr.setForeground(Color.red);
+                if (isNotFirst) {
+                    error += ", ";
+                }
+                error += label_bedemand_regnr.getText() + "(registrerings_nr skal være på 4 cifre, og kun tal)";
+                isNotFirst = true;
+                valid = false;
+            }
+            //Validerer ikke om det kun er numre, skal lige have lavet en metode til det da det er på 
+            //10 cifre og derfor ikke kan være i en integer
+            if (textField_bedemand_kontonr.getText().length() != 10) {
+                label_bedemand_kontonr.setForeground(Color.red);
+                if (isNotFirst) {
+                    error += ", ";
+                }
+                error += label_bedemand_kontonr.getText() + "(konto_nr skal være på 10 cifre, og kun tal)";
+                valid = false;
+            }
+        }
+
+        if (!valid) {
+            errorLabel.setText("Fejl i input, hold over denne besked for detaljer.");
+            errorLabel.setToolTipText(error);
+        }
+
+        return valid;
+    }
+
+    public boolean isInteger(String test) {
+        boolean isInteger = true;
+        try {
+            Integer.parseInt(test);
+        } catch (NumberFormatException ex) {
+            isInteger = false;
+        }
+        return isInteger;
+    }
+
+    private void resetErrors() {
+        errorLabel.setText("");
+        label_bedemand_adresse.setForeground(Color.black);
+        label_bedemand_firma.setForeground(Color.black);
+        label_bedemand_by.setForeground(Color.black);
+        label_bedemand_postnr.setForeground(Color.black);
+        label_bedemand_cvr.setForeground(Color.black);
+        label_bedemand_bank.setForeground(Color.black);
+        label_bedemand_regnr.setForeground(Color.black);
+        label_bedemand_kontonr.setForeground(Color.black);
+        label_faktureringBy.setForeground(Color.black);
+        label_faktureringPostNr.setForeground(Color.black);
+        label_faktureringsadresse.setForeground(Color.black);
+    }
+    
+    private void resetFaktureringsInfo(){
+        checkBox_faktureringsAdresse.setSelected(false);
+        label_faktureringBy.setText("");
+        label_faktureringPostNr.setText("");
+        label_faktureringsadresse.setText("");
+    }
+    
+    private void resetBedemandInfo(){
+        textField_bedemand_adresse.setText("");
+        textField_bedemand_by.setText("");
+        textField_bedemand_post.setText("");
+        textField_bedemand_firma.setText("");
+        textField_bedemand_cvr.setText("");
+        textField_bedemand_bank.setText("");
+        textField_bedemand_kontonr.setText("");
+        textField_bedemand_regnr.setText("");
+    }
 }

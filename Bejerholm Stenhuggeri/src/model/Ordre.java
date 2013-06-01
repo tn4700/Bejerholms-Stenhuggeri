@@ -267,6 +267,10 @@ public class Ordre {
         double total = getTotal() + getSalgsMoms();
         return total;
     }
+    
+    public String createFakturaNr(){
+        return "00" + kunde.getTlf() + "-" + ordre_nr;
+    }
 /**
  * Denne metode returnerer provisionsbeløbet på ordren med eller uden moms
  * @param moms True = Med moms / False = uden

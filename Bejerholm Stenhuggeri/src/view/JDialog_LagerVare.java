@@ -448,13 +448,13 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         boolean valid = true;
         resetErrors();
         String error = "Fejl på følgende input: ";
-        boolean isFirst = false;
+        boolean isNotFirst = false;
 
         if (vareNavnTextField.getText().equals("")) {
             vareNavnLabel.setForeground(Color.red);
             error += vareNavnLabel.getText();
             valid = false;
-            isFirst = true;
+            isNotFirst = true;
         } else {
             String old = vareNavnTextField.getText();
             String news = validerString(vareNavnTextField.getText().trim());
@@ -463,59 +463,59 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
                 vareNavnLabel.setForeground(Color.red);
                 error += vareNavnLabel.getText() + "(Fjernet specialtegn)";
                 valid = false;
-                isFirst = true;
+                isNotFirst = true;
             }
         }
         try {
             Integer.parseInt(vareBreddeTextField.getText());
         } catch (NumberFormatException ex) {
             vareBreddeLabel.setForeground(Color.red);
-            if (isFirst) {
+            if (isNotFirst) {
                 error += ", ";
             }
             error += vareBreddeLabel.getText();
-            isFirst = true;
+            isNotFirst = true;
             valid = false;
         }
         try {
             Integer.parseInt(vareHøjdeTextField.getText());
         } catch (NumberFormatException ex) {
             vareHøjdeLabel.setForeground(Color.red);
-            if (isFirst) {
+            if (isNotFirst) {
                 error += ", ";
             }
             error += vareHøjdeLabel.getText();
-            isFirst = true;
+            isNotFirst = true;
             valid = false;
         }
         try {
             Double.parseDouble(indkøbsPrisTextField.getText());
         } catch (NumberFormatException ex) {
             indkøbsPrisLabel.setForeground(Color.red);
-            if (isFirst) {
+            if (isNotFirst) {
                 error += ", ";
             }
             error += indkøbsPrisLabel.getText();
-            isFirst = true;
+            isNotFirst = true;
             valid = false;
         }
         try {
             Double.parseDouble(salgsPrisTextField.getText());
         } catch (NumberFormatException ex) {
             salgsPrisLabel.setForeground(Color.red);
-            if (isFirst) {
+            if (isNotFirst) {
                 error += ", ";
             }
             error += salgsPrisLabel.getText();
             valid = false;
-            isFirst = true;
+            isNotFirst = true;
         }
         if (!typeNavnTextField.getText().equals("")) {
             String old = typeNavnTextField.getText();
             String news = validerString(typeNavnTextField.getText().trim());
             if (!old.equals(news)) {
                 typeNavnTextField.setText(validerString(typeNavnTextField.getText().trim()));
-                if (isFirst) {
+                if (isNotFirst) {
                     error += ", ";
                 }
                 typeNavnLabel.setForeground(Color.red);
