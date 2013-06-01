@@ -193,7 +193,7 @@ public class OpretOrdre {
             cb.fill();
         }
         if (ordre.getKirkegård() != null) {
-            createContent(cb, tFont, 12, black, 525, 544, ordre.getKirkegård(), center);
+            createContent(cb, tFont, 12, black, 525, 544, ordre.getKirkegård().getNavn(), center);
         }
         if (ordre.getAfdeling() != 0) {
             createContent(cb, tFont, 12, black, 525, 524, "" + ordre.getAfdeling(), center);

@@ -15,7 +15,7 @@ public class Faktura {
     private String faktura_nr;
     private Timestamp faktureringsdato;
     private Timestamp sendt_dato;
-    private String faktureringsadresse;
+    private Faktureringsadresse faktureringsadresse;
     private boolean fakturatype; //True = bedemand, false = normal
     private boolean betalingsstatus; // True = betalt, false = ikke betalt
     private Ordre ordre;
@@ -25,7 +25,7 @@ public class Faktura {
     public Faktura(String faktura_nr,
             Timestamp faktureringsdato,
             Timestamp sendt_dato,
-            String faktureringsadresse,
+            Faktureringsadresse faktureringsadresse,
             boolean fakturatype,
             boolean betalingsstatus,
             Ordre ordre,
@@ -91,11 +91,11 @@ public class Faktura {
         this.sendt_dato = sendt_dato;
     }
 
-    public String getFaktureringsadresse() {
+    public Faktureringsadresse getFaktureringsadresse() {
         return faktureringsadresse;
     }
 
-    public void setFaktureringsadresse(String faktureringsadresse) {
+    public void setFaktureringsadresse(Faktureringsadresse faktureringsadresse) {
         this.faktureringsadresse = faktureringsadresse;
     }
 

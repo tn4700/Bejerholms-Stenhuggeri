@@ -1244,7 +1244,7 @@ public class Gui extends javax.swing.JFrame {
         Vare valgtvare = (Vare)  jComboBoxLynsalgVare.getSelectedItem();
         jTextAreaVareInfo.append(""+valgtvare+"\n");
         jTextAreaVareInfo.append("Overflade: "+valgtvare.getOverflade()+"\n");
-        jTextAreaVareInfo.append("Type: "+valgtvare.getTypenavn()+"\n");
+        jTextAreaVareInfo.append("Type: "+valgtvare.getVaretype().getNavn()+"\n");
         jTextAreaVareInfo.append("Højde: "+valgtvare.getHøjde()+"\n");
         jTextAreaVareInfo.append("Bredde: "+valgtvare.getBredde()+"\n");
         jTextAreaVareInfo.append("Pris"+valgtvare.getSalgspris()+"\n");

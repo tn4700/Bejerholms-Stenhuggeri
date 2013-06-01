@@ -9,15 +9,12 @@ import control.Utility;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.sql.Timestamp;
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Faktura;
 import model.Kunde;
 import model.Ordre;
-import model.Provisionsseddel;
-import model.Samarbejdspartner;
 
 /**
  *
@@ -52,7 +49,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
             jLabel_VisAfdeling.setText("" + ordre.getAfdeling());
             jLabel_VisNR.setText("" + ordre.getNummer());
             jLabel_VisRække.setText("" + ordre.getRække());
-            jLabel_VisKirkegård.setText(ordre.getKirkegård());
+            jLabel_VisKirkegård.setText(ordre.getKirkegård().getNavn());
             jTextArea_Bemærkning.setText(ordre.getBemærkning());
             jTextArea_Bemærkning.append("\n Ekstra bemærkning: \n");
             if (!ordre.getBemærkning_ekstra().isEmpty()) {
@@ -851,7 +848,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     }
 
     private void opretNormalOrdre() {
-        Faktura faktura = new Faktura(ordre.createFakturaNr(),
+        /*Faktura faktura = new Faktura(ordre.createFakturaNr(),
             Utility.getCurrentTime(),
             Utility.getCurrentTime(),
             "",
@@ -859,7 +856,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
             false,
             ordre,
             null,
-            null);
+            null);*/
     }
 
     private void opretBedemandOrdre() {

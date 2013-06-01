@@ -89,10 +89,18 @@ public class OpretFaktura {
         createContent(cb, btFont, 12, black, 25, 660, "Faktureres til:", left);
         String navn = faktura.getOrdre().getKunde().getFornavn() + " " + faktura.getOrdre().getKunde().getEfternavn();
         createContent(cb, tFont, 12, black, 25, 644, navn, left);
+        if(faktura.getFaktureringsadresse()==null){
         String adresse = faktura.getOrdre().getKunde().getAdresse();
         createContent(cb, tFont, 12, black, 25, 628, adresse, left);
         String postnrby = faktura.getOrdre().getKunde().getPost_nr().getPost_nr() + " " + faktura.getOrdre().getKunde().getPost_nr().getByNavn();
         createContent(cb, tFont, 12, black, 25, 612, postnrby, left);
+        } else {
+        String adresse = faktura.getFaktureringsadresse().getAdresse();
+        createContent(cb, tFont, 12, black, 25, 628, adresse, left);
+        String postnrby = faktura.getFaktureringsadresse().getPost_nr().getPost_nr() 
+                + " " + faktura.getFaktureringsadresse().getPost_nr().getByNavn();
+        createContent(cb, tFont, 12, black, 25, 612, postnrby, left);
+        }
 
         //Indsættelse af dato og fakturanummer
         createContent(cb, btFont, 12, black, 385, 525, "DATO:", left);

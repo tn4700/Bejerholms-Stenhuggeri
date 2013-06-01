@@ -38,14 +38,17 @@ public class ObjectHandlerTEST {
             //Opret kunde
             Postnummer pn = dbhandler.getPostnummer(4700);
             Kunde k = new Kunde("Morten", "Hansen", "Georgevej 23", 88888888, pn);
+            
+            //Opret kirkegård
+            Kirkegård kirkegård = new Kirkegård(0, "Kirkegården");
 
             //Opret Ordre
-            Ordre ordre = new Ordre(null,true,ts,ts,ts,"Giver ikke en fuck","Ikke en","En stor kirkegård",
+            Ordre ordre = new Ordre(null,true,ts,ts,ts,"Giver ikke en fuck","Ikke en",kirkegård,
                     1,"Mor",1,1,true,k, null);
             
             //Opret vare
             Varegruppe vg = dbhandler.getVareGruppe(1);
-            Vare v = new Vare(0,"TestVare 1",56,23,0.50,50.50,"Pas","Ru",false,0,vg);
+            Vare v = new Vare(0,"TestVare 1",56,23,0.50,50.50,null,1,false,0,vg);
             dbhandler.createVare(v);
             Vare test = dbhandler.getVare(dbhandler.getMaxVareNr());
 
@@ -81,11 +84,14 @@ public class ObjectHandlerTEST {
             //Opret provisionsseddel
             Provisionsseddel provisionsseddel = new Provisionsseddel(null, Utility.getCurrentTime(), kontoudtog);
             
+            //Opret faktureringsadresse
+            Faktureringsadresse faktureringsadresse = new Faktureringsadresse(0, "Hejvej 7", pn);
+            
             //Opret faktura
             Faktura faktura = new Faktura(null,
             Utility.getCurrentTime(),
             Utility.getCurrentTime(),
-            "Lolvej 7",
+            faktureringsadresse,
             true,
             false,
             ordre,

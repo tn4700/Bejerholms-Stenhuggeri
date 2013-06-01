@@ -1554,7 +1554,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 ordre.setOrdretype(false);
             }
             if (jCheckBox_gravsten.isSelected()) {
-                ordre.setKirkegård(jTextField_kirkegård_ordresalg.getText());
+                Kirkegård kirkegård = new Kirkegård(0, jTextField_kirkegård_ordresalg.getText());
+                ordre.setKirkegård(kirkegård);
                 ordre.setAfdeling(Integer.parseInt(jTextField_afdeling_ordresalg.getText()));
                 ordre.setRække(Integer.parseInt(jTextField_række.getText()));
                 ordre.setNummer(Integer.parseInt(jTextField_nr.getText()));

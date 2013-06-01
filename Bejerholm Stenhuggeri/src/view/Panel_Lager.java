@@ -640,8 +640,14 @@ public class Panel_Lager extends javax.swing.JPanel {
         vareHøjdeTextField.setText(vare.getHøjde() + " cm");
         indkøbsPrisTextField.setText(Utility.formatDoubleToKr(vare.getIndkøbspris()));
         salgsPrisTextField.setText(Utility.formatDoubleToKr(vare.getSalgspris()));
-        overfladeTextField.setText(vare.getOverflade());
-        typeNavnTextField.setText(vare.getTypenavn());
+        if (vare.getOverflade() == 0) {
+            overfladeTextField.setText("");
+        } else if (vare.getOverflade() == 1) {
+            overfladeTextField.setText("Ru");
+        } else {
+            overfladeTextField.setText("Poleret");
+        }
+        typeNavnTextField.setText(vare.getVaretype().getNavn());
         vareStatusTextField.setText(vare.getVareStatusToString());
         dekorationTextField.setText(vare.getDekorationToString());
         vareGruppeTextField.setText(vare.getGruppe().toString());

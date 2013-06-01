@@ -16,8 +16,8 @@ public class Vare {
     private int bredde;
     private double indkøbspris;
     private double salgspris;
-    private String typenavn;
-    private String overflade;
+    private Varetype varetype;
+    private int overflade; //0 - ingen, 1 - ru, 2 - poleret;
     private boolean dekoration;
     private Varegruppe gruppe;
     private int vareStatus;
@@ -28,8 +28,8 @@ public class Vare {
             int bredde,
             double indkøbspris,
             double salgspris,
-            String typenavn,
-            String overflade,
+            Varetype varetype,
+            int overflade,
             boolean dekoration,
             int vareStatus,
             Varegruppe gruppe) {
@@ -40,7 +40,7 @@ public class Vare {
         this.bredde = bredde;
         this.indkøbspris = indkøbspris;
         this.salgspris = salgspris;
-        this.typenavn = typenavn;
+        this.varetype = varetype;
         this.overflade = overflade;
         this.dekoration = dekoration;
         this.vareStatus = vareStatus;
@@ -103,19 +103,19 @@ public class Vare {
         this.salgspris = salgspris;
     }
 
-    public String getTypenavn() {
-        return typenavn;
+    public Varetype getVaretype() {
+        return varetype;
     }
 
-    public void setTypenavn(String typenavn) {
-        this.typenavn = typenavn;
+    public void setVaretype(Varetype varetype) {
+        this.varetype = varetype;
     }
 
-    public String getOverflade() {
+    public int getOverflade() {
         return overflade;
     }
 
-    public void setOverflade(String overflade) {
+    public void setOverflade(int overflade) {
         this.overflade = overflade;
     }
 

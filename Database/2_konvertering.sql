@@ -4,18 +4,6 @@ use bejerholmstenhuggeri;
 # Har ikke lavet primærnøgler til alle linje tabellerne da dette automatisk kommer
 # når vi laver fase 2 i konverteringen
 
-alter table tegntype
-add column id int auto_increment,
-add primary key(id);
-
-alter table tom_linje
-add column id int auto_increment,
-add primary key(id);
-
-alter table inskription
-add column id int auto_increment,
-add primary key(id);
-
 #fase 2 - For hver stærk entitet oprettes en tabel, med registrering af primærnøglen.
 #Alle tabeller er oprettet i 1_entiteter scriptet
 
@@ -34,7 +22,13 @@ alter table faktura
 add column ordre_nr char(5),
 add foreign key(ordre_nr) references ordre(ordre_nr),
 add column provisions_nr char(5),
-add foreign key(provisions_nr) references provisionsseddel(provisions_nr);
+add foreign key(provisions_nr) references provisionsseddel(provisions_nr),
+add column adresse_id int,
+add foreign key(adresse_id) references faktureringsadresse(id);
+
+alter table faktureringsadresse
+add column post_nr char(4),
+add foreign key(post_nr) references postnummer(post_nr);
 
 alter table provisionsseddel
 add column kontoudtog_nr char(5),
@@ -45,7 +39,9 @@ add foreign key(kontoudtog_nr) references kontoudtog(kontoudtog_nr);
 
 alter table vare
 add column grp_nr int,
-add foreign key(grp_nr) references varegruppe(grp_nr);
+add foreign key(grp_nr) references varegruppe(grp_nr),
+add column type_id int,
+add foreign key(type_id) references varetype(id);
 
 alter table vare_linje
 add column ordre_nr char(5),
@@ -71,7 +67,9 @@ add foreign key(post_nr) references postnummer(post_nr);
 
 alter table ordre
 add column tlf char(8),
-add foreign key(tlf) references kunde(tlf);
+add foreign key(tlf) references kunde(tlf),
+add column kirkegård_id int,
+add foreign key(kirkegård_id) references kirkegård(id);
 
 alter table faktura
 add column bedemand_tlf char(8),

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Vare;
 import model.Varegruppe;
+import model.Varetype;
 
 /**
  *
@@ -20,6 +21,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
 
     private Boolean dialogType;
     private ArrayList<Varegruppe> vareGruppeListe;
+    private ArrayList<Varetype> vareTypeListe;
     private Vare vare;
     private DatabaseObjectHandler dbhandler;
 
@@ -33,6 +35,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         this.setTitle("Opret vare");
         initComponents();
         fyldGruppeListe();
+        fyldTypeListe();
         this.setLocationRelativeTo(parent);
     }
 
@@ -44,9 +47,9 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         this.vare = vare;
         initComponents();
         this.setLocationRelativeTo(parent);
-        enterVareInfo(vare);
         fyldGruppeListe();
-        vælgVareGruppeComboBox.setSelectedIndex(vare.getGruppe().getGrp_nr() - 1);
+        fyldTypeListe();
+        enterVareInfo(vare);
     }
 
     /**
@@ -73,7 +76,6 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         vareNavnTextField = new javax.swing.JTextField();
         vareBreddeTextField = new javax.swing.JTextField();
         indkøbsPrisTextField = new javax.swing.JTextField();
-        typeNavnTextField = new javax.swing.JTextField();
         salgsPrisTextField = new javax.swing.JTextField();
         vareStatusLabel = new javax.swing.JLabel();
         dekorationLabel = new javax.swing.JLabel();
@@ -82,6 +84,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         overFladeComboBox = new javax.swing.JComboBox();
         dekorationComboBox = new javax.swing.JComboBox();
         vareStatusComboBox = new javax.swing.JComboBox();
+        vareTypeComboBox = new javax.swing.JComboBox();
         errorLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -121,7 +124,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         indkøbsPrisLabel.setText("Købspris");
 
         typeNavnLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        typeNavnLabel.setText("Typenavn");
+        typeNavnLabel.setText("Varetype");
 
         salgsPrisLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         salgsPrisLabel.setText("Salgspris");
@@ -158,16 +161,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
             vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vareInfoPanelLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(vareInfoPanelLayout.createSequentialGroup()
-                        .addGap(269, 269, 269)
-                        .addComponent(annullerButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(opretVareButton))
-                    .addGroup(vareInfoPanelLayout.createSequentialGroup()
-                        .addComponent(typeNavnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(typeNavnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(vareInfoPanelLayout.createSequentialGroup()
                         .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(salgsPrisLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,8 +200,17 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
                     .addGroup(vareInfoPanelLayout.createSequentialGroup()
                         .addComponent(vareNavnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(vareNavnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(17, 17, 17))
+                        .addComponent(vareNavnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(vareInfoPanelLayout.createSequentialGroup()
+                        .addComponent(typeNavnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(vareTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vareInfoPanelLayout.createSequentialGroup()
+                        .addComponent(annullerButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(opretVareButton)
+                        .addGap(11, 11, 11)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         vareInfoPanelLayout.setVerticalGroup(
             vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,13 +249,13 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
                         .addComponent(dekorationLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(typeNavnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(typeNavnLabel))
-                .addGap(12, 12, 12)
+                    .addComponent(typeNavnLabel)
+                    .addComponent(vareTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(opretVareButton)
                     .addComponent(annullerButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         errorLabel.setForeground(new java.awt.Color(255, 0, 0));
@@ -263,14 +266,15 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(vareInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
+                        .addGap(19, 19, 19)
                         .addComponent(vareInfoOverskriftLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(vareInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -299,7 +303,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         if (validerVareInput()) {
             if (dialogType) {
                 try {
-                    vare = new Vare(0, null, 0, 0, 0, 0, null, null, false, 0, null);
+                    vare = new Vare(0, null, 0, 0, 0, 0, null, 0, false, 0, null);
                     setVare();
                     String message = "Er du sikker på at du vil oprette varen '" + vare.getNavn().replace("\\", "") + "'?";
                     boolean accept = visAcceptDialog(message, "Bekræft oprettelse");
@@ -340,7 +344,6 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
     private javax.swing.JLabel salgsPrisLabel;
     private javax.swing.JTextField salgsPrisTextField;
     private javax.swing.JLabel typeNavnLabel;
-    private javax.swing.JTextField typeNavnTextField;
     private javax.swing.JLabel vareBreddeLabel;
     private javax.swing.JTextField vareBreddeTextField;
     private javax.swing.JLabel vareGruppeLabel;
@@ -352,6 +355,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
     private javax.swing.JTextField vareNavnTextField;
     private javax.swing.JComboBox vareStatusComboBox;
     private javax.swing.JLabel vareStatusLabel;
+    private javax.swing.JComboBox vareTypeComboBox;
     private javax.swing.JComboBox vælgVareGruppeComboBox;
     // End of variables declaration//GEN-END:variables
 
@@ -372,22 +376,15 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         vareHøjdeTextField.setText(vare.getHøjde() + "");
         indkøbsPrisTextField.setText(vare.getIndkøbspris() + "");
         salgsPrisTextField.setText(vare.getSalgspris() + "");
-        //Vi kunne ikke nå at lave overflade om til boolean og vores input er kontrolleret 
-        //så der er kun Ru og Poleret overflade med mindre der er nogle der laver om i databasen
-        if (vare.getOverflade() == null || vare.getOverflade().equals("")) {
-            overFladeComboBox.setSelectedIndex(0);
-        } else if (vare.getOverflade().startsWith("R")) {
-            overFladeComboBox.setSelectedIndex(1);
-        } else {
-            overFladeComboBox.setSelectedIndex(2);
-        }
-        typeNavnTextField.setText(vare.getTypenavn());
+        overFladeComboBox.setSelectedIndex(vare.getOverflade());
+        vareTypeComboBox.setSelectedIndex(vare.getVaretype().getId());
         vareStatusComboBox.setSelectedIndex(vare.getVareStatus());
         if (vare.getDekoration()) {
             dekorationComboBox.setSelectedIndex(0);
         } else {
             dekorationComboBox.setSelectedIndex(1);
         }
+        vælgVareGruppeComboBox.setSelectedIndex(vare.getGruppe().getGrp_nr() - 1);
     }
 
     public void setVare() {
@@ -396,10 +393,10 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         vare.setSalgspris(Double.parseDouble(salgsPrisTextField.getText()));
         vare.setBredde(Integer.parseInt(vareBreddeTextField.getText()));
         vare.setHøjde(Integer.parseInt(vareHøjdeTextField.getText()));
-        if (typeNavnTextField.getText().equals("")) {
-            vare.setTypenavn("");
+        if (vareTypeComboBox.getSelectedIndex() == 0) {
+            vare.setVaretype(null);
         } else {
-            vare.setTypenavn(typeNavnTextField.getText().trim().replace("'", "\\'"));
+            vare.setVaretype((Varetype) vareTypeComboBox.getSelectedItem());
         }
         vare.setVareStatus(vareStatusComboBox.getSelectedIndex());
         if (dekorationComboBox.getSelectedIndex() == 0) {
@@ -408,13 +405,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
             vare.setDekoration(false);
         }
         vare.setGruppe((Varegruppe) vælgVareGruppeComboBox.getSelectedItem());
-        if (overFladeComboBox.getSelectedIndex() == 0) {
-            vare.setOverflade("");
-        } else if (overFladeComboBox.getSelectedIndex() == 1) {
-            vare.setOverflade("Ru");
-        } else if (overFladeComboBox.getSelectedIndex() == 2) {
-            vare.setOverflade("Poleret");
-        }
+        vare.setOverflade(overFladeComboBox.getSelectedIndex());
     }
 
     public final void fyldGruppeListe() {
@@ -422,6 +413,19 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
             vareGruppeListe = dbhandler.getVaregruppeListe();
             for (int i = 0; i < vareGruppeListe.size(); i++) {
                 vælgVareGruppeComboBox.addItem(vareGruppeListe.get(i));
+            }
+        } catch (SQLException ex) {
+            errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
+            errorLabel.setToolTipText(ex.getLocalizedMessage());
+        }
+    }
+
+    public final void fyldTypeListe() {
+        try {
+            vareTypeListe = dbhandler.getVaretypeListe();
+            vareTypeComboBox.addItem("Ingen type.");
+            for (int i = 0; i < vareTypeListe.size(); i++) {
+                vareTypeComboBox.addItem(vareTypeListe.get(i));
             }
         } catch (SQLException ex) {
             errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
@@ -508,26 +512,12 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
             }
             error += salgsPrisLabel.getText();
             valid = false;
-            isNotFirst = true;
-        }
-        if (!typeNavnTextField.getText().equals("")) {
-            String old = typeNavnTextField.getText();
-            String news = validerString(typeNavnTextField.getText().trim());
-            if (!old.equals(news)) {
-                typeNavnTextField.setText(validerString(typeNavnTextField.getText().trim()));
-                if (isNotFirst) {
-                    error += ", ";
-                }
-                typeNavnLabel.setForeground(Color.red);
-                error += typeNavnLabel.getText() + "(Fjernet specialtegn)";
-                valid = false;
-            }
+
         }
         if (!valid) {
             errorLabel.setText("Fejl i input, hold over denne besked for detaljer.");
             errorLabel.setToolTipText(error);
         }
-
         return valid;
     }
 }

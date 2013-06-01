@@ -7,11 +7,17 @@ package view;
 import com.itextpdf.text.DocumentException;
 import control.DatabaseObjectHandler;
 import control.OpretFaktura;
+import control.Utility;
 import java.awt.CardLayout;
+import java.awt.Desktop;
 import java.awt.LayoutManager;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Faktura;
 import model.Kunde;
@@ -19,12 +25,6 @@ import model.Ordre;
 import model.Vare;
 import model.Vare_linje;
 import model.Varegruppe;
-import control.Utility;
-import java.awt.Desktop;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -456,7 +456,9 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             Vare valgtvare = (Vare) jComboBoxLynsalgVare.getSelectedItem();
             jTextAreaVareInfo.append("" + valgtvare + "\n");
             jTextAreaVareInfo.append("Overflade: " + valgtvare.getOverflade() + "\n");
-            jTextAreaVareInfo.append("Type: " + valgtvare.getTypenavn() + "\n");
+            if(valgtvare.getVaretype()!=null){
+            jTextAreaVareInfo.append("Type: " + valgtvare.getVaretype().getNavn() + "\n");
+            }
             jTextAreaVareInfo.append("Højde: " + valgtvare.getHøjde() + "\n");
             jTextAreaVareInfo.append("Bredde: " + valgtvare.getBredde() + "\n");
             jTextAreaVareInfo.append("Pris" + valgtvare.getSalgspris() + "\n");
@@ -519,7 +521,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             try {
                 String ordrenr = dbhandler.createOrdre(lynordre);
                 lynordre = dbhandler.getOrdre(ordrenr);
-                Faktura nyfaktura = new Faktura(ordrenr, Utility.getCurrentTime(), Utility.getCurrentTime(), lynordre.getKunde().getAdresse(), false, false, lynordre, null, null);
+                Faktura nyfaktura = new Faktura(ordrenr, Utility.getCurrentTime(), Utility.getCurrentTime(), null, false, false, lynordre, null, null);
                 System.out.println("Ordren er blevet oprettet korrekt");
                 try {
                     dbhandler.createFaktura(nyfaktura);

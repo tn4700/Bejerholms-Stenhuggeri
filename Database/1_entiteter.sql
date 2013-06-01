@@ -20,6 +20,14 @@ byNavn              	varchar(25) not null,
 primary key(post_nr)
 ) engine = innodb;
 
+drop table if exists faktureringsadresse;
+create table faktureringsadresse
+(   
+id                      int auto_increment,      
+adresse                 varchar(50) not null,
+primary key(id)
+) engine = innodb;
+
 drop table if exists ordre;
 create table ordre
 (
@@ -48,9 +56,11 @@ linje_nr             	int not null
 drop table if exists tom_linje;
 create table tom_linje
 (
+id						int auto_increment,
 navn                    varchar(50) not null,
 pris                    double not null,
-antal                   int not null
+antal                   int not null,
+primary key(id)
 )engine = innodb;
 
 drop table if exists vare;
@@ -63,11 +73,19 @@ bredde                  int,
 indkøbspris             double not null,
 salgspris               double not null,
 typenavn				varchar(50),
-overflade				varchar(20),
+overflade				int,
 dekoration				boolean,
 vareStatus 				int not null, #0 på lager, 1 reserveret, 2 solgt
 primary key(vare_nr)
 ) engine = innodb;
+
+drop table if exists varetype;
+create table varetype
+(
+id                  	int auto_increment not null,
+navn                    varchar(50) not null,  
+primary key(id)
+) engine =innodb;
 
 drop table if exists varegruppe;
 create table varegruppe
@@ -80,7 +98,9 @@ primary key(grp_nr)
 drop table if exists inskription;
 create table inskription
 (
-skrifttype				varchar(25) not null
+id						int auto_increment,
+skrifttype				varchar(25) not null,
+primary key(id)
 ) engine = innodb;
 
 drop table if exists inskription_linje;
@@ -94,8 +114,10 @@ linje_type				int not null #0 - tom, 1 - ny, 2 - gammel, 3 - plads
 drop table if exists tegntype;
 create table tegntype
 (
+id						int auto_increment,
 navn                    varchar(50) not null,
-pris_pr_tegn            double not null
+pris_pr_tegn            double not null,
+primary key(id)
 ) engine = innodb;
 
 drop table if exists faktura;
@@ -103,8 +125,7 @@ create table faktura
 (
 faktura_nr              char(16) not null,            # Unikt nr som står i toppen af faktura seddelen
 faktureringsdato        datetime,            # Dato for oprettelse af faktura seddelen
-sendt_dato              datetime,       # Dato for hvornår fakturaen er sendt
-faktureringsadresse     varchar(50), #Skal laves om          
+sendt_dato              datetime,       # Dato for hvornår fakturaen er sendt   
 fakturatype             boolean not null,            # Bedemand eller almindelig - skal rettes i klassediagram
 betalingsstatus         boolean,        # Status = betalt eller ikke betalt
 primary key(faktura_nr)
@@ -126,6 +147,14 @@ provisions_nr           char(5) not null,
 dato                    datetime,    
 primary key(provisions_nr)
 ) engine = innodb;
+
+drop table if exists kirkegård;
+create table kirkegård
+(
+id                 		int auto_increment not null,
+navn                    varchar(50) not null,  
+primary key(id)
+) engine =innodb;
 
 drop table if exists samarbejdspartner;
 create table samarbejdspartner

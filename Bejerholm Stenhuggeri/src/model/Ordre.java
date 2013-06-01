@@ -21,7 +21,7 @@ public class Ordre {
     private Timestamp afhentningsdato;
     private String bemærkning;
     private String bemærkning_ekstra;
-    private String kirkegård;
+    private Kirkegård kirkegård;
     private int afdeling;
     private String afdødnavn;
     private int række;
@@ -37,7 +37,7 @@ public class Ordre {
             Timestamp afhentningsdato,
             String bemærkning,
             String bemærkning_ekstra,
-            String kirkegård,
+            Kirkegård kirkegård,
             int afdeling,
             String afdødnavn,
             int række,
@@ -83,7 +83,7 @@ public class Ordre {
         this.afhentningsdato = Utility.getCurrentTime();
         bemærkning = "";
         bemærkning_ekstra = "";
-        kirkegård = "";
+        kirkegård = null;
         afdeling = 0;
         afdødnavn = "";
         række = 0;
@@ -161,11 +161,11 @@ public class Ordre {
         this.bemærkning = bemærkning;
     }
 
-    public String getKirkegård() {
+    public Kirkegård getKirkegård() {
         return kirkegård;
     }
 
-    public void setKirkegård(String kirkegård) {
+    public void setKirkegård(Kirkegård kirkegård) {
         this.kirkegård = kirkegård;
     }
 
