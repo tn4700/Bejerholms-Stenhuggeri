@@ -605,119 +605,43 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         panel_faktura_info.add(panel_faktureringsadresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 220, 120));
 
         panel_bedemandInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel_bedemandInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_bedemand_firma.setText("Firmanavn");
+        panel_bedemandInfo.add(label_bedemand_firma, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 16, -1, -1));
 
         label_bedemand_cvr.setText("CVR_nr");
+        panel_bedemandInfo.add(label_bedemand_cvr, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 68, -1, -1));
 
         label_bedemand_adresse.setText("Adresse");
+        panel_bedemandInfo.add(label_bedemand_adresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 42, -1, -1));
 
         label_bedemand_postnr.setText("Postnummer");
+        panel_bedemandInfo.add(label_bedemand_postnr, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 94, -1, -1));
 
         label_bedemand_by.setText("By");
+        panel_bedemandInfo.add(label_bedemand_by, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 120, -1, -1));
 
         label_bedemand_bank.setText("Bank");
+        panel_bedemandInfo.add(label_bedemand_bank, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 68, -1, -1));
 
         label_bedemand_regnr.setText("Registrerings_nr");
+        panel_bedemandInfo.add(label_bedemand_regnr, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 94, -1, -1));
 
         label_bedemand_kontonr.setText("Konto_nr");
+        panel_bedemandInfo.add(label_bedemand_kontonr, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 120, -1, -1));
+        panel_bedemandInfo.add(textField_bedemand_firma, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 13, 85, -1));
+        panel_bedemandInfo.add(textField_bedemand_adresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 39, 323, -1));
+        panel_bedemandInfo.add(textField_bedemand_post, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 91, 86, -1));
+        panel_bedemandInfo.add(textField_bedemand_by, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 117, 86, -1));
+        panel_bedemandInfo.add(textField_bedemand_kontonr, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 117, 122, -1));
+        panel_bedemandInfo.add(textField_bedemand_cvr, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 65, 86, -1));
+        panel_bedemandInfo.add(textField_bedemand_bank, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 65, 122, -1));
+        panel_bedemandInfo.add(textField_bedemand_regnr, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 91, 122, -1));
+        panel_bedemandInfo.add(textField_bedemand_tlf, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 13, 122, -1));
 
         label_bedemand_telefon.setText("Telefon");
-
-        javax.swing.GroupLayout panel_bedemandInfoLayout = new javax.swing.GroupLayout(panel_bedemandInfo);
-        panel_bedemandInfo.setLayout(panel_bedemandInfoLayout);
-        panel_bedemandInfoLayout.setHorizontalGroup(
-            panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_bedemand_firma)
-                            .addComponent(label_bedemand_adresse))
-                        .addGap(33, 33, 33)
-                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textField_bedemand_adresse)
-                            .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                                .addComponent(textField_bedemand_firma, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(label_bedemand_telefon)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                                .addComponent(textField_bedemand_tlf, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                        .addComponent(label_bedemand_cvr)
-                        .addGap(47, 47, 47)
-                        .addComponent(textField_bedemand_cvr, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(label_bedemand_bank)
-                        .addGap(74, 74, 74)
-                        .addComponent(textField_bedemand_bank))
-                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                                .addComponent(label_bedemand_postnr)
-                                .addGap(24, 24, 24)
-                                .addComponent(textField_bedemand_post, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(label_bedemand_regnr))
-                            .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                                .addComponent(label_bedemand_by)
-                                .addGap(71, 71, 71)
-                                .addComponent(textField_bedemand_by, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(label_bedemand_kontonr)))
-                        .addGap(18, 18, 18)
-                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textField_bedemand_regnr)
-                            .addComponent(textField_bedemand_kontonr))))
-                .addContainerGap())
-        );
-        panel_bedemandInfoLayout.setVerticalGroup(
-            panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(label_bedemand_firma))
-                    .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textField_bedemand_firma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textField_bedemand_tlf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label_bedemand_telefon)))
-                .addGap(6, 6, 6)
-                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(label_bedemand_adresse))
-                    .addComponent(textField_bedemand_adresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textField_bedemand_cvr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField_bedemand_bank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_bedemand_cvr)
-                            .addComponent(label_bedemand_bank))))
-                .addGap(6, 6, 6)
-                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textField_bedemand_post, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField_bedemand_regnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_bedemand_postnr)
-                            .addComponent(label_bedemand_regnr))))
-                .addGap(6, 6, 6)
-                .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textField_bedemand_by, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField_bedemand_kontonr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel_bedemandInfoLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(panel_bedemandInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_bedemand_by)
-                            .addComponent(label_bedemand_kontonr)))))
-        );
+        panel_bedemandInfo.add(label_bedemand_telefon, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 16, -1, -1));
 
         panel_faktura_info.add(panel_bedemandInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 430, 150));
 

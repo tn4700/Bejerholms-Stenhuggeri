@@ -49,7 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
             db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
 
         } catch (Exception ex) {
-            System.out.println("fejl: " + ex);
+            ex.printStackTrace();
         }
         if (db.isConnected()) {
 

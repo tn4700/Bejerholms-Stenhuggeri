@@ -96,6 +96,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
 
         vareInfoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         vareInfoPanel.setOpaque(false);
+        vareInfoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         annullerButton.setText("Annuller");
         annullerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +104,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
                 annullerButtonActionPerformed(evt);
             }
         });
+        vareInfoPanel.add(annullerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 174, -1, -1));
 
         opretVareButton.setText("Bekræft ");
         opretVareButton.addActionListener(new java.awt.event.ActionListener() {
@@ -110,153 +112,73 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
                 opretVareButtonActionPerformed(evt);
             }
         });
+        vareInfoPanel.add(opretVareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 174, -1, -1));
 
         vareHøjdeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         vareHøjdeLabel.setText("Højde");
+        vareInfoPanel.add(vareHøjdeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 42, -1, -1));
 
         vareNavnLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         vareNavnLabel.setText("Vare navn");
+        vareInfoPanel.add(vareNavnLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 16, 60, -1));
 
         vareBreddeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         vareBreddeLabel.setText("Bredde");
+        vareInfoPanel.add(vareBreddeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 68, -1, -1));
 
         indkøbsPrisLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         indkøbsPrisLabel.setText("Købspris");
+        vareInfoPanel.add(indkøbsPrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 68, 60, -1));
 
         typeNavnLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         typeNavnLabel.setText("Varetype");
+        vareInfoPanel.add(typeNavnLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 146, 60, -1));
 
         salgsPrisLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         salgsPrisLabel.setText("Salgspris");
+        vareInfoPanel.add(salgsPrisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 94, 60, -1));
 
         overfladeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         overfladeLabel.setText("Overflade");
+        vareInfoPanel.add(overfladeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 94, -1, -1));
 
         vareHøjdeTextField.setText("0");
+        vareInfoPanel.add(vareHøjdeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 39, 110, -1));
+        vareInfoPanel.add(vareNavnTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 13, 345, -1));
 
         vareBreddeTextField.setText("0");
+        vareInfoPanel.add(vareBreddeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 65, 110, -1));
 
         indkøbsPrisTextField.setText("0.00");
+        vareInfoPanel.add(indkøbsPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 65, 141, -1));
 
         salgsPrisTextField.setText("0.00");
+        vareInfoPanel.add(salgsPrisTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 91, 141, -1));
 
         vareStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         vareStatusLabel.setText("Varestatus");
+        vareInfoPanel.add(vareStatusLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 120, 60, -1));
 
         dekorationLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         dekorationLabel.setText("Dekoration");
+        vareInfoPanel.add(dekorationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 120, -1, -1));
 
         vareGruppeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         vareGruppeLabel.setText("Vare grp.");
+        vareInfoPanel.add(vareGruppeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 42, 60, -1));
+
+        vareInfoPanel.add(vælgVareGruppeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 39, 141, -1));
 
         overFladeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Ru", "Poleret" }));
+        vareInfoPanel.add(overFladeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 91, 110, -1));
 
         dekorationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ja", "Nej" }));
+        vareInfoPanel.add(dekorationComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 117, 110, -1));
 
         vareStatusComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "På lager", "Reserveret", "Solgt" }));
+        vareInfoPanel.add(vareStatusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 117, 141, -1));
 
-        javax.swing.GroupLayout vareInfoPanelLayout = new javax.swing.GroupLayout(vareInfoPanel);
-        vareInfoPanel.setLayout(vareInfoPanelLayout);
-        vareInfoPanelLayout.setHorizontalGroup(
-            vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vareInfoPanelLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(vareInfoPanelLayout.createSequentialGroup()
-                        .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(salgsPrisLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(vareStatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(salgsPrisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(vareStatusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(vareInfoPanelLayout.createSequentialGroup()
-                        .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(vareInfoPanelLayout.createSequentialGroup()
-                                .addComponent(vareGruppeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(vælgVareGruppeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(vareInfoPanelLayout.createSequentialGroup()
-                                .addComponent(indkøbsPrisLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(indkøbsPrisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vareInfoPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vareHøjdeLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(vareHøjdeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(vareInfoPanelLayout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(vareBreddeLabel)
-                                    .addComponent(overfladeLabel)
-                                    .addComponent(dekorationLabel))
-                                .addGap(18, 18, 18)
-                                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(overFladeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(vareBreddeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dekorationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(vareInfoPanelLayout.createSequentialGroup()
-                        .addComponent(vareNavnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(vareNavnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(vareInfoPanelLayout.createSequentialGroup()
-                        .addComponent(typeNavnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(vareTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vareInfoPanelLayout.createSequentialGroup()
-                        .addComponent(annullerButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(opretVareButton)
-                        .addGap(11, 11, 11)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        vareInfoPanelLayout.setVerticalGroup(
-            vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vareInfoPanelLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(vareNavnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vareNavnLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(vælgVareGruppeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vareHøjdeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vareHøjdeLabel)
-                    .addComponent(vareGruppeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(indkøbsPrisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(indkøbsPrisLabel))
-                    .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(vareBreddeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(vareBreddeLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(salgsPrisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(overFladeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(overfladeLabel)
-                    .addComponent(salgsPrisLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(vareStatusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(vareStatusLabel))
-                    .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(dekorationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dekorationLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(typeNavnLabel)
-                    .addComponent(vareTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(vareInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(opretVareButton)
-                    .addComponent(annullerButton))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        vareInfoPanel.add(vareTypeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 143, 345, -1));
 
         errorLabel.setForeground(new java.awt.Color(255, 0, 0));
         errorLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -266,27 +188,25 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(vareInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addComponent(vareInfoOverskriftLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(vareInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, 6)
+                        .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(vareInfoOverskriftLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vareInfoOverskriftLabel1)
+                    .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vareInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(vareInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
