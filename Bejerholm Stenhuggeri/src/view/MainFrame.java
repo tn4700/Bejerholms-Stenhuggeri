@@ -37,7 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "1234");
 
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);

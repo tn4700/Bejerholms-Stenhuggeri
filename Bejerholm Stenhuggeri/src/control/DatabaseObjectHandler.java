@@ -137,7 +137,7 @@ public class DatabaseObjectHandler {
         }
         db.setData("update kunde set fornavn = '" + kunde.getFornavn() + "', efternavn = '"
                 + kunde.getEfternavn() + "', adresse = '" + kunde.getAdresse()
-                + "', post_nr = " + kunde.getPost_nr().getPost_nr() + "' where tlf = '"
+                + "', post_nr = '" + kunde.getPost_nr().getPost_nr() + "' where tlf = '"
                 + kunde.getTlf() + "';");
     }
 
@@ -925,14 +925,14 @@ public class DatabaseObjectHandler {
     public String createOrdre(Ordre ordre) throws SQLException, ControlException {
         String ordre_nr = getNextOrdreNr();
         createKunde(ordre.getKunde());
-        int kirke_id = checkKirkegård(ordre.getKirkegård());
-        if (kirke_id == 0) {
-            createKirkegård(ordre.getKirkegård());
-            ordre.getKirkegård().setId(getMaxKirkeId());
-        } else {
-            ordre.getKirkegård().setId(kirke_id);
-        }
-        if (getOrdre(ordre_nr) == null) {
+        if (ordre.getKirkegård() != null) {
+            int kirke_id = checkKirkegård(ordre.getKirkegård());
+            if (kirke_id == 0) {
+                createKirkegård(ordre.getKirkegård());
+                ordre.getKirkegård().setId(getMaxKirkeId());
+            } else {
+                ordre.getKirkegård().setId(kirke_id);
+            }
             db.setData("insert into ordre(tlf,ordre_nr,ordretype,ordredato,"
                     + "leveringdato,afhentningsdato,bemærkning,"
                     + "bemærkning_ekstra,kirkegård_id,afdeling,"
@@ -943,6 +943,18 @@ public class DatabaseObjectHandler {
                     + ordre.getAfhentningsdato() + "','" + ordre.getBemærkning() + "','"
                     + ordre.getBemærkning_ekstra() + "','"
                     + ordre.getKirkegård().getId() + "','" + ordre.getAfdeling() + "','"
+                    + ordre.getAfdødnavn() + "','" + ordre.getRække() + "','" + ordre.getNummer()
+                    + "','" + boolToInt(ordre.getGravType()) + "');");
+        } else if (getOrdre(ordre_nr) == null) {
+            db.setData("insert into ordre(tlf,ordre_nr,ordretype,ordredato,"
+                    + "leveringdato,afhentningsdato,bemærkning,"
+                    + "bemærkning_ekstra,afdeling,"
+                    + "afdødnavn,række,nummer,gravType)"
+                    + "values ('" + ordre.getKunde().getTlf() + "','"
+                    + ordre_nr + "','" + boolToInt(ordre.getOrdretype()) + "','"
+                    + ordre.getOrdredato() + "','" + ordre.getLeveringsdato() + "','"
+                    + ordre.getAfhentningsdato() + "','" + ordre.getBemærkning() + "','"
+                    + ordre.getBemærkning_ekstra() + "','" + ordre.getAfdeling() + "','"
                     + ordre.getAfdødnavn() + "','" + ordre.getRække() + "','" + ordre.getNummer()
                     + "','" + boolToInt(ordre.getGravType()) + "');");
         } else {
