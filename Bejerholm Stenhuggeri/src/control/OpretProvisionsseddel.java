@@ -39,9 +39,9 @@ public class OpretProvisionsseddel {
     //Skrift til fed into om virksomheden
     private BaseFont binfoFont;
 
-    public OpretProvisionsseddel(Faktura faktura, Provisionsseddel provisionsseddel) {
+    public OpretProvisionsseddel(Faktura faktura) {
          this.faktura = faktura;
-         this.provisionsseddel = faktura.getProvisionsseddel(); 
+         provisionsseddel = faktura.getProvisionsseddel(); 
     }
 
     public void genererProvisionsseddel(String filNavn) throws IOException, DocumentException {

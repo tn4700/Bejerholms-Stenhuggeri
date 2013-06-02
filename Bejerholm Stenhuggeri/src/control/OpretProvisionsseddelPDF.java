@@ -32,15 +32,15 @@ public class OpretProvisionsseddelPDF {
         DatabaseObjectHandler dbhandler = new DatabaseObjectHandler(db);
         
         Faktura faktura = null;
-        Provisionsseddel provisionsseddel = null;
+ 
         try {
             faktura = dbhandler.getFaktura("0028931093-00004");
-            provisionsseddel = dbhandler.getProvisionsseddel("00004");
+
         } catch (Exception e) {
         }
         
          try {
-            OpretProvisionsseddel opretProvisionsseddel = new OpretProvisionsseddel(faktura, provisionsseddel);
+            OpretProvisionsseddel opretProvisionsseddel = new OpretProvisionsseddel(faktura);
             opretProvisionsseddel.genererProvisionsseddel("testp.pdf");
 
             Desktop desktop = Desktop.getDesktop();
