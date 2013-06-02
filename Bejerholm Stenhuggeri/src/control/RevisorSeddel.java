@@ -34,9 +34,11 @@ public class RevisorSeddel {
     //Skrift til fed into om virksomheden
     private BaseFont binfoFont;
     private int år;
+    private String dato;
 
-    public RevisorSeddel(int år, DBConnection db) {
+    public RevisorSeddel(String dato,int år, DBConnection db) {
         this.år = år;
+        this.dato = dato;
         this.db = db;
         dbhandler = new DatabaseObjectHandler(db);
     }
@@ -72,6 +74,7 @@ public class RevisorSeddel {
         //Sæt Logo ind og faktura overskrift
         createContent(cb, btFont, 28, lightblue, 25, 725, "Lageropgørelse", left);
         createContent(cb, btFont, 18, black, 35, 700, "For året " + år, left);
+         createContent(cb, infoFont, 11, black, 35, 510, "Opgjort den " + dato, left);
 
         Image companyLogo = Image.getInstance("images/bejerholm.gif");
         companyLogo.setAbsolutePosition(375, 675);
@@ -139,7 +142,7 @@ public class RevisorSeddel {
 
             }
 
-            createContent(cb, tFont, 12, black, 110, x, +grupper.get(i).getGrp_nr() + " - " + grupper.get(i).getNavn(), left);
+            createContent(cb, tFont, 12, black, 110, x,  grupper.get(i).getNavn(), left);
             createContent(cb, tFont, 12, black, 330, x, "" + vare.size(), center);
             createContent(cb, tFont, 12, black, 465, x, "" + NumberFormat.getCurrencyInstance().format(grupværdi), right);
             createContent(cb, tFont, 12, black, 565, x, "" + NumberFormat.getCurrencyInstance().format(grupværdi1), right);

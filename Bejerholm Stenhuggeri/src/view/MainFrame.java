@@ -4,10 +4,19 @@
  */
 package view;
 
+import com.itextpdf.text.DocumentException;
 import control.DBConnection;
 import control.DatabaseObjectHandler;
+import control.RevisorSeddel;
+import control.Utility;
 import java.awt.CardLayout;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Calendar;
 import javax.swing.UIManager;
+import model.User;
 import model.Vare;
 
 /**
@@ -37,7 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "1234");
+            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
 
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
@@ -52,13 +61,35 @@ public class MainFrame extends javax.swing.JFrame {
             ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
 
         } else {
-            System.out.println("2");
-            Panel_DBConnect dbconn = new Panel_DBConnect();
-            jPanel1.add(dbconn);
+        // skift til vindue
         }
     }
 
-    public MainFrame(DBConnection db) {
+    public MainFrame(DBConnection db, User user) {
+       this.db = db;
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        initComponents();
+        this.setLocationRelativeTo(null);
+       
+        if (db.isConnected()) {
+
+            dbhandler = new DatabaseObjectHandler(db);
+            //Opret det panel som skal vises i framen
+            opretPaneler();
+
+            //   Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
+            ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
+
+        } else {
+            Login login = new Login();
+            login.setVisible(true);
+            this.dispose();
+        }
+        
     }
 
     /**
@@ -80,6 +111,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel_Administraion = new javax.swing.JPanel();
         jButton_BrugerAdministration = new javax.swing.JButton();
         jButton_Eksporter = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel_Salg = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -141,6 +173,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1.add(jPanel_Hovedmenu, "Hovedmenu");
 
+        jPanel_Administraion.setOpaque(false);
         jPanel_Administraion.setLayout(null);
 
         jButton_BrugerAdministration.setText("Bruger Administration");
@@ -150,7 +183,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel_Administraion.add(jButton_BrugerAdministration);
-        jButton_BrugerAdministration.setBounds(250, 170, 150, 50);
+        jButton_BrugerAdministration.setBounds(160, 170, 150, 50);
 
         jButton_Eksporter.setText("Eksporter");
         jButton_Eksporter.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +192,16 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel_Administraion.add(jButton_Eksporter);
-        jButton_Eksporter.setBounds(430, 170, 130, 50);
+        jButton_Eksporter.setBounds(320, 170, 140, 50);
+
+        jButton1.setText("Lageropgørelse");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel_Administraion.add(jButton1);
+        jButton1.setBounds(470, 170, 180, 50);
 
         jPanel1.add(jPanel_Administraion, "Administration");
 
@@ -257,6 +299,27 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_OrdreActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         try {
+             int year = Calendar.getInstance().get(Calendar.YEAR);
+             String dato = Utility.getCurrentTimeToString();
+            RevisorSeddel revisorseddel = new RevisorSeddel(dato,year,db);
+            revisorseddel.genererFaktura("test2.pdf");
+
+            Desktop desktop = Desktop.getDesktop();
+            File file = new File("docs/test2.pdf");
+            desktop.open(file);
+        } catch (FileNotFoundException ex){
+            System.out.println("Luk andre pdf'er før du prøver at se en ny!");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (DocumentException ex) {
+            ex.printStackTrace();
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -292,6 +355,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -311,7 +375,7 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void skiftcard(Vare vare) {
-        Panel_LynSalg lynsalg_ordre = new Panel_LynSalg(dbhandler, vare);
+        Panel_LynSalg lynsalg_ordre = new Panel_LynSalg(dbhandler, vare, this);
         jPanel1.add(lynsalg_ordre);
         ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg_ordre, "LynSalg_Ordre");
         ((CardLayout) jPanel1.getLayout()).show(jPanel1, "LynSalg_Ordre");

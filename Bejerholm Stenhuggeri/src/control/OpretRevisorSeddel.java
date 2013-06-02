@@ -28,20 +28,6 @@ public class OpretRevisorSeddel {
         } catch (Exception ex) {
             System.out.println("fejl: " + ex);
         }
-        try {
-            RevisorSeddel revisorseddel = new RevisorSeddel(2012,db);
-            revisorseddel.genererFaktura("test2.pdf");
-
-            Desktop desktop = Desktop.getDesktop();
-            File file = new File("docs/test2.pdf");
-            desktop.open(file);
-        } catch (FileNotFoundException ex){
-            System.out.println("Luk andre pdf'er før du prøver at se en ny!");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (DocumentException ex) {
-            ex.printStackTrace();
-        }
-
+       
     }
 }
