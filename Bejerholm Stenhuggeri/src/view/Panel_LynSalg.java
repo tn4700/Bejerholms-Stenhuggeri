@@ -32,7 +32,7 @@ import model.Varegruppe;
  * @author T
  */
 public class Panel_LynSalg extends javax.swing.JPanel {
-    
+
     private CardLayout layout;
     private ArrayList<Panel_LynSalgLinje> panel;
     private DatabaseObjectHandler dbhandler;
@@ -51,10 +51,10 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         this.frame = frame;
         this.dbhandler = dbhandler;
         initComponents();
-        ClassLoader cldr = this.getClass().getClassLoader();
-        tooltip = new ImageIcon(cldr.getResource("img/tooltip.png"));
-        
-        
+        // ClassLoader cldr = this.getClass().getClassLoader();
+        //   tooltip = new ImageIcon(cldr.getResource("img/tooltip.png"));
+
+
         købssum = 0;
         vare_list = new ArrayList();
         valgteVare_lynsalg = new ArrayList();
@@ -85,7 +85,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jPanel_OversigtVarer.setLayout(new WrapLayout());
         jScrollPane_VarelinjeScroll.getViewport().setOpaque(false);
         jScrollPane_Bekræft_Varelinjer.getViewport().setOpaque(false);
-        
+
     }
 
     /**
@@ -106,7 +106,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
             Panel_LynSalgLinje linje = new Panel_LynSalgLinje(valgteVare_lynsalg.get(i), this);
             panel.add(linje);
-            
+
         }
         drawpanel(jPanel_VareLinjer);
         jLabel_VælgVareSum.setText("" + udregnpris());
@@ -133,11 +133,11 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jPanel_OversigtVarer.setLayout(new WrapLayout());
         jScrollPane_VarelinjeScroll.getViewport().setOpaque(false);
         jScrollPane_Bekræft_Varelinjer.getViewport().setOpaque(false);
-        
-        
-        
-        
-        
+
+
+
+
+
     }
 
     /**
@@ -533,7 +533,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jComboBoxLynsalgVare.removeAllItems();
         // Tag den Varegruppe der er valgt i comboboxen og lav det til et objekt af Varegruppe
         Varegruppe varegruppe = (Varegruppe) jComboBox_Lynsalgvaregruppe.getSelectedItem();
-        
+
         try {
             //Fyld vare_list array'et op med de varer der er i den pågældende varegruppe.
             vare_list = dbhandler.getVareListe(varegruppe.getGrp_nr());
@@ -551,17 +551,17 @@ public class Panel_LynSalg extends javax.swing.JPanel {
                 if (vare_list.get(i).getVareStatus() == 0) {
                     jComboBoxLynsalgVare.addItem(vare_list.get(i));
                 }
-                
-                
+
+
             }
-            
-            
+
+
         } catch (Exception e) {
             jLabel_fejlbesked.setText("Der skete en fejl ved idlæsning af varer i vare gruppen");
             jLabel_fejlbesked.setToolTipText("Fejl: " + e);
         }
     }//GEN-LAST:event_jComboBox_LynsalgvaregruppeActionPerformed
-    
+
     private void jComboBoxLynsalgVareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLynsalgVareActionPerformed
         // tøm Vareinfo hvergang en varer vælges
 
@@ -573,17 +573,17 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             if (valgtvare.getVaretype() != null) {
                 jLabel_VisVaretype.setText(valgtvare.getVaretype().toString());
                 jLabel_VisVaretype.setToolTipText(valgtvare.getVaretype().toString());
-            }else{
+            } else {
                 jLabel_VisVaretype.setText("Ingen");
                 jLabel_VisVaretype.setToolTipText("");
             }
             jLabel_VisSalgsPris.setText(Utility.formatDoubleToKr(valgtvare.getSalgspris()));
             jLabel_VisHøjde.setText("" + valgtvare.getHøjde());
             jLabel_VisBredde.setText("" + valgtvare.getBredde());
-            
+
         }
     }//GEN-LAST:event_jComboBoxLynsalgVareActionPerformed
-    
+
     private void jButtonLynsalgTilføjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgTilføjActionPerformed
         jButtonLynsalgTilføj.setEnabled(true);
 
@@ -612,9 +612,9 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             jLabel_fejlbesked.setIcon(tooltip);
             jLabel_fejlbesked.setText("Max varelinjer er nået");
         }
-        
+
     }//GEN-LAST:event_jButtonLynsalgTilføjActionPerformed
-    
+
     private void jButtonLynsalgVidereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLynsalgVidereActionPerformed
         if (valgteVare_lynsalg.size() != 0) {
             jLabel_købssum_lynsalg.setText("" + udregnpris());
@@ -623,70 +623,70 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(frame, "Du skal vælge en vare for at komme videre.", "Fejl", JOptionPane.INFORMATION_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jButtonLynsalgVidereActionPerformed
-    
+
     private void jButton_ÆndreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ÆndreActionPerformed
         layout.show(jPanel_MainCard, "card_LynSalg");
         drawpanel(jPanel_VareLinjer);
     }//GEN-LAST:event_jButton_ÆndreActionPerformed
-    
+
     private void jButton_godkendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_godkendActionPerformed
-      if(valgteVare_lynsalg.isEmpty()){
-           JOptionPane.showMessageDialog(frame, "Det er ikke muligt at oprette en ordre uden varer!", "Fejl", JOptionPane.INFORMATION_MESSAGE);
-      }else{
-          
-     
-        int status = JOptionPane.showConfirmDialog(this, "Godkender du ordren, oprettes fakturaseddel og ordren kan ikke redigeres", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (status == 0) {
-            
-            
-            ArrayList<Vare_linje> varelinjer = new ArrayList();
-            for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
-                Vare_linje linje = new Vare_linje(i, null, valgteVare_lynsalg.get(i), null, null);
-                varelinjer.add(linje);
-                
-            }
-            Ordre lynordre = new Ordre(kunde, varelinjer);
-            
-            try {
-                String ordrenr = dbhandler.createOrdre(lynordre);
-                lynordre = dbhandler.getOrdre(ordrenr);
-                Faktura nyfaktura = new Faktura(ordrenr, Utility.getCurrentTime(), Utility.getCurrentTime(), null, false, false, lynordre, null, null);
-                try {
-                    dbhandler.createFaktura(nyfaktura);
-                } catch (Exception e) {
-                    jLabel_fejlbesked_Bekræft.setText("Det opstod en fejl ved oprettelse af faktura");
-                    jLabel_fejlbesked_Bekræft.setToolTipText("Fejl:" + e);
+        if (valgteVare_lynsalg.isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "Det er ikke muligt at oprette en ordre uden varer!", "Fejl", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+
+
+            int status = JOptionPane.showConfirmDialog(this, "Godkender du ordren, oprettes fakturaseddel og ordren kan ikke redigeres", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (status == 0) {
+
+
+                ArrayList<Vare_linje> varelinjer = new ArrayList();
+                for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
+                    Vare_linje linje = new Vare_linje(i, null, valgteVare_lynsalg.get(i), null, null);
+                    varelinjer.add(linje);
+
                 }
-                
+                Ordre lynordre = new Ordre(kunde, varelinjer);
+
                 try {
-                    OpretFaktura opretFaktura = new OpretFaktura(nyfaktura);
-                    opretFaktura.genererFaktura("Faktura-" + nyfaktura.getFaktura_nr() + ".pdf");
-                    
-                    Desktop desktop = Desktop.getDesktop();
-                    File file = new File("docs/Faktura-" + nyfaktura.getFaktura_nr() + ".pdf");
-                    desktop.open(file);
-                } catch (FileNotFoundException ex) {
-                    jLabel_fejlbesked_Bekræft.setText("Luk andre pfd'er før du prøver at se en ny ");
-                    jLabel_fejlbesked_Bekræft.setToolTipText("Fejl:" + ex);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } catch (DocumentException ex) {
-                    ex.printStackTrace();
+                    String ordrenr = dbhandler.createOrdre(lynordre);
+                    lynordre = dbhandler.getOrdre(ordrenr);
+                    Faktura nyfaktura = new Faktura(ordrenr, Utility.getCurrentTime(), Utility.getCurrentTime(), null, false, false, lynordre, null, null);
+                    try {
+                        dbhandler.createFaktura(nyfaktura);
+                    } catch (Exception e) {
+                        jLabel_fejlbesked_Bekræft.setText("Det opstod en fejl ved oprettelse af faktura");
+                        jLabel_fejlbesked_Bekræft.setToolTipText("Fejl:" + e);
+                    }
+
+                    try {
+                        OpretFaktura opretFaktura = new OpretFaktura(nyfaktura);
+                        opretFaktura.genererFaktura("Faktura-" + nyfaktura.getFaktura_nr() + ".pdf");
+
+                        Desktop desktop = Desktop.getDesktop();
+                        File file = new File("docs/Faktura-" + nyfaktura.getFaktura_nr() + ".pdf");
+                        desktop.open(file);
+                    } catch (FileNotFoundException ex) {
+                        jLabel_fejlbesked_Bekræft.setText("Luk andre pfd'er før du prøver at se en ny ");
+                        jLabel_fejlbesked_Bekræft.setToolTipText("Fejl:" + ex);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (DocumentException ex) {
+                        ex.printStackTrace();
+                    }
+                    frame.vishovedmenu();
+                } catch (Exception ex) {
+                    jLabel_fejlbesked_Bekræft.setText("Det var ikke muligt at oprette orden, prøv venligst igen");
+                    jLabel_fejlbesked_Bekræft.setToolTipText("Fejl" + ex);
+
                 }
-                frame.vishovedmenu();
-            } catch (Exception ex) {
-                jLabel_fejlbesked_Bekræft.setText("Det var ikke muligt at oprette orden, prøv venligst igen");
-                jLabel_fejlbesked_Bekræft.setToolTipText("Fejl" + ex);
-                
+
             }
-            
         }
-         }
-        
+
     }//GEN-LAST:event_jButton_godkendActionPerformed
-    
+
     private void jButton_AnnullerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AnnullerActionPerformed
         int status = JOptionPane.showConfirmDialog(this, "Ønsker du at annullere ordren?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (status == 0) {
@@ -698,10 +698,10 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             udregnpris();
             frame.vishovedmenu();
         }
-        
-        
-        
-        
+
+
+
+
     }//GEN-LAST:event_jButton_AnnullerActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLynsalgTilføj;
@@ -747,7 +747,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     private void udskrivVaregrp() {
         for (int i = 0; i < varegrup_list.size(); i++) {
             jComboBox_Lynsalgvaregruppe.addItem(varegrup_list.get(i));
-            
+
         }
     }
 
@@ -757,13 +757,13 @@ public class Panel_LynSalg extends javax.swing.JPanel {
      * @param jpanel Den kaldes med det panel som den skal tegne på
      */
     public void drawpanel(JPanel jpanel) {
-        
+
         jpanel.removeAll();
         jpanel.updateUI();
         for (int i = 0; i < panel.size(); i++) {
             jpanel.add(panel.get(i));
         }
-        
+
     }
 
 //Fjener en vare både fra array og panel
@@ -778,28 +778,28 @@ public class Panel_LynSalg extends javax.swing.JPanel {
             jButtonLynsalgTilføj.setEnabled(true);
             jLabel_fejlbesked.setText("");
         }
-        
+
     }
 // Bruges til at opdatere købssum når der fjernes en varer og der trykkes på videre knappen.
 
     public double udregnpris() {
-        
+
         købssum = 0;
         for (int i = 0; i < valgteVare_lynsalg.size(); i++) {
             købssum = købssum + valgteVare_lynsalg.get(i).getSalgspris();
-            
+
         }
-        
-        
+
+
         return købssum;
     }
-    
+
     public void flytvarelinje(Panel_LynSalgLinje i, boolean flytvej) {
-        
+
         int plads = panel.indexOf(i);
-        
+
         if (flytvej == true) {
-            
+
             if (plads != panel.size() - 1) {
                 Collections.swap(panel, plads, plads + 1);
                 Collections.swap(valgteVare_lynsalg, plads, plads + 1);
@@ -810,8 +810,8 @@ public class Panel_LynSalg extends javax.swing.JPanel {
                 Collections.swap(valgteVare_lynsalg, plads, plads - 1);
             }
         }
-        
-        
-        
+
+
+
     }
 }
