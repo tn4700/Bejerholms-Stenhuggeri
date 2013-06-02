@@ -18,6 +18,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import model.Faktura;
+import model.Kontoudtog;
 import model.Provisionsseddel;
 
 /**
@@ -26,10 +27,10 @@ import model.Provisionsseddel;
  */
 public class OpretProvisionsseddel {
      //Faktura objekt m.m. som bruges til indholdet i fakturaen
+    private Faktura faktura;
+    
     private Provisionsseddel provisionsseddel;
     
-    private Faktura faktura;
-    //Skrift til alm. tekst
     private BaseFont tFont;
     //Skrift til fed alm. tekst
     private BaseFont btFont;
@@ -38,9 +39,9 @@ public class OpretProvisionsseddel {
     //Skrift til fed into om virksomheden
     private BaseFont binfoFont;
 
-    public OpretProvisionsseddel(Faktura faktura) {
+    public OpretProvisionsseddel(Faktura faktura, Provisionsseddel provisionsseddel) {
          this.faktura = faktura;
-         provisionsseddel = faktura.getProvisionsseddel();
+         this.provisionsseddel = faktura.getProvisionsseddel(); 
     }
 
     public void genererProvisionsseddel(String filNavn) throws IOException, DocumentException {
@@ -103,7 +104,7 @@ public class OpretProvisionsseddel {
         createContent(cb, btFont, 12, black, 385, 525, "DATO:", left);
         String timeStamp = new SimpleDateFormat("dd. MMM yyyy").format(Calendar.getInstance().getTime());
         createContent(cb, tFont, 12, black, 575, 525, timeStamp, right);
-        createContent(cb, btFont, 12, black, 385, 509, "FAKTURANR:", left);
+        createContent(cb, btFont, 12, black, 385, 509, "ProvisionNR.", left);
         String provisions_nr = provisionsseddel.getProvisions_nr();
         createContent(cb, tFont, 12, black, 575, 509, ""+provisions_nr, right);
 
@@ -154,11 +155,11 @@ public class OpretProvisionsseddel {
         
         //Indsæt data for varelinjer
         int tmpY = 464;
-        double enhedspris = 11111;
-        double beløb = enhedspris*0.15;
-        double moms = beløb * 0.25;
-        double total = beløb + moms;
         
+        double enhedspris = faktura.getOrdre().getTotal();
+        double beløb = enhedspris*0.15;
+        double total = beløb * 1.25;
+        double moms = total - beløb;
  
 
         
@@ -177,8 +178,7 @@ public class OpretProvisionsseddel {
         createContent(cb, tFont, 12, black, 565, 184, ""+NumberFormat.getCurrencyInstance().format(beløb), right);
         createContent(cb, tFont, 12, black, 565, 164, "25,00%", right);
         createContent(cb, tFont, 12, black, 565, 144, ""+NumberFormat.getCurrencyInstance().format(moms), right);
-        total += (total*0.25);
-        createContent(cb, tFont, 12, black, 565, 124, ""+NumberFormat.getCurrencyInstance().format(total), right);
+       createContent(cb, tFont, 12, black, 565, 124, ""+NumberFormat.getCurrencyInstance().format(total), right);
         
         //Indsættelse af betalingsbetingelser og kontaktinfo
         createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
