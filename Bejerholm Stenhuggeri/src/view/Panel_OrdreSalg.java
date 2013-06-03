@@ -430,7 +430,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel_tilføjelse.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 152, -1, -1));
         jPanel_tilføjelse.add(jTextField_rensning_antal, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 48, 40, -1));
 
-        jComboBox_afhentning_måned.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "September", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December", "" }));
+        jComboBox_afhentning_måned.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December", " " }));
         jPanel_tilføjelse.add(jComboBox_afhentning_måned, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 172, 88, -1));
 
         jComboBox_afhentning_dag.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", " " }));
@@ -483,7 +483,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jComboBox_levering_dag.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", " " }));
         jPanel_nySten.add(jComboBox_levering_dag, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 189, -1, -1));
 
-        jComboBox_levering_måned.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "September", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December", "" }));
+        jComboBox_levering_måned.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December", " " }));
         jPanel_nySten.add(jComboBox_levering_måned, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 189, 97, -1));
 
         jPanel_nySten.add(jComboBox_year_leveringsdato, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 189, 60, -1));
@@ -536,6 +536,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jCheckBox_kiste.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup_UrneKiste.add(jCheckBox_kiste);
+        jCheckBox_kiste.setSelected(true);
         jCheckBox_kiste.setText("Kiste");
         jCheckBox_kiste.setOpaque(false);
         jPanel_gravsten.add(jCheckBox_kiste, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 165, -1, -1));
@@ -1336,8 +1337,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 ordre.setBemærkning_ekstra(jTextField_bemærkning_2.getText());
             }
             try {
-                Timestamp levering = Utility.getNewTimestamp(jComboBox_levering_dag.getSelectedItem() + "/" + jComboBox_levering_måned.getSelectedItem() + "/" + jComboBox_year_leveringsdato.getSelectedItem());
-                Timestamp afhentning = Utility.getNewTimestamp(jComboBox_afhentning_dag.getSelectedItem() + "/" + jComboBox_afhentning_måned.getSelectedItem() + "/" + jComboBox_year_afhentningsdato.getSelectedItem());
+                Timestamp levering = Utility.getNewTimestamp(jComboBox_levering_dag.getSelectedItem() + "/" + jComboBox_levering_måned.getSelectedIndex()+1 + "/" + jComboBox_year_leveringsdato.getSelectedItem());
+                Timestamp afhentning = Utility.getNewTimestamp(jComboBox_afhentning_dag.getSelectedItem() + "/" + jComboBox_afhentning_måned.getSelectedIndex()+1 + "/" + jComboBox_year_afhentningsdato.getSelectedItem());
                 ordre.setLeveringsdato(levering);
                 ordre.setAfhentningsdato(afhentning);
                 System.out.println("levering" + ordre.getLeveringsdato());
@@ -1911,8 +1912,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                     jLabel_fejlbesked_kunde_ordresalg.setText("Der mangler information om kirkegård");
                 }
                 if (jCheckBox_gravsten.isSelected() && jTextFieldValgt(jTextField_kirkegård_ordresalg) && jTextFieldValgt(jTextField_afdeling_ordresalg) && jTextFieldValgt(jTextField_række) && jTextFieldValgt(jTextField_nr)) {
-                    opretTilføjelselinje();
-
                     if (jTextFieldValgt(jTextField_Inskription_linje_1) || jTextFieldValgt(jTextField_Inskription_linje_2) || jTextFieldValgt(jTextField_Inskription_linje_3) || jTextFieldValgt(jTextField_Inskription_linje_4) || jTextFieldValgt(jTextField_Inskription_linje_4)) {
                         if (jTextFieldValgt(jTextField_skrifttype)) {
                             opretInskription_linje();

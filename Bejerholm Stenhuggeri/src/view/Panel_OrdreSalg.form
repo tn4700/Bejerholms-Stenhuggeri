@@ -553,7 +553,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="13">
-                        <StringItem index="0" value="September"/>
+                        <StringItem index="0" value="Januar"/>
                         <StringItem index="1" value="Februar"/>
                         <StringItem index="2" value="Marts"/>
                         <StringItem index="3" value="April"/>
@@ -565,7 +565,7 @@
                         <StringItem index="9" value="Oktober"/>
                         <StringItem index="10" value="November"/>
                         <StringItem index="11" value="December"/>
-                        <StringItem index="12" value=""/>
+                        <StringItem index="12" value=" "/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -810,7 +810,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="13">
-                        <StringItem index="0" value="September"/>
+                        <StringItem index="0" value="Januar"/>
                         <StringItem index="1" value="Februar"/>
                         <StringItem index="2" value="Marts"/>
                         <StringItem index="3" value="April"/>
@@ -822,7 +822,7 @@
                         <StringItem index="9" value="Oktober"/>
                         <StringItem index="10" value="November"/>
                         <StringItem index="11" value="December"/>
-                        <StringItem index="12" value=""/>
+                        <StringItem index="12" value=" "/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -1009,6 +1009,7 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="buttonGroup_UrneKiste"/>
                     </Property>
+                    <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Kiste"/>
                     <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
