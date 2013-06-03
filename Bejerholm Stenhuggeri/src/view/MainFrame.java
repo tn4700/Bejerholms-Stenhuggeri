@@ -11,10 +11,13 @@ import control.OpretRevisorSeddel;
 import util.Utility;
 import java.awt.CardLayout;
 import java.awt.Desktop;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import model.User;
 import model.Vare;
@@ -62,23 +65,28 @@ public class MainFrame extends javax.swing.JFrame {
             ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
 
         } else {
-        // skift til vindue
+            // skift til vindue
         }
     }
 
     public MainFrame(DBConnection db, User user) {
-       this.db = db;
+        this.db = db;
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (Exception e) {
             e.printStackTrace();
         }
         initComponents();
+        java.net.URL url = ClassLoader.getSystemResource("img/icon.png");        
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image img = kit.createImage(url);
+        this.setIconImage(img);
+        
         jLabel_dato.setText(Utility.getCurrentTimeToString());
         this.setLocationRelativeTo(null);
-        
+
         jLabel_Brugernavn.setText(user.getUsername());
-       
+
         if (db.isConnected()) {
 
             dbhandler = new DatabaseObjectHandler(db);
@@ -93,7 +101,7 @@ public class MainFrame extends javax.swing.JFrame {
             login.setVisible(true);
             this.dispose();
         }
-        
+
     }
 
     /**
@@ -129,6 +137,7 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Bejerholm Stenhuggeri");
         setBackground(new java.awt.Color(200, 236, 255));
         setMinimumSize(new java.awt.Dimension(1000, 720));
         setPreferredSize(new java.awt.Dimension(1000, 720));
@@ -319,16 +328,16 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_OrdreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         try {
-             int year = Calendar.getInstance().get(Calendar.YEAR);
-             String dato = Utility.getCurrentTimeToString();
-            OpretRevisorSeddel revisorseddel = new OpretRevisorSeddel(dato,year,db);
+        try {
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            String dato = Utility.getCurrentTimeToString();
+            OpretRevisorSeddel revisorseddel = new OpretRevisorSeddel(dato, year, db);
             revisorseddel.genererRevisorseddel("test2.pdf");
 
             Desktop desktop = Desktop.getDesktop();
             File file = new File("docs/test2.pdf");
             desktop.open(file);
-        } catch (FileNotFoundException ex){
+        } catch (FileNotFoundException ex) {
             System.out.println("Luk andre pdf'er før du prøver at se en ny!");
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -340,14 +349,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton_SalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalgActionPerformed
-((CardLayout) jPanel1.getLayout()).show(jPanel1, "Salg");
+        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Salg");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SalgActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    Login login = new Login();
-            login.setVisible(true);
-            this.dispose();
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 

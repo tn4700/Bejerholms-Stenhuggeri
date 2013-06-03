@@ -7,6 +7,8 @@ package view;
 import control.DBConnection;
 import control.DatabaseObjectHandler;
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +35,10 @@ public class Login extends javax.swing.JFrame {
             e.printStackTrace();
         }  
         initComponents();
+         java.net.URL url = ClassLoader.getSystemResource("img/icon.png");        
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image img = kit.createImage(url);
+        this.setIconImage(img);
         layout = (CardLayout) (jPanel_MainCard.getLayout());
         
       
