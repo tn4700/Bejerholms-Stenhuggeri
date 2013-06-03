@@ -6,7 +6,7 @@ package view;
 
 import control.DatabaseObjectHandler;
 import control.OpretOrdre;
-import control.Utility;
+import util.Utility;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Desktop;

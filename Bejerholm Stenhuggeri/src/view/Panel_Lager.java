@@ -1,7 +1,7 @@
 package view;
 
 import control.DatabaseObjectHandler;
-import control.Utility;
+import util.Utility;
 import java.awt.Color;
 import java.awt.LayoutManager;
 import java.sql.SQLException;

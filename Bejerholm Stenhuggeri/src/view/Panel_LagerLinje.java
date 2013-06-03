@@ -4,7 +4,7 @@
  */
 package view;
 
-import control.Utility;
+import util.Utility;
 import model.Vare;
 
 /**

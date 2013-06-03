@@ -4,6 +4,7 @@
  */
 package control;
 
+import util.Utility;
 import com.itextpdf.text.DocumentException;
 import control.exceptions.ControlException;
 import java.awt.Desktop;
