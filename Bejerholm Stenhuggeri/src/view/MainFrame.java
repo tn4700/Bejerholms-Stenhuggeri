@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
-import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import model.User;
 import model.Vare;
@@ -42,6 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
+        user = null;
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class MainFrame extends javax.swing.JFrame {
             opretPaneler();
 
             //   Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
-            ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
+            ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "Hovedmenu");
 
         } else {
             // skift til vindue
@@ -71,6 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     public MainFrame(DBConnection db, User user) {
         this.db = db;
+        this.user = user;
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (Exception e) {
@@ -94,7 +95,7 @@ public class MainFrame extends javax.swing.JFrame {
             opretPaneler();
 
             //   Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
-            ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
+            ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "Hovedmenu");
 
         } else {
             Login login = new Login();
@@ -114,7 +115,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel_Frame = new javax.swing.JPanel();
         jPanel_Hovedmenu = new javax.swing.JPanel();
         jButton_Administration = new javax.swing.JButton();
         jButton_Salg = new javax.swing.JButton();
@@ -123,16 +124,16 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel_Administraion = new javax.swing.JPanel();
         jButton_BrugerAdministration = new javax.swing.JButton();
         jButton_Eksporter = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButton_LagerOpgørelse = new javax.swing.JButton();
         jPanel_Salg = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        jButton_LynSalg = new javax.swing.JButton();
+        jButton_OrdreSalg = new javax.swing.JButton();
+        jButton_Hovedmenu = new javax.swing.JButton();
         jLabel_Loggedindsom = new javax.swing.JLabel();
         jLabel_Brugernavn = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jButton_LogUd = new javax.swing.JButton();
         jLabel_dato = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel_BG = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -143,10 +144,10 @@ public class MainFrame extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1000, 720));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 255, 102));
-        jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(805, 510));
-        jPanel1.setLayout(new java.awt.CardLayout());
+        jPanel_Frame.setBackground(new java.awt.Color(0, 255, 102));
+        jPanel_Frame.setOpaque(false);
+        jPanel_Frame.setPreferredSize(new java.awt.Dimension(805, 510));
+        jPanel_Frame.setLayout(new java.awt.CardLayout());
 
         jPanel_Hovedmenu.setOpaque(false);
         jPanel_Hovedmenu.setLayout(null);
@@ -159,7 +160,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel_Hovedmenu.add(jButton_Administration);
-        jButton_Administration.setBounds(410, 250, 130, 50);
+        jButton_Administration.setBounds(420, 250, 180, 75);
 
         jButton_Salg.setText("Salg");
         jButton_Salg.setFocusable(false);
@@ -169,7 +170,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel_Hovedmenu.add(jButton_Salg);
-        jButton_Salg.setBounds(250, 140, 130, 50);
+        jButton_Salg.setBounds(190, 140, 180, 75);
 
         jButton_Lager.setText("Lager");
         jButton_Lager.setFocusable(false);
@@ -179,7 +180,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel_Hovedmenu.add(jButton_Lager);
-        jButton_Lager.setBounds(410, 140, 130, 50);
+        jButton_Lager.setBounds(420, 140, 180, 75);
 
         jButton_Ordre.setText("Ordre");
         jButton_Ordre.setFocusable(false);
@@ -189,9 +190,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel_Hovedmenu.add(jButton_Ordre);
-        jButton_Ordre.setBounds(250, 250, 130, 50);
+        jButton_Ordre.setBounds(190, 250, 180, 75);
 
-        jPanel1.add(jPanel_Hovedmenu, "Hovedmenu");
+        jPanel_Frame.add(jPanel_Hovedmenu, "Hovedmenu");
 
         jPanel_Administraion.setOpaque(false);
         jPanel_Administraion.setLayout(null);
@@ -203,7 +204,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel_Administraion.add(jButton_BrugerAdministration);
-        jButton_BrugerAdministration.setBounds(160, 170, 150, 50);
+        jButton_BrugerAdministration.setBounds(100, 170, 180, 75);
 
         jButton_Eksporter.setText("Eksporter");
         jButton_Eksporter.addActionListener(new java.awt.event.ActionListener() {
@@ -212,122 +213,122 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel_Administraion.add(jButton_Eksporter);
-        jButton_Eksporter.setBounds(320, 170, 140, 50);
+        jButton_Eksporter.setBounds(310, 170, 180, 75);
 
-        jButton1.setText("Lageropgørelse");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_LagerOpgørelse.setText("Lageropgørelse");
+        jButton_LagerOpgørelse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_LagerOpgørelseActionPerformed(evt);
             }
         });
-        jPanel_Administraion.add(jButton1);
-        jButton1.setBounds(470, 170, 180, 50);
+        jPanel_Administraion.add(jButton_LagerOpgørelse);
+        jButton_LagerOpgørelse.setBounds(520, 170, 180, 75);
 
-        jPanel1.add(jPanel_Administraion, "Administration");
+        jPanel_Frame.add(jPanel_Administraion, "Administration");
 
         jPanel_Salg.setOpaque(false);
         jPanel_Salg.setLayout(null);
 
-        jButton2.setText("Lyn Salg");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton_LynSalg.setText("Lyn Salg");
+        jButton_LynSalg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton_LynSalgActionPerformed(evt);
             }
         });
-        jPanel_Salg.add(jButton2);
-        jButton2.setBounds(220, 160, 130, 50);
+        jPanel_Salg.add(jButton_LynSalg);
+        jButton_LynSalg.setBounds(190, 140, 180, 75);
 
-        jButton6.setText("Ordre Salg");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButton_OrdreSalg.setText("Ordre Salg");
+        jButton_OrdreSalg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButton_OrdreSalgActionPerformed(evt);
             }
         });
-        jPanel_Salg.add(jButton6);
-        jButton6.setBounds(440, 160, 130, 50);
+        jPanel_Salg.add(jButton_OrdreSalg);
+        jButton_OrdreSalg.setBounds(420, 140, 180, 75);
 
-        jPanel1.add(jPanel_Salg, "Salg");
+        jPanel_Frame.add(jPanel_Salg, "Salg");
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
+        getContentPane().add(jPanel_Frame, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
-        jButton7.setText("Hovedmenu");
-        jButton7.setFocusable(false);
-        jButton7.setOpaque(false);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Hovedmenu.setText("Hovedmenu");
+        jButton_Hovedmenu.setFocusable(false);
+        jButton_Hovedmenu.setOpaque(false);
+        jButton_Hovedmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButton_HovedmenuActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 112, -1, 21));
+        getContentPane().add(jButton_Hovedmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 112, -1, 21));
 
         jLabel_Loggedindsom.setText("Du er logged ind som:");
-        getContentPane().add(jLabel_Loggedindsom, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 112, 120, 20));
+        getContentPane().add(jLabel_Loggedindsom, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 660, 120, 20));
 
         jLabel_Brugernavn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel_Brugernavn.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Brugernavn.setForeground(new java.awt.Color(204, 0, 0));
         jLabel_Brugernavn.setText("jLabel3");
-        getContentPane().add(jLabel_Brugernavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 107, 111, 28));
+        getContentPane().add(jLabel_Brugernavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 654, 220, 28));
 
-        jButton3.setBackground(new java.awt.Color(172, 172, 172));
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton3.setText("Log ud");
-        jButton3.setBorder(null);
-        jButton3.setContentAreaFilled(false);
-        jButton3.setFocusable(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton_LogUd.setBackground(new java.awt.Color(172, 172, 172));
+        jButton_LogUd.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton_LogUd.setText("Log ud");
+        jButton_LogUd.setBorder(null);
+        jButton_LogUd.setContentAreaFilled(false);
+        jButton_LogUd.setFocusable(false);
+        jButton_LogUd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton_LogUdActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 112, 40, 20));
+        getContentPane().add(jButton_LogUd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 660, 40, 20));
 
         jLabel_dato.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel_dato.setText("jLabel2");
         getContentPane().add(jLabel_dato, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 657, 110, 20));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel_BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg.png"))); // NOI18N
+        getContentPane().add(jLabel_BG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_AdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministrationActionPerformed
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Administration");
+        ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "Administration");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_AdministrationActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "LynSalg");
+    private void jButton_LynSalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LynSalgActionPerformed
+        ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "LynSalg");
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton_LynSalgActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "OrdreSalg");        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void jButton_OrdreSalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OrdreSalgActionPerformed
+        ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "OrdreSalg");        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_OrdreSalgActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButton_HovedmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_HovedmenuActionPerformed
         vishovedmenu();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jButton_HovedmenuActionPerformed
 
     private void jButton_BrugerAdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BrugerAdministrationActionPerformed
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Bruger");
+        ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "Bruger");
     }//GEN-LAST:event_jButton_BrugerAdministrationActionPerformed
 
     private void jButton_EksporterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EksporterActionPerformed
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Csv");         // TODO add your handling code here:
+        ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "Csv");         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_EksporterActionPerformed
 
     private void jButton_LagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerActionPerformed
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Lager");
+        ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "Lager");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_LagerActionPerformed
 
     private void jButton_OrdreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OrdreActionPerformed
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Søg");
+        ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "Søg");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_OrdreActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton_LagerOpgørelseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerOpgørelseActionPerformed
         try {
             int year = Calendar.getInstance().get(Calendar.YEAR);
             String dato = Utility.getCurrentTimeToString();
@@ -346,19 +347,19 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton_LagerOpgørelseActionPerformed
 
     private void jButton_SalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalgActionPerformed
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Salg");
+        ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "Salg");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SalgActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton_LogUdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LogUdActionPerformed
         Login login = new Login();
         login.setVisible(true);
         this.dispose();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton_LogUdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,37 +396,37 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton_Administration;
     private javax.swing.JButton jButton_BrugerAdministration;
     private javax.swing.JButton jButton_Eksporter;
+    private javax.swing.JButton jButton_Hovedmenu;
     private javax.swing.JButton jButton_Lager;
+    private javax.swing.JButton jButton_LagerOpgørelse;
+    private javax.swing.JButton jButton_LogUd;
+    private javax.swing.JButton jButton_LynSalg;
     private javax.swing.JButton jButton_Ordre;
+    private javax.swing.JButton jButton_OrdreSalg;
     private javax.swing.JButton jButton_Salg;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel_BG;
     private javax.swing.JLabel jLabel_Brugernavn;
     private javax.swing.JLabel jLabel_Loggedindsom;
     private javax.swing.JLabel jLabel_dato;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_Administraion;
+    private javax.swing.JPanel jPanel_Frame;
     private javax.swing.JPanel jPanel_Hovedmenu;
     private javax.swing.JPanel jPanel_Salg;
     // End of variables declaration//GEN-END:variables
 
     public void skiftcard(Vare vare) {
         Panel_LynSalg lynsalg_ordre = new Panel_LynSalg(dbhandler, vare, this);
-        jPanel1.add(lynsalg_ordre);
-        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg_ordre, "LynSalg_Ordre");
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "LynSalg_Ordre");
+        jPanel_Frame.add(lynsalg_ordre);
+        ((CardLayout) jPanel_Frame.getLayout()).addLayoutComponent(lynsalg_ordre, "LynSalg_Ordre");
+        ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "LynSalg_Ordre");
     }
 
     public void vishovedmenu() {
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Hovedmenu");
+        ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "Hovedmenu");
         opretPaneler();
     }
 
@@ -436,20 +437,26 @@ public class MainFrame extends javax.swing.JFrame {
         lager = new Panel_Lager(dbhandler, this);
         søg = new Panel_Søg(dbhandler, this);
         csv = new Panel_CSVFiler(db);
-        bruger = new Panel_Bruger(db);
+       // @@@@@@ Skal fjernes igen efter login er implementeret
+        if(user != null){
+             bruger = new Panel_Bruger(db, user);
+        }else{
+             bruger = new Panel_Bruger(db);
+        }
+       
         // tilføj det til vores jpanel der skal fremvise det
-        jPanel1.add(ordresalg);
-        jPanel1.add(lynsalg);
-        jPanel1.add(lager);
-        jPanel1.add(søg);
-        jPanel1.add(csv);
-        jPanel1.add(bruger);
+        jPanel_Frame.add(ordresalg);
+        jPanel_Frame.add(lynsalg);
+        jPanel_Frame.add(lager);
+        jPanel_Frame.add(søg);
+        jPanel_Frame.add(csv);
+        jPanel_Frame.add(bruger);
         // Typecast panelet til cardlayout kald metoden addlayout med det panel der skal tilføjes samt en string der navngiver det. 
-        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(ordresalg, "OrdreSalg");
-        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lynsalg, "LynSalg");
-        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(lager, "Lager");
-        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(søg, "Søg");
-        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(csv, "Csv");
-        ((CardLayout) jPanel1.getLayout()).addLayoutComponent(bruger, "Bruger");
+        ((CardLayout) jPanel_Frame.getLayout()).addLayoutComponent(ordresalg, "OrdreSalg");
+        ((CardLayout) jPanel_Frame.getLayout()).addLayoutComponent(lynsalg, "LynSalg");
+        ((CardLayout) jPanel_Frame.getLayout()).addLayoutComponent(lager, "Lager");
+        ((CardLayout) jPanel_Frame.getLayout()).addLayoutComponent(søg, "Søg");
+        ((CardLayout) jPanel_Frame.getLayout()).addLayoutComponent(csv, "Csv");
+        ((CardLayout) jPanel_Frame.getLayout()).addLayoutComponent(bruger, "Bruger");
     }
 }
