@@ -50,6 +50,37 @@ public class Panel_Bruger extends javax.swing.JPanel {
         jLabel_brugerNavn.setText("" + user);
     }
 
+    public Panel_Bruger(DBConnection db, User user) {
+        this.db = db;
+        this.user = user;
+        dbhandler = new DatabaseObjectHandler(db);
+        initComponents();
+ 
+        try {
+            userlist = dbhandler.getUserList();
+        } catch (SQLException ex) {
+            System.out.println("Der kunne ikke hentes brugere" + ex);
+        }
+        for (int i = 0; i < userlist.size(); i++) {
+            jComboBox_Brugere.addItem(userlist.get(i));
+        }
+       
+        if (user.getUsername().equalsIgnoreCase("Mathias Bejerholm")) {
+            System.out.println("du er bejerholm");
+
+        }else{
+            
+            for (int i = 0; i < jPanel_admin.getComponentCount(); i++) {
+                jPanel_admin.getComponent(i).setEnabled(false);
+            }
+            
+            for (int i = 0; i < jPanel_Opretbruger.getComponentCount(); i++) {
+                jPanel_Opretbruger.getComponent(i).setEnabled(false);
+            }
+        }
+        jLabel_brugerNavn.setText("" + user);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,6 +104,8 @@ public class Panel_Bruger extends javax.swing.JPanel {
         jButton_Redigerret = new javax.swing.JButton();
         jTextField_redigerbrugerKode = new javax.swing.JTextField();
         jTextField_redigerbrugerKodeNu = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel_admin = new javax.swing.JPanel();
         jComboBox_Brugere = new javax.swing.JComboBox();
         jTextField_adminbrugerKode = new javax.swing.JTextField();
@@ -81,20 +114,21 @@ public class Panel_Bruger extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_brugerNavn.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel_brugerNavn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_brugerNavn.setText("[Navn]");
-        add(jLabel_brugerNavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 360, 60));
+        add(jLabel_brugerNavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 360, 60));
 
         jLabel_brugerinfo.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel_brugerinfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(jLabel_brugerinfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 490, 110));
+        add(jLabel_brugerinfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 490, 110));
 
-        jPanel_Opretbruger.setBorder(javax.swing.BorderFactory.createTitledBorder("Opret bruger"));
-        jPanel_Opretbruger.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_Opretbruger.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Opret bruger"));
+        jPanel_Opretbruger.setOpaque(false);
 
         jTextField_opretVælgbrugernavn.setText("[Vælg bruger navn]");
         jTextField_opretVælgbrugernavn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -102,7 +136,6 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jTextField_opretVælgbrugernavnMousePressed(evt);
             }
         });
-        jPanel_Opretbruger.add(jTextField_opretVælgbrugernavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 140, -1));
 
         jTextField_opretKode.setText("[Kode]");
         jTextField_opretKode.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -110,7 +143,6 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jTextField_opretKodeMousePressed(evt);
             }
         });
-        jPanel_Opretbruger.add(jTextField_opretKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 140, -1));
 
         jTextField_opretGenskrivkode.setText("[genskriv kode]");
         jTextField_opretGenskrivkode.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -118,29 +150,66 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jTextField_opretGenskrivkodeMousePressed(evt);
             }
         });
-        jPanel_Opretbruger.add(jTextField_opretGenskrivkode, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 140, -1));
 
-        jButton_opret.setText("opret");
+        jButton_opret.setText("Opret");
         jButton_opret.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_opretActionPerformed(evt);
             }
         });
-        jPanel_Opretbruger.add(jButton_opret, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
 
         jLabel4.setText("Ny kode:");
-        jPanel_Opretbruger.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 50, 28));
 
         jLabel3.setText("Navn:");
-        jPanel_Opretbruger.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 50, 28));
 
         jLabel5.setText("Gens. Kode:");
-        jPanel_Opretbruger.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 28));
+
+        javax.swing.GroupLayout jPanel_OpretbrugerLayout = new javax.swing.GroupLayout(jPanel_Opretbruger);
+        jPanel_Opretbruger.setLayout(jPanel_OpretbrugerLayout);
+        jPanel_OpretbrugerLayout.setHorizontalGroup(
+            jPanel_OpretbrugerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_OpretbrugerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(jTextField_opretVælgbrugernavn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel_OpretbrugerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(jTextField_opretKode, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel_OpretbrugerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(5, 5, 5)
+                .addComponent(jTextField_opretGenskrivkode, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel_OpretbrugerLayout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(jButton_opret, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel_OpretbrugerLayout.setVerticalGroup(
+            jPanel_OpretbrugerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_OpretbrugerLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel_OpretbrugerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_opretVælgbrugernavn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel_OpretbrugerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_opretKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel_OpretbrugerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_opretGenskrivkode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(jButton_opret, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         add(jPanel_Opretbruger, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 240, 220));
 
-        jPanel_redigerbruger.setBorder(javax.swing.BorderFactory.createTitledBorder("Redigér bruger"));
-        jPanel_redigerbruger.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_redigerbruger.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Redigér bruger"));
+        jPanel_redigerbruger.setOpaque(false);
 
         jButton_Redigerret.setText("Ret Kode!");
         jButton_Redigerret.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +217,6 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jButton_RedigerretActionPerformed(evt);
             }
         });
-        jPanel_redigerbruger.add(jButton_Redigerret, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 90, 30));
 
         jTextField_redigerbrugerKode.setText("[Ny kode]");
         jTextField_redigerbrugerKode.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -156,7 +224,6 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jTextField_redigerbrugerKodeMousePressed(evt);
             }
         });
-        jPanel_redigerbruger.add(jTextField_redigerbrugerKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 150, -1));
 
         jTextField_redigerbrugerKodeNu.setText("[Nuværende Kode]");
         jTextField_redigerbrugerKodeNu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -164,12 +231,55 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jTextField_redigerbrugerKodeNuMousePressed(evt);
             }
         });
-        jPanel_redigerbruger.add(jTextField_redigerbrugerKodeNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 150, -1));
+
+        jLabel6.setText("Nuværende:");
+
+        jLabel7.setText("Ny kode");
+
+        javax.swing.GroupLayout jPanel_redigerbrugerLayout = new javax.swing.GroupLayout(jPanel_redigerbruger);
+        jPanel_redigerbruger.setLayout(jPanel_redigerbrugerLayout);
+        jPanel_redigerbrugerLayout.setHorizontalGroup(
+            jPanel_redigerbrugerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_redigerbrugerLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel_redigerbrugerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_redigerbrugerLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(8, 8, 8)
+                        .addComponent(jTextField_redigerbrugerKodeNu, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_redigerbrugerLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(30, 30, 30)
+                        .addComponent(jTextField_redigerbrugerKode, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_redigerbrugerLayout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jButton_Redigerret, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(9, 9, 9))
+        );
+        jPanel_redigerbrugerLayout.setVerticalGroup(
+            jPanel_redigerbrugerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_redigerbrugerLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(jPanel_redigerbrugerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_redigerbrugerLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel6))
+                    .addComponent(jTextField_redigerbrugerKodeNu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel_redigerbrugerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_redigerbrugerLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel7))
+                    .addComponent(jTextField_redigerbrugerKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(jButton_Redigerret, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         add(jPanel_redigerbruger, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 240, 220));
 
-        jPanel_admin.setBorder(javax.swing.BorderFactory.createTitledBorder("Admin bruger redigering"));
-        jPanel_admin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_admin.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Admin bruger redigering"));
+        jPanel_admin.setOpaque(false);
 
         jComboBox_Brugere.setMaximumSize(new java.awt.Dimension(62, 28));
         jComboBox_Brugere.setMinimumSize(new java.awt.Dimension(62, 28));
@@ -179,7 +289,6 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jComboBox_BrugereActionPerformed(evt);
             }
         });
-        jPanel_admin.add(jComboBox_Brugere, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 50, 150, 28));
 
         jTextField_adminbrugerKode.setText("[Ny kode]");
         jTextField_adminbrugerKode.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -187,7 +296,6 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jTextField_adminbrugerKodeMousePressed(evt);
             }
         });
-        jPanel_admin.add(jTextField_adminbrugerKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 90, 150, -1));
 
         jButton_adminret.setText("Ret!");
         jButton_adminret.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +303,6 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jButton_adminretActionPerformed(evt);
             }
         });
-        jPanel_admin.add(jButton_adminret, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 80, -1));
 
         jButton_adminslet.setText("Slet Bruger");
         jButton_adminslet.addActionListener(new java.awt.event.ActionListener() {
@@ -203,13 +310,47 @@ public class Panel_Bruger extends javax.swing.JPanel {
                 jButton_adminsletActionPerformed(evt);
             }
         });
-        jPanel_admin.add(jButton_adminslet, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 90, -1));
 
         jLabel1.setText("Bruger:");
-        jPanel_admin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 50, 28));
 
         jLabel2.setText("Ny kode:");
-        jPanel_admin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 50, 28));
+
+        javax.swing.GroupLayout jPanel_adminLayout = new javax.swing.GroupLayout(jPanel_admin);
+        jPanel_admin.setLayout(jPanel_adminLayout);
+        jPanel_adminLayout.setHorizontalGroup(
+            jPanel_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_adminLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jComboBox_Brugere, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel_adminLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jTextField_adminbrugerKode, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel_adminLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jButton_adminret, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jButton_adminslet, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel_adminLayout.setVerticalGroup(
+            jPanel_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_adminLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(jPanel_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_Brugere, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_adminbrugerKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_adminret, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_adminslet, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         add(jPanel_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 240, 220));
     }// </editor-fold>//GEN-END:initComponents
@@ -238,7 +379,6 @@ public class Panel_Bruger extends javax.swing.JPanel {
                     "Hov! Beklager",
                     JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            System.out.println("fejl ved seltbutton" + e);
             JOptionPane.showMessageDialog(null,
                     "Der opstod en ukendt fejl ved sletning af en bruger.",
                     "Hov! Beklager",
@@ -328,7 +468,7 @@ public class Panel_Bruger extends javax.swing.JPanel {
 
 
 
-//                jLabel_brugerinfo.setText("Brugernavnet: "+jTextField_opretVælgbrugernavn.getText()+" er optaget");
+
     }//GEN-LAST:event_jButton_opretActionPerformed
 
     private void jTextField_opretVælgbrugernavnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_opretVælgbrugernavnMousePressed
@@ -361,6 +501,8 @@ public class Panel_Bruger extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel_brugerNavn;
     private javax.swing.JLabel jLabel_brugerinfo;
     private javax.swing.JPanel jPanel_Opretbruger;
