@@ -697,25 +697,25 @@ public class DatabaseObjectHandler {
             createVaregruppe(vare.getGruppe());
             vare.getGruppe().setGrp_nr(getMaxGrpNr());
         }
-        if(vare.getVaretype()!=null){
-        if (getVaretype(vare.getVaretype().getId()) == null) {
-            createVaretype(vare.getVaretype());
-            vare.getVaretype().setId(getMaxTypeId());
-        }
-                sql = "update vare set navn = '" + vare.getNavn() + "', højde = '" + vare.getHøjde()
-                + "', bredde = '" + vare.getBredde() + "', indkøbspris = '" + vare.getIndkøbspris()
-                + "', salgspris = '" + vare.getSalgspris() + "', type_id = '" + vare.getVaretype().getId()
-                + "', overflade = '" + vare.getOverflade() + "', dekoration = '"
-                + boolToInt(vare.getDekoration()) + "', vareStatus = '" + vare.getVareStatus()
-                + "', grp_nr = '" + vare.getGruppe().getGrp_nr() + "' where vare_nr = '"
-                + vare.getVare_nr() + "';";
+        if (vare.getVaretype() != null) {
+            if (getVaretype(vare.getVaretype().getId()) == null) {
+                createVaretype(vare.getVaretype());
+                vare.getVaretype().setId(getMaxTypeId());
+            }
+            sql = "update vare set navn = '" + vare.getNavn() + "', højde = '" + vare.getHøjde()
+                    + "', bredde = '" + vare.getBredde() + "', indkøbspris = '" + vare.getIndkøbspris()
+                    + "', salgspris = '" + vare.getSalgspris() + "', type_id = '" + vare.getVaretype().getId()
+                    + "', overflade = '" + vare.getOverflade() + "', dekoration = '"
+                    + boolToInt(vare.getDekoration()) + "', vareStatus = '" + vare.getVareStatus()
+                    + "', grp_nr = '" + vare.getGruppe().getGrp_nr() + "' where vare_nr = '"
+                    + vare.getVare_nr() + "';";
         } else {
-                sql = "update vare set navn = '" + vare.getNavn() + "', højde = '" + vare.getHøjde()
-                + "', bredde = '" + vare.getBredde() + "', indkøbspris = '" + vare.getIndkøbspris()
-                + "', salgspris = '" + vare.getSalgspris() + "', type_id = null, overflade = '" + vare.getOverflade() + "', dekoration = '"
-                + boolToInt(vare.getDekoration()) + "', vareStatus = '" + vare.getVareStatus()
-                + "', grp_nr = '" + vare.getGruppe().getGrp_nr() + "' where vare_nr = '"
-                + vare.getVare_nr() + "';";
+            sql = "update vare set navn = '" + vare.getNavn() + "', højde = '" + vare.getHøjde()
+                    + "', bredde = '" + vare.getBredde() + "', indkøbspris = '" + vare.getIndkøbspris()
+                    + "', salgspris = '" + vare.getSalgspris() + "', type_id = null, overflade = '" + vare.getOverflade() + "', dekoration = '"
+                    + boolToInt(vare.getDekoration()) + "', vareStatus = '" + vare.getVareStatus()
+                    + "', grp_nr = '" + vare.getGruppe().getGrp_nr() + "' where vare_nr = '"
+                    + vare.getVare_nr() + "';";
         }
         db.setData(sql);
     }
@@ -959,6 +959,101 @@ public class DatabaseObjectHandler {
         return ordre;
     }
 
+    public ArrayList<Ordre> getKundeOrdre(int tlf) throws SQLException {
+        ArrayList<Ordre> kundeordre = new ArrayList<>();
+        Ordre ordre = null;
+        Vare_linje vare_linje;
+        int kirkegård_id = 0;
+        String sql = "select * from ordre where tlf = '" + tlf + "'";
+        ResultSet rs;
+        rs = db.getData(sql);
+        while (rs.next()) {
+            ordre = new Ordre(rs.getString("ordre_nr"),
+                    rs.getBoolean("ordretype"),
+                    rs.getTimestamp("ordredato"),
+                    rs.getTimestamp("leveringdato"),
+                    rs.getTimestamp("afhentningsdato"),
+                    rs.getString("bemærkning"),
+                    rs.getString("bemærkning_ekstra"),
+                    null,
+                    rs.getInt("afdeling"),
+                    rs.getString("afdødnavn"),
+                    rs.getInt("række"),
+                    rs.getInt("nummer"),
+                    rs.getBoolean("gravType"),
+                    null,
+                    null);
+            tlf = rs.getInt("tlf");
+            kirkegård_id = rs.getInt("kirkegård_id");
+            kundeordre.add(ordre);
+
+        }
+        rs.close();
+
+        for (int i = 0; i < kundeordre.size(); i++) {
+            kundeordre.get(i).setKirkegård(getKirkegård(kirkegård_id));
+            kundeordre.get(i).setKunde(getKunde(tlf));
+            int max = getMaxVareLinje(kundeordre.get(i).getOrdre_nr());
+            for (int j = 0; j <= max; j++) {
+                if (getVareLinje(i, kundeordre.get(i).getOrdre_nr()) != null) {
+                    vare_linje = getVareLinje(i, kundeordre.get(i).getOrdre_nr());
+                    kundeordre.get(i).addVare_linje(vare_linje);
+                }
+            }
+
+        }
+
+        return kundeordre;
+    }
+
+    public ArrayList<Ordre> getIganværendeOrdre() throws SQLException {
+        ArrayList<Ordre> ordrelist = new ArrayList<>();
+        Ordre ordre = null;
+        int tlf = 0;
+        Vare_linje vare_linje;
+        int kirkegård_id = 0;
+        String sql = "select * from ordre where ordretype = '0'";
+        ResultSet rs;
+        rs = db.getData(sql);
+        while (rs.next()) {
+            ordre = new Ordre(rs.getString("ordre_nr"),
+                    rs.getBoolean("ordretype"),
+                    rs.getTimestamp("ordredato"),
+                    rs.getTimestamp("leveringdato"),
+                    rs.getTimestamp("afhentningsdato"),
+                    rs.getString("bemærkning"),
+                    rs.getString("bemærkning_ekstra"),
+                    null,
+                    rs.getInt("afdeling"),
+                    rs.getString("afdødnavn"),
+                    rs.getInt("række"),
+                    rs.getInt("nummer"),
+                    rs.getBoolean("gravType"),
+                    null,
+                    null);
+            tlf = rs.getInt("tlf");
+            kirkegård_id = rs.getInt("kirkegård_id");
+            ordrelist.add(ordre);
+
+        }
+        rs.close();
+
+        for (int i = 0; i < ordrelist.size(); i++) {
+            ordrelist.get(i).setKirkegård(getKirkegård(kirkegård_id));
+            ordrelist.get(i).setKunde(getKunde(tlf));
+            int max = getMaxVareLinje(ordrelist.get(i).getOrdre_nr());
+            for (int j = 0; j <= max; j++) {
+                if (getVareLinje(i, ordrelist.get(i).getOrdre_nr()) != null) {
+                    vare_linje = getVareLinje(i, ordrelist.get(i).getOrdre_nr());
+                    ordrelist.get(i).addVare_linje(vare_linje);
+                }
+            }
+
+        }
+
+        return ordrelist;
+    }
+
     public String getNextOrdreNr() throws SQLException {
         int max = 0;
         ResultSet rs;
@@ -1046,32 +1141,32 @@ public class DatabaseObjectHandler {
         } else {
             editKunde(ordre.getKunde());
         }
-        if(ordre.getKirkegård()!=null){
-        int kirke_id = checkKirkegård(ordre.getKirkegård());
-        if (kirke_id == 0) {
-            createKirkegård(ordre.getKirkegård());
-            ordre.getKirkegård().setId(getMaxKirkeId());
+        if (ordre.getKirkegård() != null) {
+            int kirke_id = checkKirkegård(ordre.getKirkegård());
+            if (kirke_id == 0) {
+                createKirkegård(ordre.getKirkegård());
+                ordre.getKirkegård().setId(getMaxKirkeId());
+            } else {
+                ordre.getKirkegård().setId(kirke_id);
+            }
+            String sql = "update ordre set tlf = '" + ordre.getKunde().getTlf() + "', ordretype = '" + boolToInt(ordre.getOrdretype())
+                    + "', ordredato = '" + ordre.getOrdredato() + "', leveringsdato = " + ordre.getLeveringsdato()
+                    + "', afhentningsdato = '" + ordre.getAfhentningsdato() + "', bemærkning = '" + ordre.getBemærkning()
+                    + "', bemærkning_ekstra = " + ordre.getBemærkning_ekstra() + "', kirke_id = "
+                    + ordre.getKirkegård().getId() + "', afdeling = '" + ordre.getAfdeling() + "', afdødnavn = '" + ordre.getAfdødnavn()
+                    + "', række = " + ordre.getRække() + "', nummer = "
+                    + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
+                    + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';";
+            db.setData(sql);
         } else {
-            ordre.getKirkegård().setId(kirke_id);
-        }
-        String sql = "update ordre set tlf = '" + ordre.getKunde().getTlf() + "', ordretype = '" + boolToInt(ordre.getOrdretype())
-                + "', ordredato = '" + ordre.getOrdredato() + "', leveringsdato = " + ordre.getLeveringsdato()
-                + "', afhentningsdato = '" + ordre.getAfhentningsdato() + "', bemærkning = '" + ordre.getBemærkning()
-                + "', bemærkning_ekstra = " + ordre.getBemærkning_ekstra() + "', kirke_id = "
-                + ordre.getKirkegård().getId() + "', afdeling = '" + ordre.getAfdeling() + "', afdødnavn = '" + ordre.getAfdødnavn()
-                + "', række = " + ordre.getRække() + "', nummer = "
-                + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
-                + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';";
-        db.setData(sql);
-        } else {
-                    String sql = "update ordre set tlf = '" + ordre.getKunde().getTlf() + "', ordretype = '" + boolToInt(ordre.getOrdretype())
-                + "', ordredato = '" + ordre.getOrdredato() + "', leveringsdato = " + ordre.getLeveringsdato()
-                + "', afhentningsdato = '" + ordre.getAfhentningsdato() + "', bemærkning = '" + ordre.getBemærkning()
-                + "', bemærkning_ekstra = " + ordre.getBemærkning_ekstra() + "', kirke_id = null, afdeling = '" + ordre.getAfdeling() + "', afdødnavn = '" + ordre.getAfdødnavn()
-                + "', række = " + ordre.getRække() + "', nummer = "
-                + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
-                + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';";
-         db.setData(sql);
+            String sql = "update ordre set tlf = '" + ordre.getKunde().getTlf() + "', ordretype = '" + boolToInt(ordre.getOrdretype())
+                    + "', ordredato = '" + ordre.getOrdredato() + "', leveringsdato = " + ordre.getLeveringsdato()
+                    + "', afhentningsdato = '" + ordre.getAfhentningsdato() + "', bemærkning = '" + ordre.getBemærkning()
+                    + "', bemærkning_ekstra = " + ordre.getBemærkning_ekstra() + "', kirke_id = null, afdeling = '" + ordre.getAfdeling() + "', afdødnavn = '" + ordre.getAfdødnavn()
+                    + "', række = " + ordre.getRække() + "', nummer = "
+                    + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
+                    + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';";
+            db.setData(sql);
         }
     }
 
