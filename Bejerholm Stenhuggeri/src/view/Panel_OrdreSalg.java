@@ -1222,12 +1222,15 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private void jButton_tilføj_vare_ordreSalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_tilføj_vare_ordreSalgActionPerformed
         jLabel_fejlbesked_ordre_linje.setText("");
         jLabel_pris_gravsten1.setForeground(Color.black);
-        if (validateTextField(jTextField_redigerPris_ordre_linje, 2)) {
+        if (validateTextField(jTextField_redigerPris_ordre_linje, 2) || !jCheckBox_redigerPris_gravsten1.isSelected()) {
             if (jCheckBox_redigerPris_gravsten1.isSelected() && jTextFieldValgt(jTextField_redigerPris_ordre_linje)) {
                 Vare vare = (Vare) jComboBox_vareListe_ordre_linje.getSelectedItem();
                 vare.setSalgspris(Double.parseDouble(jTextField_redigerPris_ordre_linje.getText()));
                 try {
                     dbhandler.editVare(vare);
+                    jCheckBox_redigerPris_gravsten1.setSelected(false);
+                    jTextField_redigerPris_ordre_linje.setText("");
+                    jTextField_redigerPris_ordre_linje.setEnabled(false);
                 } catch (SQLException ex) {
                     jLabel_fejlbesked_ordre_linje.setText("Problem med databasen, hold over besked for detaljer.");
                     jLabel_fejlbesked_ordre_linje.setToolTipText(ex.getMessage());
