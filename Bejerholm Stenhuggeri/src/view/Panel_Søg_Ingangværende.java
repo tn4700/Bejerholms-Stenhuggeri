@@ -6,11 +6,7 @@ package view;
 
 import control.DatabaseObjectHandler;
 import model.Faktura;
-import control.Utility;
-import java.awt.Color;
-import java.text.NumberFormat;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import util.Utility;
 import model.Ordre;
 
 /**

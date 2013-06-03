@@ -5,7 +5,7 @@
 package view;
 
 import control.DatabaseObjectHandler;
-import control.Utility;
+import util.Utility;
 import control.exceptions.ControlException;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -52,16 +52,20 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jLabel_VisPris.setText(NumberFormat.getCurrencyInstance().format(ordre.getTotal()));
         jLabel_VisAfhentDato.setText(Utility.formatTimestampToString(ordre.getAfhentningsdato()));
         jLabel_VisLevDato.setText(Utility.formatTimestampToString(ordre.getLeveringsdato()));
-       
+
         if (ordre.getOrdretype()) {
-            jLabel_VisAfDødNavn.setText(ordre.getAfdødnavn());
-            jLabel_VisAfdeling.setText("" + ordre.getAfdeling());
-            jLabel_VisNR.setText("" + ordre.getNummer());
-            jLabel_VisRække.setText("" + ordre.getRække());
-            jLabel_VisKirkegård.setText(ordre.getKirkegård().getNavn());
+
+            if (ordre.getKirkegård() != null) {
+                jLabel_VisKirkegård.setText(ordre.getKirkegård().getNavn());
+                jLabel_VisAfDødNavn.setText(ordre.getAfdødnavn());
+                jLabel_VisAfdeling.setText("" + ordre.getAfdeling());
+                jLabel_VisNR.setText("" + ordre.getNummer());
+                jLabel_VisRække.setText("" + ordre.getRække());
+            }
+
             jLabel_VisBemærkning.setText(ordre.getBemærkning());
             jLabel_VisBemærkning.setToolTipText(ordre.getBemærkning());
-          
+
             if (!ordre.getBemærkning_ekstra().isEmpty()) {
                 jLabel_VisEkstraBemærkning.setText(ordre.getBemærkning_ekstra());
                 jLabel_VisEkstraBemærkning.setToolTipText(ordre.getBemærkning_ekstra());
@@ -697,7 +701,6 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_OrdrePDFActionPerformed
 
     private void jButton_FakturaPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_FakturaPdfActionPerformed
-        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_FakturaPdfActionPerformed
 
@@ -714,7 +717,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_KontopdfActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-int status = JOptionPane.showConfirmDialog(this, "Orden slettes fra systemet, er du sikker?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int status = JOptionPane.showConfirmDialog(this, "Orden slettes fra systemet, er du sikker?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (status == 0) {
             try {
                 dbhandler.deleteOrdre(ordre);

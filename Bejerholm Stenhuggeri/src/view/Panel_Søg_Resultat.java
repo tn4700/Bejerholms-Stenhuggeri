@@ -7,6 +7,7 @@ package view;
 import control.DatabaseObjectHandler;
 import model.Faktura;
 import model.Ordre;
+import util.Utility;
 
 /**
  *
@@ -28,8 +29,12 @@ public class Panel_Søg_Resultat extends javax.swing.JPanel {
         type = 0;
         this.ordre = ordre;
         this.dbhandler = dbhandler;
-        jLabel_VisNavn.setText(ordre.getKunde().getFornavn() + " " + ordre.getKunde().getEfternavn());
-        jLabel1.setText("" + ordre.getOrdre_nr());
+        jLabel_Navn.setText(ordre.getKunde().getFornavn() + " " + ordre.getKunde().getEfternavn());
+        jLabel_Navn.setToolTipText("Telefon nr: " + ordre.getKunde().getTlf());
+        jLabel_OrdreNr.setText("" + ordre.getOrdre_nr());
+        jLabel_beløb.setText(Utility.formatDoubleToKr(ordre.getTotal()));
+        jLabel_beløb.setToolTipText("Beløb med moms: " + Utility.formatDoubleToKr(ordre.getTotalInklMoms()));
+        jLabel_VisOprettetDato.setText(Utility.formatTimestampToString(ordre.getOrdredato()));
 
     }
 
@@ -38,8 +43,13 @@ public class Panel_Søg_Resultat extends javax.swing.JPanel {
         type = 1;
         this.faktura = faktura;
         this.dbhandler = dbhandler;
-        jLabel_VisNavn.setText(faktura.getOrdre().getKunde().getFornavn() + " " + faktura.getOrdre().getKunde().getFornavn());
-        jLabel1.setText("" + faktura.getFaktura_nr());
+        jLabel_Navn.setText(faktura.getOrdre().getKunde().getFornavn() + " " + faktura.getOrdre().getKunde().getFornavn());
+        jLabel_Navn.setToolTipText("Telefon nr: " + faktura.getOrdre().getKunde().getTlf());
+        jLabel_OrdreNr.setText("" + faktura.getFaktura_nr());
+        jLabel_beløb.setText(Utility.formatDoubleToKr(faktura.getOrdre().getTotal()));
+        jLabel_beløb.setToolTipText("Beløb med moms: " + Utility.formatDoubleToKr(faktura.getOrdre().getTotalInklMoms()));
+        jLabel_VisOprettetDato.setText(Utility.formatTimestampToString(faktura.getFaktureringsdato()));
+
     }
 
     /**
@@ -52,58 +62,94 @@ public class Panel_Søg_Resultat extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jButton_VisOrdre = new javax.swing.JButton();
+        jPanel_Beløb = new javax.swing.JPanel();
+        jLabel_beløb = new javax.swing.JLabel();
+        jPanel_OrdreInfo = new javax.swing.JPanel();
+        jLabel_OprettetDato = new javax.swing.JLabel();
         jLabel_Navn = new javax.swing.JLabel();
-        jLabel_VisNavn = new javax.swing.JLabel();
+        jLabel_VisOprettetDato = new javax.swing.JLabel();
+        jLabel_OrdreNr = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        setMinimumSize(new java.awt.Dimension(278, 106));
+        setMinimumSize(new java.awt.Dimension(278, 78));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(278, 106));
+        setPreferredSize(new java.awt.Dimension(278, 78));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Nr");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 280, 30));
-
-        jButton2.setText("Vis");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton_VisOrdre.setText("Vis");
+        jButton_VisOrdre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton_VisOrdreActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 80, -1));
+        add(jButton_VisOrdre, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 5, 105, 30));
 
-        jLabel_Navn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jPanel_Beløb.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel_Beløb.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel_beløb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_beløb.setText("jLabel5");
+        jPanel_Beløb.add(jLabel_beløb, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 8, 90, -1));
+
+        add(jPanel_Beløb, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 104, 30));
+
+        jPanel_OrdreInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel_OrdreInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel_OprettetDato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_OprettetDato.setText("Oprettet: ");
+        jPanel_OrdreInfo.add(jLabel_OprettetDato, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
         jLabel_Navn.setText("Navn: ");
-        add(jLabel_Navn, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 38, -1, -1));
+        jPanel_OrdreInfo.add(jLabel_Navn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 120, -1));
 
-        jLabel_VisNavn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_VisNavn.setText("jLabel6");
-        add(jLabel_VisNavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 280, -1));
+        jLabel_VisOprettetDato.setText("jLabel3");
+        jPanel_OrdreInfo.add(jLabel_VisOprettetDato, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+
+        jLabel_OrdreNr.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_OrdreNr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_OrdreNr.setText("Nr");
+        jPanel_OrdreInfo.add(jLabel_OrdreNr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 82, 22));
+
+        add(jPanel_OrdreInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 140, 64));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(type== 0){
+    private void jButton_VisOrdreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VisOrdreActionPerformed
+        if (type == 0) {
             JDialog_SøgOrdre visordre = new JDialog_SøgOrdre(null, true, dbhandler, ordre);
             visordre.setVisible(true);
-        }else if(type ==1){
+        } else if (type == 1) {
             JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(null, true, dbhandler, faktura);
-             visfaktura.setVisible(true);
+            visfaktura.setVisible(true);
         }
-        
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_VisOrdreActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton_VisOrdre;
     private javax.swing.JLabel jLabel_Navn;
-    private javax.swing.JLabel jLabel_VisNavn;
+    private javax.swing.JLabel jLabel_OprettetDato;
+    private javax.swing.JLabel jLabel_OrdreNr;
+    private javax.swing.JLabel jLabel_VisOprettetDato;
+    private javax.swing.JLabel jLabel_beløb;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel_Beløb;
+    private javax.swing.JPanel jPanel_OrdreInfo;
     // End of variables declaration//GEN-END:variables
 }

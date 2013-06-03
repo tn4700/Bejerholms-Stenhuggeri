@@ -8,20 +8,16 @@ import com.itextpdf.text.DocumentException;
 import control.DatabaseObjectHandler;
 import control.OpretFaktura;
 import control.OpretKontoudtog;
-import control.OpretOrdre;
 import javax.swing.JOptionPane;
 import model.Faktura;
-import control.Utility;
+import util.Utility;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.NumberFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Kunde;
-import model.Ordre;
 
 /**
  *

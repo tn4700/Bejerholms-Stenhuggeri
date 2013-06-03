@@ -12,12 +12,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
-import javax.swing.JCheckBox;
-import javax.swing.JRadioButton;
 import javax.swing.border.EtchedBorder;
 import model.Faktura;
 import model.Ordre;
-import model.Vare;
 
 /**
  *
@@ -54,11 +51,12 @@ public class Panel_Søg extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel_Søg = new javax.swing.JPanel();
         jButton_Søg = new javax.swing.JButton();
         jTextField_SøgeNr = new javax.swing.JTextField();
         jComboBox_VælgType = new javax.swing.JComboBox();
-        jPanel3 = new javax.swing.JPanel();
+        jScrollPane_SøgeResultat = new javax.swing.JScrollPane();
+        jPanel_SøgeResultat = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel_Visfaktura = new javax.swing.JPanel();
@@ -71,8 +69,8 @@ public class Panel_Søg extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Søg", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel2.setOpaque(false);
+        jPanel_Søg.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Søg", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel_Søg.setOpaque(false);
 
         jButton_Søg.setText("Søg");
         jButton_Søg.addActionListener(new java.awt.event.ActionListener() {
@@ -84,22 +82,27 @@ public class Panel_Søg extends javax.swing.JPanel {
         jTextField_SøgeNr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jComboBox_VælgType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ordre", "Faktura", "Kunde" }));
+        jComboBox_VælgType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_VælgTypeActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel_SøgLayout = new javax.swing.GroupLayout(jPanel_Søg);
+        jPanel_Søg.setLayout(jPanel_SøgLayout);
+        jPanel_SøgLayout.setHorizontalGroup(
+            jPanel_SøgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_SøgLayout.createSequentialGroup()
                 .addContainerGap(58, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_SøgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox_VælgType, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_SøgeNr, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Søg, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanel_SøgLayout.setVerticalGroup(
+            jPanel_SøgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_SøgLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jComboBox_VælgType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
@@ -109,20 +112,28 @@ public class Panel_Søg extends javax.swing.JPanel {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+        add(jPanel_Søg, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Søge Resultat"));
-        jPanel3.setFocusTraversalPolicyProvider(true);
-        jPanel3.setOpaque(false);
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 310, 210));
+        jScrollPane_SøgeResultat.setBorder(null);
+        jScrollPane_SøgeResultat.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane_SøgeResultat.setFocusable(false);
+        jScrollPane_SøgeResultat.setOpaque(false);
+
+        jPanel_SøgeResultat.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_SøgeResultat.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Søge Resultat"));
+        jPanel_SøgeResultat.setFocusTraversalPolicyProvider(true);
+        jPanel_SøgeResultat.setOpaque(false);
+        jScrollPane_SøgeResultat.setViewportView(jPanel_SøgeResultat);
+
+        add(jScrollPane_SøgeResultat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 310, 220));
 
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 24, 280, 20));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jScrollPane1.setOpaque(false);
+
+        jPanel_Visfaktura.setOpaque(false);
         jScrollPane1.setViewportView(jPanel_Visfaktura);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 113, 420, 347));
@@ -169,23 +180,22 @@ public class Panel_Søg extends javax.swing.JPanel {
 
     private void jButton_SøgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SøgActionPerformed
 
-        jPanel3.removeAll();
+        jPanel_SøgeResultat.removeAll();
         jLabel1.setText("");
         if (jTextField_SøgeNr != null) {
+            if (!jTextField_SøgeNr.getText().isEmpty()) {
+                if ((jComboBox_VælgType.getSelectedIndex() == 0)) {
+                    String ordrenr = jTextField_SøgeNr.getText();
 
-            if ((jComboBox_VælgType.getSelectedIndex() == 0)) {
-                String ordrenr = jTextField_SøgeNr.getText();
-                if (!jTextField_SøgeNr.getText().isEmpty()) {
                     try {
 
                         Integer.parseInt(jTextField_SøgeNr.getText());
 
                         try {
-                            System.out.println("ordrenr" + ordrenr);
                             Ordre ordre = dbhandler.getOrdre(ordrenr);
                             Panel_Søg_Resultat panel = new Panel_Søg_Resultat(dbhandler, ordre);
-                            jPanel3.add(panel);
-                            jPanel3.revalidate();
+                            jPanel_SøgeResultat.add(panel);
+                            jPanel_SøgeResultat.revalidate();
 
                         } catch (SQLException ex) {
                             jLabel1.setText("Der skete en fejl hentning af ordre" + ex);
@@ -196,40 +206,60 @@ public class Panel_Søg extends javax.swing.JPanel {
                     } catch (Exception e) {
                         jLabel1.setText("Ordre nr må kun være tal");
                     }
-                } else {
-                    jLabel1.setText("Ordre nr må ikke være tomt");
-                }
 
 
-            } else if (jComboBox_VælgType.getSelectedIndex() == 1) {
-                String fakturanr = jTextField_SøgeNr.getText();
-                if (!jTextField_SøgeNr.getText().isEmpty()) {
 
-                    try {
-                        System.out.println("faktura nnr" + fakturanr);
-                        Faktura faktura = dbhandler.getFaktura(fakturanr);
-                        Panel_Søg_Resultat panel = new Panel_Søg_Resultat(dbhandler, faktura);
-                        jPanel3.add(panel);
-                        jPanel3.revalidate();
+                } else if (jComboBox_VælgType.getSelectedIndex() == 1) {
+                    String fakturanr = jTextField_SøgeNr.getText();
 
-                    } catch (SQLException ex) {
-                        jLabel1.setText("Der skete en fejl hentning af fakturaen" + ex);
-                    } catch (Exception e) {
-                        jLabel1.setText("fakturaen ikke fundet");
+                    if (jTextField_SøgeNr.getText().length() == 16) {
+                        try {
+                            Faktura faktura = dbhandler.getFaktura(fakturanr);
+                            System.out.println(faktura.getFaktura_nr());
+                            Panel_Søg_Resultat panel = new Panel_Søg_Resultat(dbhandler, faktura);
+                            jPanel_SøgeResultat.add(panel);
+                            jPanel_SøgeResultat.revalidate();
+
+                        } catch (SQLException ex) {
+                            jLabel1.setText("Der skete en fejl hentning af fakturaen" + ex);
+                        } catch (Exception e) {
+                            jLabel1.setText("fakturaen ikke fundet" + e);
+                        }
+                    } else {
+                        jLabel1.setText("Faktura nr skal være 16 tegn inkl -");
                     }
 
 
-                } else {
-                    jLabel1.setText("faktura må ikke være tomt");
+                } else if (jComboBox_VælgType.getSelectedIndex() == 2) {
+
+
+                    try {
+                        jPanel_SøgeResultat.setLayout((LayoutManager) new WrapLayout());
+                        ArrayList<Ordre> ordre = dbhandler.getKundeOrdre(Integer.parseInt(jTextField_SøgeNr.getText()));
+                        System.out.println(ordre.size());
+                        for (int i = 0; i < ordre.size(); i++) {
+                            Panel_Søg_Resultat panel = new Panel_Søg_Resultat(dbhandler, ordre.get(i));
+                            jPanel_SøgeResultat.add(panel);
+                            jPanel_SøgeResultat.revalidate();
+
+                        }
+
+                    } catch (SQLException ex) {
+                        jLabel1.setText("Det var ikke muligt at hente kunde ordre");
+                        jLabel1.setToolTipText("Fejl: " + ex);
+                    } catch (Exception e) {
+                        jLabel1.setText("Kunde ordre ikke fundet");
+                        jLabel1.setToolTipText("Fejl " + e);
+                    }
+
+
                 }
 
-            } else if (jComboBox_VælgType.getSelectedIndex() == 2) {
-                // Her skal være en metode der hiver alle ordre og fakturaer
-                // fra et indtastet telefon nr.
             } else {
+                jLabel1.setText("Du skal indtaste noget før du kan søge");
             }
         }
-        // TODO add your handling code here:
+            // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SøgActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -245,18 +275,25 @@ public class Panel_Søg extends javax.swing.JPanel {
         opdaterfaktura();
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jComboBox_VælgTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_VælgTypeActionPerformed
+        jPanel_SøgeResultat.removeAll();
+        jPanel_SøgeResultat.revalidate();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_VælgTypeActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton_Søg;
     private javax.swing.JComboBox jComboBox_VælgType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel_Søg;
+    private javax.swing.JPanel jPanel_SøgeResultat;
     private javax.swing.JPanel jPanel_Visfaktura;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane_SøgeResultat;
     private javax.swing.JTextField jTextField_SøgeNr;
     // End of variables declaration//GEN-END:variables
 
@@ -287,16 +324,21 @@ public class Panel_Søg extends javax.swing.JPanel {
 
     public void hentordre() {
         jPanel_Visfaktura.removeAll();
-        Ordre ordre = null;
+        ArrayList<Ordre> ordrelist;
         jPanel_Visfaktura.removeAll();
         try {
-            ordre = dbhandler.getOrdre("00001");
-            
+            ordrelist = dbhandler.getIganværendeOrdre();
+            for (int i = 0; i < ordrelist.size(); i++) {
+                Panel_Søg_Ingangværende panel = new Panel_Søg_Ingangværende(ordrelist.get(i), dbhandler, this);
+                jPanel_Visfaktura.add(panel);
+
+            }
+
         } catch (SQLException ex) {
-       
+            jLabel1.setText("Der skete en fejl ved hentning af igangværende faktura");
+            jLabel1.setToolTipText("fejl: " + ex);
         }
-        Panel_Søg_Ingangværende panel = new Panel_Søg_Ingangværende(ordre, dbhandler, this);
-        jPanel_Visfaktura.add(panel);
+
 
     }
 }
