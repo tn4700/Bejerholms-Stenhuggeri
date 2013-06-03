@@ -4,8 +4,10 @@
  */
 package view;
 
+import com.itextpdf.text.DocumentException;
 import control.DatabaseObjectHandler;
 import control.OpretOrdre;
+import control.exceptions.ControlException;
 import util.Utility;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -13,7 +15,10 @@ import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.LayoutManager;
 import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JComboBox;
@@ -1191,7 +1196,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel_main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -1344,10 +1349,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 varelinjer.add(valgteVare_ordresalg.get(i));
             }
             Postnummer postnr = new Postnummer(Integer.parseInt(jTextField_postnr_ordresalg.getText()), 
-                    jTextField_By_ordresalg.getText().trim().replace("'", "\'"));
-            kunde = new Kunde(jTextField_fornavn_ordresalg.getText().trim().replace("'", "\'"), 
-                    jTextField_efternavn_ordresalg.getText().trim().replace("'", "\'"), 
-                    jTextField_adresse_ordresalg.getText().trim().replace("'", "\'"), 
+                    jTextField_By_ordresalg.getText().trim().replace("'", "\\'"));
+            kunde = new Kunde(jTextField_fornavn_ordresalg.getText().trim().replace("'", "\\'"), 
+                    jTextField_efternavn_ordresalg.getText().trim().replace("'", "\\'"), 
+                    jTextField_adresse_ordresalg.getText().trim().replace("'", "\\'"), 
                     Integer.parseInt(jTextField_tlf_ordresalg.getText()), 
                     postnr);
             Ordre ordre = new Ordre(kunde, varelinjer);
@@ -1359,12 +1364,12 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 ordre.setOrdretype(false);
             }
             if (jCheckBox_gravsten.isSelected()) {
-                Kirkegård kirkegård = new Kirkegård(0, jTextField_kirkegård_ordresalg.getText().trim().replace("'", "\'"));
+                Kirkegård kirkegård = new Kirkegård(0, jTextField_kirkegård_ordresalg.getText().trim().replace("'", "\\'"));
                 ordre.setKirkegård(kirkegård);
                 ordre.setAfdeling(Integer.parseInt(jTextField_afdeling_ordresalg.getText()));
                 ordre.setRække(Integer.parseInt(jTextField_række.getText()));
                 ordre.setNummer(Integer.parseInt(jTextField_nr.getText()));
-                ordre.setAfdødnavn(jTextField_afdødnavn.getText().trim().replace("'", "\'"));
+                ordre.setAfdødnavn(jTextField_afdødnavn.getText().trim().replace("'", "\\'"));
                 if (jCheckBox_kiste.isSelected()) {
                     ordre.setGravType(true);
                 } else if (jCheckBox_urne.isSelected()) {
@@ -1372,10 +1377,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 }
             }
             if (jTextFieldValgt(jTextField_bemærkning_1)) {
-                ordre.setBemærkning(jTextField_bemærkning_1.getText().trim().replace("'", "\'"));
+                ordre.setBemærkning(jTextField_bemærkning_1.getText().trim().replace("'", "\\'"));
             }
             if (jTextFieldValgt(jTextField_bemærkning_2)) {
-                ordre.setBemærkning_ekstra(jTextField_bemærkning_2.getText().trim().replace("'", "\'"));
+                ordre.setBemærkning_ekstra(jTextField_bemærkning_2.getText().trim().replace("'", "\\'"));
             }
             try {
                 Timestamp levering = Utility.getNewTimestamp(jComboBox_levering_dag.getSelectedItem() + "/" + jComboBox_levering_måned.getSelectedIndex() + 1 + "/" + jComboBox_year_leveringsdato.getSelectedItem());
@@ -1390,9 +1395,18 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 Desktop desktop = Desktop.getDesktop();
                 File file = new File("docs/ordrePDF.pdf");
                 desktop.open(file);
-            } catch (Exception e) {
-                System.out.println("Der skete en fejl med oprettelse af pfd'en" + e.getMessage());
-                e.printStackTrace();
+            } catch (DocumentException ex) {
+                //Fejl med oprettelse af pdf
+                ex.printStackTrace();
+            } catch (SQLException ex) {
+            jLabel_fejlbesked_kunde_ordresalg.setText("Problem med databasen, hold over den besked for detaljer");
+            jLabel_fejlbesked_kunde_ordresalg.setToolTipText(ex.getMessage());
+            } catch (ControlException ex) {
+                //Fejl i Objekt data
+            } catch (ParseException ex) {
+                //Fejl i Timestamp konvertering
+            } catch (IOException ex) {
+                //Fejl med fil læsning
             }
 
             //ændrer varestatus til 1 (reserveret), i de valgte vare i ordren.
@@ -2012,7 +2026,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         boolean skift = true;
         if (isKundeValid()) {
             if (!jCheckBox_tilføjelse.isSelected() && !jCheckBox_nysten.isSelected()) {
-                jLabel_fejlbesked_kunde_ordresalg.setText("Der skal vælges en ordretype.");
+                jLabel_fejlbesked_kunde_ordresalg.setText("Ordretype skal vælges.");
                 jLabel_fejlbesked_kunde_ordresalg.setToolTipText("Enten tilføjelse eller ny sten skal vælges for at gå videre");
                 skift = false;
             } else if (jCheckBox_tilføjelse.isSelected()) {

@@ -692,21 +692,31 @@ public class DatabaseObjectHandler {
     }
 
     public void editVare(Vare vare) throws SQLException {
+        String sql;
         if (getVareGruppe(vare.getGruppe().getGrp_nr()) == null) {
             createVaregruppe(vare.getGruppe());
             vare.getGruppe().setGrp_nr(getMaxGrpNr());
         }
+        if(vare.getVaretype()!=null){
         if (getVaretype(vare.getVaretype().getId()) == null) {
             createVaretype(vare.getVaretype());
             vare.getVaretype().setId(getMaxTypeId());
         }
-        String sql = "update vare set navn = '" + vare.getNavn() + "', højde = '" + vare.getHøjde()
+                sql = "update vare set navn = '" + vare.getNavn() + "', højde = '" + vare.getHøjde()
                 + "', bredde = '" + vare.getBredde() + "', indkøbspris = '" + vare.getIndkøbspris()
                 + "', salgspris = '" + vare.getSalgspris() + "', type_id = '" + vare.getVaretype().getId()
                 + "', overflade = '" + vare.getOverflade() + "', dekoration = '"
                 + boolToInt(vare.getDekoration()) + "', vareStatus = '" + vare.getVareStatus()
                 + "', grp_nr = '" + vare.getGruppe().getGrp_nr() + "' where vare_nr = '"
                 + vare.getVare_nr() + "';";
+        } else {
+                sql = "update vare set navn = '" + vare.getNavn() + "', højde = '" + vare.getHøjde()
+                + "', bredde = '" + vare.getBredde() + "', indkøbspris = '" + vare.getIndkøbspris()
+                + "', salgspris = '" + vare.getSalgspris() + "', type_id = null, overflade = '" + vare.getOverflade() + "', dekoration = '"
+                + boolToInt(vare.getDekoration()) + "', vareStatus = '" + vare.getVareStatus()
+                + "', grp_nr = '" + vare.getGruppe().getGrp_nr() + "' where vare_nr = '"
+                + vare.getVare_nr() + "';";
+        }
         db.setData(sql);
     }
 
@@ -1036,6 +1046,7 @@ public class DatabaseObjectHandler {
         } else {
             editKunde(ordre.getKunde());
         }
+        if(ordre.getKirkegård()!=null){
         int kirke_id = checkKirkegård(ordre.getKirkegård());
         if (kirke_id == 0) {
             createKirkegård(ordre.getKirkegård());
@@ -1052,6 +1063,16 @@ public class DatabaseObjectHandler {
                 + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
                 + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';";
         db.setData(sql);
+        } else {
+                    String sql = "update ordre set tlf = '" + ordre.getKunde().getTlf() + "', ordretype = '" + boolToInt(ordre.getOrdretype())
+                + "', ordredato = '" + ordre.getOrdredato() + "', leveringsdato = " + ordre.getLeveringsdato()
+                + "', afhentningsdato = '" + ordre.getAfhentningsdato() + "', bemærkning = '" + ordre.getBemærkning()
+                + "', bemærkning_ekstra = " + ordre.getBemærkning_ekstra() + "', kirke_id = null, afdeling = '" + ordre.getAfdeling() + "', afdødnavn = '" + ordre.getAfdødnavn()
+                + "', række = " + ordre.getRække() + "', nummer = "
+                + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
+                + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';";
+         db.setData(sql);
+        }
     }
 
     public Vare_linje getVareLinje(int linje_nr, String ordre_nr) throws SQLException {
@@ -1070,13 +1091,13 @@ public class DatabaseObjectHandler {
                     null,
                     null);
 
-            if (rs.getInt("vare_nr") > 0) {
+            if (rs.getInt("vare_nr") != 0) {
                 linjeType = 1;
                 id = rs.getInt("vare_nr");
-            } else if (rs.getInt("inskription_id") > 0) {
+            } else if (rs.getInt("inskription_id") != 0) {
                 linjeType = 2;
                 id = rs.getInt("inskription_id");
-            } else if (rs.getInt("tom_linje_id") > 0) {
+            } else if (rs.getInt("tom_linje_id") != 0) {
                 linjeType = 3;
                 id = rs.getInt("tom_linje_id");
             }

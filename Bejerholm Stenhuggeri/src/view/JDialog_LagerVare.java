@@ -233,7 +233,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
                     }
                 } catch (SQLException ex) {
                     errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
-                    errorLabel.setToolTipText(ex.getLocalizedMessage());
+                    errorLabel.setToolTipText(ex.getMessage());
                 }
             } else {
                 String message = "Er du sikker på at du vil redigere varen '" + vare.getNavn().replace("\\", "") + "'?";
@@ -245,7 +245,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
                         this.dispose();
                     } catch (SQLException ex) {
                         errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
-                        errorLabel.setToolTipText(ex.getLocalizedMessage());
+                        errorLabel.setToolTipText(ex.getMessage());
                     }
                 }
             }
@@ -338,7 +338,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
             }
         } catch (SQLException ex) {
             errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
-            errorLabel.setToolTipText(ex.getLocalizedMessage());
+            errorLabel.setToolTipText(ex.getMessage());
         }
     }
 
@@ -351,7 +351,7 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
             }
         } catch (SQLException ex) {
             errorLabel.setText("Problem med databasen, hold over den besked for detaljer");
-            errorLabel.setToolTipText(ex.getLocalizedMessage());
+            errorLabel.setToolTipText(ex.getMessage());
         }
     }
 
