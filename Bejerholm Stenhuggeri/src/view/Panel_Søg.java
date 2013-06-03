@@ -83,7 +83,7 @@ public class Panel_Søg extends javax.swing.JPanel {
 
         jTextField_SøgeNr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jComboBox_VælgType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ordre", "Faktura", "Kontoudtog", "Provisionsseddel" }));
+        jComboBox_VælgType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ordre", "Faktura", "Kunde" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -124,8 +124,6 @@ public class Panel_Søg extends javax.swing.JPanel {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "EN FLOT TITEL"));
         jScrollPane1.setOpaque(false);
-
-        jPanel_Visfaktura.setOpaque(false);
         jScrollPane1.setViewportView(jPanel_Visfaktura);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 420, 350));

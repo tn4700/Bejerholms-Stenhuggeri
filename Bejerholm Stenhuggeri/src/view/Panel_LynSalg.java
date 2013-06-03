@@ -68,9 +68,14 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         // Hiv Kunden ud der bruges til Lynsalg - Hvilket er Firmaet i Korsør
         try {
             kunde = dbhandler.getKunde(50111211);
+            if(kunde == null){
+               jLabel_fejlbesked.setText("Der skete en fejl ved indlæsning af butik som kunde");
+            jLabel_fejlbesked.setToolTipText( jLabel_fejlbesked.getText() + " Undersøg om brugeren findes i databasen"); 
+            }
         } catch (SQLException ex) {
+           
             jLabel_fejlbesked.setText("Der skete en fejl ved indlæsning af butik som kunde");
-            jLabel_fejlbesked.setToolTipText("Fejl:" + ex);
+            jLabel_fejlbesked.setToolTipText( jLabel_fejlbesked+ " Fejl: " + ex);
         }
 
 
@@ -286,7 +291,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
 
         jLabel_fejlbesked.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_fejlbesked.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jPanel_LynSalg.add(jLabel_fejlbesked, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 200, 20));
+        jPanel_LynSalg.add(jLabel_fejlbesked, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 220, 20));
 
         jPanel_VareInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Vare info"));
         jPanel_VareInfo.setOpaque(false);
@@ -385,15 +390,19 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jPanel_MainCard.add(jPanel_LynSalg, "card_LynSalg");
 
         jPanel_OrdreBekræftigelse.setOpaque(false);
+        jPanel_OrdreBekræftigelse.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_Overskrift.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel_Overskrift.setText("Ordre Bekræftigelse:");
+        jPanel_OrdreBekræftigelse.add(jLabel_Overskrift, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel_købssum_lynsalg.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel_købssum_lynsalg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_købssum_lynsalg.setText("jLabel32");
+        jPanel_OrdreBekræftigelse.add(jLabel_købssum_lynsalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 413, 280, 40));
 
         jLabel_SamletprisOverskrift.setText("Samlet pris: ");
+        jPanel_OrdreBekræftigelse.add(jLabel_SamletprisOverskrift, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 399, -1, -1));
 
         jScrollPane_Bekræft_Varelinjer.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Valgte Varer"));
         jScrollPane_Bekræft_Varelinjer.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
@@ -404,6 +413,8 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         jPanel_OversigtVarer.setOpaque(false);
         jScrollPane_Bekræft_Varelinjer.setViewportView(jPanel_OversigtVarer);
         jPanel_OversigtVarer.getAccessibleContext().setAccessibleName("Bekræftigelse");
+
+        jPanel_OrdreBekræftigelse.add(jScrollPane_Bekræft_Varelinjer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 560, 300));
 
         jPanel_Valgmuligheder.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Valgmuligheder"));
         jPanel_Valgmuligheder.setOpaque(false);
@@ -455,54 +466,12 @@ public class Panel_LynSalg extends javax.swing.JPanel {
                 .addContainerGap(165, Short.MAX_VALUE))
         );
 
-        jLabel_fejlbesked_Bekræft.setText("jLabel3");
+        jPanel_OrdreBekræftigelse.add(jPanel_Valgmuligheder, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, -1, -1));
 
-        javax.swing.GroupLayout jPanel_OrdreBekræftigelseLayout = new javax.swing.GroupLayout(jPanel_OrdreBekræftigelse);
-        jPanel_OrdreBekræftigelse.setLayout(jPanel_OrdreBekræftigelseLayout);
-        jPanel_OrdreBekræftigelseLayout.setHorizontalGroup(
-            jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_købssum_lynsalg, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                                .addGap(110, 110, 110)
-                                .addComponent(jLabel_SamletprisOverskrift))))
-                    .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                        .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jScrollPane_Bekræft_Varelinjer, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel_Overskrift)))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel_Valgmuligheder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel_fejlbesked_Bekræft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(10, 10, 10))
-        );
-        jPanel_OrdreBekræftigelseLayout.setVerticalGroup(
-            jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_Overskrift)
-                    .addComponent(jLabel_fejlbesked_Bekræft))
-                .addGap(16, 16, 16)
-                .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane_Bekræft_Varelinjer, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel_Valgmuligheder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel_OrdreBekræftigelseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_OrdreBekræftigelseLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel_købssum_lynsalg, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel_SamletprisOverskrift))
-                .addContainerGap())
-        );
+        jLabel_fejlbesked_Bekræft.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_fejlbesked_Bekræft.setText("jLabel3");
+        jLabel_fejlbesked_Bekræft.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jPanel_OrdreBekræftigelse.add(jLabel_fejlbesked_Bekræft, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 45, 180, -1));
 
         jPanel_MainCard.add(jPanel_OrdreBekræftigelse, "card_OrdreBekræftigelse");
 

@@ -7,7 +7,7 @@ package view;
 import com.itextpdf.text.DocumentException;
 import control.DBConnection;
 import control.DatabaseObjectHandler;
-import control.RevisorSeddel;
+import control.OpretRevisorSeddel;
 import control.Utility;
 import java.awt.CardLayout;
 import java.awt.Desktop;
@@ -33,6 +33,7 @@ public class MainFrame extends javax.swing.JFrame {
     private Panel_Søg søg;
     private Panel_CSVFiler csv;
     private Panel_Bruger bruger;
+    private User user;
 
     /**
      * Creates new form MainFrame
@@ -73,7 +74,10 @@ public class MainFrame extends javax.swing.JFrame {
             e.printStackTrace();
         }
         initComponents();
+        jLabel_dato.setText(Utility.getCurrentTimeToString());
         this.setLocationRelativeTo(null);
+        
+        jLabel_Brugernavn.setText(user.getUsername());
        
         if (db.isConnected()) {
 
@@ -115,8 +119,11 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel_Salg = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox();
         jButton7 = new javax.swing.JButton();
+        jLabel_Loggedindsom = new javax.swing.JLabel();
+        jLabel_Brugernavn = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel_dato = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -230,33 +237,46 @@ public class MainFrame extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "OrdreSalg", "LynSalg" }));
-        jComboBox2.setOpaque(false);
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 160, -1));
-
         jButton7.setText("Hovedmenu");
+        jButton7.setFocusable(false);
         jButton7.setOpaque(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 80, -1, -1));
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 112, -1, 21));
+
+        jLabel_Loggedindsom.setText("Du er logged ind som:");
+        getContentPane().add(jLabel_Loggedindsom, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 112, 120, 20));
+
+        jLabel_Brugernavn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel_Brugernavn.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Brugernavn.setText("jLabel3");
+        getContentPane().add(jLabel_Brugernavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 107, 111, 28));
+
+        jButton3.setBackground(new java.awt.Color(172, 172, 172));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton3.setText("Log ud");
+        jButton3.setBorder(null);
+        jButton3.setContentAreaFilled(false);
+        jButton3.setFocusable(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 112, 40, 20));
+
+        jLabel_dato.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel_dato.setText("jLabel2");
+        getContentPane().add(jLabel_dato, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 657, 110, 20));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, (String) jComboBox2.getSelectedItem());        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton_AdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministrationActionPerformed
         ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Administration");
@@ -284,11 +304,6 @@ public class MainFrame extends javax.swing.JFrame {
         ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Csv");         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_EksporterActionPerformed
 
-    private void jButton_SalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalgActionPerformed
-        ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Salg");
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_SalgActionPerformed
-
     private void jButton_LagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LagerActionPerformed
         ((CardLayout) jPanel1.getLayout()).show(jPanel1, "Lager");
         // TODO add your handling code here:
@@ -303,8 +318,8 @@ public class MainFrame extends javax.swing.JFrame {
          try {
              int year = Calendar.getInstance().get(Calendar.YEAR);
              String dato = Utility.getCurrentTimeToString();
-            RevisorSeddel revisorseddel = new RevisorSeddel(dato,year,db);
-            revisorseddel.genererFaktura("test2.pdf");
+            OpretRevisorSeddel revisorseddel = new OpretRevisorSeddel(dato,year,db);
+            revisorseddel.genererRevisorseddel("test2.pdf");
 
             Desktop desktop = Desktop.getDesktop();
             File file = new File("docs/test2.pdf");
@@ -319,6 +334,18 @@ public class MainFrame extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton_SalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalgActionPerformed
+((CardLayout) jPanel1.getLayout()).show(jPanel1, "Salg");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_SalgActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    Login login = new Login();
+            login.setVisible(true);
+            this.dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,6 +384,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton_Administration;
@@ -366,8 +394,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton_Ordre;
     private javax.swing.JButton jButton_Salg;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel_Brugernavn;
+    private javax.swing.JLabel jLabel_Loggedindsom;
+    private javax.swing.JLabel jLabel_dato;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_Administraion;
     private javax.swing.JPanel jPanel_Hovedmenu;

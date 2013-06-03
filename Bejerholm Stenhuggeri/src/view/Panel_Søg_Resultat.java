@@ -73,6 +73,7 @@ public class Panel_Søg_Resultat extends javax.swing.JPanel {
         jButton1.setText("jButton1");
 
         setMinimumSize(new java.awt.Dimension(278, 170));
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(278, 170));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -82,6 +83,11 @@ public class Panel_Søg_Resultat extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 260, 30));
 
         jButton2.setText("Vis");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 80, -1));
 
         jButton3.setText("Slet");
@@ -170,6 +176,13 @@ public class Panel_Søg_Resultat extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            JDialog_SøgOrdre visordre = new JDialog_SøgOrdre(null, true, dbhandler, ordre);
+            visordre.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
