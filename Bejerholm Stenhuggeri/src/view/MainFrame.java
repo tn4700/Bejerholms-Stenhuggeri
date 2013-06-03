@@ -143,6 +143,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel_Hovedmenu.setLayout(null);
 
         jButton_Administration.setText("Administration");
+        jButton_Administration.setFocusable(false);
         jButton_Administration.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_AdministrationActionPerformed(evt);
@@ -152,6 +153,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton_Administration.setBounds(410, 250, 130, 50);
 
         jButton_Salg.setText("Salg");
+        jButton_Salg.setFocusable(false);
         jButton_Salg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_SalgActionPerformed(evt);
@@ -161,6 +163,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton_Salg.setBounds(250, 140, 130, 50);
 
         jButton_Lager.setText("Lager");
+        jButton_Lager.setFocusable(false);
         jButton_Lager.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_LagerActionPerformed(evt);
@@ -170,6 +173,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton_Lager.setBounds(410, 140, 130, 50);
 
         jButton_Ordre.setText("Ordre");
+        jButton_Ordre.setFocusable(false);
         jButton_Ordre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_OrdreActionPerformed(evt);

@@ -83,6 +83,7 @@
             <Component class="javax.swing.JButton" name="jButton_Administration">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Administration"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_AdministrationActionPerformed"/>
@@ -96,6 +97,7 @@
             <Component class="javax.swing.JButton" name="jButton_Salg">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salg"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_SalgActionPerformed"/>
@@ -109,6 +111,7 @@
             <Component class="javax.swing.JButton" name="jButton_Lager">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Lager"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_LagerActionPerformed"/>
@@ -122,6 +125,7 @@
             <Component class="javax.swing.JButton" name="jButton_Ordre">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ordre"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_OrdreActionPerformed"/>

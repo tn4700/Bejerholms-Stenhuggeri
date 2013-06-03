@@ -404,7 +404,7 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
 
         try {
             OpretKontoudtog kontoudtogpdf = new OpretKontoudtog(faktura);
-            kontoudtogpdf.genererFaktura("Kontoudtog-" + faktura.getProvisionsseddel().getKontoudtog().getKontoudtog_nr() + ".pdf");
+            kontoudtogpdf.genererKontoudtog("Kontoudtog-" + faktura.getProvisionsseddel().getKontoudtog().getKontoudtog_nr() + ".pdf");
             Desktop desktop = Desktop.getDesktop();
             File file = new File("docs/Kontoudtog-" + faktura.getProvisionsseddel().getKontoudtog().getKontoudtog_nr() + ".pdf");
             desktop.open(file);

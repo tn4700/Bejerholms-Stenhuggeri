@@ -49,7 +49,7 @@ public class OpretKontoudtog {
         this.kontoudtog = provisionsseddel.getKontoudtog();
     }
 
-    public void genererFaktura(String filNavn) throws IOException, DocumentException {
+    public void genererKontoudtog(String filNavn) throws IOException, DocumentException {
         //Opretter nyt dokument til indhold
         Document doc = new Document();
         //Sti'en for pdf'en der oprettes
