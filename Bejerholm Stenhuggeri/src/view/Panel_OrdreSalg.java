@@ -137,11 +137,11 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jComboBox_afhentning_dag = new javax.swing.JComboBox();
         jComboBox_year_leveringsdato1 = new javax.swing.JComboBox();
         jComboBox_year_afhentningsdato = new javax.swing.JComboBox();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        jLabel54 = new javax.swing.JLabel();
-        jLabel59 = new javax.swing.JLabel();
-        jLabel63 = new javax.swing.JLabel();
+        jLabel_værkstedstimer = new javax.swing.JLabel();
+        jLabel_rensning = new javax.swing.JLabel();
+        jLabel_transport = new javax.swing.JLabel();
+        jLabel_levering = new javax.swing.JLabel();
+        jLabel_afhentning = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jPanel_nySten = new javax.swing.JPanel();
         jComboBox_ordresalg_varegruppe = new javax.swing.JComboBox();
@@ -166,15 +166,15 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jCheckBox_kiste = new javax.swing.JCheckBox();
         jTextField_nr = new javax.swing.JTextField();
         jCheckBox_urne = new javax.swing.JCheckBox();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel64 = new javax.swing.JLabel();
+        jLabel_række = new javax.swing.JLabel();
+        jLabel_kirkegård = new javax.swing.JLabel();
         jTextField_række = new javax.swing.JTextField();
-        jLabel65 = new javax.swing.JLabel();
+        jLabel_afdeling = new javax.swing.JLabel();
         jTextField_kirkegård_ordresalg = new javax.swing.JTextField();
-        jLabel39 = new javax.swing.JLabel();
+        jLabel_nr = new javax.swing.JLabel();
         jLabel66 = new javax.swing.JLabel();
         jTextField_afdødnavn = new javax.swing.JTextField();
-        jLabel67 = new javax.swing.JLabel();
+        jLabel_afdødnavn = new javax.swing.JLabel();
         jLabel68 = new javax.swing.JLabel();
         jButton_videre_ordresalg = new javax.swing.JButton();
         jPanel_inskriptionInfo = new javax.swing.JPanel();
@@ -197,7 +197,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel30 = new javax.swing.JLabel();
         jComboBox_tegntype_ordresalg = new javax.swing.JComboBox();
         jLabel71 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
+        jLabel_skrifttype = new javax.swing.JLabel();
         jTextField_skrifttype = new javax.swing.JTextField();
         jPanel_inskription_eksempel = new javax.swing.JPanel();
         jLabel_eksempelInskription_1 = new javax.swing.JLabel();
@@ -207,6 +207,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel_eksempelInskription_5 = new javax.swing.JLabel();
         jLabel_fejlbesked_skrifttypeIkkeValgt = new javax.swing.JLabel();
         jLabel102 = new javax.swing.JLabel();
+        jLabel_Tilføjelse_error = new javax.swing.JLabel();
+        jLabel_Gravsten_error = new javax.swing.JLabel();
         jPanel_Ordre_Linje = new javax.swing.JPanel();
         jPanel_specielLinje = new javax.swing.JPanel();
         jLabel_fejlbesked_speciel_linje = new javax.swing.JLabel();
@@ -423,10 +425,10 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jPanel_tilføjelse.add(jTextField_levering_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 100, 67, -1));
 
         jLabel52.setText("Pris");
-        jPanel_tilføjelse.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 2, -1, -1));
+        jPanel_tilføjelse.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, -1, 20));
 
         jLabel53.setText("Antal");
-        jPanel_tilføjelse.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 2, -1, -1));
+        jPanel_tilføjelse.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, 20));
         jPanel_tilføjelse.add(jTextField_antal_værkstedstimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 22, 40, -1));
 
         jLabel91.setText("Måned");
@@ -469,20 +471,20 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jPanel_tilføjelse.add(jComboBox_year_afhentningsdato, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 172, 65, -1));
 
-        jLabel27.setText("Værkstedstimer");
-        jPanel_tilføjelse.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 25, -1, -1));
+        jLabel_værkstedstimer.setText("Værkstedstimer");
+        jPanel_tilføjelse.add(jLabel_værkstedstimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 25, -1, -1));
 
-        jLabel46.setText("Rensning");
-        jPanel_tilføjelse.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 51, -1, -1));
+        jLabel_rensning.setText("Rensning");
+        jPanel_tilføjelse.add(jLabel_rensning, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 51, -1, -1));
 
-        jLabel54.setText("Transport");
-        jPanel_tilføjelse.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 77, -1, -1));
+        jLabel_transport.setText("Transport");
+        jPanel_tilføjelse.add(jLabel_transport, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 77, -1, -1));
 
-        jLabel59.setText("Levering");
-        jPanel_tilføjelse.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 103, -1, -1));
+        jLabel_levering.setText("Levering");
+        jPanel_tilføjelse.add(jLabel_levering, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 103, -1, -1));
 
-        jLabel63.setText("Afhentning");
-        jPanel_tilføjelse.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 129, -1, -1));
+        jLabel_afhentning.setText("Afhentning");
+        jPanel_tilføjelse.add(jLabel_afhentning, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 129, -1, -1));
 
         jPanel_OrdreSalg.add(jPanel_tilføjelse, new org.netbeans.lib.awtextra.AbsoluteConstraints(239, 284, 230, 210));
 
@@ -577,26 +579,26 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jCheckBox_urne.setOpaque(false);
         jPanel_gravsten.add(jCheckBox_urne, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 165, -1, -1));
 
-        jLabel33.setText("Række");
-        jPanel_gravsten.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 70, -1, -1));
+        jLabel_række.setText("Række");
+        jPanel_gravsten.add(jLabel_række, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 70, -1, -1));
 
-        jLabel64.setText("Kirkegård");
-        jPanel_gravsten.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 16, -1, -1));
+        jLabel_kirkegård.setText("Kirkegård");
+        jPanel_gravsten.add(jLabel_kirkegård, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 16, -1, -1));
         jPanel_gravsten.add(jTextField_række, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 67, 124, -1));
 
-        jLabel65.setText("Afdeling");
-        jPanel_gravsten.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 43, -1, -1));
+        jLabel_afdeling.setText("Afdeling");
+        jPanel_gravsten.add(jLabel_afdeling, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 43, -1, -1));
         jPanel_gravsten.add(jTextField_kirkegård_ordresalg, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 13, 124, -1));
 
-        jLabel39.setText("Nr");
-        jPanel_gravsten.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 96, -1, -1));
+        jLabel_nr.setText("Nr");
+        jPanel_gravsten.add(jLabel_nr, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 96, -1, -1));
 
         jLabel66.setText("Gravtype");
         jPanel_gravsten.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 169, -1, -1));
         jPanel_gravsten.add(jTextField_afdødnavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 119, 124, -1));
 
-        jLabel67.setText("Afdødnavn");
-        jPanel_gravsten.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 122, -1, -1));
+        jLabel_afdødnavn.setText("Afdødnavn");
+        jPanel_gravsten.add(jLabel_afdødnavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 122, -1, -1));
 
         jPanel_OrdreSalg.add(jPanel_gravsten, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 284, 219, 210));
 
@@ -718,8 +720,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel71.setText("Tegntype:");
         jPanel_inskriptionInfo.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 179, -1, -1));
 
-        jLabel34.setText("Skrifttype:");
-        jPanel_inskriptionInfo.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 228, -1, -1));
+        jLabel_skrifttype.setText("Skrifttype:");
+        jPanel_inskriptionInfo.add(jLabel_skrifttype, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 228, -1, -1));
         jPanel_inskriptionInfo.add(jTextField_skrifttype, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 225, 230, -1));
 
         jPanel_inskription_eksempel.setBackground(new java.awt.Color(255, 255, 255));
@@ -755,13 +757,21 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
         jLabel_fejlbesked_skrifttypeIkkeValgt.setForeground(new java.awt.Color(255, 51, 0));
         jLabel_fejlbesked_skrifttypeIkkeValgt.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel_inskriptionInfo.add(jLabel_fejlbesked_skrifttypeIkkeValgt, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 179, 234, 14));
+        jPanel_inskriptionInfo.add(jLabel_fejlbesked_skrifttypeIkkeValgt, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 179, 234, 20));
 
         jPanel_OrdreSalg.add(jPanel_inskriptionInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 32, 315, 420));
 
         jLabel102.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel102.setText("Inskription");
         jPanel_OrdreSalg.add(jLabel102, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 9, -1, -1));
+
+        jLabel_Tilføjelse_error.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Tilføjelse_error.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel_OrdreSalg.add(jLabel_Tilføjelse_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 160, 20));
+
+        jLabel_Gravsten_error.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Gravsten_error.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel_OrdreSalg.add(jLabel_Gravsten_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 150, 20));
 
         jPanel_main.add(jPanel_OrdreSalg, "card_ordreSalg");
 
@@ -1287,7 +1297,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jLabel_fejlbesked_ordre_linje.setText("");
         jLabel_fejlbesked_speciel_linje.setText("");
         if (jTextFieldValgt(jTextField_navn_specielLinje) && jTextFieldValgt(jTextField_antal_speciel_linje) && jTextFieldValgt(jTextField_antal_speciel_linje)) {
-            if (!isDouble(jTextField_pris_specielLinje.getText()) || !isDouble(jTextField_antal_speciel_linje.getText())) {
+            if (!validateTextField(jTextField_pris_specielLinje, 2) || !validateTextField(jTextField_antal_speciel_linje, 2)) {
                 jLabel_fejlbesked_speciel_linje.setText("pris og antal skal indholde tal");
             } else if (valgteVare_ordresalg.size() < MAX_VareLinjer) {
                 Tom_linje tom_linje = new Tom_linje(jTextField_navn_specielLinje.getText(), Double.parseDouble(jTextField_pris_specielLinje.getText()), Integer.parseInt(jTextField_antal_speciel_linje.getText()), 1);
@@ -1321,11 +1331,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         layout.show(jPanel_main, "card_ordreSalg");
-        valgteVare_ordresalg = new ArrayList();
-        panelListe = new ArrayList();
+        nulstilVareLinje();
         jLabel_købssum_ordresalg.setText("" + udregnpris());
-        jLabel_adresse.setText("" + udregnpris());
-        drawpanel(jPanel_valgteVare_ordresalg);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton_godkend_ordresalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_godkend_ordresalgActionPerformed
@@ -1336,8 +1343,13 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             for (int i = 0; i < valgteVare_ordresalg.size(); i++) {
                 varelinjer.add(valgteVare_ordresalg.get(i));
             }
-            Postnummer postnr = new Postnummer(Integer.parseInt(jTextField_postnr_ordresalg.getText()), jTextField_By_ordresalg.getText());
-            kunde = new Kunde(jTextField_fornavn_ordresalg.getText(), jTextField_efternavn_ordresalg.getText(), jTextField_adresse_ordresalg.getText(), Integer.parseInt(jTextField_tlf_ordresalg.getText()), postnr);
+            Postnummer postnr = new Postnummer(Integer.parseInt(jTextField_postnr_ordresalg.getText()), 
+                    jTextField_By_ordresalg.getText().trim().replace("'", "\'"));
+            kunde = new Kunde(jTextField_fornavn_ordresalg.getText().trim().replace("'", "\'"), 
+                    jTextField_efternavn_ordresalg.getText().trim().replace("'", "\'"), 
+                    jTextField_adresse_ordresalg.getText().trim().replace("'", "\'"), 
+                    Integer.parseInt(jTextField_tlf_ordresalg.getText()), 
+                    postnr);
             Ordre ordre = new Ordre(kunde, varelinjer);
 
             if (jCheckBox_nysten.isSelected()) {
@@ -1347,11 +1359,12 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 ordre.setOrdretype(false);
             }
             if (jCheckBox_gravsten.isSelected()) {
-                Kirkegård kirkegård = new Kirkegård(0, jTextField_kirkegård_ordresalg.getText());
+                Kirkegård kirkegård = new Kirkegård(0, jTextField_kirkegård_ordresalg.getText().trim().replace("'", "\'"));
                 ordre.setKirkegård(kirkegård);
                 ordre.setAfdeling(Integer.parseInt(jTextField_afdeling_ordresalg.getText()));
                 ordre.setRække(Integer.parseInt(jTextField_række.getText()));
                 ordre.setNummer(Integer.parseInt(jTextField_nr.getText()));
+                ordre.setAfdødnavn(jTextField_afdødnavn.getText().trim().replace("'", "\'"));
                 if (jCheckBox_kiste.isSelected()) {
                     ordre.setGravType(true);
                 } else if (jCheckBox_urne.isSelected()) {
@@ -1359,19 +1372,16 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 }
             }
             if (jTextFieldValgt(jTextField_bemærkning_1)) {
-                ordre.setBemærkning(jTextField_bemærkning_1.getText());
+                ordre.setBemærkning(jTextField_bemærkning_1.getText().trim().replace("'", "\'"));
             }
             if (jTextFieldValgt(jTextField_bemærkning_2)) {
-                ordre.setBemærkning_ekstra(jTextField_bemærkning_2.getText());
+                ordre.setBemærkning_ekstra(jTextField_bemærkning_2.getText().trim().replace("'", "\'"));
             }
             try {
                 Timestamp levering = Utility.getNewTimestamp(jComboBox_levering_dag.getSelectedItem() + "/" + jComboBox_levering_måned.getSelectedIndex() + 1 + "/" + jComboBox_year_leveringsdato.getSelectedItem());
                 Timestamp afhentning = Utility.getNewTimestamp(jComboBox_afhentning_dag.getSelectedItem() + "/" + jComboBox_afhentning_måned.getSelectedIndex() + 1 + "/" + jComboBox_year_afhentningsdato.getSelectedItem());
                 ordre.setLeveringsdato(levering);
                 ordre.setAfhentningsdato(afhentning);
-                System.out.println("levering" + ordre.getLeveringsdato());
-                System.out.println("afhentning" + afhentning);
-                System.out.println(ordre);
 
                 String ordrenr = dbhandler.createOrdre(ordre);
                 ordre = dbhandler.getOrdre(ordrenr);
@@ -1381,7 +1391,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                 File file = new File("docs/ordrePDF.pdf");
                 desktop.open(file);
             } catch (Exception e) {
-                System.out.println("der ekete eb fejl med oprettelse af pfd'en" + e.getMessage());
+                System.out.println("Der skete en fejl med oprettelse af pfd'en" + e.getMessage());
                 e.printStackTrace();
             }
 
@@ -1455,7 +1465,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel_valgteVare_ordresalgComponentRemoved
 
     private void jTextField_tlf_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_tlf_ordresalgFocusLost
-        resetErrorLabels();
+        resetKundeErrorLabels();
         jLabel_tlf.setForeground(Color.black);
         try {
             if (!validateTextFieldLength(jTextField_tlf_ordresalg, 8) || !validateTextField(jTextField_tlf_ordresalg, 3)) {
@@ -1578,7 +1588,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox_varegruppeListe_ordre_linjeItemStateChanged
 
     private void jTextField_fornavn_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_fornavn_ordresalgFocusLost
-        resetErrorLabels();
+        resetKundeErrorLabels();
         jLabel_fornavn.setForeground(Color.black);
         if (!validateTextField(jTextField_fornavn_ordresalg, 1)) {
             jLabel_fejlbesked_kunde_ordresalg.setText("Fejl i input.");
@@ -1588,7 +1598,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField_fornavn_ordresalgFocusLost
 
     private void jTextField_efternavn_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_efternavn_ordresalgFocusLost
-        resetErrorLabels();
+        resetKundeErrorLabels();
         jLabel_efternavn.setForeground(Color.black);
         if (!validateTextField(jTextField_efternavn_ordresalg, 1)) {
             jLabel_fejlbesked_kunde_ordresalg.setText("Fejl i input.");
@@ -1598,7 +1608,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField_efternavn_ordresalgFocusLost
 
     private void jTextField_adresse_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_adresse_ordresalgFocusLost
-        resetErrorLabels();
+        resetKundeErrorLabels();
         jLabel_adresse.setForeground(Color.black);
         if (!validateTextField(jTextField_adresse_ordresalg, 1)) {
             jLabel_fejlbesked_kunde_ordresalg.setText("Fejl i input.");
@@ -1608,7 +1618,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField_adresse_ordresalgFocusLost
 
     private void jTextField_postnr_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_postnr_ordresalgFocusLost
-        resetErrorLabels();
+        resetKundeErrorLabels();
         jLabel_postnr.setForeground(Color.black);
         try {
             if (!validateTextFieldLength(jTextField_postnr_ordresalg, 4) || !validateTextField(jTextField_postnr_ordresalg, 3)) {
@@ -1618,7 +1628,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             } else {
                 Postnummer postnummer = dbhandler.getPostnummer(Integer.parseInt(jTextField_postnr_ordresalg.getText()));
                 if (postnummer != null) {
-                    jTextField_postnr_ordresalg.setText(postnummer.getPost_nr()+"");
+                    jTextField_postnr_ordresalg.setText(postnummer.getPost_nr() + "");
                     jTextField_By_ordresalg.setText(postnummer.getByNavn());
                 }
             }
@@ -1628,7 +1638,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField_postnr_ordresalgFocusLost
 
     private void jTextField_By_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_By_ordresalgFocusLost
-        resetErrorLabels();
+        resetKundeErrorLabels();
         jLabel_by.setForeground(Color.black);
         if (!validateTextField(jTextField_By_ordresalg, 1)) {
             jLabel_fejlbesked_kunde_ordresalg.setText("Fejl i input.");
@@ -1636,7 +1646,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             jLabel_by.setForeground(Color.red);
         }
     }//GEN-LAST:event_jTextField_By_ordresalgFocusLost
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -1696,40 +1705,29 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel70;
@@ -1740,13 +1738,18 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel93;
     private javax.swing.JLabel jLabel94;
     private javax.swing.JLabel jLabel95;
+    private javax.swing.JLabel jLabel_Gravsten_error;
     private javax.swing.JLabel jLabel_Inskription_1;
     private javax.swing.JLabel jLabel_Inskription_2;
     private javax.swing.JLabel jLabel_Inskription_3;
     private javax.swing.JLabel jLabel_Inskription_4;
     private javax.swing.JLabel jLabel_Inskription_5;
     private javax.swing.JLabel jLabel_Moms;
+    private javax.swing.JLabel jLabel_Tilføjelse_error;
     private javax.swing.JLabel jLabel_adresse;
+    private javax.swing.JLabel jLabel_afdeling;
+    private javax.swing.JLabel jLabel_afdødnavn;
+    private javax.swing.JLabel jLabel_afhentning;
     private javax.swing.JLabel jLabel_by;
     private javax.swing.JLabel jLabel_efternavn;
     private javax.swing.JLabel jLabel_eksempelInskription_1;
@@ -1760,6 +1763,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_fejlbesked_speciel_linje;
     private javax.swing.JLabel jLabel_fornavn;
     private javax.swing.JLabel jLabel_indkøbspris;
+    private javax.swing.JLabel jLabel_kirkegård;
     private javax.swing.JLabel jLabel_kirkeinfo_Kirke;
     private javax.swing.JLabel jLabel_kirkeinfo_afdeling;
     private javax.swing.JLabel jLabel_kirkeinfo_gravtype;
@@ -1772,14 +1776,21 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_kundeTLF;
     private javax.swing.JLabel jLabel_kundeadresse;
     private javax.swing.JLabel jLabel_købssum_ordresalg;
+    private javax.swing.JLabel jLabel_levering;
+    private javax.swing.JLabel jLabel_nr;
     private javax.swing.JLabel jLabel_postnr;
     private javax.swing.JLabel jLabel_pris_gravsten1;
+    private javax.swing.JLabel jLabel_rensning;
+    private javax.swing.JLabel jLabel_række;
+    private javax.swing.JLabel jLabel_skrifttype;
     private javax.swing.JLabel jLabel_tlf;
+    private javax.swing.JLabel jLabel_transport;
     private javax.swing.JLabel jLabel_vareinfo_bredde;
     private javax.swing.JLabel jLabel_vareinfo_højde;
     private javax.swing.JLabel jLabel_vareinfo_overflade;
     private javax.swing.JLabel jLabel_vareinfo_pris;
     private javax.swing.JLabel jLabel_vareinfo_varenavn;
+    private javax.swing.JLabel jLabel_værkstedstimer;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
@@ -1998,32 +2009,19 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }
 
     private void skiftpanel() {
-        if (kundeIsValgt()) {
-            if (!jCheckBox_gravsten.isSelected() && !jCheckBox_tilføjelse.isSelected() && !jCheckBox_nysten.isSelected()) {
-                jLabel_fejlbesked_kunde_ordresalg.setText("Endten tilføjelse eller ny sten skal vælges for at gå videre");
+        boolean skift = true;
+        if (isKundeValid()) {
+            if (!jCheckBox_tilføjelse.isSelected() && !jCheckBox_nysten.isSelected()) {
+                jLabel_fejlbesked_kunde_ordresalg.setText("Der skal vælges en ordretype.");
+                jLabel_fejlbesked_kunde_ordresalg.setToolTipText("Enten tilføjelse eller ny sten skal vælges for at gå videre");
+                skift = false;
             } else if (jCheckBox_tilføjelse.isSelected()) {
-                opretTilføjelselinje();
-
-                if (jCheckBox_gravsten.isSelected() && !jTextFieldValgt(jTextField_kirkegård_ordresalg) && !jTextFieldValgt(jTextField_afdeling_ordresalg) && !jTextFieldValgt(jTextField_række) && !jTextFieldValgt(jTextField_nr)) {
-                    jLabel_fejlbesked_kunde_ordresalg.setText("Der mangler information om kirkegård");
+                if (isTilføjelseValid()) {
+                    opretTilføjelselinje();
+                } else {
+                    skift = false;
                 }
-                if (jCheckBox_gravsten.isSelected() && jTextFieldValgt(jTextField_kirkegård_ordresalg) && jTextFieldValgt(jTextField_afdeling_ordresalg) && jTextFieldValgt(jTextField_række) && jTextFieldValgt(jTextField_nr)) {
-                    if (jTextFieldValgt(jTextField_Inskription_linje_1) || jTextFieldValgt(jTextField_Inskription_linje_2) || jTextFieldValgt(jTextField_Inskription_linje_3) || jTextFieldValgt(jTextField_Inskription_linje_4) || jTextFieldValgt(jTextField_Inskription_linje_4)) {
-                        if (jTextFieldValgt(jTextField_skrifttype)) {
-                            opretInskription_linje();
-                            layout.show(jPanel_main, "card_Ordre_Linje");
-                        } else if (!jTextFieldValgt(jTextField_skrifttype)) {
-                            jLabel_fejlbesked_skrifttypeIkkeValgt.setText("skrifttype ikke valgt");
-                        }
-                    } else if (!jTextFieldValgt(jTextField_Inskription_linje_1) || !jTextFieldValgt(jTextField_Inskription_linje_2) || !jTextFieldValgt(jTextField_Inskription_linje_3) || !jTextFieldValgt(jTextField_Inskription_linje_4) || !jTextFieldValgt(jTextField_Inskription_linje_4)) {
-                        layout.show(jPanel_main, "card_Ordre_Linje");
-                    }
-                } else if (!jCheckBox_gravsten.isSelected()) {
-                    layout.show(jPanel_main, "card_Ordre_Linje");
-                }
-
             } else if (jCheckBox_nysten.isSelected()) {
-
                 Vare vare = (Vare) jComboBox_ordresalg_vare.getSelectedItem();
                 if (vare != null) {
                     Vare_linje linje = new Vare_linje(0, "", vare, null, null);
@@ -2034,48 +2032,211 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                     jLabel_købssum_ordresalg.setText("" + udregnpris());
                     jComboBox_vareListe_ordre_linje.removeItem(vare);
                     vareListe.remove(vare);
-
-                    if (jCheckBox_gravsten.isSelected() && !jTextFieldValgt(jTextField_kirkegård_ordresalg) && !jTextFieldValgt(jTextField_afdeling_ordresalg) && !jTextFieldValgt(jTextField_række) && !jTextFieldValgt(jTextField_nr)) {
-                        jLabel_fejlbesked_kunde_ordresalg.setText("Der mangler information om kirkegård");
-                    }
-                    if (jCheckBox_gravsten.isSelected() && jTextFieldValgt(jTextField_kirkegård_ordresalg) && jTextFieldValgt(jTextField_afdeling_ordresalg) && jTextFieldValgt(jTextField_række) && jTextFieldValgt(jTextField_nr)) {
-                        if (jTextFieldValgt(jTextField_Inskription_linje_1) || jTextFieldValgt(jTextField_Inskription_linje_2) || jTextFieldValgt(jTextField_Inskription_linje_3) || jTextFieldValgt(jTextField_Inskription_linje_4) || jTextFieldValgt(jTextField_Inskription_linje_4)) {
-                            if (jTextFieldValgt(jTextField_skrifttype)) {
-                                opretInskription_linje();
-                                layout.show(jPanel_main, "card_Ordre_Linje");
-                            } else if (!jTextFieldValgt(jTextField_skrifttype)) {
-                                jLabel_fejlbesked_skrifttypeIkkeValgt.setText("skrifttype ikke valgt");
-                            }
-                        } else if (!jTextFieldValgt(jTextField_Inskription_linje_1) || !jTextFieldValgt(jTextField_Inskription_linje_2) || !jTextFieldValgt(jTextField_Inskription_linje_3) || !jTextFieldValgt(jTextField_Inskription_linje_4) || !jTextFieldValgt(jTextField_Inskription_linje_4)) {
-                            layout.show(jPanel_main, "card_Ordre_Linje");
-                        }
-                    } else if (!jCheckBox_gravsten.isSelected()) {
-
-                        if (jTextFieldValgt(jTextField_Inskription_linje_1) || jTextFieldValgt(jTextField_Inskription_linje_2) || jTextFieldValgt(jTextField_Inskription_linje_3) || jTextFieldValgt(jTextField_Inskription_linje_4) || jTextFieldValgt(jTextField_Inskription_linje_4)) {
-                            if (jTextFieldValgt(jTextField_skrifttype)) {
-                                opretInskription_linje();
-                                layout.show(jPanel_main, "card_Ordre_Linje");
-                            } else if (!jTextFieldValgt(jTextField_skrifttype)) {
-                                jLabel_fejlbesked_skrifttypeIkkeValgt.setText("skrifttype ikke valgt");
-                            }
-                        } else if (!jTextFieldValgt(jTextField_Inskription_linje_1) || !jTextFieldValgt(jTextField_Inskription_linje_2) || !jTextFieldValgt(jTextField_Inskription_linje_3) || !jTextFieldValgt(jTextField_Inskription_linje_4) || !jTextFieldValgt(jTextField_Inskription_linje_4)) {
-                            layout.show(jPanel_main, "card_Ordre_Linje");
-                        }
-
-
-                    }
                 }
-            } else if (!kundeIsValgt()) {
-                jLabel_fejlbesked_kunde_ordresalg.setText("Kundeinfo er ikke udfyldt");
             }
+            if (jCheckBox_gravsten.isSelected()) {
+                if (!isGravstenValid()) {
+                    skift = false;
+                }
+            }
+            if (jTextFieldValgt(jTextField_Inskription_linje_1) || jTextFieldValgt(jTextField_Inskription_linje_2) || jTextFieldValgt(jTextField_Inskription_linje_3) || jTextFieldValgt(jTextField_Inskription_linje_4) || jTextFieldValgt(jTextField_Inskription_linje_5)) {
+                if (isInskiptionValid()) {
+                    opretInskription_linje();
+                } else {
+                    skift = false;
+                }
+            }
+        } else {
+            skift = false;
         }
-        opdaterVareListe();
+
+        if (skift) {
+            opdaterVareListe();
+            layout.show(jPanel_main, "card_Ordre_Linje");
+        } else {
+            nulstilVareLinje();
+        }
     }
 
-    public boolean kundeIsValgt() {
-        boolean result = false;
-        if (jTextFieldValgt(jTextField_tlf_ordresalg) && jTextFieldValgt(jTextField_fornavn_ordresalg) && jTextFieldValgt(jTextField_efternavn_ordresalg) && jTextFieldValgt(jTextField_adresse_ordresalg) && jTextFieldValgt(jTextField_postnr_ordresalg) && jTextFieldValgt(jTextField_By_ordresalg)) {
-            result = true;
+    public boolean isKundeValid() {
+        resetKundeErrorLabels();
+        boolean result = true;
+        if (!validateTextField(jTextField_tlf_ordresalg, 3) || !validateTextFieldLength(jTextField_tlf_ordresalg, 8)) {
+            result = false;
+            jLabel_tlf.setForeground(Color.red);
+            jLabel_tlf.setToolTipText("Tlf nummer skal være 8 cifre og kun tal");
+        }
+        if (!validateTextField(jTextField_fornavn_ordresalg, 1)) {
+            result = false;
+            jLabel_fornavn.setForeground(Color.red);
+            jLabel_fornavn.setToolTipText("Fornavn skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!validateTextField(jTextField_efternavn_ordresalg, 1)) {
+            result = false;
+            jLabel_efternavn.setForeground(Color.red);
+            jLabel_efternavn.setToolTipText("Efternavn skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!validateTextField(jTextField_adresse_ordresalg, 1)) {
+            result = false;
+            jLabel_adresse.setForeground(Color.red);
+            jLabel_adresse.setToolTipText("Adresse skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!validateTextField(jTextField_By_ordresalg, 1)) {
+            result = false;
+            jLabel_by.setForeground(Color.red);
+            jLabel_by.setToolTipText("By skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!validateTextField(jTextField_postnr_ordresalg, 3) || !validateTextFieldLength(jTextField_postnr_ordresalg, 4)) {
+            result = false;
+            jLabel_postnr.setForeground(Color.red);
+            jLabel_postnr.setToolTipText("Postnummer skal være 4 cifre og kun tal");
+        }
+        if (!result) {
+            jLabel_fejlbesked_kunde_ordresalg.setText("Kunde info forkert.");
+        }
+        return result;
+    }
+
+    public void resetKundeErrorLabels() {
+        jLabel_fejlbesked_kunde_ordresalg.setText("");
+        jLabel_tlf.setForeground(Color.black);
+        jLabel_tlf.setToolTipText(null);
+        jLabel_fornavn.setForeground(Color.black);
+        jLabel_fornavn.setToolTipText(null);
+        jLabel_efternavn.setForeground(Color.black);
+        jLabel_efternavn.setToolTipText(null);
+        jLabel_adresse.setForeground(Color.black);
+        jLabel_adresse.setToolTipText(null);
+        jLabel_postnr.setForeground(Color.black);
+        jLabel_postnr.setToolTipText(null);
+        jLabel_by.setForeground(Color.black);
+        jLabel_by.setToolTipText(null);
+    }
+
+    public boolean isGravstenValid() {
+        resetGravstenLabels();
+        boolean result = true;
+        if (!validateTextField(jTextField_kirkegård_ordresalg, 1)) {
+            result = false;
+            jLabel_kirkegård.setForeground(Color.red);
+            jLabel_kirkegård.setToolTipText("Kirkegård skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!validateTextField(jTextField_afdeling_ordresalg, 3)) {
+            result = false;
+            jLabel_afdeling.setForeground(Color.red);
+            jLabel_afdeling.setToolTipText("Afdeling nummer må kun indeholde tal.");
+        }
+        if (!validateTextField(jTextField_række, 3)) {
+            result = false;
+            jLabel_række.setForeground(Color.red);
+            jLabel_række.setToolTipText("Afdeling nummer må kun indeholde tal.");
+        }
+        if (!validateTextField(jTextField_nr, 3)) {
+            result = false;
+            jLabel_nr.setForeground(Color.red);
+            jLabel_nr.setToolTipText("Nummer må kun indeholde tal.");
+        }
+        if (!validateTextField(jTextField_afdødnavn, 1)) {
+            result = false;
+            jLabel_afdødnavn.setForeground(Color.red);
+            jLabel_afdødnavn.setToolTipText("Afdødnavn skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!result) {
+            jLabel_Gravsten_error.setText("Gravsten info forkert.");
+        }
+        return result;
+    }
+
+    public void resetGravstenLabels() {
+        jLabel_Gravsten_error.setText("");
+        jLabel_kirkegård.setForeground(Color.black);
+        jLabel_kirkegård.setToolTipText(null);
+        jLabel_afdeling.setForeground(Color.black);
+        jLabel_afdeling.setToolTipText(null);
+        jLabel_række.setForeground(Color.black);
+        jLabel_række.setToolTipText(null);
+        jLabel_nr.setForeground(Color.black);
+        jLabel_nr.setToolTipText(null);
+        jLabel_afdødnavn.setForeground(Color.black);
+        jLabel_afdødnavn.setToolTipText(null);
+    }
+
+    public boolean isTilføjelseValid() {
+        resetTilføjelseLabels();
+        boolean result = true;
+        if (jTextFieldValgt(jTextField_værkstedstimer_ordresalg) && (!validateTextField(jTextField_værkstedstimer_ordresalg, 2) || !validateTextField(jTextField_antal_værkstedstimer, 3))) {
+            result = false;
+            jLabel_værkstedstimer.setForeground(Color.red);
+            jLabel_værkstedstimer.setToolTipText("Pris skal må kun være tal separeret med et punktum for decimaler og antal skal være et heltal.");
+        }
+        if (jTextFieldValgt(jTextField_rensning_ordresalg) && (!validateTextField(jTextField_rensning_ordresalg, 2) || !validateTextField(jTextField_rensning_antal, 3))) {
+            result = false;
+            jLabel_rensning.setForeground(Color.red);
+            jLabel_rensning.setToolTipText("Pris skal må kun være tal separeret med et punktum for decimaler og antal skal være et heltal.");
+        }
+        if (jTextFieldValgt(jTextField_transport_ordresalg) && !validateTextField(jTextField_transport_ordresalg, 2)) {
+            result = false;
+            jLabel_transport.setForeground(Color.red);
+            jLabel_transport.setToolTipText("Pris må kun være tal separeret med et punktum for decimaler");
+        }
+        if (jTextFieldValgt(jTextField_levering_ordresalg) && !validateTextField(jTextField_levering_ordresalg, 2)) {
+            result = false;
+            jLabel_levering.setForeground(Color.red);
+            jLabel_levering.setToolTipText("Pris må kun være tal separeret med et punktum for decimaler");
+        }
+        if (jTextFieldValgt(jTextField_afhentning_ordresalg) && !validateTextField(jTextField_afhentning_ordresalg, 2)) {
+            result = false;
+            jLabel_afhentning.setForeground(Color.red);
+            jLabel_afhentning.setToolTipText("Pris må kun være tal separeret med et punktum for decimaler");
+        }
+        if (!result) {
+            jLabel_Tilføjelse_error.setText("Tilføjelse info forkert.");
+        }
+        return result;
+    }
+
+    public void resetTilføjelseLabels() {
+        jLabel_Tilføjelse_error.setText("");
+        jLabel_værkstedstimer.setForeground(Color.black);
+        jLabel_værkstedstimer.setToolTipText(null);
+        jLabel_rensning.setForeground(Color.black);
+        jLabel_rensning.setToolTipText(null);
+        jLabel_transport.setForeground(Color.black);
+        jLabel_transport.setToolTipText(null);
+        jLabel_afhentning.setForeground(Color.black);
+        jLabel_afhentning.setToolTipText(null);
+        jLabel_levering.setForeground(Color.black);
+        jLabel_levering.setToolTipText(null);
+    }
+
+    public boolean isInskiptionValid() {
+        jLabel_skrifttype.setForeground(Color.black);
+        jLabel_fejlbesked_skrifttypeIkkeValgt.setText("");
+        boolean result = true;
+        if (jTextFieldValgt(jTextField_Inskription_linje_1) && !validateTextField(jTextField_Inskription_linje_1, 1)) {
+            jTextField_Inskription_linje_1.setText(jTextField_Inskription_linje_1.getText().trim().replace("\\", ""));
+        }
+        if (jTextFieldValgt(jTextField_Inskription_linje_2) && !validateTextField(jTextField_Inskription_linje_2, 1)) {
+            jTextField_Inskription_linje_1.setText(jTextField_Inskription_linje_1.getText().trim().replace("\\", ""));
+        }
+        if (jTextFieldValgt(jTextField_Inskription_linje_3) && !validateTextField(jTextField_Inskription_linje_3, 1)) {
+            jTextField_Inskription_linje_1.setText(jTextField_Inskription_linje_1.getText().trim().replace("\\", ""));
+        }
+        if (jTextFieldValgt(jTextField_Inskription_linje_4) && !validateTextField(jTextField_Inskription_linje_4, 1)) {
+            jTextField_Inskription_linje_1.setText(jTextField_Inskription_linje_1.getText().trim().replace("\\", ""));
+        }
+        if (jTextFieldValgt(jTextField_Inskription_linje_5) && !validateTextField(jTextField_Inskription_linje_5, 1)) {
+            jTextField_Inskription_linje_1.setText(jTextField_Inskription_linje_1.getText().trim().replace("\\", ""));
+        }
+        if (!jTextFieldValgt(jTextField_skrifttype)) {
+            jLabel_skrifttype.setForeground(Color.red);
+            jLabel_fejlbesked_skrifttypeIkkeValgt.setText("Skrifttype ikke valgt.");
+        }
+        if (jTextFieldValgt(jTextField_skrifttype) && !validateTextField(jTextField_skrifttype, 1)) {
+            jTextField_skrifttype.setText(jTextField_skrifttype.getText().trim().replace("\\", ""));
+        }
+        if (!result) {
+            jLabel_Tilføjelse_error.setText("Tilføjelse info forkert.");
         }
         return result;
     }
@@ -2089,12 +2250,18 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         jpanel.revalidate();
     }
 
-//Fjener en vare både fra array og panel
+    //Fjerner en vare både fra array og panel
     public void removepanel(Panel_OrdreSalgLinje i) {
         panelListe.remove(i);
         valgteVare_ordresalg.remove(i.getVarelinje());
         jLabel_købssum_ordresalg.setText("" + udregnpris());
         jLabel_adresse.setText("" + udregnpris());
+        drawpanel(jPanel_valgteVare_ordresalg);
+    }
+
+    private void nulstilVareLinje() {
+        valgteVare_ordresalg = new ArrayList();
+        panelListe = new ArrayList();
         drawpanel(jPanel_valgteVare_ordresalg);
     }
 
@@ -2111,36 +2278,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             }
         }
         return købssum;
-    }
-
-//metode der returnerer false hvis en tekst ikke er double (tjekker om der er bogstaver i teksten)
-    public boolean isDouble(String input) {
-        boolean b = true;
-        try {
-            Double x = Double.parseDouble(input);
-        } catch (NumberFormatException nFE) {
-            b = false;
-        }
-        return b;
-    }
-
-    public boolean isInteger(String input) {
-        boolean b = true;
-        try {
-            int x = Integer.parseInt(input);
-        } catch (NumberFormatException nFE) {
-            b = false;
-        }
-        return b;
-    }
-
-    //metode der bliver kaldt med et jTextField og tjekker om der er skrevet noget i det
-    private boolean jTextFieldValgt(JTextField jtextField) {
-        boolean result = false;
-        if (jtextField.getText().length() != 0) {
-            result = true;
-        }
-        return result;
     }
 
     //nedenstående metoder returnerer vare_linje  
@@ -2185,8 +2322,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         return vare_linje_afhentning;
     }
 
-//metoder der tjekker om der er udfyldt tekst i inskription panelet og opretter inskription_linje, 
-//derefter inskription og til sidst en varelinje som den retuerner
+    //metoder der tjekker om der er udfyldt tekst i inskription panelet og opretter inskription_linje, 
+    //derefter inskription og til sidst en varelinje som den retuerner
     private Vare_linje getInskriptionVarelinje() {
 
         ArrayList<Inskription_linje> inskription_linjeListe = new ArrayList();
@@ -2275,6 +2412,35 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         }
     }
 
+    public boolean isDouble(String input) {
+        boolean b = true;
+        try {
+            Double x = Double.parseDouble(input);
+        } catch (NumberFormatException nFE) {
+            b = false;
+        }
+        return b;
+    }
+
+    public boolean isLong(String input) {
+        boolean b = true;
+        try {
+            long x = Long.parseLong(input);
+        } catch (NumberFormatException nFE) {
+            b = false;
+        }
+        return b;
+    }
+
+    //Metode der bliver kaldt med et jTextField og tjekker om der er skrevet noget i det
+    private boolean jTextFieldValgt(JTextField jtextField) {
+        boolean result = false;
+        if (jtextField.getText().length() != 0) {
+            result = true;
+        }
+        return result;
+    }
+
     //Validerer om et textfield's tekst har den rigtige længde
     public boolean validateTextFieldLength(JTextField textfield, int length) {
         boolean valid = true;
@@ -2286,7 +2452,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
 
     //Validerer om et tekstfelt indeholder de rigtige data
     //Type er hvilken form for validering der er tale om
-    //Type 1 - Tekst, 2 - Double, 3 - Integer
+    //Type 1 - Tekst, 2 - Double, 3 - Long
     public boolean validateTextField(JTextField textfield, int type) {
         boolean valid = true;
         if (!textfield.getText().isEmpty()) {
@@ -2301,8 +2467,9 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
                     valid = false;
                 }
             } else if (type == 3) {
-                if (!isInteger(textfield.getText().trim())) {
+                if (!isLong(textfield.getText().trim())) {
                     valid = false;
+                    System.out.println("lol");
                 }
             }
         } else {
@@ -2315,18 +2482,5 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     public String validerString(String string) {
         String newString = string.replace("\\", "");
         return newString;
-    }
-    
-    public void resetErrorLabels(){
-        jLabel_fejlbesked_kunde_ordresalg.setText("");
-    }
-    
-    public void resetLabelColors(){
-        jLabel_tlf.setForeground(Color.black);
-        jLabel_fornavn.setForeground(Color.black);
-        jLabel_efternavn.setForeground(Color.black);
-        jLabel_adresse.setForeground(Color.black);
-        jLabel_postnr.setForeground(Color.black);
-        jLabel_by.setForeground(Color.black);
     }
 }

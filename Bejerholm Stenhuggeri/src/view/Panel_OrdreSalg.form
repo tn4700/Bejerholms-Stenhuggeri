@@ -382,7 +382,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="97" y="2" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="110" y="0" width="-1" height="20"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -392,7 +392,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="184" y="2" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="180" y="0" width="-1" height="20"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -658,7 +658,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel27">
+                <Component class="javax.swing.JLabel" name="jLabel_v&#xe6;rkstedstimer">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="V&#xe6;rkstedstimer"/>
                   </Properties>
@@ -668,7 +668,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel46">
+                <Component class="javax.swing.JLabel" name="jLabel_rensning">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Rensning"/>
                   </Properties>
@@ -678,7 +678,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel54">
+                <Component class="javax.swing.JLabel" name="jLabel_transport">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Transport"/>
                   </Properties>
@@ -688,7 +688,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel59">
+                <Component class="javax.swing.JLabel" name="jLabel_levering">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Levering"/>
                   </Properties>
@@ -698,7 +698,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel63">
+                <Component class="javax.swing.JLabel" name="jLabel_afhentning">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Afhentning"/>
                   </Properties>
@@ -1057,7 +1057,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel33">
+                <Component class="javax.swing.JLabel" name="jLabel_r&#xe6;kke">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="R&#xe6;kke"/>
                   </Properties>
@@ -1067,7 +1067,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel64">
+                <Component class="javax.swing.JLabel" name="jLabel_kirkeg&#xe5;rd">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Kirkeg&#xe5;rd"/>
                   </Properties>
@@ -1084,7 +1084,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel65">
+                <Component class="javax.swing.JLabel" name="jLabel_afdeling">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Afdeling"/>
                   </Properties>
@@ -1101,7 +1101,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel39">
+                <Component class="javax.swing.JLabel" name="jLabel_nr">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Nr"/>
                   </Properties>
@@ -1128,7 +1128,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel67">
+                <Component class="javax.swing.JLabel" name="jLabel_afd&#xf8;dnavn">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Afd&#xf8;dnavn"/>
                   </Properties>
@@ -1425,7 +1425,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel34">
+                <Component class="javax.swing.JLabel" name="jLabel_skrifttype">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Skrifttype:"/>
                   </Properties>
@@ -1544,7 +1544,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="69" y="179" width="234" height="14"/>
+                      <AbsoluteConstraints x="69" y="179" width="234" height="20"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -1560,6 +1560,32 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="475" y="9" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel_Tilf&#xf8;jelse_error">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="ff" type="rgb"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="310" y="260" width="160" height="20"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel_Gravsten_error">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="ff" type="rgb"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="80" y="260" width="150" height="20"/>
                 </Constraint>
               </Constraints>
             </Component>
