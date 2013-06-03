@@ -215,13 +215,21 @@ public class Panel_Bruger extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_adminsletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_adminsletActionPerformed
+        jLabel_brugerinfo.setText("Bekræft venligst");
         try {
-            if (valgtebruger.getUsername().equals("Mathias Bejerholm")) {
-                jLabel_brugerinfo.setText("<html><head><div style=\"text-align: center;\"> <font color='red'>Advarsel!</font> </head><body><br>Brugernavnet på admin kan ikke rettes på systemmet,<br>eller slettes.</body></html>");
+            int status;
+            status = JOptionPane.showConfirmDialog(null,
+                    "Er du sikker på du vil slette brugeren: " + valgtebruger + " fra systemet?", "Slet bruger", JOptionPane.YES_NO_OPTION);
+            if (status == JOptionPane.YES_OPTION) {
+                if (valgtebruger.getUsername().equals("Mathias Bejerholm")) {
+                    jLabel_brugerinfo.setText("<html><head><div style=\"text-align: center;\"> <font color='red'>Advarsel!</font> </head><body><br>Brugernavnet på admin kan ikke rettes på systemmet,<br>eller slettes.</body></html>");
+                } else {
+                    dbhandler.deleteUser(valgtebruger);
+                    jLabel_brugerinfo.setText("<html><head><div style=\"text-align: center;\"> <font color='green'>Success!</font> </head><body><br>" + jComboBox_Brugere.getSelectedItem() + " er slettet fra systemmet.</body></html>");
+                    jComboBox_Brugere.removeItem(valgtebruger);
+                }
             } else {
-                dbhandler.deleteUser(valgtebruger);
-                jLabel_brugerinfo.setText("<html><head><div style=\"text-align: center;\"> <font color='green'>Success!</font> </head><body><br>" + jComboBox_Brugere.getSelectedItem() + " er slettet fra systemmet.</body></html>");
-                jComboBox_Brugere.removeItem(valgtebruger);
+                jLabel_brugerinfo.setText("Sletning annulleret");
             }
         } catch (SQLException e) {
             System.out.println("fejl ved seltbutton" + e);

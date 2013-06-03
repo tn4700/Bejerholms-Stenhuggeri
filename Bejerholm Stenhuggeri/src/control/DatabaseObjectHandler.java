@@ -901,7 +901,7 @@ public class DatabaseObjectHandler {
         String sql = "select MAX(id) from kirkegård;";
         rs = db.getData(sql);
         if (rs.next()) {
-            max = rs.getInt("id");
+            max = rs.getInt("MAX(id)");
         }
         return max;
     }
