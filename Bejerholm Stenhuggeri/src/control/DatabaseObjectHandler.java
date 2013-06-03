@@ -968,45 +968,47 @@ public class DatabaseObjectHandler {
     public String createOrdre(Ordre ordre) throws SQLException, ControlException {
         String ordre_nr = getNextOrdreNr();
         createKunde(ordre.getKunde());
-        if (ordre.getKirkegård() != null) {
-            int kirke_id = checkKirkegård(ordre.getKirkegård());
-            if (kirke_id == 0) {
-                createKirkegård(ordre.getKirkegård());
-                ordre.getKirkegård().setId(getMaxKirkeId());
+        if (getOrdre(ordre_nr) == null) {
+            if (ordre.getKirkegård() != null) {
+                int kirke_id = checkKirkegård(ordre.getKirkegård());
+                if (kirke_id == 0) {
+                    createKirkegård(ordre.getKirkegård());
+                    ordre.getKirkegård().setId(getMaxKirkeId());
+                } else {
+                    ordre.getKirkegård().setId(kirke_id);
+                }
+                String sql = "insert into ordre(tlf,ordre_nr,ordretype,ordredato,"
+                        + "leveringdato,afhentningsdato,bemærkning,"
+                        + "bemærkning_ekstra,kirkegård_id,afdeling,"
+                        + "afdødnavn,række,nummer,gravType)"
+                        + "values ('" + ordre.getKunde().getTlf() + "','"
+                        + ordre_nr + "','" + boolToInt(ordre.getOrdretype()) + "','"
+                        + ordre.getOrdredato() + "','" + ordre.getLeveringsdato() + "','"
+                        + ordre.getAfhentningsdato() + "','" + ordre.getBemærkning() + "','"
+                        + ordre.getBemærkning_ekstra() + "','"
+                        + ordre.getKirkegård().getId() + "','" + ordre.getAfdeling() + "','"
+                        + ordre.getAfdødnavn() + "','" + ordre.getRække() + "','" + ordre.getNummer()
+                        + "','" + boolToInt(ordre.getGravType()) + "');";
+                db.setData(sql);
             } else {
-                ordre.getKirkegård().setId(kirke_id);
+                String sql = "insert into ordre(tlf,ordre_nr,ordretype,ordredato,"
+                        + "leveringdato,afhentningsdato,bemærkning,"
+                        + "bemærkning_ekstra,afdeling,"
+                        + "afdødnavn,række,nummer,gravType)"
+                        + "values ('" + ordre.getKunde().getTlf() + "','"
+                        + ordre_nr + "','" + boolToInt(ordre.getOrdretype()) + "','"
+                        + ordre.getOrdredato() + "','" + ordre.getLeveringsdato() + "','"
+                        + ordre.getAfhentningsdato() + "','" + ordre.getBemærkning() + "','"
+                        + ordre.getBemærkning_ekstra() + "','" + ordre.getAfdeling() + "','"
+                        + ordre.getAfdødnavn() + "','" + ordre.getRække() + "','" + ordre.getNummer()
+                        + "','" + boolToInt(ordre.getGravType()) + "');";
+                db.setData(sql);
             }
-            String sql = "insert into ordre(tlf,ordre_nr,ordretype,ordredato,"
-                    + "leveringdato,afhentningsdato,bemærkning,"
-                    + "bemærkning_ekstra,kirkegård_id,afdeling,"
-                    + "afdødnavn,række,nummer,gravType)"
-                    + "values ('" + ordre.getKunde().getTlf() + "','"
-                    + ordre_nr + "','" + boolToInt(ordre.getOrdretype()) + "','"
-                    + ordre.getOrdredato() + "','" + ordre.getLeveringsdato() + "','"
-                    + ordre.getAfhentningsdato() + "','" + ordre.getBemærkning() + "','"
-                    + ordre.getBemærkning_ekstra() + "','"
-                    + ordre.getKirkegård().getId() + "','" + ordre.getAfdeling() + "','"
-                    + ordre.getAfdødnavn() + "','" + ordre.getRække() + "','" + ordre.getNummer()
-                    + "','" + boolToInt(ordre.getGravType()) + "');";
-            db.setData(sql);
-        } else if (getOrdre(ordre_nr) == null) {
-            String sql = "insert into ordre(tlf,ordre_nr,ordretype,ordredato,"
-                    + "leveringdato,afhentningsdato,bemærkning,"
-                    + "bemærkning_ekstra,afdeling,"
-                    + "afdødnavn,række,nummer,gravType)"
-                    + "values ('" + ordre.getKunde().getTlf() + "','"
-                    + ordre_nr + "','" + boolToInt(ordre.getOrdretype()) + "','"
-                    + ordre.getOrdredato() + "','" + ordre.getLeveringsdato() + "','"
-                    + ordre.getAfhentningsdato() + "','" + ordre.getBemærkning() + "','"
-                    + ordre.getBemærkning_ekstra() + "','" + ordre.getAfdeling() + "','"
-                    + ordre.getAfdødnavn() + "','" + ordre.getRække() + "','" + ordre.getNummer()
-                    + "','" + boolToInt(ordre.getGravType()) + "');";
-            db.setData(sql);
+            for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
+                createVareLinje(ordre.getVare_linjeListe().get(i), ordre_nr);
+            }
         } else {
             throw new ControlException("En ordre med ordrenummeret " + ordre_nr + " findes allerede.");
-        }
-        for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
-            createVareLinje(ordre.getVare_linjeListe().get(i), ordre_nr);
         }
         return ordre_nr;
     }

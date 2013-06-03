@@ -4,7 +4,7 @@
  */
 package model;
 
-import control.Utility;
+import util.Utility;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 

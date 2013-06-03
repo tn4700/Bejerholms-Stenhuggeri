@@ -4,8 +4,6 @@
  */
 package view;
 
-import javax.swing.JPanel;
-import model.Vare;
 import model.Vare_linje;
 
 /**

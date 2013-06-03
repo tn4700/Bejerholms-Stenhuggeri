@@ -7,7 +7,7 @@ package view;
 import com.itextpdf.text.DocumentException;
 import control.DatabaseObjectHandler;
 import control.OpretFaktura;
-import control.Utility;
+import util.Utility;
 import java.awt.CardLayout;
 import java.awt.Desktop;
 import java.awt.LayoutManager;

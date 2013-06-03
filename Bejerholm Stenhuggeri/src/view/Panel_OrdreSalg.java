@@ -6,7 +6,7 @@ package view;
 
 import control.DatabaseObjectHandler;
 import control.OpretOrdre;
-import control.Utility;
+import util.Utility;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -39,7 +39,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private double købssum;
     private MainFrame frame;
     public final int MAX_VareLinjer = 8;
-    private boolean[] kundeValid;
 
     /**
      * Creates new form NewJPanel4
@@ -68,15 +67,12 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         valgteVare_ordresalg = new ArrayList();
         panelListe = new ArrayList();
 
-
         jPanel_valgteVare_ordresalg.setLayout((LayoutManager) new WrapLayout());
 
         fyldTegntype();
         hentLister();
         fyldVaregruppe();
         fyldYear();
-        
-        kundeValid = new boolean[] {true,true,true,true,true,true};
 
         jTextField_tlf_ordresalg.setText("28931093");
     }

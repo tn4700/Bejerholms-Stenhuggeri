@@ -8,7 +8,7 @@ import com.itextpdf.text.DocumentException;
 import control.DBConnection;
 import control.DatabaseObjectHandler;
 import control.OpretRevisorSeddel;
-import control.Utility;
+import util.Utility;
 import java.awt.CardLayout;
 import java.awt.Desktop;
 import java.io.File;
