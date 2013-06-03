@@ -108,12 +108,16 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Faktura info"));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Navn");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Adresse");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Post nr by");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Tlf nr");
 
         jLabel_VisNavn.setText("jLabel8");
@@ -184,12 +188,16 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
         jLabel_VisOprettet.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_VisOprettet.setText("jLabel15");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Oprettet");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Sendt dato");
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setText("Kontoudtog nr");
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("Provisions nr:");
 
         jLabel_VisProvision.setText("jLabel18");
@@ -420,7 +428,7 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        int status = JOptionPane.showConfirmDialog(this, "Du slettet samtidig ordren, provisionsseddel samt kontoudtog", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int status = JOptionPane.showConfirmDialog(this, "Du slettet samtidig provisionsseddel samt kontoudtog", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (status == 0) {
             try {
                 dbhandler.deleteFaktura(faktura);

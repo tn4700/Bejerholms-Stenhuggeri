@@ -4,16 +4,7 @@
  */
 package view;
 
-import com.itextpdf.text.DocumentException;
 import control.DatabaseObjectHandler;
-import control.OpretFaktura;
-import control.OpretOrdre;
-import java.awt.Desktop;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import model.Faktura;
 import model.Ordre;
 
@@ -63,24 +54,21 @@ public class Panel_Søg_Resultat extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel_Navn = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         jLabel_VisNavn = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
-        setMinimumSize(new java.awt.Dimension(278, 170));
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        setMinimumSize(new java.awt.Dimension(278, 106));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(278, 170));
+        setPreferredSize(new java.awt.Dimension(278, 106));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Nr");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 260, 30));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 280, 30));
 
         jButton2.setText("Vis");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -88,109 +76,33 @@ public class Panel_Søg_Resultat extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 80, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 80, -1));
 
-        jButton3.setText("Slet");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 80, -1));
-
+        jLabel_Navn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_Navn.setText("Navn: ");
-        add(jLabel_Navn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        add(jLabel_Navn, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 38, -1, -1));
 
-        jLabel4.setText("jLabel4");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
-
-        jButton4.setText("PDF");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 80, -1));
-
+        jLabel_VisNavn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_VisNavn.setText("jLabel6");
-        add(jLabel_VisNavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
-
-        jLabel7.setText("jLabel7");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+        add(jLabel_VisNavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 280, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (type == 0) {
-            try {
-                OpretOrdre opretOrdre = new OpretOrdre(ordre);
-                opretOrdre.genererOrdre("OrdreTest.pdf");
-                Desktop desktop = Desktop.getDesktop();
-                File file = new File("docs/OrdreTest.pdf");
-                desktop.open(file);
-            } catch (FileNotFoundException ex) {
-                System.out.println("Luk andre pdf'er før du prøver at se en ny!");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (DocumentException ex) {
-                ex.printStackTrace();
-            }
-        } else if (type == 1) {
-            try {
-                OpretFaktura opretFaktura = new OpretFaktura(faktura);
-                opretFaktura.genererFaktura("FakturaTest.pdf");
-
-                Desktop desktop = Desktop.getDesktop();
-                File file = new File("docs/FakturaTest.pdf");
-                desktop.open(file);
-            } catch (FileNotFoundException ex) {
-                System.out.println("Luk andre pdf'er før du prøver at se en ny!");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (DocumentException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(type == 0){
-           int status = JOptionPane.showConfirmDialog(this, "Orden slettes fra systemet, er du sikker?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (status == 0) {
-            try {
-                dbhandler.deleteOrdre(ordre);
-            } catch (SQLException ex) {
-                System.out.println("Der skete en fejl" + ex);
-            }
-        } 
-        }else if(type == 1){
-            int status = JOptionPane.showConfirmDialog(this, "Fakturaen slettes fra systemet inkl provisionsseddel og kontoudtog, er du sikker?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (status == 0) {
-            try {
-                dbhandler.deleteFaktura(faktura);
-            } catch (SQLException ex) {
-                System.out.println("Der skete en fejl" + ex);
-            }
-        }
-        }
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(type== 0){
             JDialog_SøgOrdre visordre = new JDialog_SøgOrdre(null, true, dbhandler, ordre);
             visordre.setVisible(true);
+        }else if(type ==1){
+            JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(null, true, dbhandler, faktura);
+             visfaktura.setVisible(true);
+        }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel_Navn;
     private javax.swing.JLabel jLabel_VisNavn;
     // End of variables declaration//GEN-END:variables

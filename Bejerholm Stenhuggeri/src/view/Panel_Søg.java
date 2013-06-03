@@ -39,7 +39,7 @@ public class Panel_Søg extends javax.swing.JPanel {
 
         initComponents();
         jPanel_Visfaktura.setLayout((LayoutManager) new WrapLayout());
-       
+
 
 
     }
@@ -89,27 +89,27 @@ public class Panel_Søg extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox_VælgType, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_SøgeNr, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Søg, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(19, 19, 19)
                 .addComponent(jComboBox_VælgType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jTextField_SøgeNr, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addComponent(jButton_Søg, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 310, 180));
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Søge Resultat"));
@@ -119,14 +119,13 @@ public class Panel_Søg extends javax.swing.JPanel {
 
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("jLabel1");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 24, 280, 20));
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "EN FLOT TITEL"));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jScrollPane1.setOpaque(false);
         jScrollPane1.setViewportView(jPanel_Visfaktura);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 420, 350));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 113, 420, 347));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Vælg"));
         jPanel1.setOpaque(false);
@@ -156,18 +155,16 @@ public class Panel_Søg extends javax.swing.JPanel {
                 .addComponent(jRadioButton1)
                 .addGap(10, 10, 10)
                 .addComponent(jRadioButton2)
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(0, 5, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jRadioButton1)
+                .addComponent(jRadioButton2))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 420, 50));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 50, 422, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_SøgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SøgActionPerformed
@@ -204,11 +201,6 @@ public class Panel_Søg extends javax.swing.JPanel {
                 }
 
 
-
-
-
-
-
             } else if (jComboBox_VælgType.getSelectedIndex() == 1) {
                 String fakturanr = jTextField_SøgeNr.getText();
                 if (!jTextField_SøgeNr.getText().isEmpty()) {
@@ -232,27 +224,27 @@ public class Panel_Søg extends javax.swing.JPanel {
                 }
 
             } else if (jComboBox_VælgType.getSelectedIndex() == 2) {
-            } else if (jComboBox_VælgType.getSelectedIndex() == 3) {
+                // Her skal være en metode der hiver alle ordre og fakturaer
+                // fra et indtastet telefon nr.
+            } else {
             }
-        } else {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SøgActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-      jScrollPane1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Igangværende Faktura"));
-       hentfakturaer();
-       opdaterfaktura();
+        jScrollPane1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Igangværende Faktura"));
+        hentfakturaer();
+        opdaterfaktura();
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-      jScrollPane1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Igangværende Ordre"));
-      hentordre();
-      opdaterfaktura();
+        jScrollPane1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Igangværende Ordre"));
+        hentordre();
+        opdaterfaktura();
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton_Søg;
@@ -292,18 +284,19 @@ public class Panel_Søg extends javax.swing.JPanel {
         }
 
     }
-    public void hentordre(){
+
+    public void hentordre() {
         jPanel_Visfaktura.removeAll();
         Ordre ordre = null;
-         jPanel_Visfaktura.removeAll();
+        jPanel_Visfaktura.removeAll();
         try {
-           ordre =  dbhandler.getOrdre("00001");
-            System.out.println(ordre.getOrdre_nr());
+            ordre = dbhandler.getOrdre("00001");
+            
         } catch (SQLException ex) {
-            System.out.println("Minidiller");
+       
         }
-        Panel_Søg_Ingangværende panel = new Panel_Søg_Ingangværende(ordre , dbhandler, this);
+        Panel_Søg_Ingangværende panel = new Panel_Søg_Ingangværende(ordre, dbhandler, this);
         jPanel_Visfaktura.add(panel);
-         
+
     }
 }
