@@ -297,7 +297,9 @@ public class JDialog_LagerVare extends javax.swing.JDialog {
         indkøbsPrisTextField.setText(vare.getIndkøbspris() + "");
         salgsPrisTextField.setText(vare.getSalgspris() + "");
         overFladeComboBox.setSelectedIndex(vare.getOverflade());
+        if(vare.getVaretype()!=null){
         vareTypeComboBox.setSelectedIndex(vare.getVaretype().getId());
+        }
         vareStatusComboBox.setSelectedIndex(vare.getVareStatus());
         if (vare.getDekoration()) {
             dekorationComboBox.setSelectedIndex(0);
