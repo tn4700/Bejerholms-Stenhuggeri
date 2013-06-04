@@ -1006,13 +1006,15 @@ public class DatabaseObjectHandler {
         return kundeordre;
     }
 
-    public ArrayList<Ordre> getIganværendeOrdre() throws SQLException {
+    public ArrayList<Ordre> getIganværendeOrdre() throws SQLException, ControlException {
         ArrayList<Ordre> ordrelist = new ArrayList<>();
         Ordre ordre = null;
-        int tlf = 0;
         Vare_linje vare_linje;
-        int kirkegård_id = 0;
-        String sql = "select * from ordre where ordretype = '0'";
+        String sql = "SELECT ordre.ordre_nr, ordre.ordredato, ordre.ordretype, ordre.leveringdato, ordre.afhentningsdato, ordre.bemærkning,"
+                + "ordre.bemærkning_ekstra, ordre.afdeling, ordre.afdødnavn, ordre.række, ordre.nummer, ordre. gravType, ordre.tlf, ordre.kirkegård_id,"
+                + " postnummer.post_nr, postnummer.byNavn, kunde.fornavn, kunde.efternavn, kunde.tlf, kunde.adresse, kunde.post_nr, kirkegård.id as kirkegård_id, "
+                + " kirkegård.navn as kirkegård_navn from ordre INNER JOIN kunde ON ordre.tlf = kunde.tlf INNER JOIN postnummer ON kunde.post_nr = postnummer.post_nr"
+                + " LEFT JOIN kirkegård ON ordre.kirkegård_id = kirkegård.id ORDER BY ordre.ordre_nr ASC";
         ResultSet rs;
         rs = db.getData(sql);
         while (rs.next()) {
@@ -1031,23 +1033,32 @@ public class DatabaseObjectHandler {
                     rs.getBoolean("gravType"),
                     null,
                     null);
-            tlf = rs.getInt("tlf");
-            kirkegård_id = rs.getInt("kirkegård_id");
+            Postnummer post = new Postnummer(rs.getInt("post_nr"), rs.getString("bynavn"));
+            Kirkegård kirkegård = new Kirkegård(rs.getInt("kirkegård_id"), rs.getString("kirkegård_navn"));
+            Kunde kunde = new Kunde(rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("adresse"), rs.getInt("tlf"), post);
+            ordre.setKirkegård(kirkegård);
+            ordre.setKunde(kunde);
             ordrelist.add(ordre);
 
         }
         rs.close();
 
         for (int i = 0; i < ordrelist.size(); i++) {
-            ordrelist.get(i).setKirkegård(getKirkegård(kirkegård_id));
-            ordrelist.get(i).setKunde(getKunde(tlf));
-            int max = getMaxVareLinje(ordrelist.get(i).getOrdre_nr());
-            for (int j = 0; j <= max; j++) {
-                if (getVareLinje(i, ordrelist.get(i).getOrdre_nr()) != null) {
-                    vare_linje = getVareLinje(i, ordrelist.get(i).getOrdre_nr());
-                    ordrelist.get(i).addVare_linje(vare_linje);
+              Faktura faktura = getFaktura("00" + ordrelist.get(i).getKunde().getTlf() + "-" + ordrelist.get(i).getOrdre_nr());           
+            if (faktura == null) {
+                int max = getMaxVareLinje(ordrelist.get(i).getOrdre_nr());
+                for (int j = 0; j <= max; j++) {
+                    if (getVareLinje(i, ordrelist.get(i).getOrdre_nr()) != null) {
+                        vare_linje = getVareLinje(i, ordrelist.get(i).getOrdre_nr());
+                        ordrelist.get(i).addVare_linje(vare_linje);
+
+                    }
                 }
+            } else {
+                ordrelist.remove(i);
             }
+
+
 
         }
 
@@ -1329,7 +1340,7 @@ public class DatabaseObjectHandler {
                 }
             }
         }
-        System.out.println("hej");
+
         return faktura;
     }
 
