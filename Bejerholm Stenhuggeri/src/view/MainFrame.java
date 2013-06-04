@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import model.User;
 import model.Vare;
@@ -307,7 +308,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_OrdreSalgActionPerformed
 
     private void jButton_HovedmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_HovedmenuActionPerformed
+        boolean accept = visAcceptDialog("Er du sikker på at du vil gå til hovedmenu'en?", "Gå til hovedmenu");
+        if(accept){
         vishovedmenu();
+        }
     }//GEN-LAST:event_jButton_HovedmenuActionPerformed
 
     private void jButton_BrugerAdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BrugerAdministrationActionPerformed
@@ -458,5 +462,16 @@ public class MainFrame extends javax.swing.JFrame {
         ((CardLayout) jPanel_Frame.getLayout()).addLayoutComponent(søg, "Søg");
         ((CardLayout) jPanel_Frame.getLayout()).addLayoutComponent(csv, "Csv");
         ((CardLayout) jPanel_Frame.getLayout()).addLayoutComponent(bruger, "Bruger");
+    }
+    
+    public boolean visAcceptDialog(String message, String title) {
+        boolean accept = false;
+        String[] options = new String[]{"Ja", "Nej"};
+        int reply = JOptionPane.showOptionDialog(this, message, title, JOptionPane.DEFAULT_OPTION,
+                JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+        if (reply == JOptionPane.YES_OPTION) {
+            accept = true;
+        }
+        return accept;
     }
 }
