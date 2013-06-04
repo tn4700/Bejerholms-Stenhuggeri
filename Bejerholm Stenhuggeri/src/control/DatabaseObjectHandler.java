@@ -1011,8 +1011,8 @@ public class DatabaseObjectHandler {
         Ordre ordre = null;
         Vare_linje vare_linje;
         String sql = "SELECT ordre.ordre_nr, ordre.ordredato, ordre.ordretype, ordre.leveringdato, ordre.afhentningsdato, ordre.bemærkning,"
-                + "ordre.bemærkning_ekstra, ordre.afdeling, ordre.afdødnavn, ordre.række, ordre.nummer, ordre. gravType, ordre.tlf, ordre.kirkegård_id,"
-                + " postnummer.post_nr, postnummer.byNavn, kunde.fornavn, kunde.efternavn, kunde.tlf, kunde.adresse, kunde.post_nr, kirkegård.id as kirkegård_id, "
+                + " ordre.bemærkning_ekstra, ordre.afdeling, ordre.afdødnavn, ordre.række, ordre.nummer, ordre.gravType,"
+                + " postnummer.post_nr, postnummer.byNavn, kunde.fornavn, kunde.efternavn, kunde.tlf, kunde.adresse, kirkegård.id as kirkegård_id, "
                 + " kirkegård.navn as kirkegård_navn from ordre INNER JOIN kunde ON ordre.tlf = kunde.tlf INNER JOIN postnummer ON kunde.post_nr = postnummer.post_nr"
                 + " LEFT JOIN kirkegård ON ordre.kirkegård_id = kirkegård.id ORDER BY ordre.ordre_nr ASC";
         ResultSet rs;

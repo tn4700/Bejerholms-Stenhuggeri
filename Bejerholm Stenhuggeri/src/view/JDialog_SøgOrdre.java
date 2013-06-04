@@ -4,16 +4,27 @@
  */
 package view;
 
+import com.itextpdf.text.DocumentException;
 import control.DatabaseObjectHandler;
+import control.OpretFaktura;
+import control.OpretOrdre;
 import util.Utility;
 import control.exceptions.ControlException;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
+import java.awt.Frame;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.NumberFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import model.Faktura;
 import model.Faktureringsadresse;
 import model.Kontoudtog;
@@ -33,15 +44,25 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     private DatabaseObjectHandler dbhandler;
     private Panel_Søg panel;
     private Kunde kunde;
+    private Faktura faktura;
+    private Frame frame;
 
     /**
      * Creates new form JDialog_SøgFaktura
      */
     public JDialog_SøgOrdre(java.awt.Frame parent, boolean modal, DatabaseObjectHandler dbhandler, Ordre ordre) {
         super(parent, modal);
+        this.frame = frame;
         this.dbhandler = dbhandler;
         this.ordre = ordre;
         kunde = ordre.getKunde();
+        try {
+            faktura = dbhandler.getFaktura(ordre.createFakturaNr());
+        } catch (SQLException ex) {
+            Logger.getLogger(JDialog_SøgOrdre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ControlException ex) {
+            Logger.getLogger(JDialog_SøgOrdre.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
         jLabel_VisOprettet.setText(Utility.formatTimestampToString(ordre.getOrdredato()));
         jLabel_VisTlf.setText("" + kunde.getTlf());
@@ -53,26 +74,34 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jLabel_VisAfhentDato.setText(Utility.formatTimestampToString(ordre.getAfhentningsdato()));
         jLabel_VisLevDato.setText(Utility.formatTimestampToString(ordre.getLeveringsdato()));
 
-        if (ordre.getOrdretype()) {
-
-            if (ordre.getKirkegård() != null) {
-                jLabel_VisKirkegård.setText(ordre.getKirkegård().getNavn());
-                jLabel_VisAfDødNavn.setText(ordre.getAfdødnavn());
-                jLabel_VisAfdeling.setText("" + ordre.getAfdeling());
-                jLabel_VisNR.setText("" + ordre.getNummer());
-                jLabel_VisRække.setText("" + ordre.getRække());
-            }
-
-            jLabel_VisBemærkning.setText(ordre.getBemærkning());
-            jLabel_VisBemærkning.setToolTipText(ordre.getBemærkning());
-
-            if (!ordre.getBemærkning_ekstra().isEmpty()) {
-                jLabel_VisEkstraBemærkning.setText(ordre.getBemærkning_ekstra());
-                jLabel_VisEkstraBemærkning.setToolTipText(ordre.getBemærkning_ekstra());
-            } else {
-                jLabel_VisEkstraBemærkning.setText("Ingen ekstra bemærkning indtastet");
-            }
+        if (faktura == null) {
+            jButton_FakturaPdf.setEnabled(false);
+            jButton_FakturaPdf.setToolTipText("Ordren er ikke opgraderet til faktura endnu");
+        }else{
+            jButton_Opgrader.setEnabled(false);
+            jButton_Opgrader.setToolTipText("Ordren er allerede opgraderet");
         }
+            if (ordre.getOrdretype()) {
+
+                if (ordre.getKirkegård() != null) {
+                    jLabel_VisKirkegård.setText(ordre.getKirkegård().getNavn());
+                    jLabel_VisAfDødNavn.setText(ordre.getAfdødnavn());
+                    jLabel_VisAfdeling.setText("" + ordre.getAfdeling());
+                    jLabel_VisNR.setText("" + ordre.getNummer());
+                    jLabel_VisRække.setText("" + ordre.getRække());
+                }
+
+                jLabel_VisBemærkning.setText(ordre.getBemærkning());
+                jLabel_VisBemærkning.setToolTipText(ordre.getBemærkning());
+
+                if (!ordre.getBemærkning_ekstra().isEmpty()) {
+                    jLabel_VisEkstraBemærkning.setText(ordre.getBemærkning_ekstra());
+                    jLabel_VisEkstraBemærkning.setToolTipText(ordre.getBemærkning_ekstra());
+                } else {
+                    jLabel_VisEkstraBemærkning.setText("Ingen ekstra bemærkning");
+                }
+            }
+        
 
     }
 
@@ -87,7 +116,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
 
         panel_card = new javax.swing.JPanel();
         panel_visOrdre = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel_KundeInfo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -96,8 +125,8 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jLabel_VisAdresse = new javax.swing.JLabel();
         jLabel_VisPostnrBy = new javax.swing.JLabel();
         jLabel_VisTlf = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel_Overskrift = new javax.swing.JLabel();
+        jPanel_OrdreInfo = new javax.swing.JPanel();
         jLabel_VisLevDato = new javax.swing.JLabel();
         jLabel_VisOprettet = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -108,14 +137,13 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jLabel_VisAfhentDato = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel_VisPris = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanel_Valgmuligheder = new javax.swing.JPanel();
         jButton_OrdrePDF = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButton_Rediger = new javax.swing.JButton();
         jButton_FakturaPdf = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton_Kontopdf = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        jButton_Opgrader = new javax.swing.JButton();
+        jButton_Slet = new javax.swing.JButton();
+        jPanel_Ekstrainfo = new javax.swing.JPanel();
         jLabel_Afdødnavn = new javax.swing.JLabel();
         jLabel_Kirkegård = new javax.swing.JLabel();
         jLabel_Række = new javax.swing.JLabel();
@@ -131,7 +159,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jLabel_VisEkstraBemærkning = new javax.swing.JLabel();
         jLabel_fejl = new javax.swing.JLabel();
         panel_Opgrader = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        jLabel_OverskriftOpgrader = new javax.swing.JLabel();
         panel_faktura_info = new javax.swing.JPanel();
         button_accepter = new javax.swing.JButton();
         panel_fakturaInfo = new javax.swing.JPanel();
@@ -170,7 +198,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         textField_bedemand_regnr = new javax.swing.JTextField();
         textField_bedemand_tlf = new javax.swing.JTextField();
         label_bedemand_telefon = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
+        jPanel_info = new javax.swing.JPanel();
         label_info_opgrader = new javax.swing.JLabel();
         button_annuller = new javax.swing.JButton();
         errorLabel = new javax.swing.JLabel();
@@ -193,7 +221,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         panel_visOrdre.setPreferredSize(new java.awt.Dimension(470, 430));
         panel_visOrdre.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Kunde info"));
+        jPanel_KundeInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Kunde info"));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Navn");
@@ -215,60 +243,60 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
 
         jLabel_VisTlf.setText("jLabel14");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel_KundeInfoLayout = new javax.swing.GroupLayout(jPanel_KundeInfo);
+        jPanel_KundeInfo.setLayout(jPanel_KundeInfoLayout);
+        jPanel_KundeInfoLayout.setHorizontalGroup(
+            jPanel_KundeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_KundeInfoLayout.createSequentialGroup()
+                .addGroup(jPanel_KundeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_KundeInfoLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(52, 52, 52))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel_KundeInfoLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel_KundeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_KundeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_VisTlf, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel_KundeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jLabel_VisPostnrBy, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                         .addComponent(jLabel_VisAdresse, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel_VisNavn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(141, 141, 141))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanel_KundeInfoLayout.setVerticalGroup(
+            jPanel_KundeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_KundeInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_KundeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel_VisNavn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_KundeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel_VisAdresse))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_KundeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel_VisPostnrBy))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_KundeInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_VisTlf)
                     .addComponent(jLabel4))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
-        panel_visOrdre.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 210, -1));
+        panel_visOrdre.add(jPanel_KundeInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 210, -1));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel9.setText("Vis Ordre");
-        panel_visOrdre.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, -1, -1));
+        jLabel_Overskrift.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel_Overskrift.setText("Vis Ordre");
+        panel_visOrdre.add(jLabel_Overskrift, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, -1, -1));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Ordre info"));
+        jPanel_OrdreInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Ordre info"));
 
         jLabel_VisLevDato.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_VisLevDato.setText("jLabel16");
@@ -314,58 +342,58 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel_OrdreInfoLayout = new javax.swing.GroupLayout(jPanel_OrdreInfo);
+        jPanel_OrdreInfo.setLayout(jPanel_OrdreInfoLayout);
+        jPanel_OrdreInfoLayout.setHorizontalGroup(
+            jPanel_OrdreInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_OrdreInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel_OrdreInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_OrdreInfoLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_OrdreInfoLayout.createSequentialGroup()
+                        .addGroup(jPanel_OrdreInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
                             .addComponent(jLabel11))
                         .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel_OrdreInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel_OrdreInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel_VisLevDato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel_VisOprettet, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel_VisAfhentDato)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel_OrdreInfoLayout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(52, 52, 52)
                         .addComponent(jLabel_VisProvision)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanel_OrdreInfoLayout.setVerticalGroup(
+            jPanel_OrdreInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_OrdreInfoLayout.createSequentialGroup()
+                .addGroup(jPanel_OrdreInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel_VisOprettet))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_OrdreInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_VisLevDato)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_OrdreInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel_VisAfhentDato))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_OrdreInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel_VisProvision))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        panel_visOrdre.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, -1));
+        panel_visOrdre.add(jPanel_OrdreInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, -1));
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Valgmuligheder"));
+        jPanel_Valgmuligheder.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Valgmuligheder"));
 
         jButton_OrdrePDF.setText("Ordre PDF");
         jButton_OrdrePDF.addActionListener(new java.awt.event.ActionListener() {
@@ -374,79 +402,72 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
             }
         });
 
-        jButton4.setText("Rediger");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Rediger.setText("Rediger");
+        jButton_Rediger.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButton_RedigerActionPerformed(evt);
             }
         });
 
-        jButton_FakturaPdf.setText("Faktura PDF");
+        jButton_FakturaPdf.setText("Vis Faktura");
         jButton_FakturaPdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_FakturaPdfActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Opgrader");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Opgrader.setText("Opgrader");
+        jButton_Opgrader.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButton_OpgraderActionPerformed(evt);
             }
         });
 
-        jButton_Kontopdf.setText("Konto PDF");
-        jButton_Kontopdf.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Slet.setText("Slet");
+        jButton_Slet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_KontopdfActionPerformed(evt);
+                jButton_SletActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Slet");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton_OrdrePDF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_FakturaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_Kontopdf, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout jPanel_ValgmulighederLayout = new javax.swing.GroupLayout(jPanel_Valgmuligheder);
+        jPanel_Valgmuligheder.setLayout(jPanel_ValgmulighederLayout);
+        jPanel_ValgmulighederLayout.setHorizontalGroup(
+            jPanel_ValgmulighederLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_ValgmulighederLayout.createSequentialGroup()
+                .addGroup(jPanel_ValgmulighederLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_ValgmulighederLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jButton_Opgrader, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_Rediger, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_Slet, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_ValgmulighederLayout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(jButton_OrdrePDF, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_FakturaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jPanel_ValgmulighederLayout.setVerticalGroup(
+            jPanel_ValgmulighederLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_ValgmulighederLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton7)
-                    .addComponent(jButton5))
+                .addGroup(jPanel_ValgmulighederLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_Rediger)
+                    .addComponent(jButton_Slet)
+                    .addComponent(jButton_Opgrader))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_ValgmulighederLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_FakturaPdf)
-                    .addComponent(jButton_OrdrePDF)
-                    .addComponent(jButton_Kontopdf))
+                    .addComponent(jButton_OrdrePDF))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        panel_visOrdre.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 303, -1, 120));
+        panel_visOrdre.add(jPanel_Valgmuligheder, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 303, -1, 120));
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Ekstra Info")));
+        jPanel_Ekstrainfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Ekstra Info")));
 
         jLabel_Afdødnavn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_Afdødnavn.setText("Afdød navn:");
@@ -479,24 +500,24 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jLabel_VisBemærkning.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_VisBemærkning.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel_EkstrainfoLayout = new javax.swing.GroupLayout(jPanel_Ekstrainfo);
+        jPanel_Ekstrainfo.setLayout(jPanel_EkstrainfoLayout);
+        jPanel_EkstrainfoLayout.setHorizontalGroup(
+            jPanel_EkstrainfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_EkstrainfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_EkstrainfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_Afdødnavn)
                     .addComponent(jLabel_Kirkegård)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanel_EkstrainfoLayout.createSequentialGroup()
                         .addComponent(jLabel_Række)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel_VisRække, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel_EkstrainfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel_VisAfDødNavn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_VisKirkegård, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanel_EkstrainfoLayout.createSequentialGroup()
                         .addComponent(jLabel_NR)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel_VisNR, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -505,28 +526,28 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel_VisAfdeling, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_EkstrainfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_VisBemærkning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanel_EkstrainfoLayout.createSequentialGroup()
                         .addComponent(jLabel_Bemærkning)
                         .addGap(0, 78, Short.MAX_VALUE))
                     .addComponent(jLabel_VisEkstraBemærkning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanel_EkstrainfoLayout.setVerticalGroup(
+            jPanel_EkstrainfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_EkstrainfoLayout.createSequentialGroup()
+                .addGroup(jPanel_EkstrainfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Afdødnavn)
                     .addComponent(jLabel_Bemærkning)
                     .addComponent(jLabel_VisAfDødNavn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_EkstrainfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Kirkegård)
                     .addComponent(jLabel_VisKirkegård)
                     .addComponent(jLabel_VisBemærkning))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_EkstrainfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Række)
                     .addComponent(jLabel_NR)
                     .addComponent(jLabel_Afdeling)
@@ -537,7 +558,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                 .addGap(62, 62, 62))
         );
 
-        panel_visOrdre.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 213, 440, 90));
+        panel_visOrdre.add(jPanel_Ekstrainfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 213, 440, 90));
 
         jLabel_fejl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_fejl.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -550,9 +571,9 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         panel_Opgrader.setPreferredSize(new java.awt.Dimension(470, 430));
         panel_Opgrader.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel12.setText("Opgrader Faktura");
-        panel_Opgrader.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        jLabel_OverskriftOpgrader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel_OverskriftOpgrader.setText("Opgrader Faktura");
+        panel_Opgrader.add(jLabel_OverskriftOpgrader, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         panel_faktura_info.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panel_faktura_info.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -666,14 +687,14 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
 
         panel_faktura_info.add(panel_bedemandInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 430, 150));
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_info.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel_info.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_info_opgrader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_info_opgrader.setText("Kontoudtog og Provisionsseddel med numrene <Ordre_nr> vil også blive oprettet.");
-        jPanel10.add(label_info_opgrader, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 397, 32));
+        jPanel_info.add(label_info_opgrader, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 397, 32));
 
-        panel_faktura_info.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 430, -1));
+        panel_faktura_info.add(jPanel_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 430, -1));
 
         button_annuller.setText("Annuller");
         button_annuller.addActionListener(new java.awt.event.ActionListener() {
@@ -698,25 +719,40 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_OrdrePDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OrdrePDFActionPerformed
+        try {
+            OpretOrdre ordrepdf = new OpretOrdre(ordre);
+            ordrepdf.genererOrdre("Ordre-" + ordre.getOrdre_nr() + ".pdf");
+            Desktop desktop = Desktop.getDesktop();
+            File file = new File("docs/Ordre-" + ordre.getOrdre_nr() + ".pdf");
+            desktop.open(file);
+        } catch (FileNotFoundException ex) {
+            jLabel_fejl.setText("Luk andre pdf'er før du prøver at se en ny!");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (DocumentException ex) {
+            ex.printStackTrace();
+        }       // TODO add your handling code here:
     }//GEN-LAST:event_jButton_OrdrePDFActionPerformed
 
     private void jButton_FakturaPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_FakturaPdfActionPerformed
+        JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(frame, rootPaneCheckingEnabled, dbhandler, faktura);
+        visfaktura.setVisible(true);
+        
+        
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_FakturaPdfActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton_RedigerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RedigerActionPerformed
         this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButton_RedigerActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton_OpgraderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OpgraderActionPerformed
         ((CardLayout) panel_card.getLayout()).show(panel_card, "Opgrader");
         startOpgradering();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButton_OpgraderActionPerformed
 
-    private void jButton_KontopdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_KontopdfActionPerformed
-    }//GEN-LAST:event_jButton_KontopdfActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButton_SletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SletActionPerformed
         int status = JOptionPane.showConfirmDialog(this, "Orden slettes fra systemet, er du sikker?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (status == 0) {
             try {
@@ -727,7 +763,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
             }
         }
 
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jButton_SletActionPerformed
 
     private void radioButton_NormalOrdreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButton_NormalOrdreActionPerformed
         radioButton_NormalOrdre.setSelected(true);
@@ -783,27 +819,26 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     private javax.swing.JButton button_annuller;
     private javax.swing.JCheckBox checkBox_faktureringsAdresse;
     private javax.swing.JLabel errorLabel;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton_FakturaPdf;
-    private javax.swing.JButton jButton_Kontopdf;
+    private javax.swing.JButton jButton_Opgrader;
     private javax.swing.JButton jButton_OrdrePDF;
+    private javax.swing.JButton jButton_Rediger;
+    private javax.swing.JButton jButton_Slet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_Afdeling;
     private javax.swing.JLabel jLabel_Afdødnavn;
     private javax.swing.JLabel jLabel_Bemærkning;
     private javax.swing.JLabel jLabel_Kirkegård;
     private javax.swing.JLabel jLabel_NR;
+    private javax.swing.JLabel jLabel_Overskrift;
+    private javax.swing.JLabel jLabel_OverskriftOpgrader;
     private javax.swing.JLabel jLabel_Række;
     private javax.swing.JLabel jLabel_VisAdresse;
     private javax.swing.JLabel jLabel_VisAfDødNavn;
@@ -822,12 +857,12 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel_VisRække;
     private javax.swing.JLabel jLabel_VisTlf;
     private javax.swing.JLabel jLabel_fejl;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel_Ekstrainfo;
+    private javax.swing.JPanel jPanel_KundeInfo;
+    private javax.swing.JPanel jPanel_OrdreInfo;
+    private javax.swing.JPanel jPanel_Valgmuligheder;
+    private javax.swing.JPanel jPanel_info;
     private javax.swing.JLabel label_bedemand_adresse;
     private javax.swing.JLabel label_bedemand_bank;
     private javax.swing.JLabel label_bedemand_by;

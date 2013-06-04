@@ -137,6 +137,7 @@ public class Panel_Søg extends javax.swing.JPanel {
         add(jLabel_Fejlbesked, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 24, 280, 20));
 
         jScrollPane_IgangværendeScroll.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jScrollPane_IgangværendeScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane_IgangværendeScroll.setOpaque(false);
 
         jPanel_Visfaktura.setOpaque(false);
@@ -343,8 +344,14 @@ public class Panel_Søg extends javax.swing.JPanel {
         } catch (SQLException ex) {
             jLabel_Fejlbesked.setText("Der skete en fejl ved hentning af igangværende faktura");
             jLabel_Fejlbesked.setToolTipText("fejl: " + ex);
+        } catch (ControlException ex){
+            
         }
 
 
+    }
+    
+     public void lukvindue(){
+        
     }
 }
