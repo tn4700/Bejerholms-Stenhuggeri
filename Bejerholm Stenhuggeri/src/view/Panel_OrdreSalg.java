@@ -1259,10 +1259,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     private void jButton_godkend_ordresalgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_godkend_ordresalgActionPerformed
         boolean accept = visAcceptDialog("Ønsker du at godkende ordren?", "Bekræft ordre.");
         if (accept) {        //opretter ny ArrayList til 
-//            ArrayList<Vare_linje> varelinjer = new ArrayList();
-//            for (int i = 0; i < valgteVare_ordresalg.size(); i++) {
-//                varelinjer.add(valgteVare_ordresalg.get(i));
-//            }
+
             Postnummer postnr = new Postnummer(Integer.parseInt(jTextField_postnr_ordresalg.getText()),
                     jTextField_By_ordresalg.getText().trim().replace("'", "\\'"));
             kunde = new Kunde(jTextField_fornavn_ordresalg.getText().trim().replace("'", "\\'"),
