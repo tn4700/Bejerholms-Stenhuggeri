@@ -4,9 +4,9 @@
  */
 package model;
 
-import util.Utility;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import util.Utility;
 
 /**
  *
