@@ -1,0 +1,7 @@
+Ting vi kunne have gjort anderledes:
+
+Programmering:
+-SQL Strenge i get metoder kunne være lavet med udtræk fra flere tabeller i stedet for flere lag af metoder og midlertidige variable.
+-Ordre, Provision og Kontoudtog nummer behøvede ikke at være Strings. Vi lavede dem sådan da disse numre skulle have 0'er foran, men dette var kun en nødvendighed i visning af disse i GUI/PDF, og vi kunne derfor have sparet nogle metoder og lavet dem om til integers, både i database og programmering.
+Database:
+-Ordre, Provision og Kontoudtog nummer behøvede ikke at være Strings.
