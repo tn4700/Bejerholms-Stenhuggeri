@@ -1,7 +1,6 @@
 package view;
 
 import control.DatabaseObjectHandler;
-import util.Utility;
 import java.awt.Color;
 import java.awt.LayoutManager;
 import java.sql.SQLException;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Vare;
 import model.Varegruppe;
+import util.Utility;
 
 public class Panel_Lager extends javax.swing.JPanel {
 
