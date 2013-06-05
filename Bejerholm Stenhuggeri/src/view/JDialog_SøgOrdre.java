@@ -1314,6 +1314,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
             } catch (SQLException ex) {
                 jLabel_fejl.setText("Der skete en fejl ved sletning af orden");
                 jLabel_fejl.setToolTipText("Fejl: " + ex);
+                ex.printStackTrace();
             }
         }
 
