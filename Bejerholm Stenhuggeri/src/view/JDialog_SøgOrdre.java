@@ -19,7 +19,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -255,6 +254,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jComboBox_levering_måned = new javax.swing.JComboBox();
         jComboBox_year_leveringsdato = new javax.swing.JComboBox();
         jCheckBox_gravsten = new javax.swing.JCheckBox();
+        jLabel_error_rediger = new javax.swing.JLabel();
         panel_inskription = new javax.swing.JPanel();
         jLabel_OverskriftOpgrader2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -929,6 +929,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 353, 91, -1));
 
         jButton6.setText("Rediger varelinjer");
+        jButton6.setEnabled(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -937,6 +938,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 295, 184, -1));
 
         jButton7.setText("Rediger inskription");
+        jButton7.setEnabled(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -998,6 +1000,10 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jPanel1.add(jCheckBox_gravsten, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 268, 184, -1));
 
         panel_rediger.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 41, 450, 390));
+
+        jLabel_error_rediger.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_error_rediger.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        panel_rediger.add(jLabel_error_rediger, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 280, 40));
 
         panel_card.add(panel_rediger, "Rediger");
 
@@ -1131,51 +1137,27 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_eksempelInskription_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_eksempelInskription_1.setText("Linje 1");
+        jPanel6.add(jLabel_eksempelInskription_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 8, 402, -1));
 
         jLabel_eksempelInskription_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_eksempelInskription_2.setText("Linje 2");
+        jPanel6.add(jLabel_eksempelInskription_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 28, 402, -1));
 
         jLabel_eksempelInskription_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_eksempelInskription_3.setText("Linje 3");
+        jPanel6.add(jLabel_eksempelInskription_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 48, 402, -1));
 
         jLabel_eksempelInskription_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_eksempelInskription_4.setText("Linje 4");
+        jPanel6.add(jLabel_eksempelInskription_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 68, 402, -1));
 
         jLabel_eksempelInskription_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_eksempelInskription_5.setText("Linje 5");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_eksempelInskription_1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
-                    .addComponent(jLabel_eksempelInskription_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_eksempelInskription_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_eksempelInskription_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_eksempelInskription_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jLabel_eksempelInskription_1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_eksempelInskription_2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_eksempelInskription_3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_eksempelInskription_4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_eksempelInskription_5)
-                .addContainerGap())
-        );
+        jPanel6.add(jLabel_eksempelInskription_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 88, 402, -1));
 
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 226, 426, 111));
 
@@ -1432,17 +1414,19 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     }//GEN-LAST:event_jCheckBox_gravstenActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        boolean accept = visAcceptDialog("Er du sikker på du vil gemme ændringerne?", "Gem ændringer");
-        if (accept) {
-            try {
-                setOrdreInfo();
-                dbhandler.editOrdre(ordre);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (ControlException ex) {
-                ex.printStackTrace();
+        if (isKundeValid() && isGravstenValid()) {
+            boolean accept = visAcceptDialog("Er du sikker på du vil gemme ændringerne?", "Gem ændringer");
+            if (accept) {
+                try {
+                    setOrdreInfo();
+                    dbhandler.editOrdre(ordre);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ControlException ex) {
+                    ex.printStackTrace();
+                }
+                ((CardLayout) panel_card.getLayout()).show(panel_card, "visOrdre");
             }
-            ((CardLayout) panel_card.getLayout()).show(panel_card, "visOrdre");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1585,6 +1569,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel_eksempelInskription_3;
     private javax.swing.JLabel jLabel_eksempelInskription_4;
     private javax.swing.JLabel jLabel_eksempelInskription_5;
+    private javax.swing.JLabel jLabel_error_rediger;
     private javax.swing.JLabel jLabel_fejl;
     private javax.swing.JLabel jLabel_fornavn;
     private javax.swing.JLabel jLabel_kirkegård;
@@ -2148,11 +2133,169 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
             Timestamp levering = Utility.getNewTimestamp(jComboBox_levering_dag.getSelectedItem() + "/" + (jComboBox_levering_måned.getSelectedIndex() + 1) + "/" + jComboBox_year_leveringsdato.getSelectedItem());
             Timestamp afhentning = Utility.getNewTimestamp(jComboBox_afhentning_dag.getSelectedItem() + "/" + (jComboBox_afhentning_måned.getSelectedIndex() + 1) + "/" + jComboBox_year_afhentningsdato.getSelectedItem());
             ordre.setLeveringsdato(levering);
-            System.out.println(levering);
             ordre.setAfhentningsdato(afhentning);
-            System.out.println(afhentning);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public boolean isKundeValid() {
+        resetKundeErrorLabels();
+        boolean result = true;
+        if (!validateTextField(jTextField_tlf_ordresalg, 3) || !validateTextFieldLength(jTextField_tlf_ordresalg, 8)) {
+            result = false;
+            jLabel_tlf.setForeground(Color.red);
+            jLabel_tlf.setToolTipText("Tlf nummer skal være 8 cifre og kun tal");
+        }
+        if (!validateTextField(jTextField_fornavn_ordresalg, 1)) {
+            result = false;
+            jLabel_fornavn.setForeground(Color.red);
+            jLabel_fornavn.setToolTipText("Fornavn skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!validateTextField(jTextField_efternavn_ordresalg, 1)) {
+            result = false;
+            jLabel_efternavn.setForeground(Color.red);
+            jLabel_efternavn.setToolTipText("Efternavn skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!validateTextField(jTextField_adresse_ordresalg, 1)) {
+            result = false;
+            jLabel_adresse.setForeground(Color.red);
+            jLabel_adresse.setToolTipText("Adresse skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!validateTextField(jTextField_By_ordresalg, 1)) {
+            result = false;
+            jLabel_by.setForeground(Color.red);
+            jLabel_by.setToolTipText("By skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!validateTextField(jTextField_postnr_ordresalg, 3) || !validateTextFieldLength(jTextField_postnr_ordresalg, 4)) {
+            result = false;
+            jLabel_postnr.setForeground(Color.red);
+            jLabel_postnr.setToolTipText("Postnummer skal være 4 cifre og kun tal");
+        }
+        if (!result) {
+            jLabel_error_rediger.setText("Kunde info forkert.");
+        }
+        return result;
+    }
+
+    public void resetKundeErrorLabels() {
+        jLabel_error_rediger.setText("");
+        jLabel_tlf.setForeground(Color.black);
+        jLabel_tlf.setToolTipText(null);
+        jLabel_fornavn.setForeground(Color.black);
+        jLabel_fornavn.setToolTipText(null);
+        jLabel_efternavn.setForeground(Color.black);
+        jLabel_efternavn.setToolTipText(null);
+        jLabel_adresse.setForeground(Color.black);
+        jLabel_adresse.setToolTipText(null);
+        jLabel_postnr.setForeground(Color.black);
+        jLabel_postnr.setToolTipText(null);
+        jLabel_by.setForeground(Color.black);
+        jLabel_by.setToolTipText(null);
+    }
+
+    public boolean isGravstenValid() {
+        resetGravstenLabels();
+        boolean result = true;
+        if (!validateTextField(jTextField_kirkegård_ordresalg, 1)) {
+            result = false;
+            jLabel_kirkegård.setForeground(Color.red);
+            jLabel_kirkegård.setToolTipText("Kirkegård skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!validateTextField(jTextField_afdeling_ordresalg, 3)) {
+            result = false;
+            jLabel_afdeling.setForeground(Color.red);
+            jLabel_afdeling.setToolTipText("Afdeling nummer må kun indeholde tal.");
+        }
+        if (!validateTextField(jTextField_række, 3)) {
+            result = false;
+            jLabel_række.setForeground(Color.red);
+            jLabel_række.setToolTipText("Række nummer må kun indeholde tal.");
+        }
+        if (!validateTextField(jTextField_nr, 3)) {
+            result = false;
+            jLabel_nr.setForeground(Color.red);
+            jLabel_nr.setToolTipText("Nummer må kun indeholde tal.");
+        }
+        if (!validateTextField(jTextField_afdødnavn, 1)) {
+            result = false;
+            jLabel_afdødnavn.setForeground(Color.red);
+            jLabel_afdødnavn.setToolTipText("Afdødnavn skal være udfyldt og må ikke indeholde \\");
+        }
+        if (!result) {
+            jLabel_error_rediger.setText("Gravsten info forkert.");
+        }
+        return result;
+    }
+
+    public void resetGravstenLabels() {
+        jLabel_error_rediger.setText("");
+        jLabel_kirkegård.setForeground(Color.black);
+        jLabel_kirkegård.setToolTipText(null);
+        jLabel_afdeling.setForeground(Color.black);
+        jLabel_afdeling.setToolTipText(null);
+        jLabel_række.setForeground(Color.black);
+        jLabel_række.setToolTipText(null);
+        jLabel_nr.setForeground(Color.black);
+        jLabel_nr.setToolTipText(null);
+        jLabel_afdødnavn.setForeground(Color.black);
+        jLabel_afdødnavn.setToolTipText(null);
+    }
+
+    public boolean isDouble(String input) {
+        boolean b = true;
+        try {
+            Double x = Double.parseDouble(input);
+        } catch (NumberFormatException nFE) {
+            b = false;
+        }
+        return b;
+    }
+
+    public boolean isLong(String input) {
+        boolean b = true;
+        try {
+            long x = Long.parseLong(input);
+        } catch (NumberFormatException nFE) {
+            b = false;
+        }
+        return b;
+    }
+
+    //Validerer om et textfield's tekst har den rigtige længde
+    public boolean validateTextFieldLength(JTextField textfield, int length) {
+        boolean valid = true;
+        if (textfield.getText().trim().length() != length) {
+            valid = false;
+        }
+        return valid;
+    }
+
+    //Validerer om et tekstfelt indeholder de rigtige data
+    //Type er hvilken form for validering der er tale om
+    //Type 1 - Tekst, 2 - Double, 3 - Long
+    private boolean validateTextField(JTextField textfield, int type) {
+        boolean valid = true;
+        if (!textfield.getText().isEmpty()) {
+            if (type == 1) {
+                String oldString = textfield.getText().trim();
+                String newString = validerString(textfield.getText().trim());
+                if (!newString.equals(oldString)) {
+                    valid = false;
+                }
+            } else if (type == 2) {
+                if (!isDouble(textfield.getText().trim())) {
+                    valid = false;
+                }
+            } else if (type == 3) {
+                if (!isLong(textfield.getText().trim())) {
+                    valid = false;
+                }
+            }
+        } else {
+            valid = false;
+        }
+
+        return valid;
     }
 }
