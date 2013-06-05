@@ -74,8 +74,8 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jLabel_VisLevDato.setText(Utility.formatTimestampToString(ordre.getLeveringsdato()));
 
         if (faktura == null) {
-            jButton_FakturaPdf.setEnabled(false);
-            jButton_FakturaPdf.setToolTipText("Ordren er ikke opgraderet til faktura endnu");
+            jButton_VisFaktura.setEnabled(false);
+            jButton_VisFaktura.setToolTipText("Ordren er ikke opgraderet til faktura endnu");
         }else{
             jButton_Opgrader.setEnabled(false);
             jButton_Opgrader.setToolTipText("Ordren er allerede opgraderet");
@@ -139,7 +139,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jPanel_Valgmuligheder = new javax.swing.JPanel();
         jButton_OrdrePDF = new javax.swing.JButton();
         jButton_Rediger = new javax.swing.JButton();
-        jButton_FakturaPdf = new javax.swing.JButton();
+        jButton_VisFaktura = new javax.swing.JButton();
         jButton_Opgrader = new javax.swing.JButton();
         jButton_Slet = new javax.swing.JButton();
         jPanel_Ekstrainfo = new javax.swing.JPanel();
@@ -408,10 +408,10 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
             }
         });
 
-        jButton_FakturaPdf.setText("Vis Faktura");
-        jButton_FakturaPdf.addActionListener(new java.awt.event.ActionListener() {
+        jButton_VisFaktura.setText("Vis Faktura");
+        jButton_VisFaktura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_FakturaPdfActionPerformed(evt);
+                jButton_VisFakturaActionPerformed(evt);
             }
         });
 
@@ -446,7 +446,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                         .addGap(111, 111, 111)
                         .addComponent(jButton_OrdrePDF, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_FakturaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton_VisFaktura, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel_ValgmulighederLayout.setVerticalGroup(
@@ -459,7 +459,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                     .addComponent(jButton_Opgrader))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_ValgmulighederLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_FakturaPdf)
+                    .addComponent(jButton_VisFaktura)
                     .addComponent(jButton_OrdrePDF))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
@@ -733,15 +733,15 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         }       // TODO add your handling code here:
     }//GEN-LAST:event_jButton_OrdrePDFActionPerformed
 
-    private void jButton_FakturaPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_FakturaPdfActionPerformed
+    private void jButton_VisFakturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VisFakturaActionPerformed
         JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(null, rootPaneCheckingEnabled, dbhandler, faktura, panel);
         visfaktura.setVisible(true);  
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_FakturaPdfActionPerformed
+    }//GEN-LAST:event_jButton_VisFakturaActionPerformed
 
     private void jButton_RedigerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RedigerActionPerformed
-        this.dispose();        // TODO add your handling code here:
+               // TODO add your handling code here:
     }//GEN-LAST:event_jButton_RedigerActionPerformed
 
     private void jButton_OpgraderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_OpgraderActionPerformed
@@ -816,11 +816,11 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     private javax.swing.JButton button_annuller;
     private javax.swing.JCheckBox checkBox_faktureringsAdresse;
     private javax.swing.JLabel errorLabel;
-    private javax.swing.JButton jButton_FakturaPdf;
     private javax.swing.JButton jButton_Opgrader;
     private javax.swing.JButton jButton_OrdrePDF;
     private javax.swing.JButton jButton_Rediger;
     private javax.swing.JButton jButton_Slet;
+    private javax.swing.JButton jButton_VisFaktura;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

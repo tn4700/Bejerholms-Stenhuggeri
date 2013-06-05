@@ -440,7 +440,7 @@
                                   <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                                   <Component id="jButton_OrdrePDF" min="-2" pref="97" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jButton_FakturaPdf" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <Component id="jButton_VisFaktura" min="-2" pref="97" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="59" max="32767" attributes="0"/>
@@ -458,7 +458,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton_FakturaPdf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton_VisFaktura" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton_OrdrePDF" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -483,12 +483,12 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_RedigerActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton_FakturaPdf">
+                <Component class="javax.swing.JButton" name="jButton_VisFaktura">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Vis Faktura"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_FakturaPdfActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_VisFakturaActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton_Opgrader">
