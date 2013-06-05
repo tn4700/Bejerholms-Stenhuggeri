@@ -22,8 +22,8 @@ private Panel_LynSalg panel_lynsalg;
         this.vare = vare;    
         this.panel_lynsalg = panel_lynsalg;
         initComponents();
-        jLabel2.setText(vare.getNavn());
-        jLabel3.setText("Pris: "+vare.getSalgspris());
+        jLabel_VareNavn.setText(vare.getNavn());
+        jLabel_Pris.setText("Pris: "+vare.getSalgspris());
     }
 
     public Vare getVare() {
@@ -41,8 +41,8 @@ private Panel_LynSalg panel_lynsalg;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel_VareNavn = new javax.swing.JLabel();
+        jLabel_Pris = new javax.swing.JLabel();
         jButton_Slet = new javax.swing.JButton();
         jButton_Op = new javax.swing.JButton();
         jButton_Ned = new javax.swing.JButton();
@@ -55,14 +55,14 @@ private Panel_LynSalg panel_lynsalg;
         setPreferredSize(new java.awt.Dimension(490, 38));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText("Vare navn");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 12, -1, -1));
+        jLabel_VareNavn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_VareNavn.setText("Vare navn");
+        jLabel_VareNavn.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        add(jLabel_VareNavn, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 12, -1, -1));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 130, 20));
+        jLabel_Pris.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_Pris.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        add(jLabel_Pris, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 130, 20));
 
         jButton_Slet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"))); // NOI18N
         jButton_Slet.setContentAreaFilled(false);
@@ -114,7 +114,7 @@ private Panel_LynSalg panel_lynsalg;
     private javax.swing.JButton jButton_Ned;
     private javax.swing.JButton jButton_Op;
     private javax.swing.JButton jButton_Slet;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel_Pris;
+    private javax.swing.JLabel jLabel_VareNavn;
     // End of variables declaration//GEN-END:variables
 }

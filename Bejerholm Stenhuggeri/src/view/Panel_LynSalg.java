@@ -51,10 +51,6 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         this.frame = frame;
         this.dbhandler = dbhandler;
         initComponents();
-        // ClassLoader cldr = this.getClass().getClassLoader();
-        //   tooltip = new ImageIcon(cldr.getResource("img/tooltip.png"));
-
-
         købssum = 0;
         vare_list = new ArrayList();
         valgteVare_lynsalg = new ArrayList();
@@ -68,14 +64,14 @@ public class Panel_LynSalg extends javax.swing.JPanel {
         // Hiv Kunden ud der bruges til Lynsalg - Hvilket er Firmaet i Korsør
         try {
             kunde = dbhandler.getKunde(50111211);
-            if(kunde == null){
-               jLabel_fejlbesked.setText("Der skete en fejl ved indlæsning af butik som kunde");
-            jLabel_fejlbesked.setToolTipText( jLabel_fejlbesked.getText() + " Undersøg om brugeren findes i databasen"); 
+            if (kunde == null) {
+                jLabel_fejlbesked.setText("Der skete en fejl ved indlæsning af butik som kunde");
+                jLabel_fejlbesked.setToolTipText(jLabel_fejlbesked.getText() + " Undersøg om brugeren findes i databasen");
             }
         } catch (SQLException ex) {
-           
+
             jLabel_fejlbesked.setText("Der skete en fejl ved indlæsning af butik som kunde");
-            jLabel_fejlbesked.setToolTipText( jLabel_fejlbesked+ " Fejl: " + ex);
+            jLabel_fejlbesked.setToolTipText(jLabel_fejlbesked + " Fejl: " + ex);
         }
 
 
@@ -736,9 +732,9 @@ public class Panel_LynSalg extends javax.swing.JPanel {
     }
 
 //Fjener en vare både fra array og panel
-    public void removepanel(Panel_LynSalgLinje i) {
-        panel.remove(i);
-        valgteVare_lynsalg.remove(i.getVare());
+    public void removepanel(Panel_LynSalgLinje linje_panel) {
+        panel.remove(linje_panel);
+        valgteVare_lynsalg.remove(linje_panel.getVare());
         // foretag en action til varegruppe combobox så den opdaterer varelisten i comboboxen med varer
         jComboBox_Lynsalgvaregruppe.setSelectedIndex(jComboBox_Lynsalgvaregruppe.getSelectedIndex());
         jLabel_købssum_lynsalg.setText("" + udregnpris());
