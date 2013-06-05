@@ -1403,11 +1403,12 @@ public class DatabaseObjectHandler {
         }
     }
 
-    public void editFaktura(Faktura faktura) throws SQLException, ControlException {
+    public Faktura editFaktura(Faktura faktura) throws SQLException, ControlException {
         Faktura newFaktura = faktura;
         Faktura oldFaktura = getFaktura(faktura.getFaktura_nr());
         deleteFaktura(oldFaktura);
         createFaktura(newFaktura);
+        return newFaktura;
     }
 
     public String getNextKontoudtogNr() throws SQLException {
