@@ -1355,14 +1355,8 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel_valgteVare_ordresalgComponentRemoved
 
     private void jTextField_tlf_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_tlf_ordresalgFocusLost
-        resetKundeErrorLabels();
-        jLabel_tlf.setForeground(Color.black);
         try {
-            if (!validateTextFieldLength(jTextField_tlf_ordresalg, 8) || !validateTextField(jTextField_tlf_ordresalg, 3)) {
-                jLabel_fejlbesked_kunde_ordresalg.setText("Fejl i input.");
-                jLabel_fejlbesked_kunde_ordresalg.setToolTipText("Tlf skal være 8 cifre og kun tal");
-                jLabel_tlf.setForeground(Color.red);
-            } else {
+            if (validateTextFieldLength(jTextField_tlf_ordresalg, 8) && validateTextField(jTextField_tlf_ordresalg, 3)) {
                 kunde = dbhandler.getKunde(Integer.parseInt(jTextField_tlf_ordresalg.getText()));
                 if (kunde != null) {
                     jTextField_fornavn_ordresalg.setText(kunde.getFornavn());
@@ -1481,14 +1475,9 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox_varegruppeListe_ordre_linjeItemStateChanged
 
     private void jTextField_postnr_ordresalgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_postnr_ordresalgFocusLost
-        resetKundeErrorLabels();
         jLabel_postnr.setForeground(Color.black);
         try {
-            if (!validateTextFieldLength(jTextField_postnr_ordresalg, 4) || !validateTextField(jTextField_postnr_ordresalg, 3)) {
-                jLabel_fejlbesked_kunde_ordresalg.setText("Fejl i input.");
-                jLabel_fejlbesked_kunde_ordresalg.setToolTipText("Post_nr skal være 4 cifre og kun tal");
-                jLabel_postnr.setForeground(Color.red);
-            } else {
+            if (validateTextFieldLength(jTextField_postnr_ordresalg, 4) && validateTextField(jTextField_postnr_ordresalg, 3)) {
                 Postnummer postnummer = dbhandler.getPostnummer(Integer.parseInt(jTextField_postnr_ordresalg.getText()));
                 if (postnummer != null) {
                     jTextField_postnr_ordresalg.setText(postnummer.getPost_nr() + "");
@@ -1972,7 +1961,7 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
         if (!validateTextField(jTextField_række, 3)) {
             result = false;
             jLabel_række.setForeground(Color.red);
-            jLabel_række.setToolTipText("Afdeling nummer må kun indeholde tal.");
+            jLabel_række.setToolTipText("Række nummer må kun indeholde tal.");
         }
         if (!validateTextField(jTextField_nr, 3)) {
             result = false;
@@ -2294,7 +2283,6 @@ public class Panel_OrdreSalg extends javax.swing.JPanel {
             } else if (type == 3) {
                 if (!isLong(textfield.getText().trim())) {
                     valid = false;
-                    System.out.println("lol");
                 }
             }
         } else {
