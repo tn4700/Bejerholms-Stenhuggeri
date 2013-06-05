@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -1421,9 +1422,11 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                     setOrdreInfo();
                     dbhandler.editOrdre(ordre);
                 } catch (SQLException ex) {
-                    ex.printStackTrace();
+                    jLabel_error_rediger.setText("Problem med databasen, hold over denne besked for info.");
+                    jLabel_error_rediger.setToolTipText(ex.getMessage());
                 } catch (ControlException ex) {
-                    ex.printStackTrace();
+                    jLabel_error_rediger.setText("Ugyldig objekt, hold over denne besked for info.");
+                    jLabel_error_rediger.setToolTipText(ex.getMessage());
                 }
                 ((CardLayout) panel_card.getLayout()).show(panel_card, "visOrdre");
             }
@@ -2134,8 +2137,9 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
             Timestamp afhentning = Utility.getNewTimestamp(jComboBox_afhentning_dag.getSelectedItem() + "/" + (jComboBox_afhentning_måned.getSelectedIndex() + 1) + "/" + jComboBox_year_afhentningsdato.getSelectedItem());
             ordre.setLeveringsdato(levering);
             ordre.setAfhentningsdato(afhentning);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (ParseException ex) {
+            jLabel_error_rediger.setText("Fejl i timestamp, hold over denne besked for info.");
+            jLabel_error_rediger.setToolTipText(ex.getMessage());
         }
     }
 

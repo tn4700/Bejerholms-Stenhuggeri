@@ -961,7 +961,7 @@ public class DatabaseObjectHandler {
 
     public ArrayList<Ordre> getKundeOrdre(int tlf) throws SQLException {
         ArrayList<Ordre> kundeordre = new ArrayList<>();
-        Ordre ordre = null;
+        Ordre ordre;
         Vare_linje vare_linje;
         int kirkegård_id = 0;
         String sql = "select * from ordre where tlf = '" + tlf + "'";
@@ -1008,7 +1008,7 @@ public class DatabaseObjectHandler {
 
     public ArrayList<Ordre> getIganværendeOrdre() throws SQLException, ControlException {
         ArrayList<Ordre> ordrelist = new ArrayList<>();
-        Ordre ordre = null;
+        Ordre ordre;
         Vare_linje vare_linje;
         String sql = "SELECT ordre.ordre_nr, ordre.ordredato, ordre.ordretype, ordre.leveringdato, ordre.afhentningsdato, ordre.bemærkning,"
                 + " ordre.bemærkning_ekstra, ordre.afdeling, ordre.afdødnavn, ordre.række, ordre.nummer, ordre.gravType,"
