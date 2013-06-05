@@ -1034,9 +1034,9 @@ public class DatabaseObjectHandler {
                     null,
                     null);
             Postnummer post = new Postnummer(rs.getInt("post_nr"), rs.getString("bynavn"));
-            if(rs.getInt("kirkegård_id")!=0){
-            Kirkegård kirkegård = new Kirkegård(rs.getInt("kirkegård_id"), rs.getString("kirkegård_navn"));
-            ordre.setKirkegård(kirkegård);
+            if (rs.getInt("kirkegård_id") != 0) {
+                Kirkegård kirkegård = new Kirkegård(rs.getInt("kirkegård_id"), rs.getString("kirkegård_navn"));
+                ordre.setKirkegård(kirkegård);
             }
             Kunde kunde = new Kunde(rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("adresse"), rs.getInt("tlf"), post);
             ordre.setKunde(kunde);
@@ -1046,7 +1046,7 @@ public class DatabaseObjectHandler {
         rs.close();
 
         for (int i = 0; i < ordrelist.size(); i++) {
-              Faktura faktura = getFaktura("00" + ordrelist.get(i).getKunde().getTlf() + "-" + ordrelist.get(i).getOrdre_nr());           
+            Faktura faktura = getFaktura("00" + ordrelist.get(i).getKunde().getTlf() + "-" + ordrelist.get(i).getOrdre_nr());
             if (faktura == null) {
                 int max = getMaxVareLinje(ordrelist.get(i).getOrdre_nr());
                 for (int j = 0; j <= max; j++) {
@@ -1133,7 +1133,7 @@ public class DatabaseObjectHandler {
 
     public void deleteOrdre(Ordre ordre) throws SQLException {
         for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
-            deleteVareLinje(ordre.getVare_linjeListe().get(i), ordre.getOrdre_nr());
+            deleteVareLinje(ordre.getVare_linjeListe().get(i));
         }
         String sql = "delete from ordre where ordre_nr = '" + ordre.getOrdre_nr() + "';";
         db.setData(sql);
@@ -1143,7 +1143,7 @@ public class DatabaseObjectHandler {
         //Henter den originale ordre ind og sletter alle vare_linjer fra den
         Ordre gammelOrdre = getOrdre(ordre.getOrdre_nr());
         for (int i = 0; i < gammelOrdre.getVare_linjeListe().size(); i++) {
-            deleteVareLinje(gammelOrdre.getVare_linjeListe().get(i), gammelOrdre.getOrdre_nr());
+            deleteVareLinje(gammelOrdre.getVare_linjeListe().get(i));
         }
         //Opretter vare_linjer fra det opdaterede ordre objekt
         for (int i = 0; i < ordre.getVare_linjeListe().size(); i++) {
@@ -1175,7 +1175,7 @@ public class DatabaseObjectHandler {
             String sql = "update ordre set tlf = '" + ordre.getKunde().getTlf() + "', ordretype = '" + boolToInt(ordre.getOrdretype())
                     + "', ordredato = '" + ordre.getOrdredato() + "', leveringdato = '" + ordre.getLeveringsdato()
                     + "', afhentningsdato = '" + ordre.getAfhentningsdato() + "', bemærkning = '" + ordre.getBemærkning()
-                    + "', bemærkning_ekstra = '" + ordre.getBemærkning_ekstra() + "', kirkegård_id = null, afdeling = '" + ordre.getAfdeling() 
+                    + "', bemærkning_ekstra = '" + ordre.getBemærkning_ekstra() + "', kirkegård_id = null, afdeling = '" + ordre.getAfdeling()
                     + "', afdødnavn = null, række = '" + ordre.getRække() + "', nummer = '"
                     + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
                     + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';";
@@ -1258,10 +1258,7 @@ public class DatabaseObjectHandler {
         }
     }
 
-    public void deleteVareLinje(Vare_linje vare_linje, String ordre_nr) throws SQLException {
-        String sql = "delete from vare_linje where linje_nr = '" + vare_linje.getLinje_nr()
-                + "' and ordre_nr = '" + ordre_nr + "';";
-        db.setData(sql);
+    public void deleteVareLinje(Vare_linje vare_linje) throws SQLException {
         if (vare_linje.getInskription() != null) {
             deleteInskription(vare_linje.getInskription());
         } else if (vare_linje.getTom_linje() != null) {
@@ -1270,6 +1267,9 @@ public class DatabaseObjectHandler {
             vare_linje.getVare().setVareStatus(0);
             updateVareStatus(vare_linje.getVare());
         }
+        String sql = "delete from vare_linje where linje_nr = '" + vare_linje.getLinje_nr()
+                + "' and ordre_nr = '" + vare_linje.getOrdre_nr() + "';";
+        db.setData(sql);
     }
 
     public void editVareLinje(Vare_linje vare_linje, String ordre_nr) throws ControlException {
