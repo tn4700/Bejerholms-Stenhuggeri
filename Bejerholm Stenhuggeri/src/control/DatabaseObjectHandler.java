@@ -1034,9 +1034,11 @@ public class DatabaseObjectHandler {
                     null,
                     null);
             Postnummer post = new Postnummer(rs.getInt("post_nr"), rs.getString("bynavn"));
+            if(rs.getInt("kirkegård_id")!=0){
             Kirkegård kirkegård = new Kirkegård(rs.getInt("kirkegård_id"), rs.getString("kirkegård_navn"));
-            Kunde kunde = new Kunde(rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("adresse"), rs.getInt("tlf"), post);
             ordre.setKirkegård(kirkegård);
+            }
+            Kunde kunde = new Kunde(rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("adresse"), rs.getInt("tlf"), post);
             ordre.setKunde(kunde);
             ordrelist.add(ordre);
 
@@ -1161,22 +1163,24 @@ public class DatabaseObjectHandler {
                 ordre.getKirkegård().setId(kirke_id);
             }
             String sql = "update ordre set tlf = '" + ordre.getKunde().getTlf() + "', ordretype = '" + boolToInt(ordre.getOrdretype())
-                    + "', ordredato = '" + ordre.getOrdredato() + "', leveringsdato = " + ordre.getLeveringsdato()
+                    + "', ordredato = '" + ordre.getOrdredato() + "', leveringdato = '" + ordre.getLeveringsdato()
                     + "', afhentningsdato = '" + ordre.getAfhentningsdato() + "', bemærkning = '" + ordre.getBemærkning()
-                    + "', bemærkning_ekstra = " + ordre.getBemærkning_ekstra() + "', kirke_id = "
+                    + "', bemærkning_ekstra = '" + ordre.getBemærkning_ekstra() + "', kirkegård_id = '"
                     + ordre.getKirkegård().getId() + "', afdeling = '" + ordre.getAfdeling() + "', afdødnavn = '" + ordre.getAfdødnavn()
-                    + "', række = " + ordre.getRække() + "', nummer = "
+                    + "', række = '" + ordre.getRække() + "', nummer = '"
                     + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
                     + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';";
+            System.out.println(sql);
             db.setData(sql);
         } else {
             String sql = "update ordre set tlf = '" + ordre.getKunde().getTlf() + "', ordretype = '" + boolToInt(ordre.getOrdretype())
-                    + "', ordredato = '" + ordre.getOrdredato() + "', leveringsdato = " + ordre.getLeveringsdato()
+                    + "', ordredato = '" + ordre.getOrdredato() + "', leveringdato = '" + ordre.getLeveringsdato()
                     + "', afhentningsdato = '" + ordre.getAfhentningsdato() + "', bemærkning = '" + ordre.getBemærkning()
-                    + "', bemærkning_ekstra = " + ordre.getBemærkning_ekstra() + "', kirke_id = null, afdeling = '" + ordre.getAfdeling() + "', afdødnavn = '" + ordre.getAfdødnavn()
-                    + "', række = " + ordre.getRække() + "', nummer = "
+                    + "', bemærkning_ekstra = '" + ordre.getBemærkning_ekstra() + "', kirkegård_id = null, afdeling = '" + ordre.getAfdeling() 
+                    + "', afdødnavn = null, række = '" + ordre.getRække() + "', nummer = '"
                     + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
                     + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';";
+            System.out.println(sql);
             db.setData(sql);
         }
     }
@@ -1257,6 +1261,9 @@ public class DatabaseObjectHandler {
     }
 
     public void deleteVareLinje(Vare_linje vare_linje, String ordre_nr) throws SQLException {
+        String sql = "delete from vare_linje where linje_nr = '" + vare_linje.getLinje_nr()
+                + "' and ordre_nr = '" + ordre_nr + "';";
+        db.setData(sql);
         if (vare_linje.getInskription() != null) {
             deleteInskription(vare_linje.getInskription());
         } else if (vare_linje.getTom_linje() != null) {
@@ -1265,9 +1272,6 @@ public class DatabaseObjectHandler {
             vare_linje.getVare().setVareStatus(0);
             updateVareStatus(vare_linje.getVare());
         }
-        String sql = "delete from vare_linje where linje_nr = '" + vare_linje.getLinje_nr()
-                + "' and ordre_nr = '" + ordre_nr + "';";
-        db.setData(sql);
     }
 
     public void editVareLinje(Vare_linje vare_linje, String ordre_nr) throws ControlException {
@@ -1332,7 +1336,7 @@ public class DatabaseObjectHandler {
         if (faktura != null) {
             faktura.setOrdre(getOrdre(ordre_nr));
             if (faktura.getFakturatype()) {
-                if (tlf != 0 || provisions_nr != null) {
+                if (tlf != 0 && provisions_nr != null) {
                     faktura.setBedemand(getSamarbejdspartner(tlf));
                     faktura.setProvisionsseddel(getProvisionsseddel(provisions_nr));
                 } else {
