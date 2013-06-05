@@ -1310,7 +1310,6 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         int status = JOptionPane.showConfirmDialog(this, "Orden slettes fra systemet, er du sikker?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (status == 0) {
             try {
-                ordre = dbhandler.getOrdre(ordre.getOrdre_nr());
                 dbhandler.deleteOrdre(ordre);
             } catch (SQLException ex) {
                 jLabel_fejl.setText("Der skete en fejl ved sletning af orden");
