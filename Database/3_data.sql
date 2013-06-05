@@ -17,7 +17,9 @@ values
 insert into faktureringsadresse (adresse, post_nr)
 values
 ('Gottliebsvej 7', '4700'),
-('Hejvej 14', '4700');
+('Hejvej 14', '4700'),
+('Farligvej 13', '4700')
+;
 
 insert into varegruppe (navn)
 values
