@@ -1170,7 +1170,6 @@ public class DatabaseObjectHandler {
                     + "', række = '" + ordre.getRække() + "', nummer = '"
                     + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
                     + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';";
-            System.out.println(sql);
             db.setData(sql);
         } else {
             String sql = "update ordre set tlf = '" + ordre.getKunde().getTlf() + "', ordretype = '" + boolToInt(ordre.getOrdretype())
@@ -1180,7 +1179,6 @@ public class DatabaseObjectHandler {
                     + "', afdødnavn = null, række = '" + ordre.getRække() + "', nummer = '"
                     + ordre.getNummer() + "', gravType = '" + boolToInt(ordre.getGravType())
                     + "' where ordre_nr = '" + ordre.getOrdre_nr() + "';";
-            System.out.println(sql);
             db.setData(sql);
         }
     }
