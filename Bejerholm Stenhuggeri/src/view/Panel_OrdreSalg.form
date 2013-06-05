@@ -554,7 +554,7 @@
                 <Component class="javax.swing.JComboBox" name="jComboBox_afhentning_m&#xe5;ned">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="13">
+                      <StringArray count="12">
                         <StringItem index="0" value="Januar"/>
                         <StringItem index="1" value="Februar"/>
                         <StringItem index="2" value="Marts"/>
@@ -567,7 +567,6 @@
                         <StringItem index="9" value="Oktober"/>
                         <StringItem index="10" value="November"/>
                         <StringItem index="11" value="December"/>
-                        <StringItem index="12" value=" "/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -580,7 +579,7 @@
                 <Component class="javax.swing.JComboBox" name="jComboBox_afhentning_dag">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="32">
+                      <StringArray count="31">
                         <StringItem index="0" value="01"/>
                         <StringItem index="1" value="02"/>
                         <StringItem index="2" value="03"/>
@@ -612,7 +611,6 @@
                         <StringItem index="28" value="29"/>
                         <StringItem index="29" value="30"/>
                         <StringItem index="30" value="31"/>
-                        <StringItem index="31" value=" "/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -766,7 +764,7 @@
                 <Component class="javax.swing.JComboBox" name="jComboBox_levering_dag">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="32">
+                      <StringArray count="31">
                         <StringItem index="0" value="01"/>
                         <StringItem index="1" value="02"/>
                         <StringItem index="2" value="03"/>
@@ -798,7 +796,6 @@
                         <StringItem index="28" value="29"/>
                         <StringItem index="29" value="30"/>
                         <StringItem index="30" value="31"/>
-                        <StringItem index="31" value=" "/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -811,7 +808,7 @@
                 <Component class="javax.swing.JComboBox" name="jComboBox_levering_m&#xe5;ned">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="13">
+                      <StringArray count="12">
                         <StringItem index="0" value="Januar"/>
                         <StringItem index="1" value="Februar"/>
                         <StringItem index="2" value="Marts"/>
@@ -824,7 +821,6 @@
                         <StringItem index="9" value="Oktober"/>
                         <StringItem index="10" value="November"/>
                         <StringItem index="11" value="December"/>
-                        <StringItem index="12" value=" "/>
                       </StringArray>
                     </Property>
                   </Properties>
