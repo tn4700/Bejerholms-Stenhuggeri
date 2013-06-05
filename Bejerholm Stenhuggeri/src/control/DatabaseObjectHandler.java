@@ -47,7 +47,7 @@ public class DatabaseObjectHandler {
     }
 
     public void editPostnummer(Postnummer postnummer) throws SQLException {
-        String sql = "update postnummer set byNavn = '" + "' where post_nr = '" + postnummer.getPost_nr() + "';";
+        String sql = "update postnummer set byNavn = '" + postnummer.getByNavn() + "' where post_nr = '" + postnummer.getPost_nr() + "';";
         db.setData(sql);
     }
 
