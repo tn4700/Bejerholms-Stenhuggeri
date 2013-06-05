@@ -42,17 +42,16 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
 
     private Ordre ordre;
     private DatabaseObjectHandler dbhandler;
-    private Panel_Søg panel;
-    private Kunde kunde;
+       private Kunde kunde;
     private Faktura faktura;
-    private Frame frame;
+    private Panel_Søg panel;
 
     /**
      * Creates new form JDialog_SøgFaktura
      */
-    public JDialog_SøgOrdre(java.awt.Frame parent, boolean modal, DatabaseObjectHandler dbhandler, Ordre ordre) {
+    public JDialog_SøgOrdre(java.awt.Frame parent, boolean modal, DatabaseObjectHandler dbhandler, Ordre ordre, Panel_Søg panel) {
         super(parent, modal);
-        this.frame = frame;
+        this.panel = panel;
         this.dbhandler = dbhandler;
         this.ordre = ordre;
         kunde = ordre.getKunde();
@@ -735,11 +734,9 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_OrdrePDFActionPerformed
 
     private void jButton_FakturaPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_FakturaPdfActionPerformed
-        JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(frame, rootPaneCheckingEnabled, dbhandler, faktura);
-        visfaktura.setVisible(true);
-        
-        
-        
+        JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(null, rootPaneCheckingEnabled, dbhandler, faktura, panel);
+        visfaktura.setVisible(true);  
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_FakturaPdfActionPerformed
 

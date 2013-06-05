@@ -18,17 +18,19 @@ public class Panel_Søg_Resultat extends javax.swing.JPanel {
     private Ordre ordre;
     private Faktura faktura;
     private DatabaseObjectHandler dbhandler;
+    private Panel_Søg panel;
     int type; // 0 = ordre
     // 1 = faktura
 
     /**
      * Creates new form Panel_Søg_Resultat
      */
-    public Panel_Søg_Resultat(DatabaseObjectHandler dbhandler, Ordre ordre) {
+    public Panel_Søg_Resultat(DatabaseObjectHandler dbhandler, Ordre ordre, Panel_Søg panel) {
         initComponents();
         type = 0;
         this.ordre = ordre;
         this.dbhandler = dbhandler;
+        this.panel = panel;
         jLabel_Navn.setText(ordre.getKunde().getFornavn() + " " + ordre.getKunde().getEfternavn());
         jLabel_Navn.setToolTipText("Telefon nr: " + ordre.getKunde().getTlf());
         jLabel_OrdreNr.setText("" + ordre.getOrdre_nr());
@@ -38,8 +40,9 @@ public class Panel_Søg_Resultat extends javax.swing.JPanel {
 
     }
 
-    public Panel_Søg_Resultat(DatabaseObjectHandler dbhandler, Faktura faktura) {
+    public Panel_Søg_Resultat(DatabaseObjectHandler dbhandler, Faktura faktura, Panel_Søg panel) {
         initComponents();
+        this.panel = panel;
         type = 1;
         this.faktura = faktura;
         this.dbhandler = dbhandler;
@@ -124,17 +127,17 @@ public class Panel_Søg_Resultat extends javax.swing.JPanel {
         jLabel_OrdreNr.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_OrdreNr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_OrdreNr.setText("Nr");
-        jPanel_OrdreInfo.add(jLabel_OrdreNr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 82, 22));
+        jPanel_OrdreInfo.add(jLabel_OrdreNr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 120, 22));
 
         add(jPanel_OrdreInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 140, 64));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_VisOrdreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VisOrdreActionPerformed
         if (type == 0) {
-            JDialog_SøgOrdre visordre = new JDialog_SøgOrdre(null, true, dbhandler, ordre);
+            JDialog_SøgOrdre visordre = new JDialog_SøgOrdre(null, true, dbhandler, ordre, panel);
             visordre.setVisible(true);
         } else if (type == 1) {
-            JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(null, true, dbhandler, faktura);
+            JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(null, true, dbhandler, faktura, panel);
             visfaktura.setVisible(true);
         }
 

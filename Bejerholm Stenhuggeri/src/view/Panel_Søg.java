@@ -34,9 +34,7 @@ public class Panel_Søg extends javax.swing.JPanel {
     public Panel_Søg(DatabaseObjectHandler dbhandler, MainFrame frame) {
         this.dbhandler = dbhandler;
         this.frame = frame;
-
         initComponents();
-
         // sæt Søge knappen til at væred en knap der trykker på når der trykker ENTER på keyboardet
         JRootPane rootPane = frame.getRootPane();
         rootPane.setDefaultButton(jButton_Søg);
@@ -185,7 +183,7 @@ public class Panel_Søg extends javax.swing.JPanel {
 
                         try {
                             Ordre ordre = dbhandler.getOrdre(ordrenr);
-                            Panel_Søg_Resultat panel = new Panel_Søg_Resultat(dbhandler, ordre);
+                            Panel_Søg_Resultat panel = new Panel_Søg_Resultat(dbhandler, ordre,this);
                             jPanel_SøgeResultat.add(panel);
                             jPanel_SøgeResultat.revalidate();
 
@@ -208,7 +206,7 @@ public class Panel_Søg extends javax.swing.JPanel {
                         try {
                             Faktura faktura = dbhandler.getFaktura(fakturanr);
                             System.out.println(faktura.getFaktura_nr());
-                            Panel_Søg_Resultat panel = new Panel_Søg_Resultat(dbhandler, faktura);
+                            Panel_Søg_Resultat panel = new Panel_Søg_Resultat(dbhandler, faktura,this);
                             jPanel_SøgeResultat.add(panel);
                             jPanel_SøgeResultat.revalidate();
 
@@ -233,7 +231,7 @@ public class Panel_Søg extends javax.swing.JPanel {
 
                                 if (ordre.size() != 0) {
                                     for (int i = 0; i < ordre.size(); i++) {
-                                        Panel_Søg_Resultat panel = new Panel_Søg_Resultat(dbhandler, ordre.get(i));
+                                        Panel_Søg_Resultat panel = new Panel_Søg_Resultat(dbhandler, ordre.get(i),this);
                                         jPanel_SøgeResultat.add(panel);
                                         jPanel_SøgeResultat.revalidate();
 
@@ -311,8 +309,6 @@ public class Panel_Søg extends javax.swing.JPanel {
     public void hentfakturaer() {
         jPanel_Visfaktura.removeAll();
         try {
-
-
             fakturaliste = dbhandler.getFakturaListe();
         } catch (SQLException ex) {
             Logger.getLogger(Panel_Søg.class.getName()).log(Level.SEVERE, null, ex);
@@ -324,6 +320,7 @@ public class Panel_Søg extends javax.swing.JPanel {
             if (!fakturaliste.get(i).getBetalingsstatus()) {
                 Panel_Søg_Ingangværende panel = new Panel_Søg_Ingangværende(fakturaliste.get(i), dbhandler, this);
                 jPanel_Visfaktura.add(panel);
+                jPanel_Visfaktura.revalidate();
             }
         }
 
@@ -336,7 +333,7 @@ public class Panel_Søg extends javax.swing.JPanel {
         try {
             ordrelist = dbhandler.getIganværendeOrdre();
             for (int i = 0; i < ordrelist.size(); i++) {
-                Panel_Søg_Ingangværende panel = new Panel_Søg_Ingangværende(ordrelist.get(i), dbhandler, this);
+                Panel_Søg_Ingangværende panel = new Panel_Søg_Ingangværende(ordrelist.get(i), dbhandler);
                 jPanel_Visfaktura.add(panel);
 
             }
@@ -344,14 +341,10 @@ public class Panel_Søg extends javax.swing.JPanel {
         } catch (SQLException ex) {
             jLabel_Fejlbesked.setText("Der skete en fejl ved hentning af igangværende faktura");
             jLabel_Fejlbesked.setToolTipText("fejl: " + ex);
-        } catch (ControlException ex){
-            
+        } catch (ControlException ex) {
         }
 
 
     }
-    
-     public void lukvindue(){
-        
-    }
+
 }

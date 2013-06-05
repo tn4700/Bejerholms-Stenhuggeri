@@ -19,7 +19,7 @@ public class Panel_Søg_Ingangværende extends javax.swing.JPanel {
     private DatabaseObjectHandler dbhandler;
     private Panel_Søg panel;
     private Ordre ordre;
-    boolean valgttype; 
+    boolean valgttype;
     // true = faktura
     //  false = ordre
 
@@ -28,9 +28,9 @@ public class Panel_Søg_Ingangværende extends javax.swing.JPanel {
      */
     public Panel_Søg_Ingangværende(Faktura faktura, DatabaseObjectHandler dbhandler, Panel_Søg panel) {
         valgttype = true;
+        this.panel = panel;
         this.dbhandler = dbhandler;
         this.faktura = faktura;
-        this.panel = panel;
         initComponents();
         jLabel_tekst1.setText("Faktureringsdato:");
         jLabel_tekst2.setText("Sendt dato:");
@@ -40,15 +40,13 @@ public class Panel_Søg_Ingangværende extends javax.swing.JPanel {
 
     }
 
-    public Panel_Søg_Ingangværende(Ordre ordre, DatabaseObjectHandler dbhandler, Panel_Søg panel) {
+    public Panel_Søg_Ingangværende(Ordre ordre, DatabaseObjectHandler dbhandler) {
         valgttype = false;
         this.dbhandler = dbhandler;
         this.ordre = ordre;
-        this.panel = panel;
         initComponents();
         setBackground(new java.awt.Color(211, 255, 216));
         jButton3.setText("Se Ordre");
-
         jLabel_fakturanr.setText("Ordre nr: " + ordre.getOrdre_nr());
         jLabel_tekst2.setText("");
         jLabel_Vistekst2.setText("");
@@ -109,13 +107,13 @@ public class Panel_Søg_Ingangværende extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (valgttype) {
-             JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(null, true, dbhandler, faktura);
-             visfaktura.setVisible(true);
+            JDialog_SøgFaktura visfaktura = new JDialog_SøgFaktura(null, valgttype, dbhandler, faktura, panel);
+            visfaktura.setVisible(true);
         } else {
-            JDialog_SøgOrdre visordre = new JDialog_SøgOrdre(null, true, dbhandler, ordre);
+            JDialog_SøgOrdre visordre = new JDialog_SøgOrdre(null, true, dbhandler, ordre, panel);
             visordre.setVisible(true);
         }
-       
+
     }//GEN-LAST:event_jButton3ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;

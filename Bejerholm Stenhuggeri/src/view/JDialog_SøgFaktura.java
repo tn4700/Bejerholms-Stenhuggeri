@@ -9,7 +9,6 @@ import control.DatabaseObjectHandler;
 import control.OpretFaktura;
 import control.OpretKontoudtog;
 import control.OpretProvisionsseddel;
-import control.OpretRevisorSeddel;
 import javax.swing.JOptionPane;
 import model.Faktura;
 import util.Utility;
@@ -35,10 +34,11 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
     /**
      * Creates new form JDialog_SøgFaktura
      */
-    public JDialog_SøgFaktura(java.awt.Frame parent, boolean modal, DatabaseObjectHandler dbhandler, Faktura faktura) {
+    public JDialog_SøgFaktura(java.awt.Frame parent, boolean modal, DatabaseObjectHandler dbhandler, Faktura faktura, Panel_Søg panel) {
         super(parent, modal);
         this.dbhandler = dbhandler;
         this.faktura = faktura;
+        this.panel = panel;
         kunde = faktura.getOrdre().getKunde();
         initComponents();
         jLabel_VisOprettet.setText(Utility.formatTimestampToString(faktura.getFaktureringsdato()));
@@ -60,6 +60,11 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
             jButton_ProvisionPDF.setToolTipText("Ingen Provisionsseddel tilknyttet denne faktura");
             jLabel_VisProvision.setText("Ingen tilknyttet");
             jLabel_VisKontoUdtog.setText("Ingen tilknyttet");
+        }
+
+        if (faktura.getBetalingsstatus() == true) {
+            jButton_Betalt.setText("Ikke betalt");
+            jButton_Betalt.setToolTipText("Ændrer Betalingsstatus til ikke betalt");
         }
 
 
@@ -107,7 +112,6 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Faktura");
         setMinimumSize(new java.awt.Dimension(500, 400));
-        setPreferredSize(new java.awt.Dimension(500, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel_PanelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Faktura info"));
@@ -407,23 +411,47 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_ProvisionPDFActionPerformed
 
     private void jButton_RykkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RykkerActionPerformed
-        this.dispose();        // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton_RykkerActionPerformed
 
     private void jButton_BetaltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BetaltActionPerformed
-        int status = JOptionPane.showConfirmDialog(this, "Ændre betalingsstatus til betalt?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (status == 0) {
-            try {
-                faktura.setBetalingsstatus(true);
-                dbhandler.editFaktura(faktura);
-                panel.hentfakturaer();
-            } catch (Exception e) {
-                jLabel_brugerbesked.setText("Der opstod en fejl ved ændring af betalingsstatus");
-                jLabel_brugerbesked.setToolTipText("fejl " + e);
+        if (faktura.getBetalingsstatus() == false) {
+            int status = JOptionPane.showConfirmDialog(this, "Ændre betalingsstatus til betalt?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (status == 0) {
+                try {
+                    faktura.setBetalingsstatus(true);
+                    faktura = dbhandler.editFaktura(faktura);
+                    panel.hentfakturaer();
+                    jButton_Betalt.setText("Ikke betalt");
+                    jButton_Betalt.setToolTipText("Ændre betalingsstatus til ikke betalt");
+
+
+                } catch (Exception e) {
+                    jLabel_brugerbesked.setText("Der opstod en fejl ved ændring af betalingsstatus");
+                    jLabel_brugerbesked.setToolTipText("fejl " + e);
+                }
             }
-            // TODO add your handling code here:
+        } else {
+            int status = JOptionPane.showConfirmDialog(this, "Ændre betalingsstatus til ikke betalt?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (status == 0) {
+                try {
+                    faktura.setBetalingsstatus(false);
+                    faktura = dbhandler.editFaktura(faktura);
+                    panel.hentfakturaer();
+                    jButton_Betalt.setText("betalt");
+                    jButton_Betalt.setToolTipText("Ændre betalingsstatus til betalt");
+
+
+                } catch (Exception e) {
+                    jLabel_brugerbesked.setText("Der opstod en fejl ved ændring af betalingsstatus");
+                    jLabel_brugerbesked.setToolTipText("fejl " + e);
+                }
+            }
+
+        }
+
     }//GEN-LAST:event_jButton_BetaltActionPerformed
-    }
+
     private void jButton_KontoPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_KontoPDFActionPerformed
 
         try {
@@ -453,6 +481,7 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
                 jLabel_brugerbesked.setToolTipText("Fejl " + ex);
 
             }
+            panel.hentfakturaer();
             dispose();
         }
         // TODO add your handling code here:
