@@ -236,7 +236,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         jLabel66 = new javax.swing.JLabel();
         jTextField_afdødnavn = new javax.swing.JTextField();
         jLabel_afdødnavn = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jButton_rediger_accept = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -913,13 +913,13 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
 
         jPanel1.add(jPanel_gravsten, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 13, 204, 171));
 
-        jButton2.setText("Accepter");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton_rediger_accept.setText("Accepter");
+        jButton_rediger_accept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton_rediger_acceptActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 353, 87, -1));
+        jPanel1.add(jButton_rediger_accept, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 353, 87, -1));
 
         jButton3.setText("Annuller");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -1310,11 +1310,11 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         int status = JOptionPane.showConfirmDialog(this, "Orden slettes fra systemet, er du sikker?", "Advarsel!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (status == 0) {
             try {
+                ordre = dbhandler.getOrdre(ordre.getOrdre_nr());
                 dbhandler.deleteOrdre(ordre);
             } catch (SQLException ex) {
                 jLabel_fejl.setText("Der skete en fejl ved sletning af orden");
                 jLabel_fejl.setToolTipText("Fejl: " + ex);
-                ex.printStackTrace();
             }
         }
 
@@ -1415,7 +1415,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jCheckBox_gravstenActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton_rediger_acceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_rediger_acceptActionPerformed
         if (isKundeValid() && isGravstenValid()) {
             boolean accept = visAcceptDialog("Er du sikker på du vil gemme ændringerne?", "Gem ændringer");
             if (accept) {
@@ -1432,7 +1432,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
                 ((CardLayout) panel_card.getLayout()).show(panel_card, "visOrdre");
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton_rediger_acceptActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         ((CardLayout) panel_card.getLayout()).show(panel_card, "Tilføjelse");
@@ -1474,7 +1474,6 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1487,6 +1486,7 @@ public class JDialog_SøgOrdre extends javax.swing.JDialog {
     private javax.swing.JButton jButton_Rediger;
     private javax.swing.JButton jButton_Slet;
     private javax.swing.JButton jButton_VisFaktura;
+    private javax.swing.JButton jButton_rediger_accept;
     private javax.swing.JCheckBox jCheckBox_gravsten;
     private javax.swing.JCheckBox jCheckBox_kiste;
     private javax.swing.JCheckBox jCheckBox_urne;
