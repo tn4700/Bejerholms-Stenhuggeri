@@ -4,8 +4,10 @@
  */
 package control;
 
+import control.exceptions.ControlException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import model.Faktura;
 import model.Faktureringsadresse;
 import model.Kunde;
 import model.Ordre;
@@ -56,33 +58,7 @@ public class DatabaseObjectHandlerTest {
     public void tearDown() {
     }
 
-    @Test
-    public void hentkunde() throws SQLException {
-        //whitebox test
-        System.out.println("Hent kunde");
-        int tlf = 50111211;
-
-        Kunde kunde = dbhandler.getKunde(tlf);
-
-        String expResult = "Thomas";
-        String result = kunde.getFornavn();
-        assertEquals("Test af fornavn", expResult, result);
-
-        expResult = "Nielsen";
-        result = kunde.getEfternavn();
-        assertEquals("Test af efternavn", expResult, result);
-
-        expResult = "Østre Ringvej 49 2. TV";
-        result = kunde.getAdresse();
-        assertEquals("Test af adresse", expResult, result);
-
-
-
-
-
-
-    }
-
+   
     @Test
     public void getPostnummer() throws SQLException {
         System.out.println("Hent Postnummer");
@@ -526,6 +502,40 @@ public class DatabaseObjectHandlerTest {
 
 
 
+    }
+    
+    public void getFaktura() throws SQLException, ControlException{
+        System.out.println("Hent faktura");
+        Faktura faktura = dbhandler.getFaktura("0050111211-00002");
+
+        Timestamp expResultTimestamp = new Timestamp(113,03,30,14,50,32,00);
+        Timestamp resultTimestamp = faktura.getFaktureringsdato();
+        assertEquals("Hent Faktureringsdato", expResultTimestamp, resultTimestamp);
+        
+        expResultTimestamp = new Timestamp(113,03,01,14,50,32,00);
+        resultTimestamp = faktura.getSendt_dato();
+        assertEquals("Hent Sendtdato", expResultTimestamp, resultTimestamp);
+        
+        boolean expResultBool = true;
+        boolean resultBool = faktura.getFakturatype();
+        assertEquals("Hent Fakturatype",expResultBool, resultBool);
+        
+        expResultBool = false;
+        resultBool = faktura.getBetalingsstatus();
+        assertEquals("Hent Betalingsstatus",expResultBool, resultBool);
+
+        int expectedResultInt = 58350001;
+        int resultInt = faktura.getBedemand().getTlf();
+        assertEquals("Samarbejdspartner",expectedResultInt, resultInt);
+        
+        String expectedResult = "00004";
+        String result = faktura.getOrdre().getOrdre_nr();
+        assertEquals("Hent Ordrenr",expectedResult, result);
+        
+        expectedResult = "00004";
+        result = faktura.getProvisionsseddel().getProvisions_nr();
+        assertEquals("Hent Provisionsnr",expectedResult, result);
+        
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
