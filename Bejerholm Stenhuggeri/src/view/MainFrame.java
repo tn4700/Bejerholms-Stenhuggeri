@@ -336,11 +336,11 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             int year = Calendar.getInstance().get(Calendar.YEAR);
             String dato = Utility.getCurrentTimeToString();
-            OpretRevisorSeddel revisorseddel = new OpretRevisorSeddel(dato, year, db);
-            revisorseddel.genererRevisorseddel("test2.pdf");
+            OpretRevisorSeddel revisorseddel = new OpretRevisorSeddel(dato, year, dbhandler);
+            revisorseddel.genererRevisorseddel("Lageropgørelse - " + dato + ".pdf");
 
             Desktop desktop = Desktop.getDesktop();
-            File file = new File("docs/test2.pdf");
+            File file = new File("docs/Lageropgørelse - " + dato + ".pdf");
             desktop.open(file);
         } catch (FileNotFoundException ex) {
             System.out.println("Luk andre pdf'er før du prøver at se en ny!");

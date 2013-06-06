@@ -24,7 +24,7 @@ import model.Varegruppe;
  */
 public class OpretRevisorSeddel {
 
-    DBConnection db;
+ 
     DatabaseObjectHandler dbhandler;
     private BaseFont tFont;
     //Skrift til fed alm. tekst
@@ -36,11 +36,10 @@ public class OpretRevisorSeddel {
     private int år;
     private String dato;
 
-    public OpretRevisorSeddel(String dato,int år, DBConnection db) {
+    public OpretRevisorSeddel(String dato,int år, DatabaseObjectHandler dbhandler) {
         this.år = år;
         this.dato = dato;
-        this.db = db;
-        dbhandler = new DatabaseObjectHandler(db);
+        this.dbhandler = dbhandler;
     }
 
     public void genererRevisorseddel(String filNavn) throws IOException, DocumentException {
