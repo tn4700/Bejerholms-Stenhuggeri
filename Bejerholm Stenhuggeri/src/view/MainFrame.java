@@ -42,32 +42,9 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
-        user = null;
-        try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        initComponents();
-        this.setLocationRelativeTo(null);
-        try {
-            db = new DBConnection("localhost", "3306", "bejerholmstenhuggeri", "root", "root");
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        if (db.isConnected()) {
-
-            dbhandler = new DatabaseObjectHandler(db);
-            //Opret det panel som skal vises i framen
-            opretPaneler();
-
-            //   Man kan så bruge den her kode til at skifte panel når det er lavet til card. 
-            ((CardLayout) jPanel_Frame.getLayout()).show(jPanel_Frame, "Hovedmenu");
-
-        } else {
-            // skift til vindue
-        }
+         Login login = new Login();
+            login.setVisible(true);
+            this.dispose();
     }
 
     public MainFrame(DBConnection db, User user) {

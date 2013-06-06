@@ -240,7 +240,7 @@ public class DatabaseObjectHandlerTest {
 // Redigere en kunde hvor telefon nr også ændres
 
     @Test
-    public void editKundeUndenTelefon() throws SQLException {
+    public void editKundeMedTelefon() throws SQLException {
         System.out.println("Rediger Kunde og telefon nr");
 
         Kunde kunde = dbhandler.getKunde(12345678);

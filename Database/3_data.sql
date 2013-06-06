@@ -202,4 +202,5 @@ values
 insert into user (brugernavn,pw)
 values
 ('martinhana','martin10'),
-('Mahias BejerHolm','Mathias20');
+('Mathias Bejerholm','Mathias20'),
+('test','123');
