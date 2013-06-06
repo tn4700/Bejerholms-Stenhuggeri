@@ -1,0 +1,4 @@
+faktura_nr, faktureringsdato, sendt_dato, fakturatype, betalingsstatus, ordre_nr, provisions_nr, adresse_id, bedemand_tlf, 
+0028931093-00004, 2013-04-30 14:50:32.0, 2013-05-01 14:50:32.0, true, false, 00004, 00004, null, 58350001, 
+0031255685-00003, 2013-04-30 13:50:32.0, 2013-05-01 13:50:32.0, false, true, 00003, null, null, null, 
+0050111211-00002, 2013-04-30 12:50:32.0, 2013-05-01 12:50:32.0, false, false, 00002, null, null, null, 
