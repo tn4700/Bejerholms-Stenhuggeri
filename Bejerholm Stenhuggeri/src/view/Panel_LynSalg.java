@@ -6,7 +6,7 @@ package view;
 
 import com.itextpdf.text.DocumentException;
 import control.DatabaseObjectHandler;
-import control.OpretFaktura;
+import control.Faktura_PDF;
 import util.Utility;
 import java.awt.CardLayout;
 import java.awt.Desktop;
@@ -626,7 +626,7 @@ public class Panel_LynSalg extends javax.swing.JPanel {
                     }
 
                     try {
-                        OpretFaktura opretFaktura = new OpretFaktura(nyfaktura);
+                        Faktura_PDF opretFaktura = new Faktura_PDF(nyfaktura);
                         opretFaktura.genererFaktura("Faktura-" + nyfaktura.getFaktura_nr() + ".pdf");
 
                         Desktop desktop = Desktop.getDesktop();

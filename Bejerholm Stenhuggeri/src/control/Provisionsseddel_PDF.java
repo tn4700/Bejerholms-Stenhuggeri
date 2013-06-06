@@ -25,7 +25,7 @@ import model.Provisionsseddel;
  *
  * @author Anette Stidsing
  */
-public class OpretProvisionsseddel {
+public class Provisionsseddel_PDF {
      //Faktura objekt m.m. som bruges til indholdet i fakturaen
     private Faktura faktura;
     
@@ -39,7 +39,7 @@ public class OpretProvisionsseddel {
     //Skrift til fed into om virksomheden
     private BaseFont binfoFont;
 
-    public OpretProvisionsseddel(Faktura faktura) {
+    public Provisionsseddel_PDF(Faktura faktura) {
          this.faktura = faktura;
          provisionsseddel = faktura.getProvisionsseddel(); 
     }
