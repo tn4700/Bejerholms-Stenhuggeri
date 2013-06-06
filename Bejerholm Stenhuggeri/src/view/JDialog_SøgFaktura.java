@@ -6,9 +6,9 @@ package view;
 
 import com.itextpdf.text.DocumentException;
 import control.DatabaseObjectHandler;
-import control.OpretFaktura;
-import control.OpretKontoudtog;
-import control.OpretProvisionsseddel;
+import control.Faktura_PDF;
+import control.Kontoudtog_PDF;
+import control.Provisionsseddel_PDF;
 import javax.swing.JOptionPane;
 import model.Faktura;
 import util.Utility;
@@ -379,7 +379,7 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
 
     private void jButton_FakturaPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_FakturaPDFActionPerformed
         try {
-            OpretFaktura fakturapdf = new OpretFaktura(faktura);
+            Faktura_PDF fakturapdf = new Faktura_PDF(faktura);
             fakturapdf.genererFaktura("Faktura-" + faktura.getFaktura_nr() + ".pdf");
             Desktop desktop = Desktop.getDesktop();
             File file = new File("docs/Faktura-" + faktura.getFaktura_nr() + ".pdf");
@@ -395,7 +395,7 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
 
     private void jButton_ProvisionPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ProvisionPDFActionPerformed
         try {
-            OpretProvisionsseddel provisionpdf = new OpretProvisionsseddel(faktura);
+            Provisionsseddel_PDF provisionpdf = new Provisionsseddel_PDF(faktura);
             provisionpdf.genererProvisionsseddel("Provision-" + faktura.getProvisionsseddel().getProvisions_nr() + ".pdf");
             Desktop desktop = Desktop.getDesktop();
             File file = new File("docs/Provision-" + faktura.getProvisionsseddel().getProvisions_nr() + ".pdf");
@@ -455,7 +455,7 @@ public class JDialog_SøgFaktura extends javax.swing.JDialog {
     private void jButton_KontoPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_KontoPDFActionPerformed
 
         try {
-            OpretKontoudtog kontoudtogpdf = new OpretKontoudtog(faktura);
+            Kontoudtog_PDF kontoudtogpdf = new Kontoudtog_PDF(faktura);
             kontoudtogpdf.genererKontoudtog("Kontoudtog-" + faktura.getProvisionsseddel().getKontoudtog().getKontoudtog_nr() + ".pdf");
             Desktop desktop = Desktop.getDesktop();
             File file = new File("docs/Kontoudtog-" + faktura.getProvisionsseddel().getKontoudtog().getKontoudtog_nr() + ".pdf");

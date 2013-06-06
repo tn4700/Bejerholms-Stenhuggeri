@@ -4,30 +4,28 @@
  */
 package control;
 
-import com.itextpdf.text.*;
+import util.Utility;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import model.Faktura;
-import model.Kontoudtog;
-import model.Provisionsseddel;
+import model.Vare_linje;
 
 /**
  *
- * @author Oliver
+ * @author NiklasRenner
  */
-public class OpretKontoudtog {
+public class Faktura_PDF {
 
     //Faktura objekt m.m. som bruges til indholdet i fakturaen
     private Faktura faktura;
-    private Provisionsseddel provisionsseddel;
-    // Kontoudtog objekt
-    private Kontoudtog kontoudtog;
     //Skrift til alm. tekst
     private BaseFont tFont;
     //Skrift til fed alm. tekst
@@ -37,19 +35,12 @@ public class OpretKontoudtog {
     //Skrift til fed into om virksomheden
     private BaseFont binfoFont;
 
-    /**
-     * Når denne constructor kaldes skal faktura indeholde et provisionsseddel
-     * objekt og Provisionsseddel skal indeholde et kontoudtog objekt
-     *
-     * @param faktura Den faktura som der skal laves en kontoudtog linje på
-     */
-    public OpretKontoudtog(Faktura faktura) {
+    public Faktura_PDF(Faktura faktura) {
         this.faktura = faktura;
-        provisionsseddel = faktura.getProvisionsseddel();
-        this.kontoudtog = provisionsseddel.getKontoudtog();
     }
 
-    public void genererKontoudtog(String filNavn) throws IOException, DocumentException {
+    public void genererFaktura(String filNavn) throws IOException, DocumentException {
+
         //Opretter nyt dokument til indhold
         Document doc = new Document();
         //Sti'en for pdf'en der oprettes
@@ -70,15 +61,15 @@ public class OpretKontoudtog {
         //Indsætter detaljer i PDF'en(Hvem den er oprettet af, hvornår, titel og hvad størrelse siden er)
         doc.addCreator("Bejerholm Stenhuggeri");
         doc.addCreationDate();
-        doc.addTitle("Bejerholm Stenhuggeri Kontoudtog nr. " + kontoudtog.getKontoudtog_nr());
+        doc.addTitle("Bejerholm Stenhuggeri faktura nr. " + faktura.getFaktura_nr());
         doc.setPageSize(PageSize.LETTER);
 
-//Start skrivning af dokument
+        //Start skrivning af dokument
         doc.open();
         PdfContentByte cb = docWriter.getDirectContent();
 
         //Sæt Logo ind og faktura overskrift
-        createContent(cb, btFont, 28, lightblue, 25, 725, "Kontoudtog", left);
+        createContent(cb, btFont, 28, lightblue, 25, 725, "FAKTURA", left);
         Image companyLogo = Image.getInstance("images/bejerholm.gif");
         companyLogo.setAbsolutePosition(375, 675);
         companyLogo.scalePercent(25);
@@ -95,30 +86,38 @@ public class OpretKontoudtog {
         createContent(cb, binfoFont, 11, black, 575, 576, "Sydbank  -  Reg. nr. 6821", right);
         createContent(cb, binfoFont, 11, black, 575, 564, "Konto 1021974", right);
 
-
-
         //Indsættelse af data om kundenavn og faktureringsadresse
         createContent(cb, btFont, 12, black, 25, 660, "Faktureres til:", left);
-        String firmanavn = faktura.getBedemand().getFirmanavn();
-        createContent(cb, tFont, 12, black, 130, 660, firmanavn, left);
-        String adresse = faktura.getBedemand().getAdresse();
-        createContent(cb, tFont, 12, black, 130, 644, adresse, left);
-        String postnrby = faktura.getBedemand().getPost_nr().getPost_nr() + " " + faktura.getBedemand().getPost_nr().getByNavn();
-        createContent(cb, tFont, 12, black, 130, 628, postnrby, left);
+        String navn = faktura.getOrdre().getKunde().getFornavn() + " " + faktura.getOrdre().getKunde().getEfternavn();
+        createContent(cb, tFont, 12, black, 25, 644, navn, left);
+        if(faktura.getFaktureringsadresse()==null){
+        String adresse = faktura.getOrdre().getKunde().getAdresse();
+        createContent(cb, tFont, 12, black, 25, 628, adresse, left);
+        String postnrby = faktura.getOrdre().getKunde().getPost_nr().getPost_nr() + " " + faktura.getOrdre().getKunde().getPost_nr().getByNavn();
+        createContent(cb, tFont, 12, black, 25, 612, postnrby, left);
+        } else {
+        String adresse = faktura.getFaktureringsadresse().getAdresse();
+        createContent(cb, tFont, 12, black, 25, 628, adresse, left);
+        String postnrby = faktura.getFaktureringsadresse().getPost_nr().getPost_nr() 
+                + " " + faktura.getFaktureringsadresse().getPost_nr().getByNavn();
+        createContent(cb, tFont, 12, black, 25, 612, postnrby, left);
+        }
 
+        //Indsættelse af dato og fakturanummer
         createContent(cb, btFont, 12, black, 385, 525, "DATO:", left);
-        String timeStamp = new SimpleDateFormat("dd. MMM yyyy").format(Calendar.getInstance().getTime());
-        createContent(cb, tFont, 12, black, 575, 525, timeStamp, right);
-        createContent(cb, btFont, 12, black, 385, 509, "Kontoudtog nr:", left);
-        String faktura_nr = kontoudtog.getKontoudtog_nr();
+        createContent(cb, tFont, 12, black, 575, 525, Utility.getCurrentTimeToString(), right);
+        createContent(cb, btFont, 12, black, 385, 509, "FAKTURANR:", left);
+        String faktura_nr = faktura.getFaktura_nr();
         createContent(cb, tFont, 12, black, 575, 509, faktura_nr, right);
 
+        //Indsættelse af ordrenummer og evt. hvem stenen er vedrørende
         createContent(cb, btFont, 12, black, 25, 541, "Vedrørende:", left);
         String ordre_nr = faktura.getOrdre().getOrdre_nr();
-        createContent(cb, tFont, 12, black, 25, 525, "Bejerholms Stenhuggeri ApS tilgodhavende ", left);
- 
-
-
+        createContent(cb, tFont, 12, black, 25, 525, "Ordrenummer " + ordre_nr, left);
+        String afdødnavn = faktura.getOrdre().getAfdødnavn();
+        if (afdødnavn != null) {
+            createContent(cb, tFont, 12, black, 25, 509, "Vedr. gravsten til " + afdødnavn, left);
+        }
 
         //Farv tabel baggrund
         cb.setRGBColorFill(216, 228, 232);
@@ -154,41 +153,62 @@ public class OpretKontoudtog {
         createContent(cb, btFont, 12, black, 238, 484, "BESKRIVELSE", center);
         createContent(cb, btFont, 12, black, 425, 484, "ENHEDSPRIS", center);
         createContent(cb, btFont, 12, black, 525, 484, "BELØB", center);
+        createContent(cb, tFont, 12, black, 110, 204, "Miljøafgift 2,5%", left);
         createContent(cb, tFont, 12, black, 465, 184, "SUBTOTAL", right);
         createContent(cb, tFont, 12, black, 465, 164, "MOMS", right);
         createContent(cb, tFont, 12, black, 465, 144, "SALGSMOMS", right);
         createContent(cb, btFont, 12, black, 465, 124, "I ALT", right);
 
-        // første vare linje
-        createContent(cb, tFont, 12, black, 63, 464, "1", center);
-        createContent(cb, tFont, 12, black, 110, 464, "Ordrenr: " + faktura.getOrdre().getOrdre_nr(), left);
-        createContent(cb, tFont, 12, black, 465, 464, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getTotal()), right);
-        createContent(cb, tFont, 12, black, 565, 464, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getTotal()), right);
-
-        // anden vare linje
-        createContent(cb, tFont, 12, black, 63, 444, "1", center);
-        createContent(cb, tFont, 12, black, 110, 444, "Provisions Nr: " + provisionsseddel.getProvisions_nr(), left);
-        createContent(cb, tFont, 12, black, 465, 444, "(" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getProvisionBeløb(false)) + ")", right);
-        createContent(cb, tFont, 12, black, 565, 444, "-" + NumberFormat.getCurrencyInstance().format(+faktura.getOrdre().getProvisionBeløb(false)), right);
-
-
-        createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
-        createContent(cb, tFont, 12, black, 150, 104, "Dags Dato", left);
-        createContent(cb, tFont, 12, black, 25, 84, "Overført til konto: Reg nr: " + faktura.getBedemand().getRegistrerings_nr() + " Konto nr: " + faktura.getBedemand().getKonto_nr(), left);
-        createContent(cb, tFont, 12, black, 25, 64, "Ordrenummer og navn bedes anført ved bankoverførsel", left);
-        createContent(cb, tFont, 10, black, 25, 24, "Hvis der er spørgsmål til dette kontoudtog, bedes De venligst kontakte os(se kontaktinfo i toppen af siden)", left);
-
+        //Indsæt data for varelinjer
+        int tmpY = 464;
+        int antal;
+        double enhedsPris;
+        double pris;
         double total = 0;
-        createContent(cb, tFont, 12, black, 565, 184, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getTotal()), right);
+        String beskrivelse;
+
+        for (int i = 0; i < faktura.getOrdre().getVare_linjeListe().size(); i++) {
+            Vare_linje vare_linje = faktura.getOrdre().getVare_linjeListe().get(i);
+
+            beskrivelse = vare_linje.getBeskrivelse();
+            antal = vare_linje.getAntal();
+            enhedsPris = vare_linje.getEnhedsPris();
+            pris = antal * enhedsPris;
+            total += pris;
+
+            createContent(cb, tFont, 12, black, 63, tmpY, "" + antal, center);
+            createContent(cb, tFont, 12, black, 110, tmpY, beskrivelse, left);
+            createContent(cb, tFont, 12, black, 465, tmpY, "" + Utility.formatDoubleToKr(enhedsPris), right);
+            createContent(cb, tFont, 12, black, 565, tmpY, "" + Utility.formatDoubleToKr(pris), right);
+
+            tmpY = tmpY - 20;
+        }
+        createContent(cb, tFont, 12, black, 565, 204, "" + Utility.formatDoubleToKr(Math.floor(total * 0.025)), right);
+        total += Math.floor((total * 0.025));
+        createContent(cb, tFont, 12, black, 565, 184, "" + Utility.formatDoubleToKr(total), right);
         createContent(cb, tFont, 12, black, 565, 164, "25,00%", right);
-        createContent(cb, tFont, 12, black, 565, 144, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getSalgsMoms()), right);
+        createContent(cb, tFont, 12, black, 565, 144, "" + Utility.formatDoubleToKr(total * 0.25), right);
         total += (total * 0.25);
-        createContent(cb, tFont, 12, black, 565, 124, "" + NumberFormat.getCurrencyInstance().format(faktura.getOrdre().getTotalInklMoms()), right);
+        total = Math.floor(total + 0.5);
+        createContent(cb, tFont, 12, black, 565, 124, "" + Utility.formatDoubleToKr(total), right);
+
+        //Indsættelse af betalingsbetingelser og kontaktinfo
+        createContent(cb, btFont, 12, black, 25, 104, "Betalingsbetingelser: ", left);
+        if (faktura.getFakturatype()) {
+            createContent(cb, tFont, 12, black, 150, 104, "Netto 7 dage", left);
+        } else {
+            createContent(cb, tFont, 12, black, 150, 104, "Netto 14 dage", left);
+        }
+        createContent(cb, tFont, 12, black, 25, 84, "Sydbank: 6821  -  1021974", left);
+        createContent(cb, tFont, 12, black, 25, 64, "Ordrenummer og navn bedes anført ved bankoverførsel", left);
+        createContent(cb, tFont, 10, black, 25, 24, "Hvis der er spørgsmål til denne faktura, bedes De venligst kontakte os(se kontaktinfo i toppen af fakturaen)", left);
+
+        //Lukker dokument og skriver alt det data der er blevet indsat til PDF-filen
         doc.close();
 
     }
-    //Indsættelse af data i PDF-filen ved hjælp af data metoden bliver kaldt med    
 
+    //Indsættelse af data i PDF-filen ved hjælp af data metoden bliver kaldt med    
     public void createContent(PdfContentByte cb, BaseFont font, int fontSize, BaseColor color, float x, float y, String text, int align) {
         //Start med indsættelsen af data til det enkelte tekst objekt
         cb.beginText();
@@ -202,6 +222,7 @@ public class OpretKontoudtog {
         cb.endText();
     }
 
+    //Predefinere skrifte der bruges i dokumentet
     private void initializeFonts() throws DocumentException, IOException {
         btFont = BaseFont.createFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
         tFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
