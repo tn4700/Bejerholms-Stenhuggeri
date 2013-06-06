@@ -1049,11 +1049,10 @@ public class DatabaseObjectHandler {
             Faktura faktura = getFaktura("00" + ordrelist.get(i).getKunde().getTlf() + "-" + ordrelist.get(i).getOrdre_nr());
             if (faktura == null) {
                 int max = getMaxVareLinje(ordrelist.get(i).getOrdre_nr());
-                for (int j = 0; j <= max; j++) {
-                    if (getVareLinje(i, ordrelist.get(i).getOrdre_nr()) != null) {
-                        vare_linje = getVareLinje(i, ordrelist.get(i).getOrdre_nr());
+                for (int j = 1; j <= max; j++) {
+                    if (getVareLinje(j, ordrelist.get(i).getOrdre_nr()) != null) {
+                        vare_linje = getVareLinje(j, ordrelist.get(i).getOrdre_nr());
                         ordrelist.get(i).addVare_linje(vare_linje);
-
                     }
                 }
             } else {
@@ -1063,7 +1062,6 @@ public class DatabaseObjectHandler {
 
 
         }
-
         return ordrelist;
     }
 
@@ -1259,6 +1257,9 @@ public class DatabaseObjectHandler {
     }
 
     public void deleteVareLinje(Vare_linje vare_linje) throws SQLException {
+        String sql = "delete from vare_linje where linje_nr = '" + vare_linje.getLinje_nr()
+                + "' and ordre_nr = '" + vare_linje.getOrdre_nr() + "';";
+        db.setData(sql);
         if (vare_linje.getInskription() != null) {
             deleteInskription(vare_linje.getInskription());
         } else if (vare_linje.getTom_linje() != null) {
@@ -1267,9 +1268,6 @@ public class DatabaseObjectHandler {
             vare_linje.getVare().setVareStatus(0);
             updateVareStatus(vare_linje.getVare());
         }
-        String sql = "delete from vare_linje where linje_nr = '" + vare_linje.getLinje_nr()
-                + "' and ordre_nr = '" + vare_linje.getOrdre_nr() + "';";
-        db.setData(sql);
     }
 
     public void editVareLinje(Vare_linje vare_linje, String ordre_nr) throws ControlException {
